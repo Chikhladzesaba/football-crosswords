@@ -1,0 +1,24 @@
+title: Champions League <em>2000s</em>
+intro: Finals, heroes and heartbreak from 2000 to 2009. Medium to hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game, not affiliated with UEFA. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 17
+
+# ANSWER | clue  (one per line, answer = letters only)
+KAHN | Bayern's goalkeeper saved three Valencia penalties in the 2001 shootout at San Siro.
+DIDA | Brazilian goalkeeper who saved three Juventus penalties in the all-Italian shootout at Old Trafford in 2003.
+DUDEK | His double save in extra time and the stop that won the shootout made him the hero of 2005.
+ISTANBUL | City where Liverpool came back from 3–0 down at half-time.
+MALDINI | Milan's captain, son of a European Cup-winning captain, scored inside the first minute of the 2005 final.
+INZAGHI | Scored both Milan goals in the 2007 final in Athens; the first was a Pirlo free-kick that deflected in off him.
+LEHMANN | Arsenal goalkeeper who became the first player sent off in a Champions League final.
+LARSSON | Swedish striker who came off the bench in Paris in 2006 and set up both Barcelona goals.
+MORIENTES | Scored the opener in the 2000 final, then reached the 2004 final on loan at Monaco after knocking his parent club out.
+LEVERKUSEN | Lost the 2002 final, in a season they also finished runners-up in the Bundesliga and the German Cup.
+# didn't fit: HAMPDEN | Glasgow stadium where Zidane's left-footed volley decided the 2002 final.
+DECO | Scored in Porto's 2004 final win, then moved to Barcelona and lifted the trophy again two years later.
+TERRY | Chelsea captain who slipped as he took a penalty that would have won the 2008 final.
+GUARDIOLA | Won the 2009 final in Rome in his first season as a top-flight head coach, completing a treble.
+SHEVCHENKO | Scored the winning shootout penalty in 2003, but had the decisive one saved two years later.
+CASILLAS | Came off the bench for the injured César in 2002 and made late saves to protect a 2–1 lead.
+VALENCIA | Lost back-to-back finals in 2000 and 2001.

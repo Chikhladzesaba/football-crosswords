@@ -8,6 +8,8 @@ words.txt looks like this:
     title: World Cup <em>Winners</em>     (words in <em> get the italic serif, like "Guess <em>the Player</em>")
     intro: Every nation that has ever won the men's World Cup. 8 answers.
     note: Unofficial fan game. Covers every World Cup from 1930 to 2026.
+    maxcols: 12     (optional: widest the grid may be, so squares stay big enough on phones; default 12)
+    maxrows: 15     (optional: tallest the grid may be; default 15)
     BRAZIL | The only nation with five titles...
     ITALY | Four-time champions...
 Answers: letters only, no spaces (write "REALMADRID", not "Real Madrid").
@@ -31,6 +33,8 @@ for line in (folder / "words.txt").read_text(encoding="utf-8").splitlines():
         k, v = line.split(":", 1)
         meta[k.strip()] = v.strip()
 WORDS = list(clues)
+MAXCOLS = int(meta.get("maxcols", 12))
+MAXROWS = int(meta.get("maxrows", 15))
 
 
 def fits(grid, w, r, c, d):
@@ -56,6 +60,12 @@ def place(grid, w, r, c, d):
         grid[p] = (ch, "X" if p in grid else d)
 
 
+def too_big(grid, w, r, c, d):
+    rs = [p[0] for p in grid] + [r, r + (len(w) - 1 if d == "D" else 0)]
+    cs = [p[1] for p in grid] + [c, c + (len(w) - 1 if d == "A" else 0)]
+    return max(cs) - min(cs) + 1 > MAXCOLS or max(rs) - min(rs) + 1 > MAXROWS
+
+
 def build(order, rng):
     grid, placed = {}, []
     place(grid, order[0], 0, 0, "A"); placed.append((order[0], 0, 0, "A"))
@@ -68,17 +78,19 @@ def build(order, rng):
                 for d in "AD":
                     rr, cc = (r, c - i) if d == "A" else (r - i, c)
                     x = fits(grid, w, rr, cc, d)
-                    if x > 0:
+                    if x > 0 and not too_big(grid, w, rr, cc, d):
                         opts.append((x, rng.random(), rr, cc, d))
         if not opts:
-            return None
+            continue                   # this word doesn't fit this time; try the rest
         x, _, rr, cc, d = max(opts)
         place(grid, w, rr, cc, d); placed.append((w, rr, cc, d))
     rs = [p[0] for p in grid]; cs = [p[1] for p in grid]
     h, wd = max(rs) - min(rs) + 1, max(cs) - min(cs) + 1
+    if wd > MAXCOLS or h > MAXROWS:
+        return None                    # too big for a phone screen
     crosses = sum(1 for v in grid.values() if v[1] == "X")
-    # prefer: more crossings, then a smaller, squarer grid
-    return (crosses, -max(h, wd), -(h * wd)), placed, min(rs), min(cs), h, wd
+    # prefer: more words placed, then more crossings, then a smaller grid
+    return (len(placed), crosses, -(h * wd)), placed, min(rs), min(cs), h, wd
 
 
 best, rng = None, random.Random(1)     # fixed seed: same words.txt always gives the same grid
@@ -88,9 +100,10 @@ for _ in range(20000):
     if res and (best is None or res[0] > best[0]):
         best = res
 if not best:
-    sys.exit("Couldn't fit every word into one connected grid. Try adding or swapping a word.")
+    sys.exit("Couldn't fit every word into one connected grid within maxcols x maxrows. Try removing or swapping a word.")
 
 _, placed, r0, c0, h, wd = best
+left_out = [w for w in WORDS if w not in {p[0] for p in placed}]
 words = [{"answer": w, "row": r - r0, "col": c - c0, "dir": d, "clue": clues[w]} for w, r, c, d in placed]
 words.sort(key=lambda x: (x["row"], x["col"]))
 puzzle = {"id": folder.name, "title": meta.get("title", folder.name),
@@ -107,3 +120,5 @@ for w in words:
         g[w["row"] + (i if w["dir"] == "D" else 0)][w["col"] + (i if w["dir"] == "A" else 0)] = ch
 print("\n".join(" ".join(row) for row in g))
 print(f"\n{len(words)} words, grid {h} rows x {wd} columns -> {folder / 'puzzle.js'}")
+if left_out:
+    print("LEFT OUT (didn't fit):", ", ".join(left_out))
