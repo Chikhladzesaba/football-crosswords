@@ -1,0 +1,35 @@
+title: Champions League <em>2010s</em>
+intro: Finals, comebacks and collapses from 2010 to 2019. Very hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game, not affiliated with UEFA. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 20
+
+# ANSWER | clue  (one per line, answer = letters only)
+MOURINHO | Won the 2010 final, then joined the club whose stadium had hosted it.
+ABIDAL | Handed the armband by Puyol to lift the trophy at Wembley, less than three months after liver surgery.
+DIMATTEO | Caretaker who replaced Villas-Boas in March and lifted the trophy in May.
+DROGBA | Headed an 88th-minute equaliser in Munich, then scored the winning penalty with his last kick before leaving.
+CECH | Saved an extra-time penalty, then two more in a shootout in the opponents' own stadium.
+MULLER | Headed an 83rd-minute opener in a home final and still finished on the losing side.
+ROBBEN | Had an extra-time penalty saved in one final, then scored an 89th-minute winner in the next.
+GUNDOGAN | Equalised from the penalty spot in the first all-German final.
+MANDZUKIC | Scored in the 2013 final, and with an overhead kick in the 2017 final, for two different clubs.
+HEYNCKES | Retired after a 2013 treble, then came back four years later as a caretaker.
+MALAGA | Debutants knocked out of the 2013 quarter-finals by two stoppage-time goals in Dortmund.
+GODIN | Uruguayan defender whose header nearly won the 2014 final.
+ANCELOTTI | Won his third title as a coach in Lisbon, seven years after his second.
+MORATA | Scored against his former club in both legs of a 2015 semi-final, then again in the final.
+JUANFRAN | Hit the post with the only missed penalty of the 2016 shootout in Milan.
+CARRASCO | Belgian winger who came off the bench to equalise in the 2016 final.
+ZIDANE | First coach to win three in a row in the Champions League era.
+SERGIROBERTO | Scored in the 95th minute to complete a 6–1 comeback against PSG in 2017.
+LEICESTER | Reached the quarter-finals in their first Champions League season, a year after winning their league.
+CARDIFF | Hosted the first final played under a closed roof.
+CUADRADO | Colombian sent off for a second yellow card in the 2017 final.
+MANOLAS | Greek defender whose header completed Roma's 3–0 comeback against Barcelona in 2018.
+KARIUS | Goalkeeper whose two errors in Kyiv were later linked to a concussion.
+WIJNALDUM | Came on at half-time and scored twice in two minutes against Barcelona at Anfield.
+ORIGI | Scored twice in a 4–0 semi-final comeback, then sealed the final in Madrid.
+MOURA | Completed a second-half hat-trick in the 96th minute in Amsterdam in 2019.
+SISSOKO | His handball gave away a penalty inside the first minute of the 2019 final.
+APOEL | Cypriot club that reached the 2012 quarter-finals after knocking out Lyon on penalties.
