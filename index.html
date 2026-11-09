@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>World Cup Winners Crossword</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: matchday programme — header strip, grid as the pitch on the left, clue sheet on the right; stacks on phones with a sticky clue bar */
+:root {
+  --bg: #f3f5f1;          /* chalk-white with a grass bias */
+  --surface: #ffffff;
+  --ink: #14211a;         /* deep pitch green-black */
+  --muted: #5d6b62;
+  --line: #c9d1ca;
+  --block: #14211a;       /* black squares */
+  --gold: #c99a1e;        /* trophy gold, the one accent */
+  --gold-soft: #f6e7b8;
+  --gold-ink: #6b4f00;
+  --wrong: #b3261e;
+  --wrong-soft: #f9dedc;
+  --right: #1d6b3a;
+  --font-display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --cell: min(48px, calc((100vw - 44px) / 9));
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1612; --surface: #16211b; --ink: #e6ede8; --muted: #93a39a; --line: #2c3a32;
+    --block: #070b09; --gold: #e2b43c; --gold-soft: #4a3c12; --gold-ink: #f3d98a;
+    --wrong: #ff8a80; --wrong-soft: #4a1d1a; --right: #7fd39b; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1612; --surface: #16211b; --ink: #e6ede8; --muted: #93a39a; --line: #2c3a32;
+  --block: #070b09; --gold: #e2b43c; --gold-soft: #4a3c12; --gold-ink: #f3d98a;
+  --wrong: #ff8a80; --wrong-soft: #4a1d1a; --right: #7fd39b; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 48px;
+}
+.wrap { max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+
+header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; border-bottom: 3px solid var(--ink); padding-bottom: 12px; }
+.eyebrow { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; letter-spacing: .12em; font-size: 14px; color: var(--gold-ink); }
+h1 { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: clamp(34px, 7vw, 56px); line-height: .95; margin: 2px 0 0; text-wrap: balance; }
+.meta { display: flex; align-items: center; gap: 16px; }
+.timer { font-family: var(--font-display); font-weight: 700; font-size: 40px; line-height: 1; font-variant-numeric: tabular-nums; }
+.count { color: var(--muted); font-size: 13px; text-align: right; }
+
+.board { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 32px; align-items: start; }
+@media (max-width: 760px) { .board { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
+
+.play { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.clue-bar {
+  display: flex; gap: 10px; align-items: baseline; background: var(--gold-soft); color: var(--ink);
+  padding: 10px 14px; border-left: 4px solid var(--gold); min-height: 64px; width: calc(var(--cell) * 9 + 10px); max-width: 100%;
+}
+.clue-bar b { font-family: var(--font-display); font-size: 20px; white-space: nowrap; color: var(--gold-ink); }
+
+.grid { display: grid; grid-template-columns: repeat(9, var(--cell)); grid-auto-rows: var(--cell); width: max-content; border: 1px solid var(--block); background: var(--block); gap: 1px; }
+.cell { position: relative; background: var(--block); }
+.cell.open { background: var(--surface); }
+.cell.open.inword { background: var(--gold-soft); }
+.cell.open.active { background: var(--gold); }
+.cell.wrong input { color: var(--wrong); }
+.cell.wrong { background: var(--wrong-soft) !important; }
+.cell.revealed input { color: var(--right); }
+.num { position: absolute; top: 1px; left: 3px; font-size: calc(var(--cell) * .24); line-height: 1; font-weight: 600; color: var(--muted); pointer-events: none; }
+.cell.active .num { color: var(--ink); }
+.cell input {
+  width: 100%; height: 100%; border: 0; background: transparent; text-align: center; padding: calc(var(--cell) * .14) 0 0;
+  font-family: var(--font-display); font-weight: 700; font-size: calc(var(--cell) * .58); text-transform: uppercase;
+  color: var(--ink); caret-color: transparent; cursor: pointer; border-radius: 0;
+}
+.cell input:focus { outline: none; }
+.cell.active input:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+.cell.active input { color: #14211a; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+button {
+  font: 600 14px/1 var(--font-body); padding: 10px 14px; border: 1.5px solid var(--ink); background: transparent; color: var(--ink);
+  cursor: pointer; border-radius: 999px;
+}
+button:hover { background: var(--ink); color: var(--bg); }
+button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+button.primary { background: var(--ink); color: var(--bg); }
+button.primary:hover { background: transparent; color: var(--ink); }
+
+.result { border: 2px solid var(--gold); padding: 14px 16px; width: calc(var(--cell) * 9 + 10px); max-width: 100%; }
+.result h2 { font-family: var(--font-display); text-transform: uppercase; font-size: 26px; margin: 0; line-height: 1.1; }
+.result p { margin: 4px 0 0; color: var(--muted); }
+
+.clues { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; min-width: 0; }
+@media (max-width: 960px) { .clues { grid-template-columns: minmax(0, 1fr); } }
+.clues h3 { font-family: var(--font-display); text-transform: uppercase; letter-spacing: .08em; font-size: 18px; margin: 0 0 6px; padding-bottom: 6px; border-bottom: 2px solid var(--ink); }
+.clues ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.clues li { display: grid; grid-template-columns: 2.2em minmax(0, 1fr); gap: 4px; padding: 9px 8px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.clues li:hover { background: var(--surface); }
+.clues li.current { background: var(--gold-soft); }
+.clues li.done { color: var(--muted); }
+.clues li.done span:last-child { text-decoration: line-through; text-decoration-color: var(--line); }
+.clues li .n { font-family: var(--font-display); font-weight: 700; font-size: 17px; }
+.len { color: var(--muted); font-size: 13px; white-space: nowrap; }
+
+.source { color: var(--muted); font-size: 12px; }
+@media (prefers-reduced-motion: no-preference) { .cell.open { transition: background-color .12s; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">Football crossword · 8 answers</div>
+      <h1>World Cup Winners</h1>
+    </div>
+    <div class="meta">
+      <div class="count" id="count">0 of 8 solved</div>
+      <div class="timer" id="timer" aria-label="Time">00:00</div>
+    </div>
+  </header>
+
+  <div class="board">
+    <div class="play">
+      <div class="clue-bar" id="clueBar" aria-live="polite"><b id="clueNum">1A</b><span id="clueText"></span></div>
+      <div class="grid" id="grid" role="grid" aria-label="Crossword grid"></div>
+      <div class="actions">
+        <button class="primary" id="btnCheck" type="button">Check letters</button>
+        <button id="btnReveal" type="button">Reveal word</button>
+        <button id="btnClear" type="button">Start over</button>
+      </div>
+      <div class="result" id="result" hidden>
+        <h2 id="resultTitle">Full time</h2>
+        <p id="resultText"></p>
+      </div>
+    </div>
+
+    <div class="clues">
+      <section><h3>Across</h3><ol id="across"></ol></section>
+      <section><h3>Down</h3><ol id="down"></ol></section>
+    </div>
+  </div>
+  <p class="source">Every nation that has won the men's FIFA World Cup, 1930 to 2026.</p>
+</div>
+
+<script>
+// ---- PUZZLE DATA ----------------------------------------------------------
+// One puzzle = one list of words. row/col are where the word starts (0 = top/left).
+// dir "A" = across, "D" = down. Positions come from layout.py, never edit them by hand.
+const PUZZLE = {
+  id: "world-cup-winners",
+  rows: 10,
+  cols: 9,
+  words: [
+    { answer: "BRAZIL",    row: 0, col: 2, dir: "A", clue: "The only nation with five titles. The fifth came in Yokohama in 2002." },
+    { answer: "ITALY",     row: 0, col: 6, dir: "D", clue: "Four-time champions. The last title came in Berlin in 2006, when Fabio Grosso scored the winning penalty against France." },
+    { answer: "ENGLAND",   row: 2, col: 0, dir: "D", clue: "Won their only title at home in 1966. Geoff Hurst scored a hat-trick in the final at Wembley." },
+    { answer: "SPAIN",     row: 2, col: 4, dir: "D", clue: "Won in 2010 with Iniesta's extra-time goal, then again in 2026 when Ferran Torres scored in extra time against Argentina." },
+    { answer: "URUGUAY",   row: 3, col: 2, dir: "D", clue: "Hosted and won the first World Cup in 1930. Twenty years later they silenced the Maracanã to win again." },
+    { answer: "GERMANY",   row: 4, col: 0, dir: "A", clue: "Mario Götze's extra-time goal against Argentina in Rio gave them a fourth title in 2014." },
+    { answer: "FRANCE",    row: 4, col: 8, dir: "D", clue: "Zinedine Zidane scored two headers against Brazil in the 1998 final to win their first title at home." },
+    { answer: "ARGENTINA", row: 6, col: 0, dir: "A", clue: "Champions in 1978, 1986 and 2022. The last one came after a penalty shootout against France in Qatar." },
+  ],
+};
+
+// ---- BUILD THE GRID FROM THE DATA ------------------------------------------
+const $ = (id) => document.getElementById(id);
+const key = (r, c) => r + "," + c;
+const cells = {};          // "r,c" -> { r, c, answer, input, el, words: { A: word, D: word } }
+const words = PUZZLE.words;
+
+words.forEach((w) => {
+  w.cells = [];
+  for (let i = 0; i < w.answer.length; i++) {
+    const r = w.row + (w.dir === "D" ? i : 0);
+    const c = w.col + (w.dir === "A" ? i : 0);
+    const k = key(r, c);
+    if (!cells[k]) cells[k] = { r, c, answer: w.answer[i], words: {} };
+    cells[k].words[w.dir] = w;
+    w.cells.push(cells[k]);
+  }
+});
+
+// Clue numbers: read the grid left-to-right, top-to-bottom; every square where a word starts gets the next number.
+let n = 0;
+for (let r = 0; r < PUZZLE.rows; r++) {
+  for (let c = 0; c < PUZZLE.cols; c++) {
+    const starts = words.filter((w) => w.row === r && w.col === c);
+    if (starts.length) { n++; starts.forEach((w) => (w.num = n)); cells[key(r, c)].num = n; }
+  }
+}
+words.sort((a, b) => a.num - b.num);
+
+const gridEl = $("grid");
+for (let r = 0; r < PUZZLE.rows; r++) {
+  for (let c = 0; c < PUZZLE.cols; c++) {
+    const cell = cells[key(r, c)];
+    const el = document.createElement("div");
+    el.className = "cell";
+    if (cell) {
+      el.classList.add("open");
+      if (cell.num) el.innerHTML = `<span class="num">${cell.num}</span>`;
+      const input = document.createElement("input");
+      input.id = "c" + r + "-" + c;
+      input.maxLength = 1;
+      input.autocomplete = "off";
+      input.setAttribute("autocapitalize", "characters");
+      input.setAttribute("autocorrect", "off");
+      input.spellcheck = false;
+      input.setAttribute("aria-label", `Row ${r + 1}, column ${c + 1}`);
+      el.appendChild(input);
+      cell.el = el; cell.input = input;
+      input.addEventListener("mousedown", (e) => { e.preventDefault(); onCellTap(cell); });
+      input.addEventListener("focus", () => { if (state.cell !== cell) select(cell, state.dir); });
+      input.addEventListener("keydown", (e) => onKey(e, cell));
+      input.addEventListener("input", (e) => onInput(e, cell));
+    }
+    gridEl.appendChild(el);
+  }
+}
+
+// Clue lists
+words.forEach((w) => {
+  const li = document.createElement("li");
+  li.innerHTML = `<span class="n">${w.num}</span><span>${w.clue} <span class="len">(${w.answer.length})</span></span>`;
+  li.addEventListener("click", () => { select(w.cells[0], w.dir); });
+  $(w.dir === "A" ? "across" : "down").appendChild(li);
+  w.li = li;
+});
+
+// ---- PLAYING --------------------------------------------------------------
+const state = { cell: null, dir: "A", started: null, elapsed: 0, done: false, timerId: null };
+
+function wordAt(cell, dir) { return cell.words[dir] || cell.words[dir === "A" ? "D" : "A"]; }
+
+function select(cell, dir) {
+  if (!cell.words[dir]) dir = dir === "A" ? "D" : "A";
+  state.cell = cell; state.dir = dir;
+  const w = cell.words[dir];
+  Object.values(cells).forEach((c) => c.el.classList.remove("inword", "active"));
+  w.cells.forEach((c) => c.el.classList.add("inword"));
+  cell.el.classList.add("active");
+  words.forEach((x) => x.li.classList.toggle("current", x === w));
+  $("clueNum").textContent = w.num + (w.dir === "A" ? "A" : "D");
+  $("clueText").textContent = w.clue;
+  if (document.activeElement !== cell.input) cell.input.focus({ preventScroll: true });
+}
+
+function onCellTap(cell) {
+  // Tapping the active square again flips between across and down
+  if (state.cell === cell && cell.words.A && cell.words.D) select(cell, state.dir === "A" ? "D" : "A");
+  else select(cell, state.dir);
+}
+
+function move(step) {
+  const w = wordAt(state.cell, state.dir);
+  const i = w.cells.indexOf(state.cell) + step;
+  if (i >= 0 && i < w.cells.length) select(w.cells[i], w.dir);
+}
+
+function nextWord(step) {
+  const w = wordAt(state.cell, state.dir);
+  const i = (words.indexOf(w) + step + words.length) % words.length;
+  const nw = words[i];
+  const firstEmpty = nw.cells.find((c) => !c.input.value) || nw.cells[0];
+  select(firstEmpty, nw.dir);
+}
+
+function setLetter(cell, letter) {
+  startTimer();
+  cell.input.value = letter;
+  cell.el.classList.remove("wrong", "revealed");
+  afterChange();
+}
+
+function onKey(e, cell) {
+  if (state.done) return;
+  const k = e.key;
+  if (/^[a-zA-Z]$/.test(k) && !e.metaKey && !e.ctrlKey) {
+    e.preventDefault(); setLetter(cell, k.toUpperCase()); move(1);
+  } else if (k === "Backspace") {
+    e.preventDefault();
+    if (cell.input.value) setLetter(cell, "");
+    else { move(-1); setLetter(state.cell, ""); }
+  } else if (k === "Delete") {
+    e.preventDefault(); setLetter(cell, "");
+  } else if (k.startsWith("Arrow")) {
+    e.preventDefault();
+    const d = { ArrowRight: [0, 1, "A"], ArrowLeft: [0, -1, "A"], ArrowDown: [1, 0, "D"], ArrowUp: [-1, 0, "D"] }[k];
+    if (state.dir !== d[2] && cell.words[d[2]]) { select(cell, d[2]); return; }
+    const next = cells[key(cell.r + d[0], cell.c + d[1])];
+    if (next) select(next, d[2]);
+  } else if (k === "Tab" || k === "Enter") {
+    e.preventDefault(); nextWord(e.shiftKey ? -1 : 1);
+  } else if (k === " ") {
+    e.preventDefault(); if (cell.words.A && cell.words.D) select(cell, state.dir === "A" ? "D" : "A");
+  }
+}
+
+// Phones often don't send a usable key name, so read what landed in the box instead
+function onInput(e, cell) {
+  const letter = (cell.input.value.match(/[a-z]/gi) || []).pop();
+  if (letter) { setLetter(cell, letter.toUpperCase()); move(1); }
+  else setLetter(cell, "");
+}
+
+function isWordDone(w) { return w.cells.every((c) => c.input.value === c.answer); }
+
+function afterChange() {
+  let solved = 0;
+  words.forEach((w) => { const d = isWordDone(w); w.li.classList.toggle("done", d); if (d) solved++; });
+  $("count").textContent = `${solved} of ${words.length} solved`;
+  save();
+  if (solved === words.length && !state.done) finish();
+}
+
+function finish() {
+  state.done = true; stopTimer();
+  Object.values(cells).forEach((c) => (c.input.readOnly = true));
+  $("result").hidden = false;
+  $("resultText").textContent = `You named all ${words.length} winners in ${fmt(state.elapsed)}.`;
+}
+
+// ---- BUTTONS --------------------------------------------------------------
+$("btnCheck").addEventListener("click", () => {
+  Object.values(cells).forEach((c) => {
+    c.el.classList.toggle("wrong", !!c.input.value && c.input.value !== c.answer);
+  });
+  if (state.cell) state.cell.input.focus({ preventScroll: true });
+});
+$("btnReveal").addEventListener("click", () => {
+  if (!state.cell || state.done) return;
+  startTimer();
+  wordAt(state.cell, state.dir).cells.forEach((c) => {
+    if (c.input.value !== c.answer) { c.input.value = c.answer; c.el.classList.remove("wrong"); c.el.classList.add("revealed"); }
+  });
+  afterChange();
+});
+$("btnClear").addEventListener("click", () => {
+  Object.values(cells).forEach((c) => { c.input.value = ""; c.input.readOnly = false; c.el.classList.remove("wrong", "revealed"); });
+  stopTimer(); state.elapsed = 0; state.started = null; state.done = false;
+  $("timer").textContent = "00:00"; $("result").hidden = true;
+  afterChange();
+  select(words[0].cells[0], words[0].dir);
+});
+
+// ---- TIMER ----------------------------------------------------------------
+function fmt(s) { return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); }
+function startTimer() {
+  if (state.timerId || state.done) return;
+  state.started = Date.now() - state.elapsed * 1000;
+  state.timerId = setInterval(() => {
+    state.elapsed = Math.floor((Date.now() - state.started) / 1000);
+    $("timer").textContent = fmt(state.elapsed);
+  }, 250);
+}
+function stopTimer() {
+  if (state.timerId) state.elapsed = Math.floor((Date.now() - state.started) / 1000);
+  clearInterval(state.timerId); state.timerId = null;
+  $("timer").textContent = fmt(state.elapsed);
+}
+
+// ---- SAVE PROGRESS ON THIS DEVICE -----------------------------------------
+const STORE = "crossword:" + PUZZLE.id;
+function save() {
+  try {
+    const letters = {}; Object.entries(cells).forEach(([k, c]) => { if (c.input.value) letters[k] = c.input.value; });
+    localStorage.setItem(STORE, JSON.stringify({ letters, elapsed: state.elapsed }));
+  } catch (e) {}
+}
+function load() {
+  try {
+    const data = JSON.parse(localStorage.getItem(STORE) || "null");
+    if (!data) return;
+    Object.entries(data.letters || {}).forEach(([k, v]) => { if (cells[k]) cells[k].input.value = v; });
+    state.elapsed = data.elapsed || 0; $("timer").textContent = fmt(state.elapsed);
+  } catch (e) {}
+}
+
+load();
+afterChange();
+select(words[0].cells[0], words[0].dir);
+</script>
+</body>
+</html>
