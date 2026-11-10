@@ -107,6 +107,7 @@
 
   function draw() {
     groups.innerHTML = "";
+    groups.classList.toggle("one-topic", chosen.topic !== "All"); // one topic: a normal list on phones too
     const shown = list.filter((c) =>
       (chosen.difficulty === "All" || c.difficulty === chosen.difficulty) &&
       (chosen.topic === "All" || c.topic === chosen.topic) &&
@@ -117,6 +118,15 @@
       const sec = document.createElement("section"); sec.className = "topic-group";
       const h = document.createElement("h2"); h.textContent = t;
       const n = document.createElement("span"); n.textContent = inTopic.length; h.appendChild(n);
+      if (chosen.topic === "All" && inTopic.length > 1) { // "See all" opens the topic as a full list
+        const all = document.createElement("button");
+        all.type = "button"; all.className = "see-all"; all.textContent = "See all →";
+        all.addEventListener("click", () => {
+          [...document.querySelectorAll("#filter-topic .chip")].find((b) => b.textContent === t).click();
+          window.scrollTo({ top: groups.getBoundingClientRect().top + scrollY - 70, behavior: "smooth" });
+        });
+        h.appendChild(all);
+      }
       const ul = document.createElement("ul"); ul.className = "list";
       inTopic.forEach((c) => ul.appendChild(card(c)));
       sec.append(h, ul); groups.appendChild(sec);
