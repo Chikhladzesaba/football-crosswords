@@ -15,4 +15,5 @@ window.CROSSWORDS = [
   { folder: "iconic-stadiums",        name: "Iconic Stadiums",        difficulty: "Medium",    topic: "Club football",    answers: 16, about: "Famous grounds and the nights that made them." },
   { folder: "ballon-dor-winners",     name: "Ballon d'Or Winners",    difficulty: "Medium",    topic: "Legends",          answers: 20, about: "Every winner from 1956 to 2025." },
   { folder: "legendary-managers",     name: "Legendary Managers",     difficulty: "Medium",    topic: "Legends",          answers: 17, about: "The coaches behind football's greatest teams." },
+  { folder: "ac-milan-history",       name: "AC Milan History",       difficulty: "Very hard", topic: "Club football",    answers: 19, about: "Founders, European nights and legends, from 1899 to the 2022 title." },
 ];

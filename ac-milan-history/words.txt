@@ -1,0 +1,36 @@
+title: AC Milan <em>History</em>
+intro: From an Englishman's club in 1899 to the Scudetto of 2022. Very hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game, not affiliated with AC Milan. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*KILPIN | Englishman from Nottingham who founded the club in 1899 and was its first captain.
+*NORDAHL | Swedish centre-forward who remains the club's all-time top scorer.
+LIEDHOLM | The "Li" of the Gre-No-Li trio, who later returned as coach.
+*RIVERA | "Golden Boy" who became the first Italian-born winner of the Ballon d'Or.
+*ROCCO | Coach of the first European Cup win, at Wembley in 1963.
+*ALTAFINI | Scored both goals in the 1963 final and 14 in that campaign, a record for decades.
+PRATI | Scored a hat-trick against Ajax in the 1969 European Cup final.
+TOTONERO | Betting scandal that sent the club down to Serie B in 1980.
+BERLUSCONI | Bought the club in 1986 and owned it for over 30 years.
+*SACCHI | Coach who had never played professionally, yet won two European Cups in a row.
+STEAUA | Beaten 4–0 in the 1989 European Cup final in Barcelona.
+RIJKAARD | Scored the only goal of the 1990 final in Vienna.
+GULLIT | Ballon d'Or winner in 1987, his first year at the club.
+*VANBASTEN | Scored twice in the 1989 final and won the Ballon d'Or three times while at the club.
+*BARESI | Captain whose number 6 shirt was retired.
+*MALDINI | Played 902 official games for the club, and his number 3 is kept only for his family.
+*CAPELLO | Coach of the side that went 58 Serie A games unbeaten in the early 1990s.
+DESAILLY | Scored in the 1994 final, a year after beating the club in the 1993 final with Marseille.
+MASSARO | Scored twice in the 4–0 final against Barcelona in Athens.
+SAVICEVIC | Montenegrin "Genius" who lobbed the keeper in the 1994 final.
+WEAH | Won the Ballon d'Or in 1995, his first season at the club.
+*SHEVCHENKO | Scored the winning penalty at Old Trafford in 2003 and won the Ballon d'Or a year later.
+SEEDORF | The only player to win the Champions League with three different clubs.
+*KAKA | Brazilian who won the Ballon d'Or in 2007, the year of the seventh European Cup.
+INZAGHI | Scored both goals in the 2007 final in Athens.
+*IBRAHIMOVIC | Returned at 38 and won the 2022 Scudetto, aged 40.
+PIOLI | Coach of the 2022 Scudetto side.
+LEAO | Portuguese winger named Serie A's best player of the 2021–22 season.
+MILANELLO | The club's training ground, near Varese.
