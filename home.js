@@ -27,33 +27,33 @@
     if (!mySolved.length) return; // new visitors see no empty stats
     const fastest = mySolved.reduce((a, c) => (solved[c.folder].time < solved[a.folder].time ? c : a));
     const box = document.createElement("div");
-    box.className = "stats";
-    [[`${mySolved.length}/${list.length}`, "Solved"],
-     [mySolved.filter((c) => solved[c.folder].perfect).length, "With no help"],
-     [streak(), "Day streak 🔥"],
-     [fmt(solved[fastest.folder].time), "Fastest: " + fastest.name]]
+    box.className = "stats-bar";
+    [[`${mySolved.length}/${list.length}`, "solved"],
+     ["⭐ " + mySolved.filter((c) => solved[c.folder].perfect).length, "with no help"],
+     ["🔥 " + streak(), "day streak"],
+     ["⚡ " + fmt(solved[fastest.folder].time), "fastest"]]
       .forEach(([value, label]) => {
-        const s = document.createElement("div"); s.className = "stat";
+        const s = document.createElement("span"); s.className = "stat"; s.title = value === undefined ? "" : (label === "fastest" ? fastest.name : "");
         const b = document.createElement("b"); b.textContent = value;
         const l = document.createElement("span"); l.textContent = label;
         s.append(b, l); box.appendChild(s);
       });
     // Reset: first tap asks, second tap deletes every saved puzzle, tick and stat on this device
     const reset = document.createElement("button");
-    reset.type = "button"; reset.className = "reset"; reset.textContent = "Reset my stats";
+    reset.type = "button"; reset.className = "reset"; reset.textContent = "Reset";
     reset.addEventListener("click", () => {
       if (!reset.classList.contains("confirm")) {
         reset.classList.add("confirm");
-        reset.textContent = "Tap again to delete all progress";
-        setTimeout(() => { reset.classList.remove("confirm"); reset.textContent = "Reset my stats"; }, 4000);
+        reset.textContent = "Tap again to delete all";
+        setTimeout(() => { reset.classList.remove("confirm"); reset.textContent = "Reset"; }, 4000);
         return;
       }
       try { Object.keys(localStorage).filter((k) => k.startsWith("crossword:")).forEach((k) => localStorage.removeItem(k)); } catch (e) {}
       location.reload();
     });
     const filters = document.querySelector(".filters");
+    box.appendChild(reset);
     filters.parentNode.insertBefore(box, filters);
-    filters.parentNode.insertBefore(reset, filters);
   }
 
   // Only show filter buttons for values that at least one crossword has
@@ -98,14 +98,29 @@
     return li;
   }
 
+  // The list is drawn as one section per topic: a grid on computers, a sideways-swipe row on phones
+  const mainEl = document.querySelector("main.narrow");
+  if (mainEl) mainEl.classList.remove("narrow"); // the home page uses the full width for the grid
+  const groups = document.createElement("div");
+  groups.id = "groups";
+  document.getElementById("list").replaceWith(groups);
+
   function draw() {
-    const ul = document.getElementById("list");
-    ul.innerHTML = "";
+    groups.innerHTML = "";
     const shown = list.filter((c) =>
       (chosen.difficulty === "All" || c.difficulty === chosen.difficulty) &&
       (chosen.topic === "All" || c.topic === chosen.topic) &&
       (chosen.status === "All" || (chosen.status === "Solved") === !!solved[c.folder]));
-    shown.forEach((c) => ul.appendChild(card(c)));
+    TOPICS.forEach((t) => {
+      const inTopic = shown.filter((c) => c.topic === t);
+      if (!inTopic.length) return;
+      const sec = document.createElement("section"); sec.className = "topic-group";
+      const h = document.createElement("h2"); h.textContent = t;
+      const n = document.createElement("span"); n.textContent = inTopic.length; h.appendChild(n);
+      const ul = document.createElement("ul"); ul.className = "list";
+      inTopic.forEach((c) => ul.appendChild(card(c)));
+      sec.append(h, ul); groups.appendChild(sec);
+    });
     document.getElementById("empty").hidden = shown.length > 0;
     document.getElementById("shown").textContent =
       shown.length === list.length ? `${list.length} crosswords` : `${shown.length} of ${list.length} crosswords`;
