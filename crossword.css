@@ -158,3 +158,28 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .share-note { margin: 0; font-size: 13px; color: var(--muted); white-space: pre-line; overflow-wrap: anywhere; }
 .result .share-note { color: var(--green-ink); }
 .result[hidden] { display: none; }
+
+/* ---- Play another (after finishing) ---- */
+.next[hidden] { display: none; }
+.next h3 { margin: 4px 0 8px; font-size: 15px; }
+.next-list { display: flex; flex-direction: column; gap: 8px; }
+.next-card {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 12px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 12px 14px; color: var(--ink); text-decoration: none;
+}
+.next-card:hover { border-color: var(--accent); }
+.next-card .name { font-weight: 600; }
+.next-card .meta-line { display: flex; align-items: center; gap: 8px; }
+.next-card .size { color: var(--muted); font-size: 13px; }
+.all-done { margin: 0 0 4px; font-weight: 600; }
+
+/* ---- Home page: your stats + solved ticks ---- */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 0 0 18px; }
+.stat { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 10px 12px; min-width: 0; }
+.stat b { display: block; font-size: 20px; }
+.stat span { color: var(--muted); font-size: 12px; }
+@media (max-width: 560px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+.status { font-size: 13px; font-weight: 600; color: var(--green-ink); }
+.status.progress { color: var(--muted); font-weight: 500; }
+.list a.is-solved { border-color: var(--green); }

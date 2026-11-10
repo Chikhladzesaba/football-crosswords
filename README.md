@@ -15,7 +15,7 @@ I love playing football games, and a crossword is one of the most fun games to p
 - **Club football:** the Premier League era, iconic stadiums, the history of AC Milan, Arsenal, Bayern Munich, Manchester United, Juventus, Real Madrid, Barcelona, Inter and Manchester City, and transfers of the 1990s and 2000s
 - **Legends:** Ballon d'Or winners, legendary managers, Harry Kane, Dennis Bergkamp, Lionel Messi, Cristiano Ronaldo, Diego Maradona, Zinedine Zidane and David Beckham
 
-Each puzzle has a timer, "Check letters" and "Reveal word" buttons, and a Share button. When you finish, you can share your result as green squares (🟩 solved, 🟨 revealed). Your progress is saved on your own device, so you can come back later.
+Each puzzle has a timer, "Check letters", "Reveal letter" and "Reveal word" buttons, and a Share button. When you finish, you can share your result as squares (🟩 solved alone, 🟨 a letter revealed, 🟧 the word revealed) and get two suggestions for what to play next. Your progress is saved on your own device, and the home page shows your stats, a ✓ on every crossword you've solved, and a day streak.
 
 
 ## Privacy

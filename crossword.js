@@ -12,19 +12,23 @@
   // English by default. A puzzle with lang: ka in words.txt gets Georgian labels and a Georgian font.
   const KA = P.lang === "ka";
   const T = KA ? {
-    back: "← ყველა კროსვორდი", check: "შემოწმება", reveal: "სიტყვის ჩვენება", clear: "თავიდან", share: "გაზიარება",
+    back: "← ყველა კროსვორდი", check: "შემოწმება", reveal: "სიტყვის ჩვენება", letter: "ასოს ჩვენება",
+    playNext: "ითამაშე სხვა", allDone: "ყველა კროსვორდი ამოხსნილი გაქვს! 🏆", home: "ყველა კროსვორდი",
+    help: (l, w) => (l || w ? [l && `${l} ასო`, w && `${w} სიტყვა`].filter(Boolean).join(" და ") + " ნაჩვენები" : "დახმარების გარეშე"), clear: "თავიდან", share: "გაზიარება",
     shareResult: "შედეგის გაზიარება", across: "ჰორიზონტალურად", down: "ვერტიკალურად",
     solved: (a, b) => `${a} / ${b} ამოხსნილი`,
-    done: (n, t, r) => `დასრულდა! ${n}-ვე პასუხი ${t}-ში` + (r ? `, ${r} ნაჩვენები.` : ", მინიშნებების გარეშე."),
-    result: (n, t, r) => `⚽ ${plainTitle}\n✅ ${n}/${n} · ${t} · ${r} ნაჩვენები`,
+    done: (n, t, h) => `დასრულდა! ${n}-ვე პასუხი ${t}-ში, ${h}.`,
+    result: (n, t, h) => `⚽ ${plainTitle}\n✅ ${n}/${n} · ${t} · ${h}`,
     invite: (n) => `⚽ შეძლებ ამოხსნა? ფეხბურთის კროსვორდი „${plainTitle}“, ${n} პასუხი.`,
     copied: "დაკოპირდა! ჩასვი სადაც გინდა.",
   } : {
-    back: "← All crosswords", check: "Check letters", reveal: "Reveal word", clear: "Start over", share: "Share",
+    back: "← All crosswords", check: "Check letters", reveal: "Reveal word", letter: "Reveal letter",
+    playNext: "Play another", allDone: "You've solved every crossword! 🏆", home: "See all crosswords",
+    help: (l, w) => (l || w ? [l && `${l} letter${l === 1 ? "" : "s"}`, w && `${w} word${w === 1 ? "" : "s"}`].filter(Boolean).join(" and ") + " revealed" : "no help"), clear: "Start over", share: "Share",
     shareResult: "Share my result", across: "Across", down: "Down",
     solved: (a, b) => `${a} of ${b} solved`,
-    done: (n, t, r) => `Full time! You got all ${n} answers in ${t}` + (r ? `, with ${r} revealed.` : ", with no reveals."),
-    result: (n, t, r) => `⚽ ${plainTitle} crossword\n✅ ${n}/${n} in ${t} · ${r} reveal${r === 1 ? "" : "s"}`,
+    done: (n, t, h) => `Full time! You got all ${n} answers in ${t}, with ${h}.`,
+    result: (n, t, h) => `⚽ ${plainTitle} crossword\n✅ ${n}/${n} in ${t} · ${h}`,
     invite: (n) => `⚽ Can you solve the ${plainTitle} football crossword? ${n} answers.`,
     copied: "Copied! Paste it anywhere to share.",
   };
@@ -55,6 +59,7 @@
           <div class="grid" id="grid" role="grid" aria-label="Crossword grid"></div>
           <div class="actions">
             <button class="primary" id="btnCheck" type="button">${T.check}</button>
+            <button id="btnLetter" type="button">${T.letter}</button>
             <button id="btnReveal" type="button">${T.reveal}</button>
             <button id="btnClear" type="button">${T.clear}</button>
             <button id="btnSharePuzzle" type="button">${T.share}</button>
@@ -65,6 +70,7 @@
             <button class="primary" id="btnShareResult" type="button">${T.shareResult}</button>
             <p class="share-note" id="shareResultNote" hidden></p>
           </div>
+          <div class="next" id="next" hidden><h3>${T.playNext}</h3><div class="next-list" id="nextList"></div></div>
         </div>
         <div class="clues">
           <section><h3>${T.across}</h3><ol id="across"></ol></section>
@@ -85,7 +91,7 @@
       const r = w.row + (w.dir === "D" ? i : 0);
       const c = w.col + (w.dir === "A" ? i : 0);
       const k = key(r, c);
-      if (!cells[k]) cells[k] = { r, c, answer: w.answer[i], words: {} };
+      if (!cells[k]) cells[k] = { k, r, c, answer: w.answer[i], words: {} };
       cells[k].words[w.dir] = w;
       w.cells.push(cells[k]);
     }
@@ -101,7 +107,7 @@
   }
   words.sort((a, b) => a.num - b.num);
 
-  const state = { cell: null, dir: "A", started: null, elapsed: 0, done: false, timerId: null, revealed: new Set() };
+  const state = { cell: null, dir: "A", started: null, elapsed: 0, done: false, timerId: null, revealed: new Set(), hinted: new Set(), wasDone: false };
 
   for (let r = 0; r < P.rows; r++) {
     for (let c = 0; c < P.cols; c++) {
@@ -230,8 +236,68 @@
     state.done = true; stopTimer();
     Object.values(cells).forEach((c) => (c.input.readOnly = true));
     $("result").hidden = false;
-    const r = state.revealed.size;
-    $("resultText").textContent = T.done(words.length, fmt(state.elapsed), r);
+    $("resultText").textContent = T.done(words.length, fmt(state.elapsed), helpText());
+    recordSolve();
+    withList(showNext);
+  }
+  const helpText = () => T.help(state.hinted.size, state.revealed.size);
+
+  // ---- SOLVED RECORD (for the home page ticks and stats) ------------------
+  // crossword:solved = { puzzleId: { time, perfect, date } }   crossword:days = ["2026-11-10", ...]
+  const today = () => new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD, local time
+  function readJSON(k, fallback) { try { return JSON.parse(localStorage.getItem(k)) || fallback; } catch (e) { return fallback; } }
+  function recordSolve() {
+    try {
+      const solved = readJSON("crossword:solved", {});
+      const perfect = state.hinted.size === 0 && state.revealed.size === 0;
+      const old = solved[P.id];
+      if (!old) solved[P.id] = { time: state.elapsed, perfect, date: today() };
+      else { if (state.elapsed < old.time) old.time = state.elapsed; old.perfect = old.perfect || perfect; }
+      localStorage.setItem("crossword:solved", JSON.stringify(solved));
+      if (!state.wasDone) { // a fresh finish (not just reopening a finished puzzle) counts for the streak
+        const days = readJSON("crossword:days", []);
+        if (!days.includes(today())) { days.push(today()); localStorage.setItem("crossword:days", JSON.stringify(days.slice(-400))); }
+      }
+    } catch (e) {}
+  }
+
+  // ---- PLAY ANOTHER -------------------------------------------------------
+  // Loads the home page list (crosswords.js) and suggests two unsolved puzzles in the same language
+  let listWaiters = null;
+  function withList(cb) {
+    if (window.CROSSWORDS) return cb(window.CROSSWORDS);
+    if (listWaiters) return listWaiters.push(cb);
+    listWaiters = [cb];
+    const s = document.createElement("script");
+    s.src = "../crosswords.js";
+    s.onload = s.onerror = () => listWaiters.forEach((f) => f(window.CROSSWORDS || []));
+    document.head.appendChild(s);
+  }
+  function showNext(list) {
+    const lang = P.lang || "en";
+    const mine = list.filter((c) => (c.lang || "en") === lang);
+    if (!mine.length) return;
+    const me = mine.find((c) => c.folder === P.id) || {};
+    const solved = readJSON("crossword:solved", {});
+    const open = mine.filter((c) => c.folder !== P.id && !solved[c.folder]);
+    const picks = [];
+    [(c) => c.topic === me.topic, (c) => c.difficulty === me.difficulty, () => true].forEach((rule) => {
+      const c = open.find((x) => rule(x) && !picks.includes(x));
+      if (c && picks.length < 2) picks.push(c);
+    });
+    const box = $("nextList");
+    box.innerHTML = "";
+    if (!picks.length) {
+      box.innerHTML = `<p class="all-done">${T.allDone}</p><a class="next-card" href="../"><span class="name">${T.home}</span></a>`;
+    }
+    picks.forEach((c) => {
+      const a = document.createElement("a");
+      a.className = "next-card"; a.href = "../" + c.folder + "/";
+      a.innerHTML = `<span class="name"></span><span class="meta-line"><span class="level level-${c.difficulty.toLowerCase().replace(" ", "-")}">${c.difficulty}</span><span class="size">${c.answers} answers</span></span>`;
+      a.querySelector(".name").textContent = c.name;
+      box.appendChild(a);
+    });
+    $("next").hidden = false;
   }
 
   // ---- SHARING ------------------------------------------------------------
@@ -243,11 +309,11 @@
       `?utm_source=share&utm_medium=social&utm_campaign=${encodeURIComponent(P.id)}&utm_content=${content}`;
   }
   function resultText() {
-    const squares = words.map((w) => (state.revealed.has(w.answer) ? "🟨" : "🟩"));
+    // 🟩 solved alone · 🟨 a letter was revealed · 🟧 the whole word was revealed
+    const squares = words.map((w) => (state.revealed.has(w.answer) ? "🟧" : w.cells.some((c) => state.hinted.has(c.k)) ? "🟨" : "🟩"));
     const rows = [];
     for (let i = 0; i < squares.length; i += 10) rows.push(squares.slice(i, i + 10).join(""));
-    const r = state.revealed.size;
-    return T.result(words.length, fmt(state.elapsed), r) + `\n${rows.join("\n")}`;
+    return T.result(words.length, fmt(state.elapsed), helpText()) + `\n${rows.join("\n")}`;
   }
   async function share(text, url, noteId) {
     const note = $(noteId);
@@ -275,6 +341,17 @@
     Object.values(cells).forEach((c) => c.el.classList.toggle("wrong", !!c.input.value && c.input.value !== c.answer));
     if (state.cell) state.cell.input.focus({ preventScroll: true });
   });
+  $("btnLetter").addEventListener("click", () => {
+    if (!state.cell || state.done) return;
+    startTimer();
+    const c = state.cell;
+    if (c.input.value !== c.answer) {
+      c.input.value = c.answer; state.hinted.add(c.k);
+      c.el.classList.remove("wrong"); c.el.classList.add("revealed");
+    }
+    move(1);
+    afterChange();
+  });
   $("btnReveal").addEventListener("click", () => {
     if (!state.cell || state.done) return;
     startTimer();
@@ -287,7 +364,7 @@
   });
   $("btnClear").addEventListener("click", () => {
     Object.values(cells).forEach((c) => { c.input.value = ""; c.input.readOnly = false; c.el.classList.remove("wrong", "revealed"); });
-    stopTimer(); state.elapsed = 0; state.done = false; state.revealed.clear();
+    stopTimer(); state.elapsed = 0; state.done = false; state.wasDone = false; state.revealed.clear(); state.hinted.clear(); $("next").hidden = true;
     $("timer").textContent = "00:00"; $("result").hidden = true;
     afterChange();
     select(words[0].cells[0], words[0].dir);
@@ -315,7 +392,7 @@
     try {
       const letters = {};
       Object.entries(cells).forEach(([k, c]) => { if (c.input.value) letters[k] = c.input.value; });
-      localStorage.setItem(STORE, JSON.stringify({ letters, elapsed: state.elapsed, revealed: [...state.revealed] }));
+      localStorage.setItem(STORE, JSON.stringify({ letters, elapsed: state.elapsed, revealed: [...state.revealed], hinted: [...state.hinted], done: state.done }));
     } catch (e) {}
   }
   function load() {
@@ -325,6 +402,8 @@
       Object.entries(data.letters || {}).forEach(([k, v]) => { if (cells[k]) cells[k].input.value = v; });
       state.elapsed = data.elapsed || 0;
       (data.revealed || []).forEach((a) => state.revealed.add(a));
+      (data.hinted || []).forEach((k) => state.hinted.add(k));
+      state.wasDone = !!data.done;
       $("timer").textContent = fmt(state.elapsed);
     } catch (e) {}
   }
