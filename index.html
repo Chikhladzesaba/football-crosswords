@@ -1,53 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html lang="ka">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Football Crosswords: free football crosswords to play online</title>
-  <meta name="description" content="Free football crosswords on the World Cup, the Champions League, the Premier League, Ballon d'Or winners and more. Pick a difficulty and play on your phone or computer.">
-  <link rel="canonical" href="https://chikhladzesaba.github.io/football-crosswords/">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Football Crosswords">
-  <meta property="og:title" content="Football Crosswords: free football crosswords to play online">
-  <meta property="og:description" content="Free football crosswords on the World Cup, the Champions League, the Premier League, Ballon d'Or winners and more. Pick a difficulty and play on your phone or computer.">
-  <meta property="og:url" content="https://chikhladzesaba.github.io/football-crosswords/">
-  <meta property="og:image" content="https://chikhladzesaba.github.io/football-crosswords/share.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Football Crosswords: free football crosswords to play online">
-  <meta name="twitter:description" content="Free football crosswords on the World Cup, the Champions League, the Premier League, Ballon d'Or winners and more. Pick a difficulty and play on your phone or computer.">
-  <meta name="twitter:image" content="https://chikhladzesaba.github.io/football-crosswords/share.png">
-  <meta name="theme-color" content="#006aff">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+  <title>მსოფლიო ჩემპიონები — კროსვორდი (ტესტი)</title>
+  <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="crossword.css">
-  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3b650f1df19b43698cc1d110b8a5c6dc"}'></script><!-- End Cloudflare Web Analytics -->
+  <link rel="stylesheet" href="../crossword.css">
 </head>
 <body>
-  <main class="narrow">
-    <h1>Football <em>Crosswords</em></h1>
-    <p class="intro">Free football crosswords. Pick a topic and play. Your progress is saved on your device.</p>
-
-    <div class="filters">
-      <div class="filter-group">
-        <span class="filter-label">Difficulty</span>
-        <div class="chips" id="filter-difficulty"></div>
-      </div>
-      <div class="filter-group">
-        <span class="filter-label">Topic</span>
-        <div class="chips" id="filter-topic"></div>
-      </div>
-    </div>
-
-    <p class="shown" id="shown"></p>
-    <!-- The cards are drawn by home.js from the list in crosswords.js -->
-    <ul class="list" id="list"></ul>
-    <p class="empty" id="empty" hidden>No crosswords match these filters yet. Try another difficulty or topic.</p>
-  </main>
-  <script src="crosswords.js"></script>
-  <script src="home.js"></script>
+  <!-- Test page for Georgian crosswords. Not on the home page and hidden from Google (noindex). -->
+  <div id="crossword"></div>
+  <script src="puzzle.js"></script>
+  <script src="../crossword.js"></script>
 </body>
 </html>
