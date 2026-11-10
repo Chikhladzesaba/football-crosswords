@@ -159,6 +159,7 @@
     $("clueNum").textContent = w.num + w.dir;
     $("clueText").textContent = w.clue;
     if (document.activeElement !== cell.input) cell.input.focus({ preventScroll: true });
+    if (typeof keepVisible === "function" && touch) requestAnimationFrame(keepVisible);
   }
 
   function onCellTap(cell) {
@@ -406,6 +407,51 @@
       state.wasDone = !!data.done;
       $("timer").textContent = fmt(state.elapsed);
     } catch (e) {}
+  }
+
+  // ---- PHONE TYPING MODE --------------------------------------------------
+  // Phones keep their own keyboard. While typing we hide the title, pin the clue to the top of the
+  // visible screen and scroll so the active square sits just above the keyboard.
+  const touch = matchMedia("(pointer: coarse)").matches;
+  const vv = window.visualViewport; // the part of the page not covered by the keyboard
+  const bar = root.querySelector(".clue-bar");
+  const spacer = document.createElement("div");
+  spacer.className = "clue-spacer";
+  bar.after(spacer);
+  const typing = () => document.body.classList.contains("typing");
+  function placeBar() {
+    if (!typing()) return;
+    spacer.style.height = bar.offsetHeight + "px"; // keeps the grid from jumping up under the bar
+    bar.style.transform = vv ? `translateY(${vv.offsetTop}px)` : ""; // iPhone: follow the visible area
+  }
+  function keepVisible() {
+    if (!touch || !state.cell) return;
+    const r = state.cell.el.getBoundingClientRect();
+    const top = (vv ? vv.offsetTop : 0) + (typing() ? bar.offsetHeight : 0) + 8;
+    const bottom = (vv ? vv.offsetTop + vv.height : innerHeight) - 12;
+    if (r.bottom > bottom) scrollBy(0, r.bottom - bottom);
+    else if (r.top < top) scrollBy(0, r.top - top);
+  }
+  let tapped = false; // the page focuses the first square on load; typing mode waits for a real tap
+  if (touch) {
+    root.addEventListener("pointerdown", () => (tapped = true), true);
+    root.addEventListener("focusin", (e) => {
+      if (!tapped || !e.target.closest("#grid")) return;
+      document.body.classList.add("typing");
+      requestAnimationFrame(() => { placeBar(); keepVisible(); });
+    });
+    root.addEventListener("focusout", () => setTimeout(() => {
+      const a = document.activeElement;
+      if (a && a.closest && a.closest("#grid")) return;
+      document.body.classList.remove("typing");
+      bar.style.transform = ""; spacer.style.height = "0";
+    }, 60));
+    if (vv) {
+      vv.addEventListener("resize", () => requestAnimationFrame(() => { placeBar(); keepVisible(); }));
+      vv.addEventListener("scroll", placeBar);
+    }
+    // Hint buttons shouldn't close the keyboard
+    ["btnCheck", "btnLetter", "btnReveal"].forEach((id) => $(id).addEventListener("mousedown", (e) => e.preventDefault()));
   }
 
   load();
