@@ -2,7 +2,7 @@
 window.PUZZLE = {
   "id": "champions-league-2000s",
   "title": "Champions League <em>2000s</em>",
-  "intro": "Finals, heroes and heartbreak from 2000 to 2009. Medium to hard. Tap a square to start; tap it again to switch between across and down.",
+  "intro": "Finals, heroes and heartbreak from 2000 to 2009. Hard. Tap a square to start; tap it again to switch between across and down.",
   "note": "Unofficial fan game, not affiliated with UEFA. Names are written without accents or spaces.",
   "rows": 17,
   "cols": 12,

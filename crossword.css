@@ -120,14 +120,35 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .len { color: var(--muted); font-size: 13px; white-space: nowrap; }
 .legend { color: var(--muted); font-size: 13px; margin-top: 24px; }
 
-/* ---- Home page list ---- */
+/* ---- Home page: filters + list ---- */
+.filters { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.filter-group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.filter-label { font-size: 13px; font-weight: 600; color: var(--muted); width: 72px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; min-width: 0; }
+.chip { padding: 6px 12px; font-size: 14px; font-weight: 500; }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.chip[aria-pressed="true"]:hover { color: #fff; }
+.shown { color: var(--muted); font-size: 13px; margin: 0 0 8px; }
+.empty { color: var(--muted); background: var(--card); border: 1px dashed var(--border); border-radius: 14px; padding: 16px; margin: 0; }
+
 .list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
 .list a {
-  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px;
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 12px;
   background: var(--card); border: 1px solid var(--border); border-radius: 14px;
   padding: 14px 16px; color: var(--ink); text-decoration: none;
 }
 .list a:hover { border-color: var(--accent); }
 .list .name { font-weight: 600; font-size: 17px; }
+.list .meta-line { display: flex; align-items: center; gap: 8px; }
 .list .size { color: var(--muted); font-size: 14px; }
 .list .about { flex-basis: 100%; color: var(--muted); font-size: 14px; }
+.level { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; }
+.level-easy { background: var(--green); color: var(--green-ink); }
+.level-medium { background: var(--accent-soft); color: var(--accent); }
+.level-hard { background: #fff1c2; color: #7a5a00; }
+.level-very-hard { background: var(--red); color: var(--red-ink); }
+@media (max-width: 560px) {
+  .filter-group { gap: 6px; }
+  .filter-label { width: 100%; }                 /* label above its buttons on phones */
+  .chip { padding: 6px 10px; font-size: 13px; }
+}

@@ -16,79 +16,23 @@
     <h1>Football <em>Crosswords</em></h1>
     <p class="intro">Free football crosswords. Pick a topic and play. Your progress is saved on your device.</p>
 
-    <!-- One <li> per crossword. To add a new one, copy a <li> block and change the link and text. -->
-    <ul class="list">
-      <li>
-        <a href="world-cup-winners/">
-          <span class="name">World Cup Winners</span>
-          <span class="size">8 answers · easy</span>
-          <span class="about">Every nation that has won the men's World Cup.</span>
-        </a>
-      </li>
-      <li>
-        <a href="champions-league-2000s/">
-          <span class="name">Champions League 2000s</span>
-          <span class="size">16 answers · medium to hard</span>
-          <span class="about">Finals, heroes and heartbreak from 2000 to 2009.</span>
-        </a>
-      </li>
-      <li>
-        <a href="champions-league-2010s/">
-          <span class="name">Champions League 2010s</span>
-          <span class="size">21 answers · very hard</span>
-          <span class="about">Finals, comebacks and collapses from 2010 to 2019.</span>
-        </a>
-      </li>
-      <li>
-        <a href="ballon-dor-winners/">
-          <span class="name">Ballon d'Or Winners</span>
-          <span class="size">20 answers · medium</span>
-          <span class="about">Every winner from 1956 to 2025.</span>
-        </a>
-      </li>
-      <li>
-        <a href="premier-league-era/">
-          <span class="name">Premier League Era</span>
-          <span class="size">18 answers · hard</span>
-          <span class="about">Records, title races and famous moments since 1992.</span>
-        </a>
-      </li>
-      <li>
-        <a href="champions-league-2020s/">
-          <span class="name">Champions League 2020s</span>
-          <span class="size">18 answers · hard</span>
-          <span class="about">Finals and big European nights from 2020 to 2026.</span>
-        </a>
-      </li>
-      <li>
-        <a href="euro-winners/">
-          <span class="name">Euro Winners</span>
-          <span class="size">17 answers · medium</span>
-          <span class="about">Champions and heroes of the European Championship.</span>
-        </a>
-      </li>
-      <li>
-        <a href="world-cup-final-heroes/">
-          <span class="name">World Cup Final Heroes</span>
-          <span class="size">19 answers · hard</span>
-          <span class="about">Scorers, keepers and moments from World Cup finals.</span>
-        </a>
-      </li>
-      <li>
-        <a href="legendary-managers/">
-          <span class="name">Legendary Managers</span>
-          <span class="size">17 answers · medium</span>
-          <span class="about">The coaches behind football's greatest teams.</span>
-        </a>
-      </li>
-      <li>
-        <a href="iconic-stadiums/">
-          <span class="name">Iconic Stadiums</span>
-          <span class="size">16 answers · medium</span>
-          <span class="about">Famous grounds and the nights that made them.</span>
-        </a>
-      </li>
-    </ul>
+    <div class="filters">
+      <div class="filter-group">
+        <span class="filter-label">Difficulty</span>
+        <div class="chips" id="filter-difficulty"></div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">Topic</span>
+        <div class="chips" id="filter-topic"></div>
+      </div>
+    </div>
+
+    <p class="shown" id="shown"></p>
+    <!-- The cards are drawn by home.js from the list in crosswords.js -->
+    <ul class="list" id="list"></ul>
+    <p class="empty" id="empty" hidden>No crosswords match these filters yet. Try another difficulty or topic.</p>
   </main>
+  <script src="crosswords.js"></script>
+  <script src="home.js"></script>
 </body>
 </html>
