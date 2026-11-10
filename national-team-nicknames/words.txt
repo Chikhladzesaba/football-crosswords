@@ -1,0 +1,20 @@
+title: National Team <em>Nicknames</em>
+intro: What fans call their national teams. Easy. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*AZZURRI | Italy, named after their blue shirts.
+*LESBLEUS | France, "the Blues".
+*SELECAO | Brazil, "the Selection".
+ORANJE | The Netherlands, after their orange shirts.
+*THREELIONS | England, after the lions on the badge.
+LAROJA | Spain, "the Red One".
+ALBICELESTE | Argentina, after their white and sky-blue shirts.
+SOCCEROOS | Australia.
+SUPEREAGLES | Nigeria.
+BLACKSTARS | Ghana.
+ELTRI | Mexico, after their three-coloured flag.
+VATRENI | Croatia, "the Blazers".
+ATLASLIONS | Morocco, World Cup semi-finalists in 2022.

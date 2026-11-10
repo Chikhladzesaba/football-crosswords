@@ -1,0 +1,20 @@
+title: Club <em>Nicknames</em>
+intro: Famous nicknames of English clubs. Easy. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*GUNNERS | Arsenal, named after the weapons factory where the club began.
+*REDDEVILS | Manchester United, who have a devil on their badge.
+REDS | Liverpool, after their red shirts.
+BLUES | Chelsea, after their blue shirts.
+CITIZENS | Manchester City, often shortened to "City".
+SPURS | Tottenham Hotspur.
+*MAGPIES | Newcastle United, after their black and white stripes.
+TOFFEES | Everton, named after a local sweet shop.
+HAMMERS | West Ham United, who have crossed hammers on their badge.
+*FOXES | Leicester City, the 2016 champions.
+WOLVES | Wolverhampton Wanderers.
+SAINTS | Southampton, which began as a church team.
+VILLANS | Aston Villa.

@@ -1,0 +1,22 @@
+title: Famous <em>Number 10s</em>
+intro: Legends who made the number 10 shirt famous. Easy. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*PELE | Brazil's number 10 who won three World Cups.
+*MARADONA | Argentina's number 10 at the 1986 World Cup.
+ZICO | Brazil's number 10 at the 1982 World Cup.
+PLATINI | France's number 10 when they won Euro 1984.
+*BAGGIO | Italy's number 10 with the ponytail at the 1994 World Cup.
+*MESSI | Barcelona and Argentina's number 10.
+RONALDINHO | Barcelona's smiling Brazilian number 10.
+TOTTI | Roma's number 10 for his whole career.
+DELPIERO | Juventus' number 10 for many years.
+RIVALDO | Brazil's number 10 when they won the 2002 World Cup.
+NEYMAR | Brazil's number 10 and record goalscorer.
+ROONEY | Manchester United's number 10, and the club's record scorer.
+BERGKAMP | Arsenal's Dutch number 10.
+MODRIC | Croatia's number 10 and captain.
+HAGI | Romania's number 10, called the "Maradona of the Carpathians".

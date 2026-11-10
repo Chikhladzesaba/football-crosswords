@@ -33,4 +33,8 @@ window.CROSSWORDS = [
   { folder: "manchester-city-history", name: "Manchester City History", difficulty: "Hard", topic: "Club football", answers: 18, about: "From St Mark's in 1880 to four titles in a row." },
   { folder: "transfers-1990s", name: "Transfers of the 1990s", difficulty: "Hard", topic: "Club football", answers: 19, about: "Record fees, free transfers and the Bosman ruling." },
   { folder: "transfers-2000s", name: "Transfers of the 2000s", difficulty: "Hard", topic: "Club football", answers: 19, about: "Galacticos, oligarchs and deadline days." },
+  { folder: "club-nicknames", name: "Club Nicknames", difficulty: "Easy", topic: "Club football", answers: 13, about: "Gunners, Magpies, Toffees and more." },
+  { folder: "famous-number-10s", name: "Famous Number 10s", difficulty: "Easy", topic: "Legends", answers: 15, about: "Legends who made the number 10 shirt famous." },
+  { folder: "premier-league-champions", name: "Premier League Champions", difficulty: "Easy", topic: "Club football", answers: 14, about: "The clubs and managers who won the title." },
+  { folder: "national-team-nicknames", name: "National Team Nicknames", difficulty: "Easy", topic: "International", answers: 13, about: "Azzurri, Selecao, Three Lions and more." },
 ];

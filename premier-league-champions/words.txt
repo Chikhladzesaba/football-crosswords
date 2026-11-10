@@ -1,0 +1,21 @@
+title: Premier League <em>Champions</em>
+intro: The clubs and managers who won the Premier League. Easy. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*UNITED | Manchester club with the most Premier League titles.
+*FERGUSON | Scottish manager who won 13 titles.
+BLACKBURN | Won the 1995 title with Alan Shearer scoring the goals.
+*ARSENAL | Won the 2003–04 title without losing a game.
+WENGER | French manager of the unbeaten 2003–04 champions.
+*CHELSEA | Won their first Premier League title in 2005.
+MOURINHO | Portuguese manager who won the title in 2005.
+*LEICESTER | Shock champions in 2016, at odds of 5000–1.
+RANIERI | Italian manager of the 2016 champions.
+CITY | Manchester club that reached 100 points in 2017–18.
+GUARDIOLA | Spanish manager who won four titles in a row, from 2021 to 2024.
+*LIVERPOOL | Won their first Premier League title in 2020.
+KLOPP | German manager who won the 2020 title.
+SLOT | Dutch manager who won the title in his first season, 2024–25.
