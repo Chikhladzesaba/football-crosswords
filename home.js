@@ -38,8 +38,22 @@
         const l = document.createElement("span"); l.textContent = label;
         s.append(b, l); box.appendChild(s);
       });
+    // Reset: first tap asks, second tap deletes every saved puzzle, tick and stat on this device
+    const reset = document.createElement("button");
+    reset.type = "button"; reset.className = "reset"; reset.textContent = "Reset my stats";
+    reset.addEventListener("click", () => {
+      if (!reset.classList.contains("confirm")) {
+        reset.classList.add("confirm");
+        reset.textContent = "Tap again to delete all progress";
+        setTimeout(() => { reset.classList.remove("confirm"); reset.textContent = "Reset my stats"; }, 4000);
+        return;
+      }
+      try { Object.keys(localStorage).filter((k) => k.startsWith("crossword:")).forEach((k) => localStorage.removeItem(k)); } catch (e) {}
+      location.reload();
+    });
     const filters = document.querySelector(".filters");
     filters.parentNode.insertBefore(box, filters);
+    filters.parentNode.insertBefore(reset, filters);
   }
 
   // Only show filter buttons for values that at least one crossword has

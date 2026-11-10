@@ -175,7 +175,10 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .all-done { margin: 0 0 4px; font-weight: 600; }
 
 /* ---- Home page: your stats + solved ticks ---- */
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 0 0 18px; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 0 0 6px; }
+.reset { display: block; margin: 0 0 18px auto; padding: 4px 0; border: 0; background: none; font-size: 13px; color: var(--muted); text-decoration: underline; }
+.reset:hover { color: var(--accent); }
+.reset.confirm { color: var(--red-ink); font-weight: 600; }
 .stat { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 10px 12px; min-width: 0; }
 .stat b { display: block; font-size: 20px; }
 .stat span { color: var(--muted); font-size: 12px; }
