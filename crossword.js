@@ -8,10 +8,41 @@
   const words = P.words.map((w) => ({ ...w }));
   document.documentElement.style.setProperty("--cols", P.cols);
 
+  // ---- LANGUAGE -----------------------------------------------------------
+  // English by default. A puzzle with lang: ka in words.txt gets Georgian labels and a Georgian font.
+  const KA = P.lang === "ka";
+  const T = KA ? {
+    back: "← ყველა კროსვორდი", check: "შემოწმება", reveal: "სიტყვის ჩვენება", clear: "თავიდან", share: "გაზიარება",
+    shareResult: "შედეგის გაზიარება", across: "ჰორიზონტალურად", down: "ვერტიკალურად",
+    solved: (a, b) => `${a} / ${b} ამოხსნილი`,
+    done: (n, t, r) => `დასრულდა! ${n}-ვე პასუხი ${t}-ში` + (r ? `, ${r} ნაჩვენები.` : ", მინიშნებების გარეშე."),
+    result: (n, t, r) => `⚽ ${plainTitle}\n✅ ${n}/${n} · ${t} · ${r} ნაჩვენები`,
+    invite: (n) => `⚽ შეძლებ ამოხსნა? ფეხბურთის კროსვორდი „${plainTitle}“, ${n} პასუხი.`,
+    copied: "დაკოპირდა! ჩასვი სადაც გინდა.",
+  } : {
+    back: "← All crosswords", check: "Check letters", reveal: "Reveal word", clear: "Start over", share: "Share",
+    shareResult: "Share my result", across: "Across", down: "Down",
+    solved: (a, b) => `${a} of ${b} solved`,
+    done: (n, t, r) => `Full time! You got all ${n} answers in ${t}` + (r ? `, with ${r} revealed.` : ", with no reveals."),
+    result: (n, t, r) => `⚽ ${plainTitle} crossword\n✅ ${n}/${n} in ${t} · ${r} reveal${r === 1 ? "" : "s"}`,
+    invite: (n) => `⚽ Can you solve the ${plainTitle} football crossword? ${n} answers.`,
+    copied: "Copied! Paste it anywhere to share.",
+  };
+  if (KA) {
+    document.documentElement.lang = "ka";
+    const f = document.createElement("link"); f.rel = "stylesheet";
+    f.href = "https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600&family=Noto+Serif+Georgian:wght@400&display=swap";
+    document.head.appendChild(f);
+  }
+  // Letters players can type: English A–Z, plus Georgian ა–ჰ. Only English letters become capitals:
+  // Georgian has no capitals in normal writing (upper-casing it would give Mtavruli).
+  const LETTER = /^[a-zA-Z\u10D0-\u10FA]$/;
+  const norm = (k) => (/[a-z]/i.test(k) ? k.toUpperCase() : k);
+
   // ---- PAGE LAYOUT --------------------------------------------------------
   root.innerHTML = `
     <main>
-      <a class="back" href="../">← All crosswords</a>
+      <a class="back" href="../">${T.back}</a>
       <h1>${P.title}</h1>
       <p class="intro">${P.intro}</p>
       <div class="meta">
@@ -23,21 +54,21 @@
           <div class="clue-bar" aria-live="polite"><b id="clueNum"></b><span id="clueText"></span></div>
           <div class="grid" id="grid" role="grid" aria-label="Crossword grid"></div>
           <div class="actions">
-            <button class="primary" id="btnCheck" type="button">Check letters</button>
-            <button id="btnReveal" type="button">Reveal word</button>
-            <button id="btnClear" type="button">Start over</button>
-            <button id="btnSharePuzzle" type="button">Share</button>
+            <button class="primary" id="btnCheck" type="button">${T.check}</button>
+            <button id="btnReveal" type="button">${T.reveal}</button>
+            <button id="btnClear" type="button">${T.clear}</button>
+            <button id="btnSharePuzzle" type="button">${T.share}</button>
           </div>
           <p class="share-note" id="sharePuzzleNote" hidden></p>
           <div class="result" id="result" hidden>
             <p id="resultText"></p>
-            <button class="primary" id="btnShareResult" type="button">Share my result</button>
+            <button class="primary" id="btnShareResult" type="button">${T.shareResult}</button>
             <p class="share-note" id="shareResultNote" hidden></p>
           </div>
         </div>
         <div class="clues">
-          <section><h3>Across</h3><ol id="across"></ol></section>
-          <section><h3>Down</h3><ol id="down"></ol></section>
+          <section><h3>${T.across}</h3><ol id="across"></ol></section>
+          <section><h3>${T.down}</h3><ol id="down"></ol></section>
         </div>
       </div>
       ${P.note ? `<p class="legend">${P.note}</p>` : ""}
@@ -152,8 +183,8 @@
   function onKey(e, cell) {
     if (state.done) return;
     const k = e.key;
-    if (/^[a-zA-Z]$/.test(k) && !e.metaKey && !e.ctrlKey) {
-      e.preventDefault(); setLetter(cell, k.toUpperCase()); move(1);
+    if (LETTER.test(k) && !e.metaKey && !e.ctrlKey) {
+      e.preventDefault(); setLetter(cell, norm(k)); move(1);
     } else if (k === "Backspace") {
       e.preventDefault();
       if (cell.input.value) setLetter(cell, "");
@@ -175,8 +206,8 @@
 
   // Phones often don't say which key was pressed, so read what landed in the box instead
   function onInput(cell) {
-    const letter = (cell.input.value.match(/[a-z]/gi) || []).pop();
-    if (letter) { setLetter(cell, letter.toUpperCase()); move(1); }
+    const letter = (cell.input.value.match(/[a-z\u10D0-\u10FA]/gi) || []).pop();
+    if (letter) { setLetter(cell, norm(letter)); move(1); }
     else setLetter(cell, "");
   }
 
@@ -190,7 +221,7 @@
       w.li.classList.toggle("done", d);
       if (d) { solved++; w.cells.forEach((c) => c.el.classList.add("solved")); } // finished words turn green
     });
-    $("count").textContent = `${solved} of ${words.length} solved`;
+    $("count").textContent = T.solved(solved, words.length);
     save();
     if (solved === words.length && !state.done) finish();
   }
@@ -200,8 +231,7 @@
     Object.values(cells).forEach((c) => (c.input.readOnly = true));
     $("result").hidden = false;
     const r = state.revealed.size;
-    $("resultText").textContent = `Full time! You got all ${words.length} answers in ${fmt(state.elapsed)}` +
-      (r ? `, with ${r} revealed.` : ", with no reveals.");
+    $("resultText").textContent = T.done(words.length, fmt(state.elapsed), r);
   }
 
   // ---- SHARING ------------------------------------------------------------
@@ -217,7 +247,7 @@
     const rows = [];
     for (let i = 0; i < squares.length; i += 10) rows.push(squares.slice(i, i + 10).join(""));
     const r = state.revealed.size;
-    return `⚽ ${plainTitle} crossword\n✅ ${words.length}/${words.length} in ${fmt(state.elapsed)} · ${r} reveal${r === 1 ? "" : "s"}\n${rows.join("\n")}`;
+    return T.result(words.length, fmt(state.elapsed), r) + `\n${rows.join("\n")}`;
   }
   async function share(text, url, noteId) {
     const note = $(noteId);
@@ -228,7 +258,7 @@
     }
     try {
       await navigator.clipboard.writeText(full);
-      note.textContent = "Copied! Paste it anywhere to share.";
+      note.textContent = T.copied;
     } catch (e) {
       note.textContent = full; // clipboard blocked: show the text so it can be copied by hand
     }
@@ -238,7 +268,7 @@
   }
   $("btnShareResult").addEventListener("click", () => share(resultText(), shareLink("result"), "shareResultNote"));
   $("btnSharePuzzle").addEventListener("click", () =>
-    share(`⚽ Can you solve the ${plainTitle} football crossword? ${words.length} answers.`, shareLink("puzzle"), "sharePuzzleNote"));
+    share(T.invite(words.length), shareLink("puzzle"), "sharePuzzleNote"));
 
   // ---- BUTTONS ------------------------------------------------------------
   $("btnCheck").addEventListener("click", () => {
