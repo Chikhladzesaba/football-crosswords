@@ -1,0 +1,30 @@
+title: Manchester United <em>History</em>
+intro: From railway workers in 1878 to the Treble and beyond. Very hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game, not affiliated with Manchester United. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*NEWTONHEATH | The railway workers' club the team began as in 1878.
+DAVIES | John Henry ___, brewery owner who rescued the club and renamed it in 1902.
+*MUNICH | City of the 1958 air disaster.
+*EDWARDS | Duncan ___, Busby Babe who died 15 days after the crash, aged 21.
+*BUSBY | Survived the crash and won the European Cup ten years later.
+BENFICA | Beaten 4–1 at Wembley in the 1968 European Cup final.
+LAW | Old Trafford hero whose backheel for City came in United's 1974 relegation season.
+STRETFORD | ___ End: Old Trafford's most famous stand.
+CANTONA | Arrived from Leeds in 1992 and inspired four titles in five years.
+*FERGUSON | Manager who won 13 league titles.
+GIGGS | Scored a solo extra-time winner in the 1999 FA Cup semi-final replay.
+SCHMEICHEL | Saved a late penalty in that replay, then captained the side in Barcelona.
+KEANE | Captain who missed the 1999 final through suspension.
+SHERINGHAM | Equalised in stoppage time in the 1999 final.
+*SOLSKJAER | "Baby-faced assassin" who won the 1999 final in stoppage time.
+CARRINGTON | The club's training ground since 2000.
+GLAZER | Family that bought the club in 2005.
+MOSCOW | City of the 2008 Champions League final.
+VANDERSAR | Saved Anelka's penalty to win the 2008 shootout.
+*ROONEY | Club record scorer with 253 goals.
+INEOS | Jim Ratcliffe's company, which bought a minority stake in 2024.
+*AMORIM | Portuguese coach appointed in November 2024.
+BILBAO | City of the 2025 Europa League final, lost to Tottenham.

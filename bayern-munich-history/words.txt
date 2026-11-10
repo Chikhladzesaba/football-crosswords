@@ -1,0 +1,30 @@
+title: Bayern Munich <em>History</em>
+intro: From a Munich café in 1900 to eleven titles in a row. Very hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game, not affiliated with FC Bayern. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*GISELA | Café ___: the Munich café where the club was founded in 1900.
+JOHN | Franz ___, the club's first president.
+*LANDAUER | Jewish president who led the club to its first title in 1932 and was forced out under the Nazis.
+*BECKENBAUER | Captain of three European Cups in a row, from 1974 to 1976.
+MAIER | Sepp ___, goalkeeper of that European Cup hat-trick.
+*MULLER | Gerd ___, whose 40-goal Bundesliga season stood as the record for 49 years.
+*LEWANDOWSKI | Scored 41 Bundesliga goals in 2020–21 to break that record.
+HOENESS | Uli ___, former player who became general manager at 27 and later president.
+RUMMENIGGE | Two-time Ballon d'Or winner who later ran the club as chief executive.
+HOLLYWOOD | "FC ___": nickname for the dramatic, quarrelling Bayern of the 1990s.
+SOLSKJAER | Scored the stoppage-time winner against Bayern in the 1999 final.
+*KAHN | Saved three penalties in the 2001 shootout in Milan.
+ROBBEN | Scored an 89th-minute winner at Wembley in 2013, a year after missing a penalty in a final.
+*HEYNCKES | Coach of the 2013 treble.
+FLICK | Coach of the 2020 side that won six trophies in one year.
+BARCELONA | Beaten 8–2 in a 2020 quarter-final in Lisbon.
+COMAN | Scored the only goal of the 2020 final in Lisbon.
+RAUMDEUTER | "Space interpreter": the name Thomas Müller gave his own role.
+SABENER | ___ Straße: the club's training ground.
+ALLIANZ | Stadium shared with 1860 Munich until 2017.
+LEVERKUSEN | Ended Bayern's run of 11 straight Bundesliga titles in 2024, unbeaten.
+KOMPANY | Belgian coach appointed in 2024, straight after a relegation with Burnley.
+*KANE | English striker whose first career trophy came in the 2024–25 Bundesliga.

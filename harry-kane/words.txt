@@ -1,0 +1,28 @@
+title: Harry <em>Kane</em>
+intro: From Chingford to Munich, with records broken on the way. Very hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*CHINGFORD | Area of east London where he grew up.
+ARSENAL | Club that released him from its academy at eight.
+*ORIENT | Leyton ___, his first loan club.
+MILLWALL | Loan club where he was named young player of the season.
+NORWICH | Loan club in the 2012–13 season, in the Premier League.
+LEICESTER | Loan club in the Championship in 2013.
+POCHETTINO | Coach who made him a first-team regular.
+SON | South Korean teammate in a record number of Premier League goal combinations.
+*GREAVES | Tottenham record scorer he passed in 2023.
+TOTTENHAM | Club he left in 2023 as its all-time top scorer.
+SHEARER | The only player with more Premier League goals.
+*ROONEY | England's record scorer before him.
+NAPLES | City where he broke England's scoring record.
+RUSSIA | Host of the World Cup where he won the Golden Boot.
+QATAR | Missed a late penalty against France in the quarter-final there.
+WEMBLEY | Lost the Euro 2020 final on penalties there.
+BERLIN | Lost the Euro 2024 final there.
+SOUTHGATE | England manager who made him captain.
+*BAYERN | Joined in 2023 as the club's record signing.
+BUNDESLIGA | Scored 36 goals in his first season there, a debut record.
+TUCHEL | His first coach in Munich, later England manager.

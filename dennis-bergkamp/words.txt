@@ -1,0 +1,25 @@
+title: Dennis <em>Bergkamp</em>
+intro: Ajax, Inter, Arsenal and the Netherlands: the career of the Iceman. Very hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*LAW | Scottish striker he was named after.
+*CRUYFF | Gave him his Ajax debut in 1986.
+*AJAX | Club whose academy he came through.
+INTER | Italian club he joined in 1993.
+UEFACUP | Trophy he won with both Ajax and Inter.
+*RIOCH | Manager who signed him for Arsenal in 1995.
+NONFLYING | "The ___ Dutchman", because of his fear of planes.
+LEICESTER | His 1997 hat-trick against them took all top three Goal of the Month places.
+*MARSEILLE | City of his last-minute World Cup winner against Argentina in 1998.
+AYALA | Argentine defender left behind by his touch in that goal.
+DEBOER | Frank ___, who hit the long pass for it.
+SCHMEICHEL | Saved his late penalty in the 1999 FA Cup semi-final replay.
+DABIZAS | Newcastle defender he spun around in 2002.
+HENRY | French partner in a famous attacking duo.
+*WENGER | Manager under whom he won three league titles.
+*INVINCIBLES | The unbeaten side he was part of in 2003–04.
+EMIRATES | Stadium whose first match was his testimonial, and where his statue stands.
+KLUIVERT | Dutchman who later broke his national scoring record.
