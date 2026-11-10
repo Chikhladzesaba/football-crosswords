@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Daily Football Crossword | Football Crosswords</title>
+  <meta name="description" content="A new free football crossword every day, mixed from every topic: World Cups, the Champions League, clubs and legends. Easy on Monday, hardest on Sunday.">
+  <link rel="canonical" href="https://chikhladzesaba.github.io/football-crosswords/daily/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Football Crosswords">
+  <meta property="og:title" content="Daily Football Crossword | Football Crosswords">
+  <meta property="og:description" content="A new free football crossword every day. Easy on Monday, hardest on Sunday.">
+  <meta property="og:url" content="https://chikhladzesaba.github.io/football-crosswords/daily/">
+  <meta property="og:image" content="https://chikhladzesaba.github.io/football-crosswords/share.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Daily Football Crossword | Football Crosswords">
+  <meta name="twitter:description" content="A new free football crossword every day. Easy on Monday, hardest on Sunday.">
+  <meta name="twitter:image" content="https://chikhladzesaba.github.io/football-crosswords/share.png">
+  <meta name="theme-color" content="#006aff">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../crossword.css">
+  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3b650f1df19b43698cc1d110b8a5c6dc"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+  <!-- Hand-made page (tools/build_share.js does not touch it). The script below picks today's
+       crossword from daily/YYYY-MM.js (made by tools/build_daily.py) and starts the game. -->
+  <div id="crossword">
+    <main>
+      <a class="back" href="../">← All crosswords</a>
+      <h1>Daily <em>Crossword</em></h1>
+      <p class="intro" id="dailyMsg">A new football crossword every day, mixed from every topic: World Cups, the Champions League, clubs and legends. Easy on Monday, hardest on Sunday.</p>
+    </main>
+  </div>
+  <script>
+  (function () {
+    var d = new Date();
+    var iso = d.toLocaleDateString("en-CA"); // today in the player's own time, YYYY-MM-DD
+    var DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    function missing() {
+      document.getElementById("dailyMsg").textContent = "Today's crossword isn't ready yet. Please come back soon, or pick one from the full list.";
+    }
+    var s = document.createElement("script");
+    s.src = iso.slice(0, 7) + ".js";
+    s.onerror = missing;
+    s.onload = function () {
+      var p = (window.DAILY || {})[iso];
+      if (!p) return missing();
+      var day = DAYS[d.getDay()] + " " + d.getDate() + " " + MONTHS[d.getMonth()];
+      window.PUZZLE = {
+        id: "daily-" + iso,
+        title: "Daily <em>Crossword</em>",
+        intro: day + " · " + p.level + ". A new mix of clues from every topic, every day: easy on Monday, hardest on Sunday. Tap a square to start; tap it again to switch between across and down.",
+        note: "Unofficial fan game. Each clue starts with the crossword it comes from. A new crossword every day at midnight, your time. Names are written without accents or spaces.",
+        rows: p.rows, cols: p.cols, words: p.words,
+        shareName: "Daily Football Crossword · " + d.getDate() + " " + MONTHS[d.getMonth()].slice(0, 3) + " " + d.getFullYear(),
+        invite: "⚽ Can you solve today's football crossword? " + p.words.length + " answers, " + p.level.toLowerCase() + ".",
+      };
+      var g = document.createElement("script");
+      g.src = "../crossword.js";
+      document.body.appendChild(g);
+    };
+    document.body.appendChild(s);
+  })();
+  </script>
+</body>
+</html>
