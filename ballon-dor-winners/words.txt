@@ -1,0 +1,33 @@
+title: Ballon d'Or <em>Winners</em>
+intro: Every winner from 1956 to 2025. Medium. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only)
+*MATTHEWS | Won the very first award in 1956, aged 41.
+*DISTEFANO | Real Madrid's Argentine-born forward, winner in 1957 and 1959.
+*YASHIN | The only goalkeeper ever to win it, in 1963.
+EUSEBIO | Benfica's "Black Panther", winner in 1965.
+CHARLTON | Manchester United forward who won it in 1966, the year his country won the World Cup.
+BEST | Northern Irish winger who won it in 1968, the year his club won the European Cup.
+MULLER | West German striker, winner in 1970.
+*CRUYFF | The first player to win it three times.
+BECKENBAUER | "Der Kaiser", winner in 1972 and 1976.
+KEEGAN | Won it in 1978 and 1979 while playing for Hamburg.
+*PLATINI | Won it three years in a row, from 1983 to 1985.
+*VANBASTEN | Dutch striker who won it three times before an ankle injury ended his career early.
+PAPIN | Marseille striker, winner in 1991.
+*WEAH | The first African winner, in 1995, and later president of his country.
+SAMMER | German sweeper, winner in 1996.
+RIVALDO | Barcelona's Brazilian, winner in 1999.
+FIGO | Won it in 2000, the year he moved from Barcelona to Real Madrid.
+OWEN | Liverpool striker, winner in 2001.
+NEDVED | Czech midfielder, winner in 2003.
+CANNAVARO | Defender who won it in 2006 after captaining the world champions.
+KAKA | Milan's Brazilian, the last winner before Messi and Ronaldo's long run.
+*MODRIC | Broke the Messi–Ronaldo run in 2018.
+BENZEMA | Won it in 2022, aged 34.
+*MESSI | Record eight-time winner.
+*RODRI | Midfielder who won it in 2024 while out injured.
+*DEMBELE | Won it in 2025 after a treble with PSG.

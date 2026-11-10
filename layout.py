@@ -12,13 +12,14 @@ words.txt looks like this:
     maxrows: 15     (optional: tallest the grid may be; default 15)
     BRAZIL | The only nation with five titles...
     ITALY | Four-time champions...
+    *MESSI | ...    (a * in front = must include: placed first, never left out if it can fit at all)
 Answers: letters only, no spaces (write "REALMADRID", not "Real Madrid").
 """
 import json, random, sys
 from pathlib import Path
 
 folder = Path(sys.argv[1])
-meta, clues = {}, {}
+meta, clues, MUST = {}, {}, set()
 for line in (folder / "words.txt").read_text(encoding="utf-8").splitlines():
     line = line.strip()
     if not line or line.startswith("#"):
@@ -26,6 +27,8 @@ for line in (folder / "words.txt").read_text(encoding="utf-8").splitlines():
     if "|" in line:
         answer, clue = [x.strip() for x in line.split("|", 1)]
         answer = answer.upper()
+        if answer.startswith("*"):
+            answer = answer[1:].strip(); MUST.add(answer)
         if not answer.isalpha():
             sys.exit(f"Answer must be letters only: {answer!r}")
         clues[answer] = clue
@@ -89,13 +92,16 @@ def build(order, rng):
     if wd > MAXCOLS or h > MAXROWS:
         return None                    # too big for a phone screen
     crosses = sum(1 for v in grid.values() if v[1] == "X")
-    # prefer: more words placed, then more crossings, then a smaller grid
-    return (len(placed), crosses, -(h * wd)), placed, min(rs), min(cs), h, wd
+    musts = sum(1 for p in placed if p[0] in MUST)
+    # prefer: all must-haves placed, then more words, then more crossings, then a smaller grid
+    return (musts, len(placed), crosses, -(h * wd)), placed, min(rs), min(cs), h, wd
 
 
 best, rng = None, random.Random(1)     # fixed seed: same words.txt always gives the same grid
 for _ in range(20000):
-    order = WORDS[:]; rng.shuffle(order)
+    must = [w for w in WORDS if w in MUST]; rest = [w for w in WORDS if w not in MUST]
+    rng.shuffle(must); rng.shuffle(rest)
+    order = must + rest                # must-haves go into the grid first
     res = build(order, rng)
     if res and (best is None or res[0] > best[0]):
         best = res
@@ -122,3 +128,6 @@ print("\n".join(" ".join(row) for row in g))
 print(f"\n{len(words)} words, grid {h} rows x {wd} columns -> {folder / 'puzzle.js'}")
 if left_out:
     print("LEFT OUT (didn't fit):", ", ".join(left_out))
+missing = [w for w in left_out if w in MUST]
+if missing:
+    print("WARNING: must-have answers left out:", ", ".join(missing))

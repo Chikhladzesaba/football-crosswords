@@ -1,0 +1,29 @@
+title: Euro <em>Winners</em>
+intro: Champions and heroes of the European Championship, 1960 to 2024. Medium. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game, not affiliated with UEFA. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only)
+PONEDELNIK | Scored the extra-time winner in the first final, in 1960.
+YASHIN | Goalkeeper for the first champions, in 1960.
+ITALY | Reached the 1968 final after winning a semi-final on a coin toss.
+*PANENKA | Chipped the winning penalty in the 1976 shootout.
+HRUBESCH | Scored both goals in the 1980 final.
+*PLATINI | Scored nine goals at Euro 1984, a record for one tournament.
+*VANBASTEN | Volleyed in from a tight angle in the 1988 final.
+*DENMARK | Called up late to replace Yugoslavia, then won the 1992 tournament.
+SCHMEICHEL | Goalkeeper for the 1992 champions.
+*BIERHOFF | Scored the first golden goal in a major final, in 1996.
+TREZEGUET | Scored the golden goal winner in 2000.
+GREECE | 2004 champions who beat the hosts in both the opening game and the final.
+*CHARISTEAS | Headed the only goal of the 2004 final.
+REHHAGEL | German coach of the 2004 champions.
+TORRES | Scored the only goal of the 2008 final in Vienna.
+SPAIN | Record four-time winners after 2024.
+*EDER | Came off the bench to score the extra-time winner in 2016.
+RONALDO | Went off injured early in a final his side still won.
+*DONNARUMMA | Player of the tournament in 2021 after saving two penalties in the final shootout.
+WEMBLEY | Hosted the 2021 final.
+*OYARZABAL | Scored the late winner in Berlin in 2024.
+YAMAL | Became the youngest scorer in the tournament's history in 2024.

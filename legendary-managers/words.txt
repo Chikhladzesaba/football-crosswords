@@ -1,0 +1,29 @@
+title: Legendary <em>Managers</em>
+intro: The coaches behind football's greatest teams. Medium. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only)
+*FERGUSON | Won 13 league titles at Old Trafford.
+WENGER | Managed the 2003–04 Invincibles.
+SHANKLY | Built Liverpool after arriving in 1959.
+PAISLEY | Won three European Cups with Liverpool.
+BUSBY | Rebuilt Manchester United after the Munich air disaster and won the 1968 European Cup.
+*CLOUGH | Won back-to-back European Cups with Nottingham Forest.
+*SACCHI | Built the great Milan side that won two European Cups in a row.
+*MICHELS | "Total Football" pioneer who won Euro 1988 with the Netherlands.
+HERRERA | Helenio, whose Inter won two European Cups with catenaccio.
+POZZO | The only coach to win two World Cups.
+ZAGALLO | Won the World Cup twice as a player and once as a coach.
+*BECKENBAUER | Won the World Cup as captain in 1974 and as coach in 1990.
+DESCHAMPS | Won the World Cup as captain in 1998 and as coach in 2018.
+HAPPEL | Won the European Cup with Feyenoord and Hamburg.
+GUTTMANN | Left Benfica with a famous curse.
+*GUARDIOLA | Won trebles with two different clubs.
+*MOURINHO | Won the Champions League with Porto and Inter.
+KLOPP | Gegenpressing coach of Dortmund and Liverpool.
+ANCELOTTI | Won league titles in all five of Europe's top leagues.
+SIMEONE | Argentine who has coached Atlético Madrid since 2011.
+SCOLARI | Coached Brazil to the 2002 World Cup.
+DELBOSQUE | Won the World Cup and the Euro with Spain.

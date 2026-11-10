@@ -1,0 +1,29 @@
+title: Premier League <em>Era</em>
+intro: Records, title races and famous moments since 1992. Hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game, not affiliated with the Premier League. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only)
+*AGUERO | Scored at 93:20 on the final day to win the 2011–12 title.
+*INVINCIBLES | Nickname of the 2003–04 champions, unbeaten all season.
+*CENTURIONS | Nickname of the first side to reach 100 points, in 2017–18.
+*LEICESTER | 5,000–1 outsiders who won the title in 2016.
+RANIERI | Managed the 5,000–1 champions.
+BLACKBURN | Champions in 1995, bankrolled by Jack Walker.
+*SHEARER | All-time record scorer with 260 goals.
+*CANTONA | Banned for months after a kung-fu kick at Selhurst Park in 1995.
+*HAALAND | Scored a record 36 goals in his first season.
+SALAH | Scored 32 goals in a 38-game season in 2017–18.
+VARDY | Scored in 11 matches in a row in 2015.
+MANE | Scored the fastest hat-trick, in 2 minutes 56 seconds, for Southampton.
+FOWLER | Held the fastest hat-trick record for 21 years before that.
+DERBY | Finished 2007–08 with 11 points, the lowest total ever.
+SOUTHAMPTON | Lost 9–0 twice in less than two years.
+GIGGS | Won a record 13 titles.
+CECH | Kept a record 202 clean sheets.
+LAMPARD | Midfielder who scored 177 Premier League goals.
+HENRY | Won the Golden Boot four times.
+GERRARD | His slip against Chelsea in April 2014 became the symbol of a lost title race.
+VANPERSIE | Won the title in 2012–13, his first season after leaving Arsenal.
+KLOPP | Ended his club's 30-year wait for a league title in 2020.
