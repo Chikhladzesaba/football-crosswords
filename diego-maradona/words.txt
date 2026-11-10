@@ -1,0 +1,27 @@
+title: Diego <em>Maradona</em>
+intro: From Villa Fiorito to Naples and the 1986 World Cup. Hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*LANUS | Buenos Aires suburb where he was born in 1960.
+FIORITO | Villa ___, the poor neighbourhood where he grew up.
+CEBOLLITAS | "Los ___", the boys' team that made him famous.
+*ARGENTINOS | ___ Juniors, where he made his debut in 1976.
+*BOCA | Club he joined in 1981 and won the league with.
+BARCELONA | Club he joined in 1982 for a world-record fee.
+GOIKOETXEA | Athletic Bilbao defender who broke his ankle in 1983.
+*NAPOLI | Club he joined in 1984, again for a world-record fee.
+SCUDETTO | Italian league title; he won two with his Italian club.
+UEFACUP | European trophy he won with Napoli in 1989.
+*AZTECA | Mexico City stadium of the 1986 quarter-final against England.
+*HANDOFGOD | Name given to his first goal against England in 1986.
+SHILTON | England goalkeeper beaten by both of his goals in 1986.
+BILARDO | Argentina coach at the 1986 World Cup.
+BURRUCHAGA | Scored the 1986 final winner from his pass.
+ROME | City where Argentina lost the 1990 World Cup final.
+SEVILLA | Spanish club he played for in 1992–93.
+NEWELLS | Rosario club where he played briefly in 1993.
+PELUSA | His childhood nickname.
+GIMNASIA | La Plata club he was coaching at the end of his life.

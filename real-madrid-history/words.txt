@@ -1,0 +1,29 @@
+title: Real Madrid <em>History</em>
+intro: From Madrid FC in 1902 to the 2024 Wembley final. Hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game, not affiliated with Real Madrid. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*ALFONSO | King ___ XIII, who gave the club its "Real" (royal) title in 1920.
+*BERNABEU | President whose name is on the stadium.
+*DISTEFANO | Argentine-born star of five European Cups in a row.
+FIVE | European Cups won in a row from 1956 to 1960.
+GENTO | Winger who won six European Cups.
+*PUSKAS | Hungarian who scored four goals in the 1960 final.
+GLASGOW | City where they beat Eintracht Frankfurt 7–3 in the 1960 final.
+YEYE | Nickname of the young 1966 European champions.
+BUTRAGUENO | "The Vulture", leader of a 1980s youth generation.
+MIJATOVIC | Scored the 1998 final winner that ended a 32-year wait.
+*GALACTICOS | Name for the club's star signings of the early 2000s.
+PEREZ | Florentino ___, president behind the Galacticos.
+*DECIMA | Nickname for the tenth European Cup, won in 2014.
+RAMOS | Defender whose late header saved the 2014 final.
+LISBON | City of the 2014 Champions League final.
+*ANCELOTTI | Coach who won the Champions League with the club in 2014, 2022 and 2024.
+KYIV | City of the third title in a row, in 2018.
+*WEMBLEY | Stadium where they beat Dortmund in 2024.
+MBAPPE | French forward who joined in 2024.
+MERENGUES | Nickname that comes from the white kit.
+CASTILLA | Name of the club's reserve team.
+VALDEBEBAS | District where the club trains.

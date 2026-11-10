@@ -1,0 +1,27 @@
+title: David <em>Beckham</em>
+intro: From Leytonstone to Sir David, via Madrid, LA and Miami. Hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*LEYTONSTONE | Area of east London where he was born in 1975.
+PRESTON | Club he joined on loan in 1995.
+*WIMBLEDON | Scored from his own half against them in 1996.
+*SIMEONE | Argentine he was sent off for kicking at in 1998.
+SAINTETIENNE | French city where that 1998 match was played.
+BARCELONA | City of the 1999 final, where his corners set up both late goals.
+GREECE | Free kick against them sent England to the 2002 World Cup.
+METATARSAL | Foot bone he broke shortly before the 2002 World Cup.
+CAPTAIN | Role he held for England from 2000 to 2006.
+BOOT | Object that cut his eye in the dressing room in 2003.
+*REALMADRID | Club he joined in 2003.
+CAPELLO | Coach who won the Spanish league with him in 2007.
+*GALAXY | Los Angeles club he joined in 2007.
+MILAN | Italian club where he spent two loan spells.
+PSG | His last club, in 2013.
+*INTERMIAMI | Club he co-owns.
+VICTORIA | His wife.
+BEND | ___ It Like Beckham, a 2002 film named after him.
+UNICEF | Charity he has served as goodwill ambassador.
+KNIGHTHOOD | Honour he received from King Charles in 2025.

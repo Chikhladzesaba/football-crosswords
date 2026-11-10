@@ -1,0 +1,30 @@
+title: Transfers of the <em>1990s</em>
+intro: Record fees, free transfers and the Bosman ruling. Hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*BAGGIO | His 1990 move from Fiorentina to Juventus caused riots in Florence.
+*LENTINI | Winger whose 1992 move from Torino to Milan set a world record.
+PAPIN | Ballon d'Or winner who moved from Marseille to Milan in 1992.
+*SCHMEICHEL | Danish goalkeeper Ferguson called the bargain of the century.
+*CANTONA | Frenchman who moved from Leeds to Manchester United in 1992.
+BLACKBURN | Club that signed Shearer for a British record in 1992.
+*SHEARER | Joined his home-town club Newcastle in 1996 for a world record.
+COLE | Andy ___, who moved from Newcastle to Manchester United in 1995.
+KLINSMANN | German striker who joined Tottenham from Monaco in 1994.
+LAUDRUP | Dane who moved from Barcelona to Real Madrid in 1994.
+WEAH | Liberian who moved from Paris Saint-Germain to Milan in 1995.
+BERGKAMP | Dutchman who joined Arsenal from Inter in 1995.
+*BOSMAN | Belgian whose 1995 court case freed out-of-contract players.
+GULLIT | Dutch star who joined Chelsea on a free transfer in 1995.
+ZOLA | Italian who joined Chelsea from Parma in 1996.
+ZIDANE | Frenchman who moved from Bordeaux to Juventus in 1996.
+*RONALDO | Brazilian who set world records moving to Barcelona and then Inter.
+OVERMARS | Dutch winger who joined Arsenal from Ajax in 1997.
+STAM | Dutch defender who joined Manchester United from PSV in 1998.
+DENILSON | Brazilian whose 1998 move to Betis set a world record.
+ANELKA | French striker sold by Arsenal to Real Madrid in 1999.
+MCMANAMAN | Left Liverpool for Real Madrid on a free transfer in 1999.
+*VIERI | Italian striker whose 1999 move from Lazio to Inter set a world record.

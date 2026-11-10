@@ -1,0 +1,30 @@
+title: Barcelona <em>History</em>
+intro: From Gamper's advert in 1899 to the sextuple and beyond. Hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game, not affiliated with FC Barcelona. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*GAMPER | Swiss founder who placed a newspaper advert in 1899.
+*BLAUGRANA | Name for the club's blue and deep red colours.
+MESQUEUNCLUB | The club's motto, "more than a club", in Catalan.
+LESCORTS | Stadium the club used before 1957.
+KUBALA | Hungarian-born star of the 1950s.
+*CRUYFF | Dutch star who returned to coach the club.
+DREAMTEAM | Nickname of his early-1990s side.
+*KOEMAN | Scored the free kick that won the 1992 European Cup.
+SAMPDORIA | Italian club beaten at Wembley in the 1992 European Cup final.
+WEMBLEY | Stadium of the 1992 and 2011 final wins.
+RONALDINHO | Brazilian applauded by Real Madrid fans in 2005.
+RIJKAARD | Coach who won the 2006 Champions League in Paris.
+*GUARDIOLA | Coach of the 2009 sextuple.
+*INIESTA | Scored the late goal at Stamford Bridge in 2009.
+*XAVI | Midfielder who later coached the club.
+*LAMASIA | The club's famous academy.
+REMONTADA | Name for the 6–1 comeback against PSG in 2017.
+SERGIROBERTO | Scored the sixth goal in that comeback.
+MONTJUIC | Hill where the club played while its stadium was rebuilt.
+CULES | Nickname for the club's fans.
+SPOTIFY | Company in the stadium's name since 2022.
+FLICK | German coach who won the league in his first season, 2024–25.
+YAMAL | Teenager from the academy who starred for Spain at Euro 2024.

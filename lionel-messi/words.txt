@@ -1,0 +1,27 @@
+title: Lionel <em>Messi</em>
+intro: From Rosario to Miami, with eight Ballon d'Ors on the way. Hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*ROSARIO | Argentine city where he was born in 1987.
+NEWELLS | ___ Old Boys, his boyhood club in Rosario.
+*NAPKIN | Barcelona's first agreement with him was famously written on one.
+REXACH | Barcelona director who signed his first agreement with the club in 2000.
+*LAMASIA | Barcelona's academy, where he arrived at 13.
+RONALDINHO | Brazilian who set up his first official goal for Barcelona.
+ALBACETE | Opponent when he scored his first official Barcelona goal, in 2005.
+GETAFE | Club he dribbled through from halfway in a famous 2007 cup goal.
+*GUARDIOLA | Coach who turned him into a false nine.
+ROME | City where he headed a goal in the 2009 Champions League final.
+WEMBLEY | Scored in the 2011 Champions League final there.
+*EIGHT | Number of Ballon d'Ors he has won, a record.
+MARACANA | Won the 2021 Copa América final there, against Brazil.
+*LUSAIL | Stadium where he finally won the World Cup, in 2022.
+PSG | Club he joined in 2021 after leaving Barcelona.
+*INTERMIAMI | Club he joined in 2023.
+LEAGUESCUP | His first trophy in the United States, won in 2023.
+ANTONELA | His wife, also from Rosario.
+PULGA | His nickname: "La ___", the flea.
+GROWTH | As a child he was treated for a ___ hormone deficiency.

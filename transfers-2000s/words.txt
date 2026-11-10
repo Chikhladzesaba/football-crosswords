@@ -1,0 +1,29 @@
+title: Transfers of the <em>2000s</em>
+intro: Galacticos, oligarchs and deadline days. Hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*FIGO | Crossed from Barcelona to Real Madrid in 2000.
+CRESPO | Argentine whose 2000 move from Parma to Lazio set a world record.
+*ZIDANE | His 2001 move from Juventus to Real Madrid set a world record.
+NEDVED | Czech signed from Lazio in 2001 to replace Zidane at Juventus.
+*BUFFON | Goalkeeper who joined Juventus from Parma in 2001.
+VERON | Argentine who joined Manchester United from Lazio in 2001.
+*FERDINAND | Defender who moved from Leeds to Manchester United in 2002.
+RONALDO | Brazilian who left Inter for Real Madrid in 2002.
+*BECKHAM | Moved from Manchester United to Real Madrid in 2003.
+*ABRAMOVICH | Russian who bought Chelsea in 2003.
+DROGBA | Ivorian who joined Chelsea from Marseille in 2004.
+*ROONEY | Teenager who moved from Everton to Manchester United in 2004.
+WALCOTT | Joined Arsenal from Southampton in 2006, aged 16.
+SHEVCHENKO | Ukrainian who left Milan for Chelsea in 2006.
+HENRY | Left Arsenal for Barcelona in 2007.
+TORRES | Spanish striker who joined Liverpool from Atletico Madrid in 2007.
+ROBINHO | Brazilian who joined Manchester City on deadline day in 2008.
+BERBATOV | Bulgarian who moved from Tottenham to Manchester United in 2008.
+*KAKA | Brazilian who left Milan for Real Madrid in 2009.
+EIGHTY | Million pounds Real Madrid paid for Cristiano Ronaldo in 2009.
+IBRAHIMOVIC | Swede who moved from Inter to Barcelona in 2009.
+ETOO | Cameroonian who left Barcelona for Inter in 2009.

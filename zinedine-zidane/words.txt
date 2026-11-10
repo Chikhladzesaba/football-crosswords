@@ -1,0 +1,28 @@
+title: Zinedine <em>Zidane</em>
+intro: From Marseille to Madrid, as player and as coach. Hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*MARSEILLE | City where he was born in 1972.
+CASTELLANE | La ___, the housing estate where he grew up.
+CANNES | Club where he made his professional debut.
+BORDEAUX | Club he left for Italy in 1996.
+*JUVENTUS | Italian club he joined in 1996.
+LIPPI | His coach in Turin.
+*BRAZIL | Scored two headers against them in the 1998 World Cup final.
+BALLONDOR | Award he won in 1998.
+ROTTERDAM | City where France won the Euro 2000 final.
+*REALMADRID | Club he joined in 2001 for a world-record fee.
+GALACTICOS | Name for the star-filled team he joined.
+HAMPDEN | Glasgow stadium of his 2002 final volley.
+LEVERKUSEN | Opponent in the 2002 Champions League final, won by his volley.
+PANENKA | Style of the chipped penalty he scored in the 2006 final.
+*MATERAZZI | Italian defender he headbutted in the 2006 World Cup final.
+BERLIN | City of the 2006 World Cup final.
+ZIZOU | His nickname.
+*THREE | Champions League titles in a row he won as Real Madrid coach.
+KYIV | City where he won his third Champions League in a row as coach, in 2018.
+ALGERIA | Country his parents came from.
+ENZO | His eldest son, also a footballer.

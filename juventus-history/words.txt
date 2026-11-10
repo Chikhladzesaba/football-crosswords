@@ -1,0 +1,31 @@
+title: Juventus <em>History</em>
+intro: From Turin students in 1897 to nine titles in a row. Hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game, not affiliated with Juventus. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*TURIN | City where students founded the club in 1897.
+PINK | Colour of the club's first shirts.
+*NOTTSCOUNTY | English club whose shirts inspired the black and white stripes.
+*AGNELLI | Family that has controlled the club since 1923.
+FIAT | Car company founded by the Agnelli family.
+BIANCONERI | Nickname meaning "the white-blacks".
+VECCHIASIGNORA | "Old Lady", the club's other nickname, in Italian.
+SIVORI | Argentine-born forward who won the 1961 Ballon d'Or.
+ZOFF | Goalkeeper who won six league titles with the club.
+TRAPATTONI | Coach who won every major European trophy with the club.
+*PLATINI | French playmaker with three Ballon d'Ors in a row.
+*AJAX | Beaten on penalties in the 1996 Champions League final.
+LIPPI | Coach who won the 1996 Champions League with the club.
+DELLEALPI | Stadium the club used from 1990 to 2006.
+*CALCIOPOLI | 2006 scandal that sent the club down.
+SERIEB | Division they won in 2007 on the way back.
+*DELPIERO | Record appearance-maker who stayed in the lower division.
+*BUFFON | Goalkeeper who stayed with the club in Serie B in 2006–07.
+CONTE | Coach who began a run of titles in 2012.
+NINE | League titles in a row, from 2012 to 2020.
+BERLIN | City of the 2015 Champions League final, lost to Barcelona.
+CARDIFF | City of the 2017 Champions League final, lost to Real Madrid.
+ALLIANZ | Name of the club's stadium since 2017.
+ZEBRA | Animal that is the club's mascot.

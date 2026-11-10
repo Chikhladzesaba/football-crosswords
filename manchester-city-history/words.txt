@@ -1,0 +1,30 @@
+title: Manchester City <em>History</em>
+intro: From St Mark's in 1880 to four titles in a row. Hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game, not affiliated with Manchester City. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*STMARKS | Church team, founded in 1880, that became the club.
+GORTON | Area of Manchester where St Mark's church stood.
+*MAINEROAD | Home ground from 1923 to 2003.
+KIPPAX | Famous standing terrace at the old ground.
+*TRAUTMANN | Goalkeeper who played on with a broken neck in the 1956 cup final.
+MERCER | Manager of the 1968 champions.
+BELL | Colin ___, midfielder of the 1968 title-winning team.
+VIENNA | City where the club won the 1970 Cup Winners' Cup.
+GILLINGHAM | Beaten on penalties in the 1999 play-off final.
+DICKOV | Scored the late equaliser in that play-off final.
+ETIHAD | The stadium's name since 2011.
+*MANSOUR | Sheikh who bought the club in 2008.
+MANCINI | Manager of the 2012 champions.
+*AGUERO | Scored the 93rd-minute title winner in 2012.
+QPR | Opponent on the final day of the 2011–12 season.
+*KOMPANY | Captain whose long-range goal beat Leicester in 2019.
+*GUARDIOLA | Manager who arrived in 2016.
+CENTURIONS | Nickname of the 2017–18 team that reached 100 points.
+FOUR | League titles in a row from 2021 to 2024, a record.
+*HAALAND | Norwegian with 36 goals in his first Premier League season.
+*RODRI | Scored the only goal of the 2023 Champions League final.
+BLUEMOON | The fans' anthem.
+CITIZENS | Nickname for the club.

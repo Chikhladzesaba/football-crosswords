@@ -1,0 +1,27 @@
+title: Cristiano <em>Ronaldo</em>
+intro: From Madeira to Riyadh, with records broken everywhere. Hard. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+*MADEIRA | Portuguese island where he was born in 1985.
+FUNCHAL | Capital of that island, his home town.
+ANDORINHA | His first boyhood club.
+NACIONAL | Club from his home town he joined at ten.
+*SPORTING | Lisbon club where he made his debut.
+*FERGUSON | Manager who signed him in 2003 after a friendly in Lisbon.
+SEVEN | Shirt number he made famous at Manchester United.
+*MOSCOW | City where he scored in the 2008 Champions League final.
+FIVE | Number of Ballon d'Ors he has won.
+*REALMADRID | Club he joined in 2009 for a world-record fee.
+LISBON | Scored a penalty in the 2014 Champions League final there.
+BICYCLEKICK | His 2018 goal in Turin that home fans applauded.
+*JUVENTUS | Club he joined in 2018.
+PARIS | Went off injured in the Euro 2016 final, which Portugal still won.
+EDER | Substitute who scored the winner in the Euro 2016 final.
+NATIONSLEAGUE | Portugal won its first edition at home in 2019.
+DAEI | Ali ___, the Iran striker he passed as men's top international scorer.
+*ALNASSR | Saudi club he joined in 2023.
+SIU | The shout that goes with his famous goal celebration.
+GEORGINA | His partner, ___ Rodriguez.
