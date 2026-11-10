@@ -26,8 +26,14 @@
             <button class="primary" id="btnCheck" type="button">Check letters</button>
             <button id="btnReveal" type="button">Reveal word</button>
             <button id="btnClear" type="button">Start over</button>
+            <button id="btnSharePuzzle" type="button">Share</button>
           </div>
-          <div class="result" id="result" hidden><p id="resultText"></p></div>
+          <p class="share-note" id="sharePuzzleNote" hidden></p>
+          <div class="result" id="result" hidden>
+            <p id="resultText"></p>
+            <button class="primary" id="btnShareResult" type="button">Share my result</button>
+            <p class="share-note" id="shareResultNote" hidden></p>
+          </div>
         </div>
         <div class="clues">
           <section><h3>Across</h3><ol id="across"></ol></section>
@@ -64,7 +70,7 @@
   }
   words.sort((a, b) => a.num - b.num);
 
-  const state = { cell: null, dir: "A", started: null, elapsed: 0, done: false, timerId: null };
+  const state = { cell: null, dir: "A", started: null, elapsed: 0, done: false, timerId: null, revealed: new Set() };
 
   for (let r = 0; r < P.rows; r++) {
     for (let c = 0; c < P.cols; c++) {
@@ -193,8 +199,46 @@
     state.done = true; stopTimer();
     Object.values(cells).forEach((c) => (c.input.readOnly = true));
     $("result").hidden = false;
-    $("resultText").textContent = `Full time! You got all ${words.length} answers in ${fmt(state.elapsed)}.`;
+    const r = state.revealed.size;
+    $("resultText").textContent = `Full time! You got all ${words.length} answers in ${fmt(state.elapsed)}` +
+      (r ? `, with ${r} revealed.` : ", with no reveals.");
   }
+
+  // ---- SHARING ------------------------------------------------------------
+  // Phones: opens the phone's share menu (WhatsApp, Messenger…). Computers: copies the text instead.
+  const plainTitle = P.title.replace(/<[^>]+>/g, "");
+  function shareLink(content) {
+    // UTM tags let analytics count visitors who arrive from shared links
+    return location.origin + location.pathname +
+      `?utm_source=share&utm_medium=social&utm_campaign=${encodeURIComponent(P.id)}&utm_content=${content}`;
+  }
+  function resultText() {
+    const squares = words.map((w) => (state.revealed.has(w.answer) ? "🟨" : "🟩"));
+    const rows = [];
+    for (let i = 0; i < squares.length; i += 10) rows.push(squares.slice(i, i + 10).join(""));
+    const r = state.revealed.size;
+    return `⚽ ${plainTitle} crossword\n✅ ${words.length}/${words.length} in ${fmt(state.elapsed)} · ${r} reveal${r === 1 ? "" : "s"}\n${rows.join("\n")}`;
+  }
+  async function share(text, url, noteId) {
+    const note = $(noteId);
+    const full = text + "\n" + url;
+    if (navigator.share && matchMedia("(pointer: coarse)").matches) {
+      try { await navigator.share({ text: full }); return; }
+      catch (e) { if (e.name === "AbortError") return; } // the player closed the share menu
+    }
+    try {
+      await navigator.clipboard.writeText(full);
+      note.textContent = "Copied! Paste it anywhere to share.";
+    } catch (e) {
+      note.textContent = full; // clipboard blocked: show the text so it can be copied by hand
+    }
+    note.hidden = false;
+    clearTimeout(note._t);
+    note._t = setTimeout(() => (note.hidden = true), 4000);
+  }
+  $("btnShareResult").addEventListener("click", () => share(resultText(), shareLink("result"), "shareResultNote"));
+  $("btnSharePuzzle").addEventListener("click", () =>
+    share(`⚽ Can you solve the ${plainTitle} football crossword? ${words.length} answers.`, shareLink("puzzle"), "sharePuzzleNote"));
 
   // ---- BUTTONS ------------------------------------------------------------
   $("btnCheck").addEventListener("click", () => {
@@ -204,14 +248,16 @@
   $("btnReveal").addEventListener("click", () => {
     if (!state.cell || state.done) return;
     startTimer();
-    wordAt(state.cell, state.dir).cells.forEach((c) => {
+    const w = wordAt(state.cell, state.dir);
+    if (!isWordDone(w)) state.revealed.add(w.answer); // counted in the shared result as 🟨
+    w.cells.forEach((c) => {
       if (c.input.value !== c.answer) { c.input.value = c.answer; c.el.classList.remove("wrong"); c.el.classList.add("revealed"); }
     });
     afterChange();
   });
   $("btnClear").addEventListener("click", () => {
     Object.values(cells).forEach((c) => { c.input.value = ""; c.input.readOnly = false; c.el.classList.remove("wrong", "revealed"); });
-    stopTimer(); state.elapsed = 0; state.done = false;
+    stopTimer(); state.elapsed = 0; state.done = false; state.revealed.clear();
     $("timer").textContent = "00:00"; $("result").hidden = true;
     afterChange();
     select(words[0].cells[0], words[0].dir);
@@ -239,7 +285,7 @@
     try {
       const letters = {};
       Object.entries(cells).forEach(([k, c]) => { if (c.input.value) letters[k] = c.input.value; });
-      localStorage.setItem(STORE, JSON.stringify({ letters, elapsed: state.elapsed }));
+      localStorage.setItem(STORE, JSON.stringify({ letters, elapsed: state.elapsed, revealed: [...state.revealed] }));
     } catch (e) {}
   }
   function load() {
@@ -248,6 +294,7 @@
       if (!data) return;
       Object.entries(data.letters || {}).forEach(([k, v]) => { if (cells[k]) cells[k].input.value = v; });
       state.elapsed = data.elapsed || 0;
+      (data.revealed || []).forEach((a) => state.revealed.add(a));
       $("timer").textContent = fmt(state.elapsed);
     } catch (e) {}
   }

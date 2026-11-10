@@ -152,3 +152,9 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .filter-label { width: 100%; }                 /* label above its buttons on phones */
   .chip { padding: 6px 10px; font-size: 13px; }
 }
+
+/* ---- Sharing ---- */
+.result { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.share-note { margin: 0; font-size: 13px; color: var(--muted); white-space: pre-line; overflow-wrap: anywhere; }
+.result .share-note { color: var(--green-ink); }
+.result[hidden] { display: none; }
