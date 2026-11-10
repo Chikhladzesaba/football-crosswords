@@ -28,8 +28,8 @@
     shareResult: "Share my result", across: "Across", down: "Down",
     solved: (a, b) => `${a} of ${b} solved`,
     done: (n, t, h) => `Full time! You got all ${n} answers in ${t}, with ${h}.`,
-    result: (n, t, h) => `⚽ ${plainTitle} crossword\n✅ ${n}/${n} in ${t} · ${h}`,
-    invite: (n) => `⚽ Can you solve the ${plainTitle} football crossword? ${n} answers.`,
+    result: (n, t, h) => `⚽ ${P.shareName || plainTitle + " crossword"}\n✅ ${n}/${n} in ${t} · ${h}`,
+    invite: (n) => P.invite || `⚽ Can you solve the ${plainTitle} football crossword? ${n} answers.`,
     copied: "Copied! Paste it anywhere to share.",
   };
   if (KA) {

@@ -217,3 +217,14 @@ body.typing .clue-bar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 20; margin: 0;
   border-radius: 0 0 14px 14px; box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
 }
+
+/* ---- Daily crossword card on the home page ---- */
+.daily-card {
+  display: flex; flex-direction: column; gap: 6px; margin: 0 0 18px; padding: 16px 18px;
+  border: 1.5px solid var(--accent); border-radius: 14px; background: #fff; color: inherit; text-decoration: none;
+}
+.daily-card:hover { box-shadow: 0 2px 12px rgba(0, 106, 255, .12); }
+.daily-card .kicker { font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: .04em; }
+.daily-card .name { font-weight: 600; font-size: 19px; }
+.daily-card .meta-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.daily-card .cta { color: var(--accent); }

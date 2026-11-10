@@ -144,6 +144,28 @@
     document.querySelector(".filters").appendChild(g);
     buttons("status", ["Not solved", "Solved"]);
   }
+  // ---- Today's Daily crossword (daily/), shown above everything else ----
+  function dailyCard() {
+    const d = new Date(), id = "daily-" + d.toLocaleDateString("en-CA");
+    const level = ["Very hard", "Easy", "Easy", "Medium", "Medium", "Hard", "Hard"][d.getDay()]; // same rule as tools/build_daily.py
+    const a = document.createElement("a");
+    a.className = "daily-card"; a.href = "daily/";
+    const kicker = document.createElement("span"); kicker.className = "kicker";
+    kicker.textContent = "Daily crossword · " + d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+    const name = document.createElement("span"); name.className = "name"; name.textContent = "Today's mix of every topic";
+    const lv = document.createElement("span"); lv.className = "level level-" + level.toLowerCase().replace(" ", "-"); lv.textContent = level;
+    const meta = document.createElement("span"); meta.className = "meta-line"; meta.appendChild(lv);
+    const st = document.createElement("span"); st.className = "status";
+    if (solved[id]) { st.textContent = "✓ Solved · " + fmt(solved[id].time) + (solved[id].perfect ? " ⭐" : ""); a.classList.add("is-solved"); }
+    else if (inProgress(id)) { st.classList.add("progress"); st.textContent = "In progress"; }
+    else { st.classList.add("cta"); st.textContent = "New every day · Play →"; }
+    meta.appendChild(st);
+    a.append(kicker, name, meta);
+    const filters = document.querySelector(".filters");
+    filters.parentNode.insertBefore(a, filters);
+  }
+
+  dailyCard();
   stats();
   draw();
 })();
