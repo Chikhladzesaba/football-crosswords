@@ -8,123 +8,123 @@ window.PUZZLE = {
   "cols": 12,
   "words": [
     {
-      "answer": "VICTORIA",
+      "answer": "PSG",
       "row": 0,
+      "col": 3,
+      "dir": "D",
+      "clue": "His last club, in 2013."
+    },
+    {
+      "answer": "BOOT",
+      "row": 1,
+      "col": 8,
+      "dir": "D",
+      "clue": "Object that cut his eye in the dressing room in 2003."
+    },
+    {
+      "answer": "SAINTETIENNE",
+      "row": 1,
+      "col": 11,
+      "dir": "D",
+      "clue": "French city where that 1998 match was played."
+    },
+    {
+      "answer": "KNIGHTHOOD",
+      "row": 2,
       "col": 0,
       "dir": "A",
+      "clue": "Honour he received from King Charles in 2025."
+    },
+    {
+      "answer": "VICTORIA",
+      "row": 4,
+      "col": 1,
+      "dir": "D",
       "clue": "His wife."
     },
     {
       "answer": "CAPTAIN",
-      "row": 0,
-      "col": 2,
-      "dir": "D",
-      "clue": "Role he held for England from 2000 to 2006."
-    },
-    {
-      "answer": "CAPELLO",
-      "row": 2,
-      "col": 0,
-      "dir": "A",
-      "clue": "Coach who won the Spanish league with him in 2007."
-    },
-    {
-      "answer": "PRESTON",
-      "row": 2,
-      "col": 11,
-      "dir": "D",
-      "clue": "Club he joined on loan in 1995."
-    },
-    {
-      "answer": "WIMBLEDON",
-      "row": 3,
-      "col": 8,
-      "dir": "D",
-      "clue": "Scored from his own half against them in 1996."
-    },
-    {
-      "answer": "REALMADRID",
       "row": 4,
-      "col": 0,
+      "col": 5,
       "dir": "A",
-      "clue": "Club he joined in 2003."
+      "clue": "Role he held for England from 2000 to 2006."
     },
     {
       "answer": "UNICEF",
       "row": 6,
-      "col": 1,
+      "col": 3,
       "dir": "A",
       "clue": "Charity he has served as goodwill ambassador."
     },
     {
-      "answer": "BOOT",
-      "row": 6,
-      "col": 8,
-      "dir": "A",
-      "clue": "Object that cut his eye in the dressing room in 2003."
-    },
-    {
-      "answer": "GALAXY",
-      "row": 8,
-      "col": 0,
-      "dir": "D",
-      "clue": "Los Angeles club he joined in 2007."
-    },
-    {
-      "answer": "SIMEONE",
-      "row": 8,
-      "col": 2,
-      "dir": "A",
-      "clue": "Argentine he was sent off for kicking at in 1998."
-    },
-    {
       "answer": "INTERMIAMI",
-      "row": 8,
-      "col": 3,
+      "row": 6,
+      "col": 5,
       "dir": "D",
       "clue": "Club he co-owns."
     },
     {
-      "answer": "LEYTONSTONE",
-      "row": 10,
-      "col": 0,
+      "answer": "WIMBLEDON",
+      "row": 7,
+      "col": 9,
+      "dir": "D",
+      "clue": "Scored from his own half against them in 1996."
+    },
+    {
+      "answer": "BEND",
+      "row": 8,
+      "col": 3,
+      "dir": "D",
+      "clue": "___ It Like Beckham, a 2002 film named after him."
+    },
+    {
+      "answer": "TBILISI",
+      "row": 8,
+      "col": 5,
       "dir": "A",
-      "clue": "Area of east London where he was born in 1975."
+      "clue": "City where he first saw Victoria on TV, during an England trip in 1996."
     },
     {
       "answer": "GREECE",
-      "row": 12,
-      "col": 2,
+      "row": 9,
+      "col": 0,
       "dir": "A",
       "clue": "Free kick against them sent England to the 2002 World Cup."
     },
     {
       "answer": "MILAN",
-      "row": 13,
-      "col": 9,
-      "dir": "D",
+      "row": 11,
+      "col": 7,
+      "dir": "A",
       "clue": "Italian club where he spent two loan spells."
     },
     {
-      "answer": "BEND",
-      "row": 14,
-      "col": 1,
+      "answer": "GALAXY",
+      "row": 12,
+      "col": 2,
       "dir": "D",
-      "clue": "___ It Like Beckham, a 2002 film named after him."
+      "clue": "Los Angeles club he joined in 2007."
     },
     {
-      "answer": "PSG",
-      "row": 14,
-      "col": 7,
-      "dir": "D",
-      "clue": "His last club, in 2013."
-    },
-    {
-      "answer": "METATARSAL",
-      "row": 15,
+      "answer": "REALMADRID",
+      "row": 13,
       "col": 0,
       "dir": "A",
-      "clue": "Foot bone he broke shortly before the 2002 World Cup."
+      "clue": "Club he joined in 2003."
+    },
+    {
+      "answer": "SIMEONE",
+      "row": 15,
+      "col": 4,
+      "dir": "A",
+      "clue": "Argentine he was sent off for kicking at in 1998."
+    },
+    {
+      "answer": "LEYTONSTONE",
+      "row": 17,
+      "col": 0,
+      "dir": "A",
+      "clue": "Area of east London where he was born in 1975."
     }
   ]
 };

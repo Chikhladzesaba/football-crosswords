@@ -5,6 +5,7 @@ maxcols: 12
 maxrows: 18
 
 # ANSWER | clue  (one per line, answer = letters only; * = must include)
+*TBILISI | City where he first saw Victoria on TV, during an England trip in 1996.
 *LEYTONSTONE | Area of east London where he was born in 1975.
 PRESTON | Club he joined on loan in 1995.
 *WIMBLEDON | Scored from his own half against them in 1996.
