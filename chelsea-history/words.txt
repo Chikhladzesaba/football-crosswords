@@ -1,0 +1,22 @@
+title: Chelsea <em>History</em>
+intro: From 1905 to world champions in 2025. Medium. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+BRIDGE | Stamford ___, home ground since the club was founded in 1905.
+PENSIONERS | Old club nickname, after the retired soldiers of the Royal Hospital nearby.
+DRAKE | Ted ___, manager when they won their first league title, in 1955.
+ZOLA | Little Italian forward, a fan favourite from 1996 to 2003.
+ABRAMOVICH | Russian owner who bought the club in 2003 and sold it in 2022.
+MOURINHO | Called himself "a special one" when he arrived in 2004.
+TERRY | John ___, centre-back and long-time captain.
+LAMPARD | Midfielder who is the club's record scorer, with 211 goals, and later managed the team.
+DROGBA | Scored the winning penalty in the 2012 Champions League final.
+MUNICH | City where they won their first Champions League, in 2012.
+CONTE | Italian coach who won the Premier League in 2017.
+HAVERTZ | Scored the only goal of the 2021 Champions League final.
+PORTO | City where they beat Manchester City in the 2021 Champions League final.
+CLUBWORLDCUP | Won the first 32-team edition in 2025, beating PSG 3-0 in New Jersey.
+PALMER | English forward who scored twice as Chelsea beat PSG 3-0 in July 2025.

@@ -1,0 +1,25 @@
+title: World Cup <em>Hosts</em>
+intro: Every country that has hosted the men's World Cup, 1930 to 2026. Medium. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game, not affiliated with FIFA. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+URUGUAY | Hosted the first World Cup, in 1930, and won it.
+ITALY | Hosted in 1934 and again in 1990.
+FRANCE | Hosted in 1938 and 1998, winning the second time.
+BRAZIL | Hosted in 1950 and 2014.
+SWITZERLAND | Hosts in 1954. The final was played in Bern.
+SWEDEN | Hosts in 1958. The final was played at the Råsunda Stadium near Stockholm.
+CHILE | Hosted in 1962, two years after a huge earthquake hit the country.
+ENGLAND | Hosted in 1966 and won the final at Wembley.
+MEXICO | First country to host the men's World Cup three times: 1970, 1986 and 2026.
+GERMANY | Hosted in 1974, as West Germany, and in 2006.
+ARGENTINA | Hosted and won in 1978.
+SPAIN | Hosted in 1982, with an orange called Naranjito as the mascot.
+USA | Hosted in 1994 and co-hosted in 2026, the first World Cup with 48 teams.
+JAPAN | Co-hosted in 2002 with South Korea. The final was in Yokohama.
+SOUTHAFRICA | Hosted the first World Cup in Africa, in 2010.
+RUSSIA | Hosted in 2018. The final was at the Luzhniki Stadium in Moscow.
+QATAR | Hosted the first World Cup played in November and December, in 2022.
+CANADA | Hosted men's World Cup games for the first time in 2026, with two neighbours.

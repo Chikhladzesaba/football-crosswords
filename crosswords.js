@@ -37,4 +37,12 @@ window.CROSSWORDS = [
   { folder: "famous-number-10s", name: "Famous Number 10s", difficulty: "Easy", topic: "Legends", answers: 15, about: "Legends who made the number 10 shirt famous." },
   { folder: "premier-league-champions", name: "Premier League Champions", difficulty: "Easy", topic: "Club football", answers: 14, about: "The clubs and managers who won the title." },
   { folder: "national-team-nicknames", name: "National Team Nicknames", difficulty: "Easy", topic: "International", answers: 13, about: "Azzurri, Selecao, Three Lions and more." },
+  { folder: "champions-league-winners", name: "Champions League Winners", difficulty: "Easy", topic: "Champions League", answers: 15, about: "Every club that has been champion of Europe." },
+  { folder: "famous-derbies", name: "Famous Derbies", difficulty: "Easy", topic: "Club football", answers: 13, about: "The biggest rivalries in world football." },
+  { folder: "ronaldinho", name: "Ronaldinho", difficulty: "Medium", topic: "Legends", answers: 14, about: "From Brazil to Barcelona, with a smile all the way." },
+  { folder: "thierry-henry", name: "Thierry Henry", difficulty: "Medium", topic: "Legends", answers: 15, about: "From the Paris suburbs to Arsenal legend, and on to the dugout." },
+  { folder: "pele", name: "Pelé", difficulty: "Medium", topic: "Legends", answers: 14, about: "Brazil's greatest, from a small town to world fame." },
+  { folder: "world-cup-hosts", name: "World Cup Hosts", difficulty: "Medium", topic: "International", answers: 18, about: "Every country that has hosted the men's World Cup, 1930 to 2026." },
+  { folder: "liverpool-history", name: "Liverpool History", difficulty: "Medium", topic: "Club football", answers: 16, about: "From the 1892 founding to a 20th league title." },
+  { folder: "chelsea-history", name: "Chelsea History", difficulty: "Medium", topic: "Club football", answers: 15, about: "From 1905 to world champions in 2025." },
 ];

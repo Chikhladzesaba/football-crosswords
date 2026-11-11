@@ -1,0 +1,22 @@
+title: Champions League <em>Winners</em>
+intro: Clubs that have won the European Cup and Champions League, 1956 to 2026. Easy. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game, not affiliated with UEFA. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+REALMADRID | Record 15-time winners, including the first five European Cups from 1956 to 1960.
+MILAN | Red-and-black club with seven titles, the latest in 2007.
+BAYERN | German club with six titles, the latest in 2020 in Lisbon.
+LIVERPOOL | Came back from 3-0 down at half-time to win in Istanbul in 2005.
+BARCELONA | Five-time winners. Messi scored in their 2009 and 2011 finals.
+AJAX | Dutch club that won three in a row from 1971 to 1973 with Johan Cruyff.
+INTER | Won the treble under José Mourinho in 2010. Diego Milito scored twice in the final.
+UNITED | Manchester club that won in 1968, 1999 and 2008.
+CITY | Manchester club that won its first title in 2023, in Istanbul.
+CHELSEA | London club that won in 2012 and 2021.
+PSG | Initials of the Paris club that won its first title in 2025 and kept it in 2026.
+PORTO | Portuguese club that José Mourinho led to the 2004 title.
+JUVENTUS | Turin club whose two titles came in 1985 and 1996.
+CELTIC | Became the first British winners in 1967, in Lisbon.
+MARSEILLE | First French club to win the Champions League, in 1993.

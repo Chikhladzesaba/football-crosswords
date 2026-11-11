@@ -1,0 +1,22 @@
+title: Thierry <em>Henry</em>
+intro: From the Paris suburbs to Arsenal legend, and on to the dugout. Medium. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+LESULIS | Paris suburb where he grew up.
+MONACO | Club where he made his debut in 1994, and which he later managed.
+JUVENTUS | Italian club he left for Arsenal in 1999.
+WENGER | Coach who signed him for Arsenal and turned him into a striker.
+INVINCIBLES | Name for the Arsenal team that went unbeaten through the 2003-04 Premier League.
+GOLDENBOOT | Premier League top-scorer award he won four times.
+TITI | His short French nickname.
+STATUE | Unveiled in his honour outside the Emirates Stadium in 2011.
+LEEDS | Beaten by his goal in the FA Cup when he returned to Arsenal on loan in 2012.
+IRELAND | Knocked out in the 2010 World Cup play-offs after his handball.
+BARCELONA | Club where he won the Champions League in 2009.
+NEWYORK | City of the Red Bulls, his MLS club from 2010 to 2014.
+BELGIUM | National team he helped as assistant coach at the 2018 World Cup.
+MONTREAL | MLS club he managed in 2020.
+OLYMPICS | France won silver at the 2024 edition, in Paris, with him as coach.
