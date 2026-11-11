@@ -1,0 +1,23 @@
+title: Liverpool <em>History</em>
+intro: From the 1892 founding to a 20th league title. Medium. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+ANFIELD | Home ground since the club was founded in 1892.
+EVERTON | Club whose move away in 1892 led to Liverpool being founded.
+SHANKLY | Scottish manager from 1959 to 1974 who built the modern club.
+PAISLEY | Manager who won three European Cups, in 1977, 1978 and 1981.
+KOP | Famous home end, named after a hill in a Boer War battle.
+ALONE | "You'll Never Walk ___", the club's anthem.
+LIVERBIRD | Bird on the club badge.
+DALGLISH | Player-manager when they won the league and FA Cup double in 1986.
+RUSH | Ian ___, club record scorer with 346 goals.
+ISTANBUL | City where they came back from 3-0 down to win the 2005 Champions League final.
+GERRARD | Captain who lifted the Champions League trophy in 2005.
+MADRID | City where they beat Tottenham in the 2019 Champions League final.
+KLOPP | German manager who ended a 30-year wait for the league title in 2020.
+SLOT | Dutch manager who won the Premier League in his first season, 2024-25.
+SALAH | Egyptian forward signed from Roma in 2017.
+TWENTY | Number of English league titles after 2025, level with Manchester United.

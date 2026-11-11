@@ -1,0 +1,21 @@
+title: <em>Pelé</em>
+intro: Brazil's greatest, from a small town to world fame. Medium. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+EDSON | His first name at birth.
+TRESCORACOES | Town in Minas Gerais where he was born in 1940.
+DONDINHO | Nickname of his father, also a footballer.
+SANTOS | Brazilian club where he played from 1956 to 1974.
+SWEDEN | Hosts of the 1958 World Cup, where he scored twice in the final aged 17.
+THREE | Number of World Cups he won, still a record for a player.
+GARRINCHA | Winger who led Brazil to the 1962 title after Pelé was injured early in the tournament.
+AZTECA | Mexico City stadium where he headed the opening goal of the 1970 World Cup final.
+ITALY | Beaten 4-1 by Brazil in the 1970 World Cup final.
+MARACANA | Rio stadium where he scored his 1000th goal, in 1969.
+COSMOS | New York club he joined in 1975.
+VICTORY | 1981 war film he made with Sylvester Stallone and Michael Caine, also called "Escape to ___".
+KING | English meaning of his nickname, "O Rei".
+MINISTER | Brazil's sport ___, a government job he held from 1995 to 1998.

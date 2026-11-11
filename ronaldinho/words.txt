@@ -1,0 +1,21 @@
+title: <em>Ronaldinho</em>
+intro: From Brazil to Barcelona, with a smile all the way. Medium. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+GAUCHO | Nickname used for him in Brazil, after people from his home state of Rio Grande do Sul.
+PORTOALEGRE | His home city in southern Brazil.
+GREMIO | Brazilian club where he started his career.
+PARIS | City where he played two seasons, from 2001 to 2003, before moving to Spain.
+RIJKAARD | Dutch coach at Barcelona when he won the Champions League in 2006.
+SEAMAN | England goalkeeper beaten by his long free kick at the 2002 World Cup.
+BERNABEU | Stadium where Real Madrid fans gave him a standing ovation in 2005.
+CHELSEA | Conceded his famous toe-poke goal at Stamford Bridge in 2005.
+MILAN | Italian club he joined from Barcelona in 2008.
+EIGHTY | His shirt number in Italy, chosen after his birth year.
+FLAMENGO | Rio de Janeiro club he joined in 2011, back in Brazil.
+LIBERTADORES | South American cup he won with Atlético Mineiro in 2013.
+BALLONDOR | Award from France Football that he won in 2005.
+ASSIS | Roberto de ___, his older brother and agent.

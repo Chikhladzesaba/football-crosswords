@@ -1,0 +1,20 @@
+title: Famous <em>Derbies</em>
+intro: The biggest rivalries in world football. Easy. Tap a square to start; tap it again to switch between across and down.
+note: Unofficial fan game. Names are written without accents or spaces.
+maxcols: 12
+maxrows: 18
+
+# ANSWER | clue  (one per line, answer = letters only; * = must include)
+CLASICO | Name for any match between Real Madrid and Barcelona.
+EVERTON | Liverpool's city rivals in the Merseyside derby.
+INTER | AC Milan's city rivals in the Derby della Madonnina.
+OLDFIRM | Nickname of the Glasgow derby.
+CELTIC | Green-and-white Glasgow club that faces Rangers.
+BOCAJUNIORS | Plays River Plate in the biggest derby in Buenos Aires. Home ground: La Bombonera.
+TOTTENHAM | Arsenal's rivals in the North London derby.
+MANCHESTER | City and United meet in this city's derby.
+LAZIO | Shares Rome's Stadio Olimpico with Roma.
+ATLETICO | Real Madrid's city rivals in the Madrid derby.
+DORTMUND | Yellow-and-black club that faces Schalke in the Revierderby.
+ISTANBUL | City where Galatasaray and Fenerbahçe play the Intercontinental derby.
+MARSEILLE | PSG's great rivals in Le Classique.
