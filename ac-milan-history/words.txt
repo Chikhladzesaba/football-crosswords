@@ -5,7 +5,7 @@ maxcols: 12
 maxrows: 18
 
 # ANSWER | clue  (one per line, answer = letters only; * = must include)
-*KILPIN | Englishman from Nottingham who founded the club in 1899 and was its first captain.
+*KILPIN | Englishman from Nottingham who co-founded the club in 1899 and was its first captain.
 *NORDAHL | Swedish centre-forward who remains the club's all-time top scorer.
 LIEDHOLM | The "Li" of the Gre-No-Li trio, who later returned as coach.
 *RIVERA | "Golden Boy" who became the first Italian-born winner of the Ballon d'Or.
@@ -21,7 +21,7 @@ GULLIT | Ballon d'Or winner in 1987, his first year at the club.
 *VANBASTEN | Scored twice in the 1989 final and won the Ballon d'Or three times while at the club.
 *BARESI | Captain whose number 6 shirt was retired.
 *MALDINI | Played 902 official games for the club, and his number 3 is kept only for his family.
-*CAPELLO | Coach of the side that went 58 Serie A games unbeaten in the early 1990s.
+*CAPELLO | Coach whose side went the whole 1991–92 Serie A season unbeaten.
 DESAILLY | Scored in the 1994 final, a year after beating the club in the 1993 final with Marseille.
 MASSARO | Scored twice in the 4–0 final against Barcelona in Athens.
 SAVICEVIC | Montenegrin "Genius" who lobbed the keeper in the 1994 final.

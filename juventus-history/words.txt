@@ -9,7 +9,7 @@ maxrows: 18
 PINK | Colour of the club's first shirts.
 *NOTTSCOUNTY | English club whose shirts inspired the black and white stripes.
 *AGNELLI | Family that has controlled the club since 1923.
-FIAT | Car company founded by the Agnelli family.
+FIAT | Car company whose founding family has controlled the club since 1923.
 BIANCONERI | Nickname meaning "the white-blacks".
 VECCHIASIGNORA | "Old Lady", the club's other nickname, in Italian.
 SIVORI | Argentine-born forward who won the 1961 Ballon d'Or.

@@ -110,7 +110,7 @@ window.PUZZLE = {
       "row": 13,
       "col": 2,
       "dir": "D",
-      "clue": "Scored the fastest hat-trick, in 2 minutes 56 seconds, for Southampton."
+      "clue": "Scored the fastest hat-trick, in 2 minutes 56 seconds, in 2015."
     },
     {
       "answer": "VARDY",

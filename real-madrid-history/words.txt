@@ -7,7 +7,7 @@ maxrows: 18
 # ANSWER | clue  (one per line, answer = letters only; * = must include)
 *ALFONSO | King ___ XIII, who gave the club its "Real" (royal) title in 1920.
 *BERNABEU | President whose name is on the stadium.
-*DISTEFANO | Argentine-born star of five European Cups in a row.
+*DISTEFANO | Argentine-born star of the European Cups won from 1956 to 1960.
 FIVE | European Cups won in a row from 1956 to 1960.
 GENTO | Winger who won six European Cups.
 *PUSKAS | Hungarian who scored four goals in the 1960 final.
@@ -16,7 +16,7 @@ YEYE | Nickname of the young 1966 European champions.
 BUTRAGUENO | "The Vulture", leader of a 1980s youth generation.
 MIJATOVIC | Scored the 1998 final winner that ended a 32-year wait.
 *GALACTICOS | Name for the club's star signings of the early 2000s.
-PEREZ | Florentino ___, president behind the Galacticos.
+PEREZ | Florentino ___, president behind the star signings of the early 2000s.
 *DECIMA | Nickname for the tenth European Cup, won in 2014.
 RAMOS | Defender whose late header saved the 2014 final.
 LISBON | City of the 2014 Champions League final.

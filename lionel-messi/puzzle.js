@@ -75,7 +75,7 @@ window.PUZZLE = {
       "row": 9,
       "col": 0,
       "dir": "D",
-      "clue": "___ Old Boys, his boyhood club in Rosario."
+      "clue": "___ Old Boys, his boyhood club in his home city."
     },
     {
       "answer": "ROSARIO",
@@ -89,7 +89,7 @@ window.PUZZLE = {
       "row": 9,
       "col": 7,
       "dir": "D",
-      "clue": "His wife, also from Rosario."
+      "clue": "His wife, whom he has known since childhood."
     },
     {
       "answer": "EIGHT",

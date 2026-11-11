@@ -61,7 +61,7 @@ window.PUZZLE = {
       "row": 5,
       "col": 7,
       "dir": "D",
-      "clue": "Tottenham record scorer he passed in 2023."
+      "clue": "Spurs record scorer he passed in 2023."
     },
     {
       "answer": "ORIENT",

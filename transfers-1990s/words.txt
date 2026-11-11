@@ -10,7 +10,7 @@ maxrows: 18
 PAPIN | Ballon d'Or winner who moved from Marseille to Milan in 1992.
 *SCHMEICHEL | Danish goalkeeper Ferguson called the bargain of the century.
 *CANTONA | Frenchman who moved from Leeds to Manchester United in 1992.
-BLACKBURN | Club that signed Shearer for a British record in 1992.
+BLACKBURN | Club that broke the British record in 1992 to sign Southampton's young striker.
 *SHEARER | Joined his home-town club Newcastle in 1996 for a world record.
 COLE | Andy ___, who moved from Newcastle to Manchester United in 1995.
 KLINSMANN | German striker who joined Tottenham from Monaco in 1994.

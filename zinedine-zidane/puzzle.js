@@ -68,7 +68,7 @@ window.PUZZLE = {
       "row": 7,
       "col": 0,
       "dir": "D",
-      "clue": "Champions League titles in a row he won as Real Madrid coach."
+      "clue": "Champions League titles in a row he won as a coach, from 2016 to 2018."
     },
     {
       "answer": "BRAZIL",
@@ -103,7 +103,7 @@ window.PUZZLE = {
       "row": 11,
       "col": 10,
       "dir": "D",
-      "clue": "His eldest son, also a footballer."
+      "clue": "His eldest son, a midfielder who retired from playing in 2024, aged 29."
     },
     {
       "answer": "CANNES",

@@ -19,7 +19,7 @@ window.PUZZLE = {
       "row": 0,
       "col": 5,
       "dir": "A",
-      "clue": "Englishman from Nottingham who founded the club in 1899 and was its first captain."
+      "clue": "Englishman from Nottingham who co-founded the club in 1899 and was its first captain."
     },
     {
       "answer": "LEAO",
@@ -61,7 +61,7 @@ window.PUZZLE = {
       "row": 3,
       "col": 1,
       "dir": "A",
-      "clue": "Coach of the side that went 58 Serie A games unbeaten in the early 1990s."
+      "clue": "Coach whose side went the whole 1991–92 Serie A season unbeaten."
     },
     {
       "answer": "NORDAHL",

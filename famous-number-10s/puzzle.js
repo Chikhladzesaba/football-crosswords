@@ -33,7 +33,7 @@ window.PUZZLE = {
       "row": 1,
       "col": 6,
       "dir": "A",
-      "clue": "Romania's number 10, called the \"Maradona of the Carpathians\"."
+      "clue": "Romania's number 10, known at home as \"Regele\" (the King), who starred at the 1994 World Cup."
     },
     {
       "answer": "ROONEY",

@@ -52,6 +52,7 @@ def gives_away(answer, text):
 
 
 POOL = [c for c in POOL if not gives_away(c["answer"], c["clue"])]  # a clue that names its own answer
+POOL = [c for c in POOL if len(c["answer"]) <= MAXCOLS]  # longer answers never fit the small daily grid
 
 # ---- grid layout (same method as layout.py) ----
 def fits(grid, w, r, c, d):
@@ -138,7 +139,7 @@ def make_day(d):
         # least recently used first, a little shuffled so days don't repeat the same pattern
         pool.sort(key=lambda c: (last_used.get(c["key"], "0000"), rng.random()))
         pick, seen = [], set()
-        for c in pool[: max(40, SIZE[level] * 4)]:
+        for c in pool[: max(40, SIZE[level] * 4) + attempt]:  # widen the search if a day is hard to fill
             if len(pick) == SIZE[level]:
                 break
             if rng.random() < .35 or c["answer"] in seen:

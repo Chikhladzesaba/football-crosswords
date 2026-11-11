@@ -117,7 +117,7 @@ window.PUZZLE = {
       "row": 12,
       "col": 8,
       "dir": "D",
-      "clue": "Czech signed from Lazio in 2001 to replace Zidane at Juventus."
+      "clue": "Czech signed from Lazio in 2001 to replace Juventus's French playmaker."
     },
     {
       "answer": "TORRES",

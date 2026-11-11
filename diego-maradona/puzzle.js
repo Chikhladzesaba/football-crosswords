@@ -19,7 +19,7 @@ window.PUZZLE = {
       "row": 1,
       "col": 4,
       "dir": "D",
-      "clue": "European trophy he won with Napoli in 1989."
+      "clue": "European trophy he won in Italy in 1989."
     },
     {
       "answer": "ROME",

@@ -33,7 +33,7 @@ window.PUZZLE = {
       "row": 2,
       "col": 9,
       "dir": "D",
-      "clue": "Bayern's goalkeeper saved three Valencia penalties in the 2001 shootout at San Siro."
+      "clue": "Bayern's goalkeeper saved three penalties in the 2001 shootout at San Siro."
     },
     {
       "answer": "LEVERKUSEN",

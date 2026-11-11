@@ -61,7 +61,7 @@ window.PUZZLE = {
       "row": 5,
       "col": 2,
       "dir": "A",
-      "clue": "Argentine defender left behind by his touch in that goal."
+      "clue": "Argentine defender left behind by his touch for the last-minute winner at the 1998 World Cup."
     },
     {
       "answer": "DABIZAS",
@@ -89,7 +89,7 @@ window.PUZZLE = {
       "row": 9,
       "col": 8,
       "dir": "D",
-      "clue": "Frank ___, who hit the long pass for it."
+      "clue": "Frank ___, whose long pass set up his 1998 World Cup winner against Argentina."
     },
     {
       "answer": "RIOCH",
@@ -110,14 +110,14 @@ window.PUZZLE = {
       "row": 11,
       "col": 6,
       "dir": "D",
-      "clue": "Gave him his Ajax debut in 1986."
+      "clue": "Gave him his debut in 1986, at the club whose academy he came through."
     },
     {
       "answer": "UEFACUP",
       "row": 16,
       "col": 4,
       "dir": "A",
-      "clue": "Trophy he won with both Ajax and Inter."
+      "clue": "Trophy he won with his first two clubs, in 1992 and 1994."
     }
   ]
 };

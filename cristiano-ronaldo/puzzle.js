@@ -12,7 +12,7 @@ window.PUZZLE = {
       "row": 0,
       "col": 4,
       "dir": "D",
-      "clue": "Manager who signed him in 2003 after a friendly in Lisbon."
+      "clue": "Manager who signed him in 2003, after he starred against United in a friendly."
     },
     {
       "answer": "LISBON",
@@ -26,7 +26,7 @@ window.PUZZLE = {
       "row": 0,
       "col": 8,
       "dir": "D",
-      "clue": "Lisbon club where he made his debut."
+      "clue": "Club where he made his debut, in Portugal's capital."
     },
     {
       "answer": "NATIONSLEAGUE",

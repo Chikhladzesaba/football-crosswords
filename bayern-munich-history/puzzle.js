@@ -47,7 +47,7 @@ window.PUZZLE = {
       "row": 2,
       "col": 11,
       "dir": "D",
-      "clue": "Scored 41 Bundesliga goals in 2020–21 to break that record."
+      "clue": "Scored 41 Bundesliga goals in 2020–21, a new single-season record."
     },
     {
       "answer": "COMAN",
@@ -96,7 +96,7 @@ window.PUZZLE = {
       "row": 12,
       "col": 7,
       "dir": "D",
-      "clue": "Sepp ___, goalkeeper of that European Cup hat-trick."
+      "clue": "Sepp ___, goalkeeper of the three European Cups in a row from 1974 to 1976."
     },
     {
       "answer": "BECKENBAUER",

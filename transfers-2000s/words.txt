@@ -8,7 +8,7 @@ maxrows: 18
 *FIGO | Crossed from Barcelona to Real Madrid in 2000.
 CRESPO | Argentine whose 2000 move from Parma to Lazio set a world record.
 *ZIDANE | His 2001 move from Juventus to Real Madrid set a world record.
-NEDVED | Czech signed from Lazio in 2001 to replace Zidane at Juventus.
+NEDVED | Czech signed from Lazio in 2001 to replace Juventus's French playmaker.
 *BUFFON | Goalkeeper who joined Juventus from Parma in 2001.
 VERON | Argentine who joined Manchester United from Lazio in 2001.
 *FERDINAND | Defender who moved from Leeds to Manchester United in 2002.
@@ -24,6 +24,6 @@ TORRES | Spanish striker who joined Liverpool from Atletico Madrid in 2007.
 ROBINHO | Brazilian who joined Manchester City on deadline day in 2008.
 BERBATOV | Bulgarian who moved from Tottenham to Manchester United in 2008.
 *KAKA | Brazilian who left Milan for Real Madrid in 2009.
-EIGHTY | Million pounds Real Madrid paid for Cristiano Ronaldo in 2009.
+EIGHTY | Million pounds Real Madrid paid Manchester United for their Portuguese winger in 2009.
 IBRAHIMOVIC | Swede who moved from Inter to Barcelona in 2009.
 ETOO | Cameroonian who left Barcelona for Inter in 2009.

@@ -61,7 +61,7 @@ window.PUZZLE = {
       "row": 6,
       "col": 2,
       "dir": "A",
-      "clue": "Dutch playmaker of the treble team."
+      "clue": "Dutch playmaker of the 2010 Champions League winners."
     },
     {
       "answer": "MILAN",
@@ -75,7 +75,7 @@ window.PUZZLE = {
       "row": 8,
       "col": 6,
       "dir": "D",
-      "clue": "Coach of the 2010 treble."
+      "clue": "Portuguese coach of the 2010 Champions League winners."
     },
     {
       "answer": "MEAZZA",
@@ -131,7 +131,7 @@ window.PUZZLE = {
       "row": 17,
       "col": 1,
       "dir": "A",
-      "clue": "Defensive system Herrera's Inter was famous for."
+      "clue": "Defensive system the \"Grande Inter\" of the 1960s was famous for."
     }
   ]
 };

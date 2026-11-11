@@ -6,7 +6,7 @@ maxrows: 18
 
 # ANSWER | clue  (one per line, answer = letters only; * = must include)
 *ROSARIO | Argentine city where he was born in 1987.
-NEWELLS | ___ Old Boys, his boyhood club in Rosario.
+NEWELLS | ___ Old Boys, his boyhood club in his home city.
 *NAPKIN | Barcelona's first agreement with him was famously written on one.
 REXACH | Barcelona director who signed his first agreement with the club in 2000.
 *LAMASIA | Barcelona's academy, where he arrived at 13.
@@ -22,6 +22,6 @@ MARACANA | Won the 2021 Copa América final there, against Brazil.
 PSG | Club he joined in 2021 after leaving Barcelona.
 *INTERMIAMI | Club he joined in 2023.
 LEAGUESCUP | His first trophy in the United States, won in 2023.
-ANTONELA | His wife, also from Rosario.
+ANTONELA | His wife, whom he has known since childhood.
 PULGA | His nickname: "La ___", the flea.
 GROWTH | As a child he was treated for a ___ hormone deficiency.

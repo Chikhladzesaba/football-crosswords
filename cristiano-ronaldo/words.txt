@@ -6,11 +6,11 @@ maxrows: 18
 
 # ANSWER | clue  (one per line, answer = letters only; * = must include)
 *MADEIRA | Portuguese island where he was born in 1985.
-FUNCHAL | Capital of that island, his home town.
+FUNCHAL | Capital of the Portuguese island where he was born, and his home town.
 ANDORINHA | His first boyhood club.
 NACIONAL | Club from his home town he joined at ten.
-*SPORTING | Lisbon club where he made his debut.
-*FERGUSON | Manager who signed him in 2003 after a friendly in Lisbon.
+*SPORTING | Club where he made his debut, in Portugal's capital.
+*FERGUSON | Manager who signed him in 2003, after he starred against United in a friendly.
 SEVEN | Shirt number he made famous at Manchester United.
 *MOSCOW | City where he scored in the 2008 Champions League final.
 FIVE | Number of Ballon d'Ors he has won.
