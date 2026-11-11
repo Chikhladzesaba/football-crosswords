@@ -61,14 +61,14 @@ window.PUZZLE = {
       "row": 6,
       "col": 4,
       "dir": "A",
-      "clue": "Spanish midfielder who became the club's youngest first-team player, aged 16."
+      "clue": "Spanish midfielder who debuted at 16 and was made captain at 21."
     },
     {
       "answer": "DIALSQUARE",
       "row": 7,
       "col": 0,
       "dir": "D",
-      "clue": "Name of the works team formed at Woolwich in 1886, the club's very first."
+      "clue": "Name of the works team formed in 1886, the club's very first."
     },
     {
       "answer": "HENRY",
@@ -89,7 +89,7 @@ window.PUZZLE = {
       "row": 10,
       "col": 8,
       "dir": "D",
-      "clue": "Goalkeeper beaten by that lob, yet a three-time league champion with the club."
+      "clue": "Goalkeeper lobbed from near halfway in the 1995 Cup Winners' Cup final, yet a three-time league champion with the club."
     },
     {
       "answer": "GEORGE",

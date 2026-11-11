@@ -5,7 +5,7 @@ maxcols: 12
 maxrows: 17
 
 # ANSWER | clue  (one per line, answer = letters only)
-KAHN | Bayern's goalkeeper saved three Valencia penalties in the 2001 shootout at San Siro.
+KAHN | Bayern's goalkeeper saved three penalties in the 2001 shootout at San Siro.
 DIDA | Brazilian goalkeeper who saved three Juventus penalties in the all-Italian shootout at Old Trafford in 2003.
 DUDEK | His double save in extra time and the stop that won the shootout made him the hero of 2005.
 ISTANBUL | City where Liverpool came back from 3–0 down at half-time.

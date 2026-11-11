@@ -6,16 +6,16 @@ maxrows: 18
 
 # ANSWER | clue  (one per line, answer = letters only; * = must include)
 *LAW | Scottish striker he was named after.
-*CRUYFF | Gave him his Ajax debut in 1986.
+*CRUYFF | Gave him his debut in 1986, at the club whose academy he came through.
 *AJAX | Club whose academy he came through.
 INTER | Italian club he joined in 1993.
-UEFACUP | Trophy he won with both Ajax and Inter.
+UEFACUP | Trophy he won with his first two clubs, in 1992 and 1994.
 *RIOCH | Manager who signed him for Arsenal in 1995.
 NONFLYING | "The ___ Dutchman", because of his fear of planes.
 LEICESTER | His 1997 hat-trick against them took all top three Goal of the Month places.
 *MARSEILLE | City of his last-minute World Cup winner against Argentina in 1998.
-AYALA | Argentine defender left behind by his touch in that goal.
-DEBOER | Frank ___, who hit the long pass for it.
+AYALA | Argentine defender left behind by his touch for the last-minute winner at the 1998 World Cup.
+DEBOER | Frank ___, whose long pass set up his 1998 World Cup winner against Argentina.
 SCHMEICHEL | Saved his late penalty in the 1999 FA Cup semi-final replay.
 DABIZAS | Newcastle defender he spun around in 2002.
 HENRY | French partner in a famous attacking duo.

@@ -75,7 +75,7 @@ window.PUZZLE = {
       "row": 8,
       "col": 2,
       "dir": "A",
-      "clue": "Duncan ___, Busby Babe who died 15 days after the crash, aged 21."
+      "clue": "Duncan ___, young star who died 15 days after the 1958 air crash, aged 21."
     },
     {
       "answer": "LAW",

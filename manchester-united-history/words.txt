@@ -8,7 +8,7 @@ maxrows: 18
 *NEWTONHEATH | The railway workers' club the team began as in 1878.
 DAVIES | John Henry ___, brewery owner who rescued the club and renamed it in 1902.
 *MUNICH | City of the 1958 air disaster.
-*EDWARDS | Duncan ___, Busby Babe who died 15 days after the crash, aged 21.
+*EDWARDS | Duncan ___, young star who died 15 days after the 1958 air crash, aged 21.
 *BUSBY | Survived the crash and won the European Cup ten years later.
 BENFICA | Beaten 4–1 at Wembley in the 1968 European Cup final.
 LAW | Old Trafford hero whose backheel for City came in United's 1974 relegation season.
@@ -16,7 +16,7 @@ STRETFORD | ___ End: Old Trafford's most famous stand.
 CANTONA | Arrived from Leeds in 1992 and inspired four titles in five years.
 *FERGUSON | Manager who won 13 league titles.
 GIGGS | Scored a solo extra-time winner in the 1999 FA Cup semi-final replay.
-SCHMEICHEL | Saved a late penalty in that replay, then captained the side in Barcelona.
+SCHMEICHEL | Saved a stoppage-time penalty against Arsenal in the 1999 FA Cup semi-final replay, then captained the side in Barcelona.
 KEANE | Captain who missed the 1999 final through suspension.
 SHERINGHAM | Equalised in stoppage time in the 1999 final.
 *SOLSKJAER | "Baby-faced assassin" who won the 1999 final in stoppage time.

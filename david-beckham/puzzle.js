@@ -26,7 +26,7 @@ window.PUZZLE = {
       "row": 1,
       "col": 11,
       "dir": "D",
-      "clue": "French city where that 1998 match was played."
+      "clue": "French city where he was sent off against Argentina at the 1998 World Cup."
     },
     {
       "answer": "KNIGHTHOOD",
@@ -82,7 +82,7 @@ window.PUZZLE = {
       "row": 8,
       "col": 5,
       "dir": "A",
-      "clue": "City where he first saw Victoria on TV, during an England trip in 1996."
+      "clue": "City where he first saw his future wife on TV, during an England trip in 1996."
     },
     {
       "answer": "GREECE",

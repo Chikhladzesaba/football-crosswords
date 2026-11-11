@@ -3,11 +3,11 @@ intro: Every nation that has ever won the men's World Cup. 8 answers. Tap a squa
 note: Unofficial fan game, not affiliated with FIFA. Covers every men's World Cup from 1930 to 2026.
 
 # ANSWER | clue  (one per line, answer = letters only)
-GERMANY | Mario Götze's extra-time goal against Argentina in Rio gave them a fourth title in 2014.
-ITALY | Four-time champions. The last title came in Berlin in 2006, when Fabio Grosso scored the winning penalty against France.
+GERMANY | Mario Götze's extra-time goal in the final in Rio gave them a fourth title in 2014.
+ITALY | Four-time champions. The last title came in Berlin in 2006, when Fabio Grosso scored the winning penalty in the final shootout.
 URUGUAY | Hosted and won the first World Cup in 1930. Twenty years later they silenced the Maracanã to win again.
 ENGLAND | Won their only title at home in 1966. Geoff Hurst scored a hat-trick in the final at Wembley.
-ARGENTINA | Champions in 1978, 1986 and 2022. The last one came after a penalty shootout against France in Qatar.
-SPAIN | Won in 2010 with Iniesta's extra-time goal, then again in 2026 when Ferran Torres scored in extra time against Argentina.
-FRANCE | Zinedine Zidane scored two headers against Brazil in the 1998 final to win their first title at home.
+ARGENTINA | Champions in 1978, 1986 and 2022. The last one came after a penalty shootout in the final in Qatar.
+SPAIN | Won in 2010 with Iniesta's extra-time goal, then again in 2026 when Ferran Torres scored in extra time in the final.
+FRANCE | Zinedine Zidane scored two headers in the 1998 final to win their first title at home.
 BRAZIL | The only nation with five titles. The fifth came in Yokohama in 2002.

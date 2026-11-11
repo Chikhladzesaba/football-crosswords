@@ -40,7 +40,7 @@ window.PUZZLE = {
       "row": 1,
       "col": 5,
       "dir": "D",
-      "clue": "Milan's Brazilian, the last winner before Messi and Ronaldo's long run."
+      "clue": "Milan's Brazilian, the last winner before two players shared the next ten awards."
     },
     {
       "answer": "DISTEFANO",

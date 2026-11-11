@@ -6,7 +6,7 @@ maxrows: 18
 
 # ANSWER | clue  (one per line, answer = letters only; * = must include)
 *STMARKS | Church team, founded in 1880, that became the club.
-GORTON | Area of Manchester where St Mark's church stood.
+GORTON | Area of east Manchester where the club's founding church stood.
 *MAINEROAD | Home ground from 1923 to 2003.
 KIPPAX | Famous standing terrace at the old ground.
 *TRAUTMANN | Goalkeeper who played on with a broken neck in the 1956 cup final.
@@ -14,7 +14,7 @@ MERCER | Manager of the 1968 champions.
 BELL | Colin ___, midfielder of the 1968 title-winning team.
 VIENNA | City where the club won the 1970 Cup Winners' Cup.
 GILLINGHAM | Beaten on penalties in the 1999 play-off final.
-DICKOV | Scored the late equaliser in that play-off final.
+DICKOV | Scored the stoppage-time equaliser in the 1999 play-off final at Wembley.
 ETIHAD | The stadium's name since 2011.
 *MANSOUR | Sheikh who bought the club in 2008.
 MANCINI | Manager of the 2012 champions.

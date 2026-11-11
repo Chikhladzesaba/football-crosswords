@@ -19,7 +19,7 @@ window.PUZZLE = {
       "row": 0,
       "col": 6,
       "dir": "D",
-      "clue": "Four-time champions. The last title came in Berlin in 2006, when Fabio Grosso scored the winning penalty against France."
+      "clue": "Four-time champions. The last title came in Berlin in 2006, when Fabio Grosso scored the winning penalty in the final shootout."
     },
     {
       "answer": "ENGLAND",
@@ -33,7 +33,7 @@ window.PUZZLE = {
       "row": 2,
       "col": 4,
       "dir": "D",
-      "clue": "Won in 2010 with Iniesta's extra-time goal, then again in 2026 when Ferran Torres scored in extra time against Argentina."
+      "clue": "Won in 2010 with Iniesta's extra-time goal, then again in 2026 when Ferran Torres scored in extra time in the final."
     },
     {
       "answer": "URUGUAY",
@@ -47,21 +47,21 @@ window.PUZZLE = {
       "row": 4,
       "col": 0,
       "dir": "A",
-      "clue": "Mario Götze's extra-time goal against Argentina in Rio gave them a fourth title in 2014."
+      "clue": "Mario Götze's extra-time goal in the final in Rio gave them a fourth title in 2014."
     },
     {
       "answer": "FRANCE",
       "row": 4,
       "col": 8,
       "dir": "D",
-      "clue": "Zinedine Zidane scored two headers against Brazil in the 1998 final to win their first title at home."
+      "clue": "Zinedine Zidane scored two headers in the 1998 final to win their first title at home."
     },
     {
       "answer": "ARGENTINA",
       "row": 6,
       "col": 0,
       "dir": "A",
-      "clue": "Champions in 1978, 1986 and 2022. The last one came after a penalty shootout against France in Qatar."
+      "clue": "Champions in 1978, 1986 and 2022. The last one came after a penalty shootout in the final in Qatar."
     }
   ]
 };

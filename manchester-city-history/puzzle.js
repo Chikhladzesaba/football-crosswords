@@ -75,7 +75,7 @@ window.PUZZLE = {
       "row": 8,
       "col": 1,
       "dir": "A",
-      "clue": "Area of Manchester where St Mark's church stood."
+      "clue": "Area of east Manchester where the club's founding church stood."
     },
     {
       "answer": "ETIHAD",

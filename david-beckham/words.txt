@@ -5,12 +5,12 @@ maxcols: 12
 maxrows: 18
 
 # ANSWER | clue  (one per line, answer = letters only; * = must include)
-*TBILISI | City where he first saw Victoria on TV, during an England trip in 1996.
+*TBILISI | City where he first saw his future wife on TV, during an England trip in 1996.
 *LEYTONSTONE | Area of east London where he was born in 1975.
 PRESTON | Club he joined on loan in 1995.
 *WIMBLEDON | Scored from his own half against them in 1996.
 *SIMEONE | Argentine he was sent off for kicking at in 1998.
-SAINTETIENNE | French city where that 1998 match was played.
+SAINTETIENNE | French city where he was sent off against Argentina at the 1998 World Cup.
 BARCELONA | City of the 1999 final, where his corners set up both late goals.
 GREECE | Free kick against them sent England to the 2002 World Cup.
 METATARSAL | Foot bone he broke shortly before the 2002 World Cup.

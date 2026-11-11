@@ -12,7 +12,7 @@ window.PUZZLE = {
       "row": 0,
       "col": 3,
       "dir": "A",
-      "clue": "Italian club beaten at Wembley in the 1992 European Cup final."
+      "clue": "Italian club beaten 1–0 after extra time in the 1992 European Cup final."
     },
     {
       "answer": "INIESTA",

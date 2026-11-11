@@ -19,7 +19,7 @@ window.PUZZLE = {
       "row": 0,
       "col": 7,
       "dir": "D",
-      "clue": "Florentino ___, president behind the Galacticos."
+      "clue": "Florentino ___, president behind the star signings of the early 2000s."
     },
     {
       "answer": "CASTILLA",
@@ -89,7 +89,7 @@ window.PUZZLE = {
       "row": 8,
       "col": 4,
       "dir": "D",
-      "clue": "Argentine-born star of five European Cups in a row."
+      "clue": "Argentine-born star of the European Cups won from 1956 to 1960."
     },
     {
       "answer": "ANCELOTTI",

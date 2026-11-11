@@ -138,7 +138,7 @@ window.PUZZLE = {
       "row": 14,
       "col": 3,
       "dir": "D",
-      "clue": "Car company founded by the Agnelli family."
+      "clue": "Car company whose founding family has controlled the club since 1923."
     },
     {
       "answer": "NOTTSCOUNTY",
