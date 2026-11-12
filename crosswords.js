@@ -58,4 +58,8 @@ window.CROSSWORDS = [
   { folder: "ka-champions-league-2020s", lang: "ka", name: "ჩემპიონთა ლიგა: 2020-იანები", difficulty: "Hard", topic: "Champions League", answers: 18, about: "ფინალები და დიდი ევროპული ღამეები 2020–2026 წლებში." },
   { folder: "ka-ac-milan-history", lang: "ka", name: "მილანის ისტორია", difficulty: "Very hard", topic: "Club football", answers: 21, about: "ინგლისელების კლუბიდან 1899 წელს 2022 წლის სკუდეტომდე." },
   { folder: "ka-champions-league-2010s", lang: "ka", name: "ჩემპიონთა ლიგა: 2010-იანები", difficulty: "Very hard", topic: "Champions League", answers: 21, about: "ფინალები, შემობრუნებები და სენსაციები 2010–2019 წლებში." },
+  { folder: "ka-lionel-messi", lang: "ka", name: "ლიონელ მესი", difficulty: "Hard", topic: "Legends", answers: 16, about: "რვა ოქროს ბურთი, მსოფლიო ჩემპიონის ტიტული და რეკორდებით სავსე კარიერა." },
+  { folder: "ka-cristiano-ronaldo", lang: "ka", name: "კრიშტიანუ რონალდუ", difficulty: "Hard", topic: "Legends", answers: 17, about: "ევროპის ჩემპიონი, ჩემპიონთა ლიგის ხუთგზის გამარჯვებული და რეკორდებით სავსე კარიერა." },
+  { folder: "ka-david-beckham", lang: "ka", name: "დევიდ ბექჰემი", difficulty: "Hard", topic: "Legends", answers: 17, about: "თავისი დროის ერთ-ერთი ყველაზე ცნობილი ფეხბურთელი, მოედანზეც და მის გარეთაც." },
+  { folder: "ka-zinedine-zidane", lang: "ka", name: "ზინედინ ზიდანი", difficulty: "Hard", topic: "Legends", answers: 19, about: "მსოფლიო ჩემპიონი მოთამაშედ, ჩემპიონთა ლიგის გამარჯვებული მწვრთნელად." },
 ];
