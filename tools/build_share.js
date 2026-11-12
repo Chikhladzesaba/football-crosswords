@@ -23,7 +23,7 @@ const KA = {
   description: (c, level) => `${c.about} საფეხბურთო კროსვორდი, სირთულე: ${level}. შეგიძლია ითამაშო ტელეფონზეც და კომპიუტერზეც.`,
   level: { "Easy": "მარტივი", "Medium": "საშუალო", "Hard": "რთული", "Very hard": "ძალიან რთული" },
   homeTitle: "საფეხბურთო კროსვორდები",
-  homeIntro: "საფეხბურთო კროსვორდები. აირჩიე სირთულე, ითამაშე და გააზიარე.",
+  homeIntro: "აირჩიე თემა, სირთულე, ითამაშე და გაუზიარე მეგობრებს.",
   back: "← ყველა კროსვორდი", across: "ჰორიზონტალურად", down: "ვერტიკალურად",
 };
 // Cloudflare Web Analytics (cookie-free visit counting). The token is public by design.
