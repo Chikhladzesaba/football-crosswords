@@ -8,12 +8,14 @@
   const T = KA ? {
     All: "ყველა", Easy: "მარტივი", Medium: "საშუალო", Hard: "რთული", "Very hard": "ძალიან რთული",
     "Not solved": "ამოუხსნელი", Solved: "ამოხსნილი", status: "სტატუსი",
+    International: "ნაკრებები", "Champions League": "ჩემპიონთა ლიგა", "Club football": "საკლუბო ფეხბურთი", Legends: "ლეგენდები",
+    seeAll: "ყველას ნახვა →",
     solvedTag: "✓ ამოხსნილი · ", inProgress: "დაწყებული", size: () => "",
     stats: ["ამოხსნილი", "დახმარების გარეშე", "დღე ზედიზედ", "ყველაზე სწრაფი"],
     reset: "თავიდან", resetAgain: "წასაშლელად კიდევ ერთხელ დააკლიკე",
     count: (a, b) => (a === b ? `${b} კროსვორდი` : `${a} / ${b} კროსვორდი`),
   } : {
-    status: "Status", solvedTag: "✓ Solved · ", inProgress: "In progress", size: (n) => n + " answers",
+    status: "Status", seeAll: "See all →", solvedTag: "✓ Solved · ", inProgress: "In progress", size: (n) => n + " answers",
     stats: ["solved", "with no help", "day streak", "fastest"],
     reset: "Reset", resetAgain: "Tap again to delete all",
     count: (a, b) => (a === b ? `${b} crosswords` : `${a} of ${b} crosswords`),
@@ -129,22 +131,17 @@
       (chosen.difficulty === "All" || c.difficulty === chosen.difficulty) &&
       (chosen.topic === "All" || c.topic === chosen.topic) &&
       (chosen.status === "All" || (chosen.status === "Solved") === !!solved[c.folder]));
-    if (KA) { // Georgian page: no topics yet, one plain list
-      groups.classList.add("one-topic");
-      const ul = document.createElement("ul"); ul.className = "list";
-      shown.forEach((c) => ul.appendChild(card(c)));
-      groups.appendChild(ul);
-    } else TOPICS.forEach((t) => {
+    TOPICS.forEach((t) => {
       const inTopic = shown.filter((c) => c.topic === t);
       if (!inTopic.length) return;
       const sec = document.createElement("section"); sec.className = "topic-group";
-      const h = document.createElement("h2"); h.textContent = t;
+      const h = document.createElement("h2"); h.textContent = say(t);
       const n = document.createElement("span"); n.textContent = inTopic.length; h.appendChild(n);
       if (chosen.topic === "All" && inTopic.length > 1) { // "See all" opens the topic as a full list
         const all = document.createElement("button");
-        all.type = "button"; all.className = "see-all"; all.textContent = "See all →";
+        all.type = "button"; all.className = "see-all"; all.textContent = T.seeAll;
         all.addEventListener("click", () => {
-          [...document.querySelectorAll("#filter-topic .chip")].find((b) => b.textContent === t).click();
+          [...document.querySelectorAll("#filter-topic .chip")].find((b) => b.textContent === say(t)).click();
           window.scrollTo({ top: groups.getBoundingClientRect().top + scrollY - 70, behavior: "smooth" });
         });
         h.appendChild(all);
@@ -158,7 +155,7 @@
   }
 
   buttons("difficulty", used("difficulty", LEVELS));
-  if (!KA) buttons("topic", used("topic", TOPICS)); // Georgian page: difficulty only for now
+  buttons("topic", used("topic", TOPICS));
   if (mySolved.length) { // the Status filter only appears once something is solved
     const g = document.createElement("div"); g.className = "filter-group";
     g.innerHTML = '<span class="filter-label">' + T.status + '</span><div class="chips" id="filter-status"></div>';
