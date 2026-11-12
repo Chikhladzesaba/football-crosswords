@@ -38,9 +38,13 @@ h1 { font-weight: 400; font-size: 40px; line-height: 1.1; margin: 0 0 8px; }
 h1 em { font-family: "Instrument Serif", "Noto Serif Georgian", serif; font-style: italic; }
 
 /* Home pages: English <-> Georgian switch, top right */
-.lang-switch { float: right; margin-top: 6px; padding: 4px 12px; border: 1px solid var(--border); border-radius: 999px;
-  color: var(--accent); text-decoration: none; font-size: 14px; font-family: "Inter Tight", "Noto Sans Georgian", system-ui, sans-serif; }
-.lang-switch:hover { border-color: var(--accent); }
+/* (the home pages load crossword.css?v=2 so phones fetch this new version instead of an old saved copy) */
+.lang-switch { float: right; margin: 8px 0 0 16px; display: flex; gap: 6px; align-items: baseline;
+  font-size: 14px; font-family: "Inter Tight", "Noto Sans Georgian", system-ui, sans-serif; color: var(--muted); }
+.lang-switch [aria-current] { color: var(--ink); font-weight: 600; }
+.lang-switch a { color: var(--muted); text-decoration: none; }
+.lang-switch a:hover { color: var(--accent); text-decoration: underline; }
+.lang-switch .sep { opacity: .5; }
 
 .back { display: inline-block; color: var(--accent); text-decoration: none; font-size: 14px; margin-bottom: 12px; }
 .back:hover { text-decoration: underline; }
