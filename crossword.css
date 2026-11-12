@@ -249,3 +249,14 @@ body.typing .clue-bar {
 .daily-card .name { font-weight: 600; font-size: 19px; }
 .daily-card .meta-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .daily-card .cta { color: var(--accent); }
+
+/* "How to play?" under the buttons, closed until tapped */
+.howto { font-size: 14px; color: var(--muted); }
+.howto summary { cursor: pointer; color: var(--accent); width: fit-content; list-style: none; }
+.howto summary::-webkit-details-marker { display: none; }
+.howto summary::before { content: "▸ "; }
+.howto[open] summary::before { content: "▾ "; }
+.howto ul { margin: 8px 0 0; padding: 12px 14px 12px 30px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; line-height: 1.5; }
+.howto li + li { margin-top: 4px; }
+.howto b { color: var(--ink); font-weight: 600; }
+body.typing .howto { display: none; }

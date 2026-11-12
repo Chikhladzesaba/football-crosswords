@@ -16,6 +16,16 @@
     playNext: "ითამაშე სხვა", allDone: "ყველა კროსვორდი ამოხსნილი გაქვს! 🏆", home: "ყველა კროსვორდი",
     help: (l, w, a) => [(l || w) && [l && `${l} ასო`, w && `${w} სიტყვა`].filter(Boolean).join(" და ") + " ნაჩვენები", a && "ავტომატური შემოწმებით"].filter(Boolean).join(", ") || "დახმარების გარეშე",
     clear: "თავიდან", share: "გაზიარება", auto: "ავტ. შემოწმება",
+    howTo: "როგორ ვითამაშო?", howToItems: [
+      "დააკლიკე უჯრას და დაწერე პასუხი. მიმართულების შესაცვლელად კიდევ ერთხელ დააკლიკე.",
+      "სწორი სიტყვა მწვანდება. თუ სიტყვა ბოლომდე შეავსე და არასწორია, ღია წითლად გამოჩნდება.",
+      "მწვანე სიტყვის ასოები უცვლელია. თუ იქ სხვა ასოს დაწერ, უჯრა წითლად აციმციმდება: შენი სიტყვა აქ არ ჯდება.",
+      "<b>შემოწმება</b> არასწორ ასოებს წითლად მონიშნავს.",
+      "<b>სიტყვის წაშლა</b> არჩეულ სიტყვას ერთბაშად წაშლის.",
+      "<b>ავტ. შემოწმება</b> არასწორ ასოს წერისთანავე წითლად მონიშნავს. ეს დახმარებად ითვლება.",
+      "<b>ასოს ჩვენება</b> და <b>სიტყვის ჩვენება</b> პასუხს გაჩვენებს. ესეც დახმარებად ითვლება.",
+      "⭐ მხოლოდ დახმარების გარეშე ამოხსნილ კროსვორდს ეძლევა.",
+    ],
     shareResult: "შედეგის გაზიარება", across: "ჰორიზონტალურად", down: "ვერტიკალურად",
     solved: (a, b) => `${a} / ${b} ამოხსნილი`,
     done: (n, t, h) => `დასრულდა! ${n}-ვე პასუხი ${t}-ში, ${h}.`,
@@ -29,6 +39,16 @@
     playNext: "Play another", allDone: "You've solved every crossword! 🏆", home: "See all crosswords",
     help: (l, w, a) => [(l || w) && [l && `${l} letter${l === 1 ? "" : "s"}`, w && `${w} word${w === 1 ? "" : "s"}`].filter(Boolean).join(" and ") + " revealed", a && "auto-check on"].filter(Boolean).join(", ") || "no help",
     clear: "Start over", share: "Share", auto: "Auto-check",
+    howTo: "How to play?", howToItems: [
+      "Tap a square and type your answer. Tap it again to switch between across and down.",
+      "Correct words turn green. A full word that's wrong turns light red.",
+      "Letters of green words are fixed. Type a different letter there and the square flashes red: your word doesn't fit.",
+      "<b>Check letters</b> marks wrong letters in red.",
+      "<b>Clear word</b> empties the selected word in one tap.",
+      "<b>Auto-check</b> marks wrong letters red as you type. It counts as help.",
+      "<b>Reveal letter</b> and <b>Reveal word</b> show the answer. They count as help too.",
+      "⭐ means you solved the crossword with no help.",
+    ],
     shareResult: "Share my result", across: "Across", down: "Down",
     solved: (a, b) => `${a} of ${b} solved`,
     done: (n, t, h) => `Full time! You got all ${n} answers in ${t}, with ${h}.`,
@@ -73,6 +93,7 @@
             <button id="btnSharePuzzle" type="button">${T.share}</button>
           </div>
           <p class="share-note" id="sharePuzzleNote" hidden></p>
+          <details class="howto"><summary>${T.howTo}</summary><ul>${T.howToItems.map((t) => `<li>${t}</li>`).join("")}</ul></details>
           <div class="result" id="result" hidden>
             <p id="resultText"></p>
             <button class="primary" id="btnShareResult" type="button">${T.shareResult}</button>
