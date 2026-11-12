@@ -18,9 +18,9 @@ const ONLY = (process.argv.indexOf("--lang") > -1) ? process.argv[process.argv.i
 const langOf = (c) => c.lang || "en";
 // Georgian texts (approved by Saba)
 const KA = {
-  brand: "ფეხბურთის კროსვორდები",
-  title: (c) => `${c.name} — ფეხბურთის კროსვორდი`,
-  description: (c, level) => `${c.about} უფასო ფეხბურთის კროსვორდი, სირთულე: ${level}. ითამაშე ტელეფონზე ან კომპიუტერზე.`,
+  brand: "საფეხბურთო კროსვორდები",
+  title: (c) => `${c.name} | საფეხბურთო კროსვორდი`,
+  description: (c, level) => `${c.about} საფეხბურთო კროსვორდი, სირთულე: ${level}. შეგიძლია ითამაშო ტელეფონზეც და კომპიუტერზეც.`,
   level: { "Easy": "მარტივი", "Medium": "საშუალო", "Hard": "რთული", "Very hard": "ძალიან რთული" },
   back: "← ყველა კროსვორდი", across: "ჰორიზონტალურად", down: "ვერტიკალურად",
 };
