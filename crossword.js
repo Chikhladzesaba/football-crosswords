@@ -12,7 +12,7 @@
   // English by default. A puzzle with lang: ka in words.txt gets Georgian labels and a Georgian font.
   const KA = P.lang === "ka";
   const T = KA ? {
-    back: "← ყველა კროსვორდი", check: "შემოწმება", reveal: "სიტყვის ჩვენება", letter: "ასოს ჩვენება",
+    back: "← ყველა კროსვორდი", check: "შემოწმება", clearWord: "სიტყვის წაშლა", reveal: "სიტყვის ჩვენება", letter: "ასოს ჩვენება",
     playNext: "ითამაშე სხვა", allDone: "ყველა კროსვორდი ამოხსნილი გაქვს! 🏆", home: "ყველა კროსვორდი",
     help: (l, w) => (l || w ? [l && `${l} ასო`, w && `${w} სიტყვა`].filter(Boolean).join(" და ") + " ნაჩვენები" : "დახმარების გარეშე"), clear: "თავიდან", share: "გაზიარება",
     shareResult: "შედეგის გაზიარება", across: "ჰორიზონტალურად", down: "ვერტიკალურად",
@@ -24,7 +24,7 @@
     level: { "Easy": "მარტივი", "Medium": "საშუალო", "Hard": "რთული", "Very hard": "ძალიან რთული" },
     size: () => "",
   } : {
-    back: "← All crosswords", check: "Check letters", reveal: "Reveal word", letter: "Reveal letter",
+    back: "← All crosswords", check: "Check letters", clearWord: "Clear word", reveal: "Reveal word", letter: "Reveal letter",
     playNext: "Play another", allDone: "You've solved every crossword! 🏆", home: "See all crosswords",
     help: (l, w) => (l || w ? [l && `${l} letter${l === 1 ? "" : "s"}`, w && `${w} word${w === 1 ? "" : "s"}`].filter(Boolean).join(" and ") + " revealed" : "no help"), clear: "Start over", share: "Share",
     shareResult: "Share my result", across: "Across", down: "Down",
@@ -63,6 +63,7 @@
           <div class="grid" id="grid" role="grid" aria-label="Crossword grid"></div>
           <div class="actions">
             <button class="primary" id="btnCheck" type="button">${T.check}</button>
+            <button id="btnClearWord" type="button">${T.clearWord}</button>
             <button id="btnLetter" type="button">${T.letter}</button>
             <button id="btnReveal" type="button">${T.reveal}</button>
             <button id="btnClear" type="button">${T.clear}</button>
@@ -367,6 +368,19 @@
     });
     afterChange();
   });
+  // Clear word: empties the selected word in one tap (long words took many Backspace taps).
+  // Keeps letters that belong to a finished crossing word, and revealed letters.
+  $("btnClearWord").addEventListener("click", () => {
+    if (!state.cell || state.done) return;
+    const w = wordAt(state.cell, state.dir);
+    w.cells.forEach((c) => {
+      const crossing = c.words[other(w.dir)];
+      const keep = c.el.classList.contains("revealed") || (crossing && isWordDone(crossing));
+      if (!keep) { c.input.value = ""; c.el.classList.remove("wrong"); }
+    });
+    afterChange();
+    select(w.cells.find((c) => !c.input.value) || w.cells[0], w.dir);
+  });
   $("btnClear").addEventListener("click", () => {
     Object.values(cells).forEach((c) => { c.input.value = ""; c.input.readOnly = false; c.el.classList.remove("wrong", "revealed"); });
     stopTimer(); state.elapsed = 0; state.done = false; state.wasDone = false; state.revealed.clear(); state.hinted.clear(); $("next").hidden = true;
@@ -455,7 +469,7 @@
       vv.addEventListener("scroll", placeBar);
     }
     // Hint buttons shouldn't close the keyboard
-    ["btnCheck", "btnLetter", "btnReveal"].forEach((id) => $(id).addEventListener("mousedown", (e) => e.preventDefault()));
+    ["btnCheck", "btnClearWord", "btnLetter", "btnReveal"].forEach((id) => $(id).addEventListener("mousedown", (e) => e.preventDefault()));
   }
 
   load();
