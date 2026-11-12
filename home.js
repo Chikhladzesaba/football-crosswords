@@ -1,8 +1,24 @@
 // Home page: draws one card per crossword from crosswords.js, plus the Difficulty and Topic filters.
 // You never need to edit this file to add a crossword — only crosswords.js.
 (function () {
-  // English home page: only English crosswords (Georgian ones have lang: "ka")
-  const list = (window.CROSSWORDS || []).filter((c) => (c.lang || "en") === "en");
+  // One script for both home pages: index.html (English) and ka/index.html (<html lang="ka">, Georgian)
+  const KA = document.documentElement.lang === "ka";
+  const list = (window.CROSSWORDS || []).filter((c) => (c.lang || "en") === (KA ? "ka" : "en"));
+  const BASE = KA ? "../" : ""; // the Georgian home page sits one folder down, in ka/
+  const T = KA ? {
+    All: "ყველა", Easy: "მარტივი", Medium: "საშუალო", Hard: "რთული", "Very hard": "ძალიან რთული",
+    "Not solved": "ამოუხსნელი", Solved: "ამოხსნილი", status: "სტატუსი",
+    solvedTag: "✓ ამოხსნილი · ", inProgress: "დაწყებული", size: () => "",
+    stats: ["ამოხსნილი", "დახმარების გარეშე", "დღე ზედიზედ", "ყველაზე სწრაფი"],
+    reset: "თავიდან", resetAgain: "წასაშლელად კიდევ ერთხელ დააკლიკე",
+    count: (a, b) => (a === b ? `${b} კროსვორდი` : `${a} / ${b} კროსვორდი`),
+  } : {
+    status: "Status", solvedTag: "✓ Solved · ", inProgress: "In progress", size: (n) => n + " answers",
+    stats: ["solved", "with no help", "day streak", "fastest"],
+    reset: "Reset", resetAgain: "Tap again to delete all",
+    count: (a, b) => (a === b ? `${b} crosswords` : `${a} of ${b} crosswords`),
+  };
+  const say = (v) => T[v] || v; // filter and level words in the page's language
   const LEVELS = ["Easy", "Medium", "Hard", "Very hard"];
   const TOPICS = ["International", "Champions League", "Club football", "Legends"];
   const chosen = { difficulty: "All", topic: "All", status: "All" };
@@ -29,24 +45,24 @@
     const fastest = mySolved.reduce((a, c) => (solved[c.folder].time < solved[a.folder].time ? c : a));
     const box = document.createElement("div");
     box.className = "stats-bar";
-    [[`${mySolved.length}/${list.length}`, "solved"],
-     ["⭐ " + mySolved.filter((c) => solved[c.folder].perfect).length, "with no help"],
-     ["🔥 " + streak(), "day streak"],
-     ["⚡ " + fmt(solved[fastest.folder].time), "fastest"]]
+    [[`${mySolved.length}/${list.length}`, T.stats[0]],
+     ["⭐ " + mySolved.filter((c) => solved[c.folder].perfect).length, T.stats[1]],
+     ["🔥 " + streak(), T.stats[2]],
+     ["⚡ " + fmt(solved[fastest.folder].time), T.stats[3]]]
       .forEach(([value, label]) => {
-        const s = document.createElement("span"); s.className = "stat"; s.title = value === undefined ? "" : (label === "fastest" ? fastest.name : "");
+        const s = document.createElement("span"); s.className = "stat"; s.title = value === undefined ? "" : (label === T.stats[3] ? fastest.name : "");
         const b = document.createElement("b"); b.textContent = value;
         const l = document.createElement("span"); l.textContent = label;
         s.append(b, l); box.appendChild(s);
       });
     // Reset: first tap asks, second tap deletes every saved puzzle, tick and stat on this device
     const reset = document.createElement("button");
-    reset.type = "button"; reset.className = "reset"; reset.textContent = "Reset";
+    reset.type = "button"; reset.className = "reset"; reset.textContent = T.reset;
     reset.addEventListener("click", () => {
       if (!reset.classList.contains("confirm")) {
         reset.classList.add("confirm");
-        reset.textContent = "Tap again to delete all";
-        setTimeout(() => { reset.classList.remove("confirm"); reset.textContent = "Reset"; }, 4000);
+        reset.textContent = T.resetAgain;
+        setTimeout(() => { reset.classList.remove("confirm"); reset.textContent = T.reset; }, 4000);
         return;
       }
       try { Object.keys(localStorage).filter((k) => k.startsWith("crossword:")).forEach((k) => localStorage.removeItem(k)); } catch (e) {}
@@ -66,7 +82,7 @@
       const b = document.createElement("button");
       b.type = "button";
       b.className = "chip";
-      b.textContent = v;
+      b.textContent = say(v);
       b.setAttribute("aria-pressed", v === "All" ? "true" : "false");
       b.addEventListener("click", () => {
         chosen[key] = v;
@@ -80,18 +96,18 @@
   function card(c) {
     const li = document.createElement("li");
     const a = document.createElement("a");
-    a.href = c.folder + "/";
+    a.href = BASE + c.folder + "/";
     const name = document.createElement("span"); name.className = "name"; name.textContent = c.name;
-    const size = document.createElement("span"); size.className = "size"; size.textContent = c.answers + " answers";
-    const level = document.createElement("span"); level.className = "level level-" + c.difficulty.toLowerCase().replace(" ", "-"); level.textContent = c.difficulty;
+    const size = document.createElement("span"); size.className = "size"; size.textContent = T.size(c.answers);
+    const level = document.createElement("span"); level.className = "level level-" + c.difficulty.toLowerCase().replace(" ", "-"); level.textContent = say(c.difficulty);
     const about = document.createElement("span"); about.className = "about"; about.textContent = c.about;
     const meta = document.createElement("span"); meta.className = "meta-line"; meta.append(level, size);
     if (solved[c.folder]) {
       const st = document.createElement("span"); st.className = "status";
-      st.textContent = "✓ Solved · " + fmt(solved[c.folder].time) + (solved[c.folder].perfect ? " ⭐" : "");
+      st.textContent = T.solvedTag + fmt(solved[c.folder].time) + (solved[c.folder].perfect ? " ⭐" : "");
       meta.appendChild(st); a.classList.add("is-solved");
     } else if (inProgress(c.folder)) {
-      const st = document.createElement("span"); st.className = "status progress"; st.textContent = "In progress";
+      const st = document.createElement("span"); st.className = "status progress"; st.textContent = T.inProgress;
       meta.appendChild(st);
     }
     a.append(name, meta, about);
@@ -113,7 +129,12 @@
       (chosen.difficulty === "All" || c.difficulty === chosen.difficulty) &&
       (chosen.topic === "All" || c.topic === chosen.topic) &&
       (chosen.status === "All" || (chosen.status === "Solved") === !!solved[c.folder]));
-    TOPICS.forEach((t) => {
+    if (KA) { // Georgian page: no topics yet, one plain list
+      groups.classList.add("one-topic");
+      const ul = document.createElement("ul"); ul.className = "list";
+      shown.forEach((c) => ul.appendChild(card(c)));
+      groups.appendChild(ul);
+    } else TOPICS.forEach((t) => {
       const inTopic = shown.filter((c) => c.topic === t);
       if (!inTopic.length) return;
       const sec = document.createElement("section"); sec.className = "topic-group";
@@ -133,15 +154,14 @@
       sec.append(h, ul); groups.appendChild(sec);
     });
     document.getElementById("empty").hidden = shown.length > 0;
-    document.getElementById("shown").textContent =
-      shown.length === list.length ? `${list.length} crosswords` : `${shown.length} of ${list.length} crosswords`;
+    document.getElementById("shown").textContent = T.count(shown.length, list.length);
   }
 
   buttons("difficulty", used("difficulty", LEVELS));
-  buttons("topic", used("topic", TOPICS));
+  if (!KA) buttons("topic", used("topic", TOPICS)); // Georgian page: difficulty only for now
   if (mySolved.length) { // the Status filter only appears once something is solved
     const g = document.createElement("div"); g.className = "filter-group";
-    g.innerHTML = '<span class="filter-label">Status</span><div class="chips" id="filter-status"></div>';
+    g.innerHTML = '<span class="filter-label">' + T.status + '</span><div class="chips" id="filter-status"></div>';
     document.querySelector(".filters").appendChild(g);
     buttons("status", ["Not solved", "Solved"]);
   }
@@ -166,7 +186,7 @@
     filters.parentNode.insertBefore(a, filters);
   }
 
-  dailyCard();
+  if (!KA) dailyCard(); // the Daily crossword is English only
   stats();
   draw();
 })();

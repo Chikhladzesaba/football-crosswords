@@ -50,7 +50,7 @@
   // ---- PAGE LAYOUT --------------------------------------------------------
   root.innerHTML = `
     <main>
-      <a class="back" href="../">${T.back}</a>
+      <a class="back" href="${KA ? "../ka/" : "../"}">${T.back}</a>
       <h1>${P.title}</h1>
       <p class="intro">${P.intro}</p>
       <div class="meta">
@@ -293,7 +293,7 @@
     const box = $("nextList");
     box.innerHTML = "";
     if (!picks.length) {
-      box.innerHTML = `<p class="all-done">${T.allDone}</p><a class="next-card" href="../"><span class="name">${T.home}</span></a>`;
+      box.innerHTML = `<p class="all-done">${T.allDone}</p><a class="next-card" href="${KA ? "../ka/" : "../"}"><span class="name">${T.home}</span></a>`;
     }
     picks.forEach((c) => {
       const a = document.createElement("a");
