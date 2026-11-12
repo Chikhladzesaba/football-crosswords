@@ -175,12 +175,16 @@ ${FONT_LINKS.replace(/\.\.\//g, "")}
         <span class="filter-label">სირთულე</span>
         <div class="chips" id="filter-difficulty"></div>
       </div>
+      <div class="filter-group">
+        <span class="filter-label">თემა</span>
+        <div class="chips" id="filter-topic"></div>
+      </div>
     </div>
 
     <p class="shown" id="shown"></p>
     <!-- The cards are drawn by home.js from the list in crosswords.js (only lang: "ka") -->
     <ul class="list" id="list"></ul>
-    <p class="empty" id="empty" hidden>ამ სირთულის კროსვორდი ჯერ არ გვაქვს. სცადე სხვა.</p>
+    <p class="empty" id="empty" hidden>ასეთი კროსვორდი ჯერ არ გვაქვს. სცადე სხვა სირთულე ან თემა.</p>
   </main>
   <script src="../crosswords.js"></script>
   <script src="../home.js"></script>
