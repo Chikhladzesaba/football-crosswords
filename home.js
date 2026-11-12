@@ -1,7 +1,8 @@
 // Home page: draws one card per crossword from crosswords.js, plus the Difficulty and Topic filters.
 // You never need to edit this file to add a crossword — only crosswords.js.
 (function () {
-  const list = window.CROSSWORDS || [];
+  // English home page: only English crosswords (Georgian ones have lang: "ka")
+  const list = (window.CROSSWORDS || []).filter((c) => (c.lang || "en") === "en");
   const LEVELS = ["Easy", "Medium", "Hard", "Very hard"];
   const TOPICS = ["International", "Champions League", "Club football", "Legends"];
   const chosen = { difficulty: "All", topic: "All", status: "All" };

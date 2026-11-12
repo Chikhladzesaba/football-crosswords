@@ -4,6 +4,7 @@
 //   difficulty = "Easy", "Medium", "Hard" or "Very hard"
 //   topic      = "International", "Champions League", "Club football" or "Legends"
 //   answers    = how many answers the puzzle has (layout.py prints this)
+//   lang       = "ka" for Georgian crosswords (no lang = English). Georgian ones are not shown on the English home page.
 window.CROSSWORDS = [
   { folder: "world-cup-winners",      name: "World Cup Winners",      difficulty: "Easy",      topic: "International",    answers: 8,  about: "Every nation that has won the men's World Cup." },
   { folder: "euro-winners",           name: "Euro Winners",           difficulty: "Medium",    topic: "International",    answers: 17, about: "Champions and heroes of the European Championship." },
@@ -45,4 +46,16 @@ window.CROSSWORDS = [
   { folder: "world-cup-hosts", name: "World Cup Hosts", difficulty: "Medium", topic: "International", answers: 18, about: "Every country that has hosted the men's World Cup, 1930 to 2026." },
   { folder: "liverpool-history", name: "Liverpool History", difficulty: "Medium", topic: "Club football", answers: 16, about: "From the 1892 founding to a 20th league title." },
   { folder: "chelsea-history", name: "Chelsea History", difficulty: "Medium", topic: "Club football", answers: 15, about: "From 1905 to world champions in 2025." },
+  // ---- Georgian (ქართული) ----
+  { folder: "ka-world-cup-winners", lang: "ka", name: "მსოფლიო ჩემპიონები", difficulty: "Easy", topic: "International", answers: 8, about: "ყველა ნაკრები, რომელსაც მსოფლიო ჩემპიონატი მოუგია." },
+  { folder: "ka-champions-league-winners", lang: "ka", name: "ჩემპიონთა ლიგის გამარჯვებულები", difficulty: "Easy", topic: "Champions League", answers: 15, about: "კლუბები, რომლებმაც ევროპის თასი და ჩემპიონთა ლიგა მოიგეს, 1956–2026." },
+  { folder: "ka-famous-number-10s", lang: "ka", name: "ლეგენდარული 10 ნომრები", difficulty: "Easy", topic: "Legends", answers: 15, about: "ლეგენდარული 10 ნომრები." },
+  { folder: "ka-premier-league-champions", lang: "ka", name: "პრემიერ ლიგის ჩემპიონები", difficulty: "Easy", topic: "Club football", answers: 15, about: "კლუბები და მწვრთნელები, რომლებმაც პრემიერ ლიგა მოიგეს." },
+  { folder: "ka-famous-derbies", lang: "ka", name: "ცნობილი დერბები", difficulty: "Easy", topic: "Club football", answers: 13, about: "ქალაქებისა და რეგიონების გუნდების დაპირისპირებები." },
+  { folder: "ka-euro-2024", lang: "ka", name: "ევრო 2024", difficulty: "Medium", topic: "International", answers: 15, about: "ევრო 2024: ჩემპიონები, რეკორდები და საქართველოს დებიუტი." },
+  { folder: "ka-ballon-dor-winners", lang: "ka", name: "ოქროს ბურთის მფლობელები", difficulty: "Medium", topic: "Legends", answers: 21, about: "ოქროს ბურთის მფლობელები 1956 წლიდან დღემდე." },
+  { folder: "ka-legendary-managers", lang: "ka", name: "ლეგენდარული მწვრთნელები", difficulty: "Medium", topic: "Legends", answers: 19, about: "ფეხბურთის ისტორიის უდიდესი გუნდების მწვრთნელები." },
+  { folder: "ka-champions-league-2020s", lang: "ka", name: "ჩემპიონთა ლიგა: 2020-იანები", difficulty: "Hard", topic: "Champions League", answers: 18, about: "ფინალები და დიდი ევროპული ღამეები 2020–2026 წლებში." },
+  { folder: "ka-ac-milan-history", lang: "ka", name: "მილანის ისტორია", difficulty: "Very hard", topic: "Club football", answers: 21, about: "ინგლისელების კლუბიდან 1899 წელს 2022 წლის სკუდეტომდე." },
+  { folder: "ka-champions-league-2010s", lang: "ka", name: "ჩემპიონთა ლიგა: 2010-იანები", difficulty: "Very hard", topic: "Champions League", answers: 21, about: "ფინალები, შემობრუნებები და სენსაციები 2010–2019 წლებში." },
 ];
