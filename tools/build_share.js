@@ -221,7 +221,7 @@ ${gridSvg}
     p.words.forEach((w) => { for (let i = 0; i < w.answer.length; i++) cells.add((w.row + (w.dir === "D" ? i : 0)) + "," + (w.col + (w.dir === "A" ? i : 0))); });
     await shot(imageHtml({
       titleHtml: p.title, kicker: ka ? KA.brand : BRAND, lang: ka ? "ka" : "en",
-      chips: ka ? `<span class="chip solid">${KA.level[c.difficulty]}</span>` : `<span class="chip solid">${c.answers} answers</span>`,
+      chips: ka ? "" : `<span class="chip solid">${c.answers} answers</span>`,
       grid: { rows: p.rows, cols: p.cols, cells: [...cells].map((k) => k.split(",").map(Number)) },
     }), path.join(ROOT, c.folder, "share.png"));
     fs.writeFileSync(path.join(ROOT, c.folder, "index.html"), puzzlePage(c, p));
