@@ -21,6 +21,8 @@
     result: (n, t, h) => `⚽ ${plainTitle}\n✅ ${n}/${n} · ${t} · ${h}`,
     invite: (n) => `⚽ შეძლებ ამოხსნა? ფეხბურთის კროსვორდი „${plainTitle}“, ${n} პასუხი.`,
     copied: "დაკოპირდა! ჩასვი სადაც გინდა.",
+    level: { "Easy": "მარტივი", "Medium": "საშუალო", "Hard": "რთული", "Very hard": "ძალიან რთული" },
+    size: () => "",
   } : {
     back: "← All crosswords", check: "Check letters", reveal: "Reveal word", letter: "Reveal letter",
     playNext: "Play another", allDone: "You've solved every crossword! 🏆", home: "See all crosswords",
@@ -31,6 +33,8 @@
     result: (n, t, h) => `⚽ ${P.shareName || plainTitle + " crossword"}\n✅ ${n}/${n} in ${t} · ${h}`,
     invite: (n) => P.invite || `⚽ Can you solve the ${plainTitle} football crossword? ${n} answers.`,
     copied: "Copied! Paste it anywhere to share.",
+    level: {},
+    size: (n) => `${n} answers`,
   };
   if (KA) {
     document.documentElement.lang = "ka";
@@ -294,7 +298,7 @@
     picks.forEach((c) => {
       const a = document.createElement("a");
       a.className = "next-card"; a.href = "../" + c.folder + "/";
-      a.innerHTML = `<span class="name"></span><span class="meta-line"><span class="level level-${c.difficulty.toLowerCase().replace(" ", "-")}">${c.difficulty}</span><span class="size">${c.answers} answers</span></span>`;
+      a.innerHTML = `<span class="name"></span><span class="meta-line"><span class="level level-${c.difficulty.toLowerCase().replace(" ", "-")}">${T.level[c.difficulty] || c.difficulty}</span><span class="size">${T.size(c.answers)}</span></span>`;
       a.querySelector(".name").textContent = c.name;
       box.appendChild(a);
     });
