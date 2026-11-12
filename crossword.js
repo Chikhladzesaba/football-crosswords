@@ -14,7 +14,8 @@
   const T = KA ? {
     back: "← ყველა კროსვორდი", check: "შემოწმება", clearWord: "სიტყვის წაშლა", reveal: "სიტყვის ჩვენება", letter: "ასოს ჩვენება",
     playNext: "ითამაშე სხვა", allDone: "ყველა კროსვორდი ამოხსნილი გაქვს! 🏆", home: "ყველა კროსვორდი",
-    help: (l, w) => (l || w ? [l && `${l} ასო`, w && `${w} სიტყვა`].filter(Boolean).join(" და ") + " ნაჩვენები" : "დახმარების გარეშე"), clear: "თავიდან", share: "გაზიარება",
+    help: (l, w, a) => [(l || w) && [l && `${l} ასო`, w && `${w} სიტყვა`].filter(Boolean).join(" და ") + " ნაჩვენები", a && "ავტომატური შემოწმებით"].filter(Boolean).join(", ") || "დახმარების გარეშე",
+    clear: "თავიდან", share: "გაზიარება", auto: "ავტ. შემოწმება",
     shareResult: "შედეგის გაზიარება", across: "ჰორიზონტალურად", down: "ვერტიკალურად",
     solved: (a, b) => `${a} / ${b} ამოხსნილი`,
     done: (n, t, h) => `დასრულდა! ${n}-ვე პასუხი ${t}-ში, ${h}.`,
@@ -26,7 +27,8 @@
   } : {
     back: "← All crosswords", check: "Check letters", clearWord: "Clear word", reveal: "Reveal word", letter: "Reveal letter",
     playNext: "Play another", allDone: "You've solved every crossword! 🏆", home: "See all crosswords",
-    help: (l, w) => (l || w ? [l && `${l} letter${l === 1 ? "" : "s"}`, w && `${w} word${w === 1 ? "" : "s"}`].filter(Boolean).join(" and ") + " revealed" : "no help"), clear: "Start over", share: "Share",
+    help: (l, w, a) => [(l || w) && [l && `${l} letter${l === 1 ? "" : "s"}`, w && `${w} word${w === 1 ? "" : "s"}`].filter(Boolean).join(" and ") + " revealed", a && "auto-check on"].filter(Boolean).join(", ") || "no help",
+    clear: "Start over", share: "Share", auto: "Auto-check",
     shareResult: "Share my result", across: "Across", down: "Down",
     solved: (a, b) => `${a} of ${b} solved`,
     done: (n, t, h) => `Full time! You got all ${n} answers in ${t}, with ${h}.`,
@@ -64,6 +66,7 @@
           <div class="actions">
             <button class="primary" id="btnCheck" type="button">${T.check}</button>
             <button id="btnClearWord" type="button">${T.clearWord}</button>
+            <button id="btnAuto" type="button" aria-pressed="false">${T.auto}</button>
             <button id="btnLetter" type="button">${T.letter}</button>
             <button id="btnReveal" type="button">${T.reveal}</button>
             <button id="btnClear" type="button">${T.clear}</button>
@@ -112,7 +115,7 @@
   }
   words.sort((a, b) => a.num - b.num);
 
-  const state = { cell: null, dir: "A", started: null, elapsed: 0, done: false, timerId: null, revealed: new Set(), hinted: new Set(), wasDone: false };
+  const state = { cell: null, dir: "A", started: null, elapsed: 0, done: false, timerId: null, revealed: new Set(), hinted: new Set(), wasDone: false, auto: false, autoUsed: false };
 
   for (let r = 0; r < P.rows; r++) {
     for (let c = 0; c < P.cols; c++) {
@@ -196,13 +199,13 @@
     if (state.done) return;
     const k = e.key;
     if (LETTER.test(k) && !e.metaKey && !e.ctrlKey) {
-      e.preventDefault(); setLetter(cell, norm(k)); move(1);
+      e.preventDefault(); typeLetter(cell, norm(k));
     } else if (k === "Backspace") {
       e.preventDefault();
-      if (cell.input.value) setLetter(cell, "");
-      else { move(-1); setLetter(state.cell, ""); }
+      if (cell.input.value && !locked(cell)) setLetter(cell, "");
+      else { move(-1); if (!locked(state.cell)) setLetter(state.cell, ""); }
     } else if (k === "Delete") {
-      e.preventDefault(); setLetter(cell, "");
+      e.preventDefault(); if (!locked(cell)) setLetter(cell, "");
     } else if (k.startsWith("Arrow")) {
       e.preventDefault();
       const d = { ArrowRight: [0, 1, "A"], ArrowLeft: [0, -1, "A"], ArrowDown: [1, 0, "D"], ArrowUp: [-1, 0, "D"] }[k];
@@ -219,20 +222,39 @@
   // Phones often don't say which key was pressed, so read what landed in the box instead
   function onInput(cell) {
     const letter = (cell.input.value.match(/[a-z\u10D0-\u10FA]/gi) || []).pop();
-    if (letter) { setLetter(cell, norm(letter)); move(1); }
+    if (letter) typeLetter(cell, norm(letter));
+    else if (locked(cell)) { cell.input.value = cell.answer; move(-1); }
     else setLetter(cell, "");
   }
 
-  const isWordDone = (w) => w.cells.every((c) => c.input.value === c.answer);
+  // Letters of a solved (green) word are fixed. Typing a different letter there doesn't
+  // overwrite it: the square flashes red, so you know your word doesn't fit the crossing one.
+  const locked = (cell) => Object.values(cell.words).some((w) => isWordDone(w));
+  function typeLetter(cell, letter) {
+    if (locked(cell)) {
+      cell.input.value = cell.answer;
+      if (letter !== cell.answer) {
+        cell.el.classList.remove("bump"); void cell.el.offsetWidth; cell.el.classList.add("bump");
+        setTimeout(() => cell.el.classList.remove("bump"), 900);
+      }
+      move(1);
+      return;
+    }
+    setLetter(cell, letter); move(1);
+  }
+
+  function isWordDone(w) { return w.cells.every((c) => c.input.value === c.answer); }
 
   function afterChange() {
     let solved = 0;
-    Object.values(cells).forEach((c) => c.el.classList.remove("solved"));
+    Object.values(cells).forEach((c) => c.el.classList.remove("solved", "wordwrong"));
     words.forEach((w) => {
       const d = isWordDone(w);
       w.li.classList.toggle("done", d);
       if (d) { solved++; w.cells.forEach((c) => c.el.classList.add("solved")); } // finished words turn green
+      else if (w.cells.every((c) => c.input.value)) w.cells.forEach((c) => c.el.classList.add("wordwrong")); // full but wrong: light red
     });
+    if (state.auto) Object.values(cells).forEach((c) => c.el.classList.toggle("wrong", !!c.input.value && c.input.value !== c.answer));
     $("count").textContent = T.solved(solved, words.length);
     save();
     if (solved === words.length && !state.done) finish();
@@ -246,7 +268,7 @@
     recordSolve();
     withList(showNext);
   }
-  const helpText = () => T.help(state.hinted.size, state.revealed.size);
+  const helpText = () => T.help(state.hinted.size, state.revealed.size, state.autoUsed);
 
   // ---- SOLVED RECORD (for the home page ticks and stats) ------------------
   // crossword:solved = { puzzleId: { time, perfect, date } }   crossword:days = ["2026-11-10", ...]
@@ -255,7 +277,7 @@
   function recordSolve() {
     try {
       const solved = readJSON("crossword:solved", {});
-      const perfect = state.hinted.size === 0 && state.revealed.size === 0;
+      const perfect = state.hinted.size === 0 && state.revealed.size === 0 && !state.autoUsed;
       const old = solved[P.id];
       if (!old) solved[P.id] = { time: state.elapsed, perfect, date: today() };
       else { if (state.elapsed < old.time) old.time = state.elapsed; old.perfect = old.perfect || perfect; }
@@ -368,6 +390,21 @@
     });
     afterChange();
   });
+  // Auto-check: wrong letters turn red as you type. Optional, remembered on this device;
+  // using it counts as help (no ⭐ "no help" for this puzzle).
+  function setAuto(on) {
+    state.auto = on;
+    $("btnAuto").setAttribute("aria-pressed", on ? "true" : "false");
+    if (on) { state.autoUsed = true; startTimer(); }
+    else Object.values(cells).forEach((c) => c.el.classList.remove("wrong"));
+    try { localStorage.setItem("crossword:autocheck", on ? "1" : "0"); } catch (e) {}
+    afterChange();
+  }
+  $("btnAuto").addEventListener("click", () => {
+    if (state.done) return;
+    setAuto(!state.auto);
+    if (state.cell) state.cell.input.focus({ preventScroll: true });
+  });
   // Clear word: empties the selected word in one tap (long words took many Backspace taps).
   // Keeps letters that belong to a finished crossing word, and revealed letters.
   $("btnClearWord").addEventListener("click", () => {
@@ -383,7 +420,7 @@
   });
   $("btnClear").addEventListener("click", () => {
     Object.values(cells).forEach((c) => { c.input.value = ""; c.input.readOnly = false; c.el.classList.remove("wrong", "revealed"); });
-    stopTimer(); state.elapsed = 0; state.done = false; state.wasDone = false; state.revealed.clear(); state.hinted.clear(); $("next").hidden = true;
+    stopTimer(); state.elapsed = 0; state.done = false; state.wasDone = false; state.revealed.clear(); state.hinted.clear(); state.autoUsed = state.auto; $("next").hidden = true;
     $("timer").textContent = "00:00"; $("result").hidden = true;
     afterChange();
     select(words[0].cells[0], words[0].dir);
@@ -411,7 +448,7 @@
     try {
       const letters = {};
       Object.entries(cells).forEach(([k, c]) => { if (c.input.value) letters[k] = c.input.value; });
-      localStorage.setItem(STORE, JSON.stringify({ letters, elapsed: state.elapsed, revealed: [...state.revealed], hinted: [...state.hinted], done: state.done }));
+      localStorage.setItem(STORE, JSON.stringify({ letters, elapsed: state.elapsed, revealed: [...state.revealed], hinted: [...state.hinted], done: state.done, autoUsed: state.autoUsed }));
     } catch (e) {}
   }
   function load() {
@@ -421,6 +458,7 @@
       Object.entries(data.letters || {}).forEach(([k, v]) => { if (cells[k]) cells[k].input.value = v; });
       state.elapsed = data.elapsed || 0;
       (data.revealed || []).forEach((a) => state.revealed.add(a));
+      state.autoUsed = !!data.autoUsed;
       (data.hinted || []).forEach((k) => state.hinted.add(k));
       state.wasDone = !!data.done;
       $("timer").textContent = fmt(state.elapsed);
@@ -469,10 +507,11 @@
       vv.addEventListener("scroll", placeBar);
     }
     // Hint buttons shouldn't close the keyboard
-    ["btnCheck", "btnClearWord", "btnLetter", "btnReveal"].forEach((id) => $(id).addEventListener("mousedown", (e) => e.preventDefault()));
+    ["btnCheck", "btnClearWord", "btnAuto", "btnLetter", "btnReveal"].forEach((id) => $(id).addEventListener("mousedown", (e) => e.preventDefault()));
   }
 
   load();
+  try { if (localStorage.getItem("crossword:autocheck") === "1" && !state.done) { state.auto = true; state.autoUsed = true; $("btnAuto").setAttribute("aria-pressed", "true"); } } catch (e) {}
   afterChange();
   select(words[0].cells[0], words[0].dir);
 })();

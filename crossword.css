@@ -97,6 +97,13 @@ h1 em { font-family: "Instrument Serif", "Noto Serif Georgian", serif; font-styl
 .cell.solved input { color: var(--green-ink); }
 .cell.active.solved input { color: #fff; }
 .cell.wrong input { color: var(--red-ink); }
+/* A full word that isn't right yet: light red (not as strong as Check letters) */
+.cell.open.wordwrong:not(.solved):not(.active) { background: #fdeeee; border-color: #f2c4c4; }
+/* Typed a different letter on a fixed square of a solved word: quick red flash */
+@keyframes bump { 0%, 60% { background: var(--red); border-color: var(--red-ink); transform: scale(1.08); } 100% { transform: none; } }
+.cell.open.bump { animation: bump .9s ease-out; }
+/* Auto-check switch when on */
+.actions button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
 
 .actions { display: flex; flex-wrap: wrap; gap: 8px; }
 button {
