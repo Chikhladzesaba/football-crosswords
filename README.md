@@ -17,11 +17,6 @@ I love playing football games, and a crossword is one of the most fun games to p
 
 Each puzzle has a timer, "Check letters", "Reveal letter" and "Reveal word" buttons, and a Share button. When you finish, you can share your result as squares (🟩 solved alone, 🟨 a letter revealed, 🟧 the word revealed) and get two suggestions for what to play next. Your progress is saved on your own device, and the home page shows your stats, a ✓ on every crossword you've solved, and a day streak.
 
-
-## Privacy
-
-No accounts, no cookies, no ads. Progress is stored only in your browser. Visits are counted with Cloudflare Web Analytics, which doesn't track individual people.
-
 ## Disclaimer
 
 An unofficial fan project, not affiliated with any club, league or player.
