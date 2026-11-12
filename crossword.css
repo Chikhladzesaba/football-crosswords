@@ -107,6 +107,8 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 @media (max-width: 960px) { .clues { grid-template-columns: minmax(0, 1fr); } }
 /* Georgian words are long: one wide clue column (Across above Down) instead of two narrow ones */
 html:lang(ka) .clues { grid-template-columns: minmax(0, 1fr); }
+/* Georgian has no real italic (the browser would just slant the letters), so titles stay upright */
+html:lang(ka) h1 em { font-family: inherit; font-style: normal; }
 html:lang(ka) .clues li { overflow-wrap: anywhere; }
 .clues section { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 12px 8px 4px; min-width: 0; }
 .clues h3 { font-size: 15px; font-weight: 600; margin: 0 8px 6px; }
