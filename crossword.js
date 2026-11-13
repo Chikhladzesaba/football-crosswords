@@ -501,8 +501,9 @@
     spacer.style.height = bar.offsetHeight + "px"; // keeps the grid from jumping up under the bar
     bar.style.transform = vv ? `translateY(${vv.offsetTop}px)` : ""; // iPhone: follow the visible area
   }
+  let userScrolling = false, scrollTimer = null; // true while the finger moves the page
   function keepVisible() {
-    if (!touch || !state.cell) return;
+    if (!touch || !state.cell || userScrolling) return; // never fight the user's own scroll
     const r = state.cell.el.getBoundingClientRect();
     const top = (vv ? vv.offsetTop : 0) + (typing() ? bar.offsetHeight : 0) + 8;
     const bottom = (vv ? vv.offsetTop + vv.height : innerHeight) - 12;
@@ -523,8 +524,16 @@
       document.body.classList.remove("typing");
       bar.style.transform = ""; spacer.style.height = "0";
     }, 60));
+    addEventListener("touchmove", () => { userScrolling = true; clearTimeout(scrollTimer); }, { passive: true });
+    addEventListener("touchend", () => { clearTimeout(scrollTimer); scrollTimer = setTimeout(() => (userScrolling = false), 700); }, { passive: true });
     if (vv) {
-      vv.addEventListener("resize", () => requestAnimationFrame(() => { placeBar(); keepVisible(); }));
+      // Toolbars hiding/showing cause small resizes; only re-scroll when the keyboard opens or closes
+      let lastH = vv.height;
+      vv.addEventListener("resize", () => requestAnimationFrame(() => {
+        placeBar();
+        if (Math.abs(vv.height - lastH) > 150) keepVisible();
+        lastH = vv.height;
+      }));
       vv.addEventListener("scroll", placeBar);
     }
     // Hint buttons shouldn't close the keyboard
