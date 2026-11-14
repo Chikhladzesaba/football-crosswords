@@ -11,8 +11,9 @@
     International: "ნაკრებები", "Champions League": "ჩემპიონთა ლიგა", "Club football": "საკლუბო ფეხბურთი", Legends: "ლეგენდები",
     seeAll: "ყველას ნახვა →",
     solvedTag: "✓ ამოხსნილი · ", inProgress: "დაწყებული", size: () => "",
-    stats: ["ამოხსნილი", "დახმარების გარეშე", "დღე ზედიზედ", "ყველაზე სწრაფი"],
-    reset: "თავიდან", resetAgain: "წასაშლელად კიდევ ერთხელ დააკლიკე",
+    stats: ["ამოხსნილი", "დახმარების გარეშე", "ზედიზედ თამაშის დღეები:", "საუკეთესო დრო:"],
+    labelFirst: true, // Georgian reads "საუკეთესო დრო: 0:30", English "0:30 fastest"
+    reset: "შედეგების წაშლა", resetAgain: "ყველაფრის წასაშლელად კიდევ ერთხელ დააკლიკე",
     count: (a, b) => (a === b ? `${b} კროსვორდი` : `${a} / ${b} კროსვორდი`),
   } : {
     status: "Status", seeAll: "See all →", solvedTag: "✓ Solved · ", inProgress: "In progress", size: (n) => n + " answers",
@@ -47,15 +48,20 @@
     const fastest = mySolved.reduce((a, c) => (solved[c.folder].time < solved[a.folder].time ? c : a));
     const box = document.createElement("div");
     box.className = "stats-bar";
-    [[`${mySolved.length}/${list.length}`, T.stats[0]],
-     ["⭐ " + mySolved.filter((c) => solved[c.folder].perfect).length, T.stats[1]],
-     ["🔥 " + streak(), T.stats[2]],
-     ["⚡ " + fmt(solved[fastest.folder].time), T.stats[3]]]
-      .forEach(([value, label]) => {
-        const s = document.createElement("span"); s.className = "stat"; s.title = value === undefined ? "" : (label === T.stats[3] ? fastest.name : "");
-        const b = document.createElement("b"); b.textContent = value;
-        const l = document.createElement("span"); l.textContent = label;
-        s.append(b, l); box.appendChild(s);
+    const days = streak();
+    const best = fmt(solved[fastest.folder].time);
+    // [icon, number, label, label goes first?]
+    [["", `${mySolved.length}/${list.length}`, T.stats[0], false],
+     ["⭐", mySolved.filter((c) => solved[c.folder].perfect).length, T.stats[1], false],
+     days ? ["🔥", days, T.stats[2], !!T.labelFirst] : null, // hidden until there is a streak
+     ["⚡", T.labelFirst ? best.replace(/^0(?=\d:)/, "") : best, T.stats[3], !!T.labelFirst]]
+      .filter(Boolean)
+      .forEach(([icon, value, label, labelFirst]) => {
+        const s = document.createElement("span"); s.className = "stat"; s.title = label === T.stats[3] ? fastest.name : "";
+        const b = document.createElement("b"); b.textContent = labelFirst ? String(value) : (icon ? icon + " " : "") + value;
+        const l = document.createElement("span"); l.textContent = labelFirst ? (icon ? icon + " " : "") + label + " " : label;
+        if (labelFirst) s.append(l, b); else s.append(b, l);
+        box.appendChild(s);
       });
     // Reset: first tap asks, second tap deletes every saved puzzle, tick and stat on this device
     const reset = document.createElement("button");
