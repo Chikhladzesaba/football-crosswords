@@ -62,4 +62,12 @@ window.CROSSWORDS = [
   { folder: "ka-cristiano-ronaldo", lang: "ka", name: "კრიშტიანუ რონალდუ", difficulty: "Hard", topic: "Legends", answers: 17, about: "ევროპის ჩემპიონი, ჩემპიონთა ლიგის ხუთგზის გამარჯვებული და რეკორდებით სავსე კარიერა." },
   { folder: "ka-david-beckham", lang: "ka", name: "დევიდ ბექჰემი", difficulty: "Hard", topic: "Legends", answers: 17, about: "თავისი დროის ერთ-ერთი ყველაზე ცნობილი ფეხბურთელი, მოედანზეც და მის გარეთაც." },
   { folder: "ka-zinedine-zidane", lang: "ka", name: "ზინედინ ზიდანი", difficulty: "Hard", topic: "Legends", answers: 19, about: "მსოფლიო ჩემპიონი მოთამაშედ, ჩემპიონთა ლიგის გამარჯვებული მწვრთნელად." },
+  { folder: "ka-barcelona-history", lang: "ka", name: "ბარსელონა", difficulty: "Medium", topic: "Club football", answers: 17, about: "ბარსელონას ლეგენდები და ისტორია." },
+  { folder: "ka-real-madrid-history", lang: "ka", name: "რეალი", difficulty: "Medium", topic: "Club football", answers: 16, about: "სამეფო კლუბის ისტორია, ფეხბურთელები და ტროფეები." },
+  { folder: "ka-liverpool-history", lang: "ka", name: "ლივერპული", difficulty: "Medium", topic: "Club football", answers: 16, about: "ლივერპულის ლეგენდები და ისტორია." },
+  { folder: "ka-manchester-united-history", lang: "ka", name: "მანჩესტერ იუნაიტედი", difficulty: "Medium", topic: "Club football", answers: 16, about: "მანჩესტერ იუნაიტედის ლეგენდები და ისტორია." },
+  { folder: "ka-world-cup-2022", lang: "ka", name: "მსოფლიო ჩემპიონატი 2022", difficulty: "Medium", topic: "International", answers: 17, about: "2022 წლის მსოფლიო ჩემპიონატის ფეხბურთელები, გუნდები და სენსაციები." },
+  { folder: "ka-world-stadiums", lang: "ka", name: "მსოფლიოს სტადიონები", difficulty: "Medium", topic: "Club football", answers: 15, about: "მსოფლიოს ცნობილი სტადიონები და მათი ისტორია." },
+  { folder: "ka-top-scorers", lang: "ka", name: "ბომბარდირები", difficulty: "Medium", topic: "Legends", answers: 16, about: "ფეხბურთის საუკეთესო ბომბარდირები და მათი რეკორდები." },
+  { folder: "ka-world-cup-history", lang: "ka", name: "მსოფლიო ჩემპიონატების ისტორია", difficulty: "Very hard", topic: "International", answers: 17, about: "მსოფლიო ჩემპიონატების ისტორია 1930 წლიდან 1998 წლამდე." },
 ];
