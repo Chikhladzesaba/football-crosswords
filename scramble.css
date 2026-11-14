@@ -25,3 +25,7 @@
 .sc-end button { display: block; width: 100%; max-width: 320px; margin: 8px auto 0; }
 .sc-link { display: inline-block; margin-top: 16px; color: var(--accent); }
 @keyframes sc-shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+
+/* Phones: a quick double tap on a letter must not zoom the page or select text */
+#scramble button, #scramble .sc-tile, #scramble .sc-slot { touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+#scramble { touch-action: manipulation; }
