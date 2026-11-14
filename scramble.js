@@ -19,6 +19,8 @@
     share: "შედეგის გაზიარება", again: "თავიდან თამაში", crosswords: "ითამაშე კროსვორდი",
     shareText: (s, n, h) => `⚽ გვარების დალაგობანა\n✅ ${s}/${n} · ${h ? h + " ასო ნაჩვენები" : "დახმარების გარეშე"}`,
     copied: "დაკოპირდა! ჩასვი სადაც გინდა.",
+    rulesTitle: "თამაშის წესები",
+    rules: ["თითო რაუნდში 10 ცნობილი ფეხბურთელის გვარია, რომლებიც ყოველ ჯერზე შემთხვევით ირჩევა. ასოები არეულია: დაალაგე ისინი სწორი თანმიმდევრობით და გამოიცანი ფეხბურთელი.", "შეცდი? „წაშლა“ ბოლო ასოს წაშლის. ჩასმულ ასოზე დაკლიკებითაც შეგიძლია მისი დაბრუნება.", "ვერ იხსენებ? „ასოს ჩვენება“ ერთ ასოს გაჩვენებს, „გამოტოვება“ კი შემდეგ გვარზე გადაგიყვანს.", "ბოლოს ნახავ შედეგს და მეგობრებს გაუზიარებ."],
   } : {
     back: "← All games", title: "Name <em>Scramble</em>",
     intro: "The letters of a famous player's name are mixed up. Tap them in the right order.",
@@ -30,6 +32,8 @@
     share: "Share my result", again: "Play again", crosswords: "Play a crossword",
     shareText: (s, n, h) => `⚽ Name Scramble\n✅ ${s}/${n} · ${h ? h + " letter hint" + (h === 1 ? "" : "s") : "no help"}`,
     copied: "Copied! Paste it anywhere to share.",
+    rulesTitle: "How to play",
+    rules: ["Each round has 10 famous footballers, picked at random every time. The letters are mixed up: put them in the right order to guess the player.", "Made a mistake? “Delete” removes the last letter. You can also tap a placed letter to take it back.", "Stuck? “Show letter” reveals one letter, and “Skip” moves on to the next name.", "At the end you see your result and can share it with friends."],
   };
 
   root.innerHTML = `
@@ -57,6 +61,10 @@
         <button id="scAgain" type="button">${T.again}</button>
         <a class="sc-link" href="${HOME}">${T.crosswords}</a>
       </div>
+      <details class="sc-rules">
+        <summary>${T.rulesTitle}</summary>
+        <ul>${T.rules.map((r) => `<li>${r}</li>`).join("")}</ul>
+      </details>
     </main>`;
   const $ = (id) => document.getElementById(id);
 

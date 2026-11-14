@@ -29,3 +29,12 @@
 /* Phones: a quick double tap on a letter must not zoom the page or select text */
 #scramble button, #scramble .sc-tile, #scramble .sc-slot { touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
 #scramble { touch-action: manipulation; }
+
+/* "How to play" under the game: folded by default, opens on click */
+.sc-rules { margin-top: 32px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; line-height: 1.55; }
+.sc-rules summary { cursor: pointer; padding: 14px 0; font-size: 15px; font-weight: 600; color: var(--ink); list-style: none; display: flex; justify-content: space-between; align-items: center; touch-action: manipulation; }
+.sc-rules summary::-webkit-details-marker { display: none; }
+.sc-rules summary::after { content: "+"; font-size: 20px; font-weight: 400; color: var(--muted); }
+.sc-rules[open] summary::after { content: "−"; }
+.sc-rules ul { margin: 0 0 8px; padding-left: 18px; }
+.sc-rules li { margin-bottom: 4px; }

@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../crossword.css?v=2">
-  <link rel="stylesheet" href="../scramble.css?v=2">
+  <link rel="stylesheet" href="../scramble.css?v=3">
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3b650f1df19b43698cc1d110b8a5c6dc"}'></script><!-- End Cloudflare Web Analytics -->
 </head>
 <body>
@@ -39,10 +39,15 @@
       <h1>Name <em>Scramble</em></h1>
       <p class="intro">The letters of a famous player's name are mixed up. Tap them in the right order.</p>
       <h2>How to play</h2>
-      <p>Each round has 10 famous footballers. Their letters are mixed up: tap them in the right order to spell the name. Made a mistake? Delete the last letter and try again. The names include World Cup winners, Ballon d'Or winners and Champions League legends.</p>
+      <ul>
+        <li>Each round has 10 famous footballers, picked at random every time. The letters are mixed up: put them in the right order to guess the player.</li>
+        <li>Made a mistake? “Delete” removes the last letter. You can also tap a placed letter to take it back.</li>
+        <li>Stuck? “Show letter” reveals one letter, and “Skip” moves on to the next name.</li>
+        <li>At the end you see your result and can share it with friends.</li>
+      </ul>
     </main>
   </div>
   <script src="../scramble-names.js"></script>
-  <script src="../scramble.js"></script>
+  <script src="../scramble.js?v=3"></script>
 </body>
 </html>
