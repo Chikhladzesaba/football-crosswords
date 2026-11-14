@@ -13,7 +13,7 @@
   const KA = P.lang === "ka";
   const T = KA ? {
     back: "← ყველა კროსვორდი", check: "შემოწმება", clearWord: "სიტყვის წაშლა", reveal: "სიტყვის ჩვენება", letter: "ასოს ჩვენება",
-    playNext: "ითამაშე სხვა", allDone: "ყველა კროსვორდი ამოხსნილი გაქვს! 🏆", home: "ყველა კროსვორდი",
+    playNext: "ითამაშე სხვა კროსვორდი", allDone: "ყველა კროსვორდი ამოხსნილი გაქვს! 🏆", home: "ყველა კროსვორდი",
     help: (l, w, a) => [(l || w) && [l && `${l} ასო`, w && `${w} სიტყვა`].filter(Boolean).join(" და ") + " ნაჩვენები", a && "ავტომატური შემოწმებით"].filter(Boolean).join(", ") || "დახმარების გარეშე",
     clear: "თავიდან", share: "გაზიარება", auto: "ავტ. შემოწმება",
     howTo: "თამაშის წესები", howToItems: [
@@ -26,10 +26,15 @@
       "<b>„ასოს ჩვენება“</b> და <b>„სიტყვის ჩვენება“</b> სწორ პასუხს გაჩვენებს. ესეც დახმარებად ჩაითვლება.",
       "⭐-ს მხოლოდ მაშინ მიიღებ, თუ კროსვორდს დახმარების გარეშე ამოხსნი.",
     ],
+    winTitle: "გილოცავ! 🏆", perfect: "⭐ დახმარების გამოყენების გარეშე!", close: "დახურვა",
+    winHelp: (l, w, a) => [
+      (l || w) && "დახმარებით ნახე " + [l && `${l} ასო`, w && `${w} სიტყვა`].filter(Boolean).join(" და ") + ".",
+      a && ((l || w) ? "ავტომატური შემოწმებაც ჩართული გქონდა." : "ავტომატური შემოწმება გქონდა ჩართული, მაგრამ არაუშავს!"),
+    ].filter(Boolean).join(" "),
     shareResult: "შედეგის გაზიარება", across: "ჰორიზონტალურად", down: "ვერტიკალურად",
     solved: (a, b) => `${a} / ${b} ამოხსნილი`,
-    done: (n, t, h) => `დასრულდა! ${n}-ვე პასუხი ${t}-ში, ${h}.`,
-    result: (n, t, h) => `⚽ ${plainTitle}\n✅ ${n}/${n} · ${t} · ${h}`,
+    done: (n, t) => `${n}-ვე კითხვა ${t}-ში გამოიცანი!`,
+    result: (n, t, h) => `⚽ ${plainTitle}\n✅ ${n}/${n} · ${t.replace(/^0(?=\d:)/, "")} წუთი · ${h}`, // 04:32 → 4:32 წუთი
     invite: (n) => `⚽ შეძლებ ამოხსნა? საფეხბურთო კროსვორდი „${plainTitle}“, ${n} პასუხი.`,
     copied: "დაკოპირდა! ჩასვი სადაც გინდა.",
     level: { "Easy": "მარტივი", "Medium": "საშუალო", "Hard": "რთული", "Very hard": "ძალიან რთული" },
@@ -49,6 +54,7 @@
       "<b>Reveal letter</b> and <b>Reveal word</b> show the answer. They count as help too.",
       "⭐ means you solved the crossword with no help.",
     ],
+    winTitle: "You did it! 🏆", perfect: "⭐ Solved with no help!", close: "Close",
     shareResult: "Share my result", across: "Across", down: "Down",
     solved: (a, b) => `${a} of ${b} solved`,
     done: (n, t, h) => `Full time! You got all ${n} answers in ${t}, with ${h}.`,
@@ -107,7 +113,20 @@
         </div>
       </div>
       ${P.note ? `<p class="legend">${P.note}</p>` : ""}
-    </main>`;
+    </main>
+    <div class="win" id="win" role="dialog" aria-modal="true" aria-labelledby="winTitle" hidden>
+      <div class="win-card">
+        <button class="win-x" id="winX" type="button" aria-label="${T.close}">×</button>
+        <div class="win-cup"><svg viewBox='0 0 100 100' aria-hidden='true'><rect width='100' height='100' rx='18' fill='#1f6feb'/><g fill='#fff'><rect x='12' y='12' width='22' height='22' rx='3'/><rect x='39' y='12' width='22' height='22' rx='3'/><rect x='66' y='12' width='22' height='22' rx='3'/><rect x='12' y='39' width='22' height='22' rx='3'/><rect x='66' y='39' width='22' height='22' rx='3'/><rect x='12' y='66' width='22' height='22' rx='3'/><rect x='39' y='66' width='22' height='22' rx='3'/><rect x='66' y='66' width='22' height='22' rx='3'/></g><clipPath id='winBall'><circle cx='50' cy='50' r='12.5'/></clipPath><circle cx='50' cy='50' r='12.5' fill='#fff'/><g clip-path='url(#winBall)' fill='#111' stroke='#111' stroke-width='0.9' stroke-linejoin='round'><polygon points='50.00,46.00 53.80,48.76 52.35,53.24 47.65,53.24 46.20,48.76'/><line x1='50.00' y1='46.00' x2='50.00' y2='40.00'/><polygon points='50.00,40.00 46.77,37.65 48.00,33.85 52.00,33.85 53.23,37.65'/><line x1='53.80' y1='48.76' x2='59.51' y2='46.91'/><polygon points='59.51,46.91 60.75,43.11 64.74,43.11 65.98,46.91 62.74,49.26'/><line x1='52.35' y1='53.24' x2='55.88' y2='58.09'/><polygon points='55.88,58.09 59.87,58.09 61.11,61.89 57.88,64.24 54.64,61.89'/><line x1='47.65' y1='53.24' x2='44.12' y2='58.09'/><polygon points='44.12,58.09 45.36,61.89 42.12,64.24 38.89,61.89 40.13,58.09'/><line x1='46.20' y1='48.76' x2='40.49' y2='46.91'/><polygon points='40.49,46.91 37.26,49.26 34.02,46.91 35.26,43.11 39.25,43.11'/></g><circle cx='50' cy='50' r='12.5' fill='none' stroke='#111' stroke-width='1.3'/></svg></div>
+        <h2 id="winTitle">${T.winTitle}</h2>
+        <p id="winText"></p>
+        <p class="win-perfect" id="winPerfect" hidden>${T.perfect}</p>
+        <p id="winHelp" hidden></p>
+        <button class="primary" id="winShare" type="button">${T.shareResult}</button>
+        <p class="share-note" id="winShareNote" hidden></p>
+        <button id="winNext" type="button">${T.playNext}</button>
+      </div>
+    </div>`;
 
   const $ = (id) => document.getElementById(id);
   const key = (r, c) => r + "," + c;
@@ -286,8 +305,37 @@
     Object.values(cells).forEach((c) => (c.input.readOnly = true));
     $("result").hidden = false;
     $("resultText").textContent = T.done(words.length, fmt(state.elapsed), helpText());
+    const fresh = !state.wasDone; // reopening an already finished puzzle shows no popup
     recordSolve();
     withList(showNext);
+    if (fresh) showWin();
+  }
+
+  // ---- WIN POPUP ----------------------------------------------------------
+  function showWin() {
+    if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); // closes the phone keyboard
+    document.body.classList.remove("typing");
+    $("winText").textContent = $("resultText").textContent;
+    const perfect = state.hinted.size === 0 && state.revealed.size === 0 && !state.autoUsed;
+    $("winPerfect").hidden = !perfect;
+    $("winHelp").hidden = perfect || !T.winHelp; // Georgian: says which help was used (English has it in the main line)
+    if (T.winHelp) $("winHelp").textContent = T.winHelp(state.hinted.size, state.revealed.size, state.autoUsed);
+    $("win").hidden = false;
+    $("winShare").focus({ preventScroll: true });
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) confetti();
+  }
+  function closeWin() { $("win").hidden = true; }
+  function confetti() { // a short shower of little squares
+    for (let i = 0; i < 24; i++) {
+      const b = document.createElement("span"); // little crossword squares in the site colours
+      b.className = "confetti";
+      b.style.background = ["#1f6feb", "#13693a", "#d9f5e3", "#e3efff"][i % 4];
+      b.style.left = Math.random() * 100 + "vw";
+      b.style.animationDelay = Math.random() * 0.8 + "s";
+      b.style.width = b.style.height = 8 + Math.random() * 10 + "px";
+      document.body.appendChild(b);
+      setTimeout(() => b.remove(), 3500);
+    }
   }
   const helpText = () => T.help(state.hinted.size, state.revealed.size, state.autoUsed);
 
@@ -357,13 +405,7 @@
     return location.origin + location.pathname +
       `?utm_source=share&utm_medium=social&utm_campaign=${encodeURIComponent(P.id)}&utm_content=${content}`;
   }
-  function resultText() {
-    // 🟩 solved alone · 🟨 a letter was revealed · 🟧 the whole word was revealed
-    const squares = words.map((w) => (state.revealed.has(w.answer) ? "🟧" : w.cells.some((c) => state.hinted.has(c.k)) ? "🟨" : "🟩"));
-    const rows = [];
-    for (let i = 0; i < squares.length; i += 10) rows.push(squares.slice(i, i + 10).join(""));
-    return T.result(words.length, fmt(state.elapsed), helpText()) + `\n${rows.join("\n")}`;
-  }
+  function resultText() { return T.result(words.length, fmt(state.elapsed), helpText()); }
   async function share(text, url, noteId) {
     const note = $(noteId);
     const full = text + "\n" + url;
@@ -382,6 +424,11 @@
     note._t = setTimeout(() => (note.hidden = true), 4000);
   }
   $("btnShareResult").addEventListener("click", () => share(resultText(), shareLink("result"), "shareResultNote"));
+  $("winShare").addEventListener("click", () => share(resultText(), shareLink("result"), "winShareNote"));
+  $("winX").addEventListener("click", closeWin);
+  $("winNext").addEventListener("click", () => { closeWin(); $("next").scrollIntoView({ behavior: "smooth", block: "center" }); });
+  $("win").addEventListener("click", (e) => { if (e.target.id === "win") closeWin(); }); // tap outside the card
+  addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("win").hidden) closeWin(); });
   $("btnSharePuzzle").addEventListener("click", () =>
     share(T.invite(words.length), shareLink("puzzle"), "sharePuzzleNote"));
 
@@ -405,7 +452,7 @@
     if (!state.cell || state.done) return;
     startTimer();
     const w = wordAt(state.cell, state.dir);
-    if (!isWordDone(w)) state.revealed.add(w.answer); // counted in the shared result as 🟨
+    if (!isWordDone(w)) state.revealed.add(w.answer); // counted as a revealed word in the result
     w.cells.forEach((c) => {
       if (c.input.value !== c.answer) { c.input.value = c.answer; c.el.classList.remove("wrong"); c.el.classList.add("revealed"); }
     });
