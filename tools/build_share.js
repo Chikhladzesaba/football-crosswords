@@ -12,7 +12,7 @@ const fs = require("fs");
 const path = require("path");
 const { chromium } = require("playwright");
 
-const SITE = "https://chikhladzesaba.github.io/football-crosswords/";
+const SITE = "https://kickoffpuzzles.com/";
 const BRAND = "Football Crosswords";
 const KA_PUBLIC = true; // true = Georgian pages may appear on Google (live since Nov 2026)
 const ONLY = (process.argv.indexOf("--lang") > -1) ? process.argv[process.argv.indexOf("--lang") + 1] : null;
