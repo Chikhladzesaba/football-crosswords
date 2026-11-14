@@ -280,3 +280,9 @@ body.typing .howto { display: none; }
 @keyframes win-pop { from { transform: scale(.8); opacity: 0; } }
 @keyframes win-bounce { 50% { transform: translateY(-8px) scale(1.06); } }
 @keyframes confetti-fall { to { transform: translateY(110vh) rotate(540deg); } }
+
+/* ---- Page loading ---- */
+/* Each puzzle page has a plain-text copy of the clues (for Google) that shows for a moment
+   before the game loads. It looked squeezed, one word per line, so we hide it: the game
+   builds its own clue list a moment later. */
+#crossword > main > .clues { display: none; }
