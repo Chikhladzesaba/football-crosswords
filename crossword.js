@@ -155,7 +155,7 @@
   }
   words.sort((a, b) => a.num - b.num);
 
-  const state = { cell: null, dir: "A", started: null, elapsed: 0, done: false, timerId: null, revealed: new Set(), hinted: new Set(), wasDone: false, auto: false, autoUsed: false };
+  const state = { cell: null, dir: "A", started: null, elapsed: 0, done: false, timerId: null, revealed: new Set(), hinted: new Set(), shown: new Set(), wasDone: false, auto: false, autoUsed: false };
 
   for (let r = 0; r < P.rows; r++) {
     for (let c = 0; c < P.cols; c++) {
@@ -269,7 +269,8 @@
 
   // Letters of a solved (green) word are fixed. Typing a different letter there doesn't
   // overwrite it: the square flashes red, so you know your word doesn't fit the crossing one.
-  const locked = (cell) => Object.values(cell.words).some((w) => isWordDone(w));
+  // Letters shown by the help buttons are fixed too (they are correct), so Backspace can't remove them.
+  const locked = (cell) => state.shown.has(cell.k) || Object.values(cell.words).some((w) => isWordDone(w));
   function typeLetter(cell, letter) {
     if (locked(cell)) {
       cell.input.value = cell.answer;
@@ -449,7 +450,7 @@
     startTimer();
     const c = state.cell;
     if (c.input.value !== c.answer) {
-      c.input.value = c.answer; state.hinted.add(c.k);
+      c.input.value = c.answer; state.hinted.add(c.k); state.shown.add(c.k);
       c.el.classList.remove("wrong"); c.el.classList.add("revealed");
     }
     move(1);
@@ -462,6 +463,7 @@
     if (!isWordDone(w)) state.revealed.add(w.answer); // counted as a revealed word in the result
     w.cells.forEach((c) => {
       if (c.input.value !== c.answer) { c.input.value = c.answer; c.el.classList.remove("wrong"); c.el.classList.add("revealed"); }
+      state.shown.add(c.k);
     });
     afterChange();
   });
@@ -495,7 +497,7 @@
   });
   $("btnClear").addEventListener("click", () => {
     Object.values(cells).forEach((c) => { c.input.value = ""; c.input.readOnly = false; c.el.classList.remove("wrong", "revealed"); });
-    stopTimer(); state.elapsed = 0; state.done = false; state.wasDone = false; state.revealed.clear(); state.hinted.clear(); state.autoUsed = state.auto; $("next").hidden = true;
+    stopTimer(); state.elapsed = 0; state.done = false; state.wasDone = false; state.revealed.clear(); state.hinted.clear(); state.shown.clear(); state.autoUsed = state.auto; $("next").hidden = true;
     $("timer").textContent = "00:00"; $("result").hidden = true;
     afterChange();
     select(words[0].cells[0], words[0].dir);
@@ -523,7 +525,7 @@
     try {
       const letters = {};
       Object.entries(cells).forEach(([k, c]) => { if (c.input.value) letters[k] = c.input.value; });
-      localStorage.setItem(STORE, JSON.stringify({ letters, elapsed: state.elapsed, revealed: [...state.revealed], hinted: [...state.hinted], done: state.done, autoUsed: state.autoUsed }));
+      localStorage.setItem(STORE, JSON.stringify({ letters, elapsed: state.elapsed, revealed: [...state.revealed], hinted: [...state.hinted], shown: [...state.shown], done: state.done, autoUsed: state.autoUsed }));
     } catch (e) {}
   }
   function load() {
@@ -535,6 +537,7 @@
       (data.revealed || []).forEach((a) => state.revealed.add(a));
       state.autoUsed = !!data.autoUsed;
       (data.hinted || []).forEach((k) => state.hinted.add(k));
+      (data.shown || data.hinted || []).forEach((k) => state.shown.add(k));
       state.wasDone = !!data.done;
       $("timer").textContent = fmt(state.elapsed);
     } catch (e) {}
