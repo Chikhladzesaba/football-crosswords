@@ -19,7 +19,7 @@
     howTo: "თამაშის წესები", howToItems: [
       "დააკლიკე უჯრას და დაწერე პასუხი. მიმართულების შესაცვლელად კიდევ ერთხელ დააკლიკე.",
       "სწორი პასუხი გამწვანდება. თუ სიტყვა ბოლომდე შეავსე და არასწორია, გაწითლდება.",
-      "მწვანე სიტყვის ასოებს ვეღარ შეცვლი. თუ იქ სხვა ასოს ჩაწერ, უჯრა წამით გაწითლდება. ესე იგი, ახალი სიტყვა არასწორია.",
+      "მწვანე სიტყვის ასოებს ვეღარ შეცვლი. სიტყვის წერისას მწვანე ასო შეგიძლია ჩაწერო ან გამოტოვო: შემდეგი ასო თავისით ჩაჯდება შემდეგ ცარიელ უჯრაში.",
       "<b>„შემოწმება“</b> არასწორ ასოებს წითლად მონიშნავს.",
       "<b>„სიტყვის წაშლა“</b> მონიშნულ სიტყვას ერთი დაკლიკვით წაშლის.",
       "<b>„ავტ. შემოწმება“</b>: ჩართვის შემდეგ ყოველი არასწორი ასო მაშინვე წითლდება. ეს დახმარებად ჩაითვლება.",
@@ -47,7 +47,7 @@
     howTo: "How to play?", howToItems: [
       "Tap a square and type your answer. Tap it again to switch between across and down.",
       "Correct words turn green. A full word that's wrong turns light red.",
-      "Letters of green words are fixed. Type a different letter there and the square flashes red: your word doesn't fit.",
+      "Letters of green words are fixed. When you type a word, you can type the green letter or skip it: your next letter goes into the next empty square.",
       "<b>Check letters</b> marks wrong letters in red.",
       "<b>Clear word</b> empties the selected word in one tap.",
       "<b>Auto-check</b> marks wrong letters red as you type. It counts as help.",
@@ -273,6 +273,13 @@
   function typeLetter(cell, letter) {
     if (locked(cell)) {
       cell.input.value = cell.answer;
+      // The player skipped the green letter and typed the next one: put it in the next free square.
+      // (Typing the green letter itself just moves on, so both ways of typing work.)
+      if (letter !== cell.answer) {
+        const w = wordAt(cell, state.dir);
+        const next = w.cells.slice(w.cells.indexOf(cell) + 1).find((c) => !locked(c));
+        if (next) { select(next, w.dir); setLetter(next, letter); move(1); return; }
+      }
       if (letter !== cell.answer) {
         cell.el.classList.remove("bump"); void cell.el.offsetWidth; cell.el.classList.add("bump");
         setTimeout(() => cell.el.classList.remove("bump"), 900);
