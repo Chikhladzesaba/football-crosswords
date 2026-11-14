@@ -11,7 +11,7 @@
     International: "ნაკრებები", "Champions League": "ჩემპიონთა ლიგა", "Club football": "საკლუბო ფეხბურთი", Legends: "ლეგენდები",
     seeAll: "ყველას ნახვა →",
     solvedTag: "✓ ამოხსნილი · ", inProgress: "დაწყებული", size: () => "",
-    stats: ["ამოხსნილი", "დახმარების გარეშე", "ზედიზედ თამაშის დღეები:", "საუკეთესო დრო:"],
+    stats: ["ამოხსნილი", "დახმარების გარეშე:", "ზედიზედ თამაშის დღეები:", "საუკეთესო დრო:"],
     labelFirst: true, // Georgian reads "საუკეთესო დრო: 0:30", English "0:30 fastest"
     reset: "შედეგების წაშლა", resetAgain: "ყველაფრის წასაშლელად კიდევ ერთხელ დააკლიკე",
     count: (a, b) => (a === b ? `${b} კროსვორდი` : `${a} / ${b} კროსვორდი`),
@@ -52,7 +52,7 @@
     const best = fmt(solved[fastest.folder].time);
     // [icon, number, label, label goes first?]
     [["", `${mySolved.length}/${list.length}`, T.stats[0], false],
-     ["⭐", mySolved.filter((c) => solved[c.folder].perfect).length, T.stats[1], false],
+     ["⭐", mySolved.filter((c) => solved[c.folder].perfect).length, T.stats[1], !!T.labelFirst],
      days ? ["🔥", days, T.stats[2], !!T.labelFirst] : null, // hidden until there is a streak
      ["⚡", T.labelFirst ? best.replace(/^0(?=\d:)/, "") : best, T.stats[3], !!T.labelFirst]]
       .filter(Boolean)
