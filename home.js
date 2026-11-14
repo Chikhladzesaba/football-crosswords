@@ -189,7 +189,21 @@
     filters.parentNode.insertBefore(a, filters);
   }
 
+  // ---- The Scramble game (scramble/ and ka/scramble/), a card above the crosswords ----
+  function gameCard() {
+    const a = document.createElement("a");
+    a.className = "daily-card"; a.href = "scramble/";
+    const kicker = document.createElement("span"); kicker.className = "kicker"; kicker.textContent = KA ? "ახალი თამაში" : "New game";
+    const name = document.createElement("span"); name.className = "name"; name.textContent = KA ? "არეული გვარები" : "Name Scramble";
+    const st = document.createElement("span"); st.className = "status cta";
+    st.textContent = KA ? "გამოიცანი ფეხბურთელი არეული ასოებით · თამაში →" : "Guess the player from mixed-up letters · Play →";
+    a.append(kicker, name, st);
+    const filters = document.querySelector(".filters");
+    filters.parentNode.insertBefore(a, filters);
+  }
+
   if (!KA) dailyCard(); // the Daily crossword is English only
+  gameCard();
   stats();
   draw();
 })();
