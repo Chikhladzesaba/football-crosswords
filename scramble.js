@@ -23,7 +23,7 @@
     back: "← All games", title: "Name <em>Scramble</em>",
     intro: "The letters of a famous player's name are mixed up. Tap them in the right order.",
     progress: (i, n) => `${i} of ${n}`, score: (s) => `Correct: ${s}`,
-    hint: "Show letter", clear: "Clear", skip: "Skip",
+    hint: "Show letter", clear: "Delete", skip: "Skip",
     endTitle: "You did it! 🏆", endTitleLow: "Your result",
     endText: (s, n) => `You got ${s} of ${n} names!`,
     perfect: "⭐ With no help!", help: (h) => `You used ${h} letter hint${h === 1 ? "" : "s"}.`,
@@ -128,6 +128,10 @@
     slots[i] = null; tile.slot = -1;
     draw();
   }
+  function deleteLast() { // the Delete button: take back only the last letter you placed
+    if (busy) return;
+    for (let i = slots.length - 1; i >= 0; i--) if (slots[i] && !slots[i].locked) { takeBack(i); break; }
+  }
   function clearAll() {
     if (busy) return;
     slots.forEach((tile, i) => { if (tile && !tile.locked) { slots[i] = null; tile.slot = -1; } });
@@ -195,7 +199,7 @@
   }
 
   $("scHint").addEventListener("click", hint);
-  $("scClear").addEventListener("click", clearAll);
+  $("scClear").addEventListener("click", deleteLast);
   $("scSkip").addEventListener("click", skip);
   $("scAgain").addEventListener("click", newRound);
   $("scShare").addEventListener("click", share);
