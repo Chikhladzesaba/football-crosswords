@@ -57,6 +57,7 @@ window.CROSSWORDS = [
   { folder: "ka-legendary-managers", lang: "ka", name: "ლეგენდარული მწვრთნელები", difficulty: "Medium", topic: "Legends", answers: 19, about: "მწვრთნელები, რომლებმაც ისტორიაში შესული გუნდები შექმნეს." },
   { folder: "ka-champions-league-2020s", lang: "ka", name: "ჩემპიონთა ლიგა: 2020-იანები", difficulty: "Hard", topic: "Champions League", answers: 18, about: "ჩემპიონთა ლიგის ფინალები და დაუვიწყარი მატჩები 2020-2026 წლებში." },
   { folder: "ka-ac-milan-history", lang: "ka", name: "მილანის ისტორია", difficulty: "Hard", topic: "Club football", answers: 21, about: "იტალიის ერთ-ერთი ყველაზე ტიტულოვანი კლუბის ისტორია 1899 წლიდან." },
+  { folder: "ka-georgia-national-team", lang: "ka", name: "საქართველოს ნაკრები", difficulty: "Hard", topic: "International", answers: 16, about: "საქართველოს ნაკრების მატჩები, მწვრთნელები და რეკორდები." },
   { folder: "ka-champions-league-2010s", lang: "ka", name: "ჩემპიონთა ლიგა: 2010-იანები", difficulty: "Very hard", topic: "Champions League", answers: 21, about: "ჩემპიონთა ლიგის ფინალები და სენსაციები 2010-2019 წლებში." },
   { folder: "ka-lionel-messi", lang: "ka", name: "ლიონელ მესი", difficulty: "Medium", topic: "Legends", answers: 16, about: "რვა ოქროს ბურთი, მსოფლიო ჩემპიონის ტიტული და რეკორდებით სავსე კარიერა." },
   { folder: "ka-cristiano-ronaldo", lang: "ka", name: "კრიშტიანუ რონალდუ", difficulty: "Hard", topic: "Legends", answers: 17, about: "ევროპის ჩემპიონი, ჩემპიონთა ლიგის ხუთგზის გამარჯვებული და რეკორდებით სავსე კარიერა." },
