@@ -1,0 +1,27 @@
+/* Scramble game. Uses the colours and buttons from crossword.css. */
+.sc-game { display: flex; flex-direction: column; gap: 16px; }
+.sc-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.sc-slots { min-height: 52px; padding: 14px 8px; background: var(--accent-soft); border-radius: 14px; }
+.sc-slot, .sc-tile {
+  --s: min(46px, calc((100vw - 60px - var(--sc-n, 8) * 6px) / var(--sc-n, 8)));
+  width: var(--s); height: var(--s); padding: 0; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center;
+  font-family: inherit; font-weight: 600; font-size: calc(var(--s) * .5); color: var(--ink);
+}
+.sc-slot { background: var(--card); border: 1px dashed var(--border); }
+.sc-slot.filled { border-style: solid; }
+.sc-slot.locked { background: var(--grey); }
+.sc-tile { background: var(--card); border: 1.5px solid var(--accent); cursor: pointer; }
+.sc-tile:hover { background: var(--accent-soft); color: var(--ink); }
+.sc-tile.used { opacity: .25; border-color: var(--border); cursor: default; }
+.sc-slots.right .sc-slot { background: var(--green); border-color: var(--green); color: var(--green-ink); }
+.sc-slots.wrong { animation: sc-shake .4s; }
+.sc-slots.wrong .sc-slot.filled:not(.locked) { background: var(--red); border-color: var(--red-ink); }
+.sc-slots.shown .sc-slot { background: var(--grey); border-color: var(--border); color: var(--muted); }
+.sc-game .actions { justify-content: center; }
+.sc-end { text-align: center; background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 28px 22px; }
+.sc-end h2 { font-size: 26px; font-weight: 600; margin: 0 0 8px; }
+.sc-end p { color: var(--muted); margin: 0 0 14px; }
+.sc-end .win-perfect { color: var(--green-ink); background: var(--green); border-radius: 10px; padding: 8px 10px; font-weight: 600; }
+.sc-end button { display: block; width: 100%; max-width: 320px; margin: 8px auto 0; }
+.sc-link { display: inline-block; margin-top: 16px; color: var(--accent); }
+@keyframes sc-shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
