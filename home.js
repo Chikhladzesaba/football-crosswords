@@ -196,7 +196,7 @@
     const kicker = document.createElement("span"); kicker.className = "kicker"; kicker.textContent = KA ? "ახალი თამაში" : "New game";
     const name = document.createElement("span"); name.className = "name"; name.textContent = KA ? "გვარების დალაგობანა" : "Name Scramble";
     const st = document.createElement("span"); st.className = "status cta";
-    st.textContent = KA ? "გამოიცანი ფეხბურთელი არეული ასოებით · თამაში →" : "Guess the player from mixed-up letters · Play →";
+    st.textContent = KA ? "დაალაგე არეული ასოები და გამოიცანი ფეხბურთელების გვარები · ითამაშე →" : "Guess the player from mixed-up letters · Play →";
     a.append(kicker, name, st);
     const filters = document.querySelector(".filters");
     filters.parentNode.insertBefore(a, filters);
