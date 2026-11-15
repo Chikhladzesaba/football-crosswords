@@ -6,7 +6,7 @@
   if (!root || !ALL.length) return;
   const KA = document.documentElement.lang === "ka";
   const ROUND = 10; // names per round
-  const HOME = KA ? "../" : "../"; // ka/scramble/ → ka/ ; scramble/ → home
+  const HOME = KA ? "../ka/" : "../"; // gamoicani-pekhburtelebis-gvarebi/ → ka/ (Georgian home) ; scramble/ → home
 
   const T = KA ? {
     back: "← სხვა თამაშები", title: "გვარების დალაგობანა",
