@@ -5,12 +5,16 @@
   const ALL = window.SCRAMBLE_NAMES || [];
   if (!root || !ALL.length) return;
   const KA = document.documentElement.lang === "ka";
-  const ROUND = 10; // names per round
+  const ROUNDS = [5, 10, 20]; // choices for names per round
+  const LENGTHS = [0, 5, 6, 7, 8]; // minimum name length (0 = any)
   const HOME = KA ? "../ka/" : "../"; // gamoicani-pekhburtelebis-gvarebi/ → ka/ (Georgian home) ; scramble/ → home
 
   const T = KA ? {
     back: "← სხვა თამაშები", title: "გვარების დალაგობანა",
     intro: "დაალაგე ცნობილი ფეხბურთელების გვარები. აირჩიე ასოები სწორი თანმიმდევრობით.",
+    setLen: "გვარის მინიმალური სიგრძე", lenAny: "ყველა", lenN: (n) => `${n}+ ასო`,
+    setCareer: "კარიერა", careerAll: "ყველა", careerActive: "მოქმედი", careerDone: "დასრულებული",
+    setRound: "გვარების რაოდენობა", matches: (n) => `შესაბამისი გვარები: ${n}`, start: "დაწყება", settings: "პარამეტრები",
     progress: (i, n) => `${i} / ${n}`, score: (s) => `სწორი პასუხები: ${s}`,
     hint: "ასოს ჩვენება", clear: "წაშლა", skip: "გამოტოვება",
     endTitle: "გილოცავ! 🏆", endTitleLow: "შედეგი",
@@ -20,10 +24,13 @@
     shareText: (s, n, h) => `⚽ გვარების დალაგობანა\n✅ ${s}/${n} · ${h ? h + " ასო ნაჩვენები" : "დახმარების გარეშე"}`,
     copied: "დაკოპირდა! ჩასვი სადაც გინდა.",
     rulesTitle: "თამაშის წესები",
-    rules: ["თითო რაუნდში 10 ცნობილი ფეხბურთელის გვარია, რომლებიც ყოველ ჯერზე შემთხვევით ირჩევა. ასოები არეულია: დაალაგე ისინი სწორი თანმიმდევრობით და გამოიცანი ფეხბურთელი.", "შეცდი? „წაშლა“ ბოლო ასოს წაშლის. ჩასმულ ასოზე დაკლიკებითაც შეგიძლია მისი დაბრუნება.", "ვერ იხსენებ? „ასოს ჩვენება“ ერთ ასოს გაჩვენებს, „გამოტოვება“ კი შემდეგ გვარზე გადაგიყვანს.", "10 გვარის გამოცნობის შემდეგ შენს შედეგს ნახავ. თუ მოგწონა თამაში, შეგიძლია შენი სტატისტიკა მეგობრებსაც გაუზიარო."],
+    rules: ["დაწყებამდე შეგიძლია აირჩიო გვარის მინიმალური სიგრძე, მოქმედი ან კარიერადასრულებული ფეხბურთელები და რაუნდის სიგრძე. გვარები ყოველ ჯერზე შემთხვევით ირჩევა. ასოები არეულია: დაალაგე ისინი სწორი თანმიმდევრობით და გამოიცანი ფეხბურთელი.", "შეცდი? „წაშლა“ ბოლო ასოს წაშლის. ჩასმულ ასოზე დაკლიკებითაც შეგიძლია მისი დაბრუნება.", "ვერ იხსენებ? „ასოს ჩვენება“ ერთ ასოს გაჩვენებს, „გამოტოვება“ კი შემდეგ გვარზე გადაგიყვანს.", "რაუნდის ბოლოს შენს შედეგს ნახავ. თუ მოგწონა თამაში, შეგიძლია შენი სტატისტიკა მეგობრებსაც გაუზიარო."],
   } : {
     back: "← All games", title: "Name <em>Scramble</em>",
     intro: "The letters of a famous player's name are mixed up. Tap them in the right order.",
+    setLen: "Minimum name length", lenAny: "Any", lenN: (n) => `${n}+ letters`,
+    setCareer: "Career", careerAll: "All", careerActive: "Active", careerDone: "Retired",
+    setRound: "Names per round", matches: (n) => `Matching names: ${n}`, start: "Start", settings: "Settings",
     progress: (i, n) => `${i} of ${n}`, score: (s) => `Correct: ${s}`,
     hint: "Show letter", clear: "Delete", skip: "Skip",
     endTitle: "You did it! 🏆", endTitleLow: "Your result",
@@ -33,7 +40,7 @@
     shareText: (s, n, h) => `⚽ Name Scramble\n✅ ${s}/${n} · ${h ? h + " letter hint" + (h === 1 ? "" : "s") : "no help"}`,
     copied: "Copied! Paste it anywhere to share.",
     rulesTitle: "How to play",
-    rules: ["Each round has 10 famous footballers, picked at random every time. The letters are mixed up: put them in the right order to guess the player.", "Made a mistake? “Delete” removes the last letter. You can also tap a placed letter to take it back.", "Stuck? “Show letter” reveals one letter, and “Skip” moves on to the next name.", "At the end you see your result and can share it with friends."],
+    rules: ["Before you start, choose the minimum name length, active or retired players, and the round length. Names are picked at random every time. The letters are mixed up: put them in the right order to guess the player.", "Made a mistake? “Delete” removes the last letter. You can also tap a placed letter to take it back.", "Stuck? “Show letter” reveals one letter, and “Skip” moves on to the next name.", "At the end of the round you see your result and can share it with friends."],
   };
 
   root.innerHTML = `
@@ -41,7 +48,14 @@
       <a class="back" href="${HOME}">${T.back}</a>
       <h1>${T.title}</h1>
       <p class="intro">${T.intro}</p>
-      <div class="sc-game" id="scGame">
+      <div class="sc-setup" id="scSetup">
+        <div class="sc-group"><div class="sc-label">${T.setLen}</div><div class="sc-chips" id="scLen"></div></div>
+        <div class="sc-group"><div class="sc-label">${T.setCareer}</div><div class="sc-chips" id="scCareer"></div></div>
+        <div class="sc-group"><div class="sc-label">${T.setRound}</div><div class="sc-chips" id="scRound"></div></div>
+        <p class="sc-match" id="scMatch"></p>
+        <button class="primary" id="scStart" type="button">${T.start}</button>
+      </div>
+      <div class="sc-game" id="scGame" hidden>
         <div class="meta"><div class="count" id="scProgress"></div><div class="count" id="scScore"></div></div>
         <div class="sc-row sc-slots" id="scSlots" aria-label="Answer"></div>
         <div class="sc-row sc-tiles" id="scTiles" aria-label="Letters"></div>
@@ -59,6 +73,7 @@
         <button class="primary" id="scShare" type="button">${T.share}</button>
         <p class="share-note" id="scNote" hidden></p>
         <button id="scAgain" type="button">${T.again}</button>
+        <button id="scSettings" type="button">${T.settings}</button>
         <a class="sc-link" href="${HOME}">${T.crosswords}</a>
       </div>
       <details class="sc-rules">
@@ -83,10 +98,43 @@
   // ---- State ----
   let names, index, score, hints, word, slots, tiles, busy;
 
+  // ---- Start screen: filters ----
+  let f = { len: 0, career: "all", count: 10 };
+  try { const saved = JSON.parse(localStorage.getItem("scrambleFilters")); if (saved && LENGTHS.includes(saved.len) && ["all", "active", "done"].includes(saved.career) && ROUNDS.includes(saved.count)) f = saved; } catch (e) {}
+
+  const word_of = (n) => (KA ? n.ka : n.en);
+  function pool() { // names that match the chosen filters
+    return ALL.filter((n) => [...word_of(n)].length >= f.len && (f.career === "all" || (f.career === "active") === (n.a === 1)));
+  }
+  function chips(id, items, isOn, pick) {
+    const box = $(id); box.innerHTML = "";
+    items.forEach(([label, value]) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "sc-chip" + (isOn(value) ? " on" : ""); b.textContent = label;
+      b.setAttribute("aria-pressed", isOn(value));
+      b.addEventListener("click", () => { pick(value); drawSetup(); });
+      box.appendChild(b);
+    });
+  }
+  function drawSetup() {
+    chips("scLen", LENGTHS.map((n) => [n ? T.lenN(n) : T.lenAny, n]), (v) => f.len === v, (v) => (f.len = v));
+    chips("scCareer", [[T.careerAll, "all"], [T.careerActive, "active"], [T.careerDone, "done"]], (v) => f.career === v, (v) => (f.career = v));
+    chips("scRound", ROUNDS.map((n) => [String(n), n]), (v) => f.count === v, (v) => (f.count = v));
+    const n = pool().length;
+    $("scMatch").textContent = T.matches(n);
+    $("scStart").disabled = n === 0;
+  }
+  function showSetup() {
+    $("scEnd").hidden = true; $("scGame").hidden = true; $("scSetup").hidden = false;
+    drawSetup();
+  }
+
   function newRound() {
-    names = shuffle(ALL).slice(0, ROUND).map((n) => (KA ? n.ka : n.en));
+    try { localStorage.setItem("scrambleFilters", JSON.stringify(f)); } catch (e) {}
+    names = shuffle(pool()).slice(0, f.count).map(word_of); // fewer names than chosen? then a shorter round
+    if (!names.length) return showSetup();
     index = 0; score = 0; hints = 0;
-    $("scEnd").hidden = true; $("scGame").hidden = false;
+    $("scSetup").hidden = true; $("scEnd").hidden = true; $("scGame").hidden = false;
     nextWord();
   }
 
@@ -210,6 +258,8 @@
   $("scClear").addEventListener("click", deleteLast);
   $("scSkip").addEventListener("click", skip);
   $("scAgain").addEventListener("click", newRound);
+  $("scStart").addEventListener("click", newRound);
+  $("scSettings").addEventListener("click", showSetup);
   $("scShare").addEventListener("click", share);
 
   // Computer keyboard: type a letter to pick it, Backspace to take the last one back
@@ -225,5 +275,5 @@
     if (tile) place(tile);
   });
 
-  newRound();
+  showSetup();
 })();
