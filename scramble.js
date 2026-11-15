@@ -7,7 +7,7 @@
   const KA = document.documentElement.lang === "ka";
   const ROUNDS = [5, 10, 20]; // choices for names per round
   const SHOW_CAREER = false; // career filter is hidden until there are enough names (data has a: 1/0 already)
-  const LENGTHS = [0, 5, 6, 7, 8]; // minimum name length (0 = any)
+  const LEN_MIN = 3, LEN_MAX = 9; // slider range; LEN_MIN = any length
   const HOME = KA ? "../ka/" : "../"; // gamoicani-pekhburtelebis-gvarebi/ → ka/ (Georgian home) ; scramble/ → home
 
   const T = KA ? {
@@ -50,7 +50,7 @@
       <h1>${T.title}</h1>
       <p class="intro">${T.intro}</p>
       <div class="sc-setup" id="scSetup">
-        <div class="sc-group"><div class="sc-label">${T.setLen}</div><div class="sc-chips" id="scLen"></div></div>
+        <div class="sc-group"><div class="sc-label">${T.setLen}</div><input type="range" class="sc-range" id="scLen" min="${LEN_MIN}" max="${LEN_MAX}" step="1"><div class="sc-range-val" id="scLenVal"></div></div>
         <div class="sc-group" ${SHOW_CAREER ? "" : "hidden"}><div class="sc-label">${T.setCareer}</div><div class="sc-chips" id="scCareer"></div></div>
         <div class="sc-group"><div class="sc-label">${T.setRound}</div><div class="sc-chips" id="scRound"></div></div>
         <p class="sc-match" id="scMatch"></p>
@@ -100,8 +100,8 @@
   let names, index, score, hints, word, slots, tiles, busy;
 
   // ---- Start screen: filters ----
-  let f = { len: 0, career: "all", count: 10 };
-  try { const saved = JSON.parse(localStorage.getItem("scrambleFilters")); if (saved && LENGTHS.includes(saved.len) && ["all", "active", "done"].includes(saved.career) && ROUNDS.includes(saved.count)) f = saved; } catch (e) {}
+  let f = { len: LEN_MIN, career: "all", count: 10 };
+  try { const saved = JSON.parse(localStorage.getItem("scrambleFilters")); if (saved && Number.isInteger(saved.len) && saved.len >= LEN_MIN && saved.len <= LEN_MAX && ["all", "active", "done"].includes(saved.career) && ROUNDS.includes(saved.count)) f = saved; } catch (e) {}
 
   const word_of = (n) => (KA ? n.ka : n.en);
   function pool() { // names that match the chosen filters
@@ -118,7 +118,8 @@
     });
   }
   function drawSetup() {
-    chips("scLen", LENGTHS.map((n) => [n ? T.lenN(n) : T.lenAny, n]), (v) => f.len === v, (v) => (f.len = v));
+    $("scLen").value = f.len;
+    $("scLenVal").textContent = f.len <= LEN_MIN ? T.lenAny : T.lenN(f.len);
     chips("scCareer", [[T.careerAll, "all"], [T.careerActive, "active"], [T.careerDone, "done"]], (v) => f.career === v, (v) => (f.career = v));
     chips("scRound", ROUNDS.map((n) => [String(n), n]), (v) => f.count === v, (v) => (f.count = v));
     const n = pool().length;
@@ -260,6 +261,7 @@
   $("scSkip").addEventListener("click", skip);
   $("scAgain").addEventListener("click", newRound);
   $("scStart").addEventListener("click", newRound);
+  $("scLen").addEventListener("input", (e) => { f.len = +e.target.value; drawSetup(); });
   $("scSettings").addEventListener("click", showSetup);
   $("scShare").addEventListener("click", share);
 
