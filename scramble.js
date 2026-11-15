@@ -6,6 +6,7 @@
   if (!root || !ALL.length) return;
   const KA = document.documentElement.lang === "ka";
   const ROUNDS = [5, 10, 20]; // choices for names per round
+  const SHOW_CAREER = false; // career filter is hidden until there are enough names (data has a: 1/0 already)
   const LENGTHS = [0, 5, 6, 7, 8]; // minimum name length (0 = any)
   const HOME = KA ? "../ka/" : "../"; // gamoicani-pekhburtelebis-gvarebi/ → ka/ (Georgian home) ; scramble/ → home
 
@@ -50,7 +51,7 @@
       <p class="intro">${T.intro}</p>
       <div class="sc-setup" id="scSetup">
         <div class="sc-group"><div class="sc-label">${T.setLen}</div><div class="sc-chips" id="scLen"></div></div>
-        <div class="sc-group"><div class="sc-label">${T.setCareer}</div><div class="sc-chips" id="scCareer"></div></div>
+        <div class="sc-group" ${SHOW_CAREER ? "" : "hidden"}><div class="sc-label">${T.setCareer}</div><div class="sc-chips" id="scCareer"></div></div>
         <div class="sc-group"><div class="sc-label">${T.setRound}</div><div class="sc-chips" id="scRound"></div></div>
         <p class="sc-match" id="scMatch"></p>
         <button class="primary" id="scStart" type="button">${T.start}</button>
@@ -104,7 +105,7 @@
 
   const word_of = (n) => (KA ? n.ka : n.en);
   function pool() { // names that match the chosen filters
-    return ALL.filter((n) => [...word_of(n)].length >= f.len && (f.career === "all" || (f.career === "active") === (n.a === 1)));
+    return ALL.filter((n) => [...word_of(n)].length >= f.len && (!SHOW_CAREER || f.career === "all" || (f.career === "active") === (n.a === 1)));
   }
   function chips(id, items, isOn, pick) {
     const box = $(id); box.innerHTML = "";
