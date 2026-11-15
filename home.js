@@ -189,10 +189,10 @@
     filters.parentNode.insertBefore(a, filters);
   }
 
-  // ---- The Scramble game (scramble/ and ka/scramble/), a card above the crosswords ----
+  // ---- The Scramble game (scramble/ and gamoicani-pekhburtelebis-gvarebi/), a card above the crosswords ----
   function gameCard() {
     const a = document.createElement("a");
-    a.className = "daily-card"; a.href = "scramble/";
+    a.className = "daily-card"; a.href = KA ? "../gamoicani-pekhburtelebis-gvarebi/" : "scramble/";
     const kicker = document.createElement("span"); kicker.className = "kicker"; kicker.textContent = KA ? "ახალი თამაში" : "New game";
     const name = document.createElement("span"); name.className = "name"; name.textContent = KA ? "გვარების დალაგობანა" : "Name Scramble";
     const st = document.createElement("span"); st.className = "status cta";
