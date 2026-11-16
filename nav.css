@@ -27,6 +27,8 @@
 
 /* Each game has its own accent color. The whole site already uses --accent / --accent-soft, so one override here recolors the page.
    Crosswords keeps the default blue from crossword.css. Orange and green use the darker "button" shade so white text stays readable. */
-html[data-game="top5"]       { --accent: #c2540a; --accent-soft: #ffeadb; }
-html[data-game="scramble"]   { --accent: #7a4fd6; --accent-soft: #ece5fb; }
-html[data-game="wordsearch"] { --accent: #0f7d4a; --accent-soft: #dcf4e7; }
+html[data-game="top5"]       { --accent: #c2540a; --accent-soft: #ffeadb; --bg: #fffaf5; --border: #f5cfae; --head: #7a3300; }
+html[data-game="scramble"]   { --accent: #7a4fd6; --accent-soft: #ece5fb; --bg: #faf8fe; --border: #cdbdf0; --head: #43257f; }
+html[data-game="wordsearch"] { --accent: #0f7d4a; --accent-soft: #dcf4e7; --bg: #f6fcf9; --border: #b9e3cc; --head: #0b5230; }
+/* Page background, borders and the main heading also follow the game, as in the design. Cards stay white. */
+html[data-game="top5"] h1, html[data-game="scramble"] h1, html[data-game="wordsearch"] h1 { color: var(--head); }

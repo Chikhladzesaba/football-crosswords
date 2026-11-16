@@ -84,7 +84,7 @@ function puzzlePage(c, p) {
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 ${headTags({ title, description, url, image: url + "share.png" })}
 ${FONT_LINKS}
-  <link rel="stylesheet" href="../nav.css?v=2">
+  <link rel="stylesheet" href="../nav.css?v=3">
   <link rel="stylesheet" href="../crossword.css?v=3">
   ${ANALYTICS}
 </head>
@@ -123,7 +123,7 @@ function puzzlePageKa(c, p) {
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 ${headTags({ title: KA.title(c), description: KA.description(c, level), url, image: url + "share.png", brand: KA.brand, locale: "ka_GE", noindex: !KA_PUBLIC })}
 ${FONT_LINKS}
-  <link rel="stylesheet" href="../nav.css?v=2">
+  <link rel="stylesheet" href="../nav.css?v=3">
   <link rel="stylesheet" href="../crossword.css?v=3">
   ${ANALYTICS}
 </head>
@@ -164,7 +164,7 @@ function kaHomePage() {
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 ${headTags({ title: KA.homeTitle, description: KA.homeIntro, url, image: url + "share.png", brand: KA.brand, locale: "ka_GE", noindex: !KA_PUBLIC, alternates: KA_PUBLIC ? HOME_ALTERNATES : [] })}
 ${FONT_LINKS.replace(/\.\.\//g, "")}
-  <link rel="stylesheet" href="../nav.css?v=2">
+  <link rel="stylesheet" href="../nav.css?v=3">
   <link rel="stylesheet" href="../crossword.css?v=3">
   ${ANALYTICS}
 </head>
