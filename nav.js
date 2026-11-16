@@ -28,6 +28,33 @@
     nav.appendChild(a);
   });
   document.body.insertBefore(nav, document.body.firstChild);
+
+  // Language switch + (on phones) the small top bar with the brand name. The switch goes to the same game in the other language.
+  const ALT = KA ? { crosswords: "", top5: "top5/", scramble: "scramble/", wordsearch: "wordsearch/" }
+                 : { crosswords: "ka/", top5: "gamoicani-top5/", scramble: "gamoicani-pekhburtelebis-gvarebi/", wordsearch: "skauti/" };
+  const alt = root + ALT[cur];
+  const LANG = KA ? '<a href="' + alt + '" hreflang="en" lang="en" title="English">ინგ</a><span class="sep">|</span><span aria-current="true">ქა</span>'
+                  : '<span aria-current="true">Eng</span><span class="sep">|</span><a href="' + alt + '" hreflang="ka" lang="ka" title="ქართული">Geo</a>';
+  const top = document.createElement("div");
+  top.className = "topbar";
+  top.innerHTML = '<a class="brand" href="' + root + (KA ? "ka/" : "") + '">Kickoff Puzzles</a><span class="top-right"><span class="pill-slot"></span><nav class="lang-switch" aria-label="' + (KA ? "ენა" : "Language") + '">' + LANG + "</nav></span>";
+  document.body.insertBefore(top, document.body.firstChild);
+  document.documentElement.classList.add("with-top");
+
+  // On a phone the round / progress pill sits in the top bar (as in the design); on a computer it stays beside the heading.
+  const mq = window.matchMedia("(max-width: 640px)");
+  let pillHome = null;
+  const placePill = () => {
+    const pill = document.querySelector("[data-pill]");
+    if (!pill) return;
+    const slot = top.querySelector(".pill-slot");
+    if (mq.matches) {
+      if (pill.parentNode !== slot) { pillHome = { parent: pill.parentNode, next: pill.nextSibling }; slot.appendChild(pill); }
+    } else if (pillHome && pill.parentNode === slot) { pillHome.parent.insertBefore(pill, pillHome.next); }
+  };
+  document.addEventListener("DOMContentLoaded", placePill);
+  (mq.addEventListener ? mq.addEventListener("change", placePill) : mq.addListener(placePill));
+  if (document.readyState !== "loading") placePill();
   // On a phone the on-screen keyboard would sit on top of the bar, so hide the bar while the keyboard is open.
   // A keyboard is open when a text field has focus AND the visible part of the page has become clearly shorter
   // (a field that was focused by the page itself on load does not open a keyboard, so the bar stays).

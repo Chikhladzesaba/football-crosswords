@@ -55,13 +55,36 @@
 /* Georgian has no capitals: text-transform would turn the letters into Mtavruli, so switch it off */
 html:lang(ka) .ws-group h3 { text-transform: none; letter-spacing: 0; }
 
-/* Computer layout (as in the design): wide page, the letter grid on the left, count + words + buttons on the right */
+/* Look from the design: light-green cells, solid green for found words, flat list of word chips, filled + outline buttons */
+.ws-grid { border-radius: 16px; padding: 12px; gap: 4px; margin-top: 4px; }
+.ws-cell { background: var(--accent-soft); color: var(--head); font-weight: 350; border-radius: 8px; }
+.ws-cell.f0, .ws-cell.f1, .ws-cell.f2, .ws-cell.f3, .ws-cell.f4, .ws-cell.f5 { background: var(--main); color: #fff; font-weight: 500; }
+.ws-cell.sel { background: var(--accent); color: #fff; font-weight: 500; }
+.ws-words { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+.ws-group, .ws-group ul { display: contents; }
+.ws-group h3 { display: none; }
+.ws-w, .ws-w.f0, .ws-w.f1, .ws-w.f2, .ws-w.f3, .ws-w.f4, .ws-w.f5 { font-size: 15px; font-weight: 350; letter-spacing: 0; padding: 6px 14px; border-radius: 14px; background: var(--card); border: 1px solid var(--line2); color: var(--head); }
+.ws-w.found { background: var(--accent-soft); border-color: var(--border); color: #4f7f66; text-decoration: line-through; text-decoration-thickness: 1px; }
+.ws-game .actions { gap: 10px; }
+.ws-game .actions button { padding: 12px 28px; border-radius: 12px; font-size: 15px; font-weight: 400; border: 1px solid var(--line2); color: var(--head); background: var(--card); }
+.ws-game .actions #wsHint { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 500; }
+.ws-time { color: var(--ph); font-weight: 350; font-size: 13px; }
+
 @media (min-width: 900px) {
   #wordsearch main.narrow { max-width: 1000px; }
-  .ws-game { --ws: 32px; display: grid; grid-template-columns: max-content minmax(0, 1fr); column-gap: 32px; align-items: start; grid-template-rows: auto auto auto auto 1fr; }
+  .ws-game { --ws: 32px; display: grid; grid-template-columns: max-content minmax(0, 1fr); column-gap: 24px; row-gap: 16px; align-items: start; grid-template-rows: auto auto auto auto 1fr; }
   .ws-grid { grid-column: 1; grid-row: 1 / span 5; margin: 0; }
-  .ws-game .meta { grid-column: 2; grid-row: 1; margin-bottom: 4px; }
-  .ws-msg { grid-column: 2; grid-row: 2; text-align: left; margin: 0 0 8px; }
+  .ws-game .meta { grid-column: 2; grid-row: 1; margin: 0; }
+  .ws-msg { grid-column: 2; grid-row: 2; text-align: left; margin: 0; min-height: 0; }
   .ws-words { grid-column: 2; grid-row: 3; }
-  .ws-game .actions { grid-column: 2; grid-row: 4; justify-content: flex-start; }
+  .ws-game .actions { grid-column: 2; grid-row: 4; justify-content: flex-start; padding-top: 4px; }
+}
+@media (max-width: 640px) {
+  .ws-game { --ws: min(30px, calc((100vw - 92px) / 14)); }
+  .ws-grid { border-radius: 14px; padding: 8px; gap: 3px; }
+  .ws-cell { border-radius: 6px; }
+  .ws-w, .ws-w.f0, .ws-w.f1, .ws-w.f2, .ws-w.f3, .ws-w.f4, .ws-w.f5 { font-size: 13px; padding: 4px 11px; border-radius: 12px; }
+  .ws-words { gap: 6px; }
+  .ws-game .actions { gap: 10px; }
+  .ws-game .actions button { flex: 1 1 0; padding: 12px 8px; }
 }

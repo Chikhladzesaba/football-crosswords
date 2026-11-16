@@ -45,12 +45,6 @@ h1 em { font-style: normal; }
 
 /* Home pages: English <-> Georgian switch, top right */
 /* (the home pages load crossword.css?v=2 so phones fetch this new version instead of an old saved copy) */
-.lang-switch { float: right; margin: 8px 0 0 16px; display: flex; gap: 6px; align-items: baseline;
-  font-size: 14px; font-family: "FiraGO", system-ui, sans-serif; color: var(--muted); }
-.lang-switch [aria-current] { color: var(--ink); font-weight: 500; }
-.lang-switch a { color: var(--muted); text-decoration: none; }
-.lang-switch a:hover { color: var(--accent); text-decoration: underline; }
-.lang-switch .sep { opacity: .5; }
 
 .back { display: inline-block; color: var(--accent); text-decoration: none; font-size: 14px; margin-bottom: 12px; }
 .back:hover { text-decoration: underline; }

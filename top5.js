@@ -50,17 +50,16 @@
 
   root.innerHTML = `
     <main class="narrow">
-      <h1>${TEXT.h1}</h1>
-      <p class="intro">${TEXT.intro}</p>
+      <div class="page-head"><div class="ph-text"><h1>${TEXT.h1}</h1><p class="intro">${TEXT.intro}</p></div><span class="pill" data-pill id="t5Kicker"></span></div>
       <div class="t5-game" id="t5Game">
-        <div class="t5-head">
+        <div class="t5-card">
           <div class="t5-pips" id="t5Pips" aria-label="${TEXT.ariaRound}"></div>
-          <p class="t5-kicker" id="t5Kicker"></p>
-          <h2 class="t5-title" id="t5Title"></h2>
+          <div class="t5-cardhead"><h2 class="t5-title" id="t5Title"></h2><div class="count" id="t5Count"></div></div>
           <p class="t5-asof" id="t5AsOf"></p>
+          <ol class="t5-board" id="t5Board"></ol>
         </div>
-        <div class="meta"><div class="t5-lives" id="t5Lives" aria-label="${TEXT.ariaLives}"></div><div class="count" id="t5Count"></div></div>
-        <ol class="t5-board" id="t5Board"></ol>
+        <div class="t5-side">
+        <div class="t5-lives" id="t5Lives" aria-label="${TEXT.ariaLives}"></div>
         <p class="t5-note" id="t5Note" hidden></p>
         <form class="t5-form" id="t5Form" autocomplete="off">
           <input class="t5-input" id="t5Input" type="text" placeholder="${TEXT.placeholder}" enterkeyhint="go" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="${TEXT.ariaGuess}">
@@ -70,6 +69,7 @@
         <div class="actions">
           <button id="t5Hint" type="button">${TEXT.hint}</button>
           <button id="t5Give" type="button">${TEXT.give}</button>
+        </div>
         </div>
       </div>
       <details class="t5-rules">
@@ -162,8 +162,9 @@
     $("t5Count").textContent = TEXT.found(found.filter(Boolean).length, list.items.length);
   }
   function drawLives() {
-    const box = $("t5Lives"); box.innerHTML = TEXT.lives + " ";
-    for (let i = 0; i < LIVES; i++) { const d = document.createElement("span"); d.className = "t5-dot" + (i >= lives ? " lost" : ""); box.appendChild(d); }
+    const box = $("t5Lives"); box.innerHTML = `<span>${TEXT.lives}</span><span class="t5-dots"></span>`;
+    const dots = box.querySelector(".t5-dots");
+    for (let i = 0; i < LIVES; i++) { const d = document.createElement("span"); d.className = "t5-dot" + (i >= lives ? " lost" : ""); dots.appendChild(d); }
   }
   function say(text, kind) { const m = $("t5Msg"); m.textContent = text; m.className = "t5-msg" + (kind ? " " + kind : ""); }
 

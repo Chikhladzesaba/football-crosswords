@@ -41,11 +41,10 @@
 
   root.innerHTML = `
     <main class="narrow">
-      <h1>${T.title}</h1>
-      <p class="intro">${T.intro}</p>
+      <div class="page-head"><div class="ph-text"><h1>${T.title}</h1><p class="intro">${T.intro}</p></div><span class="pill" data-pill id="scProgress"></span></div>
       <div class="sc-filter"><div class="sc-label">${T.lenLabel}</div><div class="sc-chips" id="scLen"></div></div>
       <div class="sc-game" id="scGame">
-        <div class="meta"><div class="count" id="scProgress"></div><div class="count" id="scScore"></div></div>
+        <div class="meta"><div class="count" id="scScore"></div></div>
         <div class="sc-row sc-slots" id="scSlots" aria-label="Answer"></div>
         <div class="sc-row sc-tiles" id="scTiles" aria-label="Letters"></div>
         <div class="actions">

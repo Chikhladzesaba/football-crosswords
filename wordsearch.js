@@ -51,10 +51,9 @@
 
   root.innerHTML = `
     <main class="narrow">
-      <h1>${TEXT.h1}</h1>
-      <p class="intro">${TEXT.intro}</p>
+      <div class="page-head"><div class="ph-text"><h1>${TEXT.h1}</h1><p class="intro">${TEXT.intro}</p></div><span class="pill" data-pill id="wsCount"></span></div>
       <div class="ws-game" id="wsGame">
-        <div class="meta"><div class="ws-time" id="wsTime" aria-label="${TEXT.ariaTime}">0:00</div><div class="count" id="wsCount"></div></div>
+        <div class="meta"><div class="ws-time" id="wsTime" aria-label="${TEXT.ariaTime}">0:00</div></div>
         <div class="ws-grid" id="wsGrid" role="grid" aria-label="${TEXT.ariaGrid}"></div>
         <p class="ws-msg" id="wsMsg" aria-live="polite"></p>
         <div class="ws-words" id="wsWords"></div>

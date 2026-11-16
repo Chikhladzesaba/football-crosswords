@@ -45,10 +45,29 @@
 .sc-rules ul { margin: 0 0 8px; padding-left: 18px; }
 .sc-rules li { margin-bottom: 4px; }
 
-/* Computer layout (as in the design): the heading lines up with the game bar, the game itself is a centered card */
-@media (min-width: 900px) {
-  main.narrow:has(.sc-game) { max-width: 1000px; }
-  .sc-filter, .sc-game, .sc-end, .sc-rules { max-width: 640px; margin-left: auto; margin-right: auto; }
-  .sc-filter, .sc-rules { width: 100%; }
-  .sc-game { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 28px 24px; }
+/* Layout from the design: heading lines up with the game bar; the game is a white card, 640px wide, at the left edge */
+.sc-filter, .sc-game, .sc-end, .sc-rules { max-width: 640px; margin-left: 0; margin-right: auto; }
+.sc-game { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 28px 24px; gap: 22px; align-items: center; }
+.sc-game .meta { align-self: stretch; justify-content: flex-end; margin: 0; }
+.sc-game .meta .count { font-size: 13px; }
+.sc-row { gap: 8px; }
+.sc-slots { background: none; padding: 0; min-height: 0; border-radius: 0; }
+.sc-slot, .sc-tile {
+  --s: min(68px, calc((min(100vw - 96px, 556px) - (var(--sc-n, 8) - 1) * 8px) / var(--sc-n, 8)));
+  height: calc(var(--s) * 1.14); border-radius: 14px; font-size: calc(var(--s) * .5);
 }
+.sc-slot { border: 2px solid var(--border); border-style: solid; background: var(--card); color: var(--head); }
+.sc-slot.filled { background: var(--accent-soft); border-color: var(--line2); }
+.sc-tile { border: 1px solid var(--line2); color: var(--head); background: var(--card); }
+.sc-tile:hover { background: var(--accent-soft); color: var(--head); }
+.sc-game .actions { justify-content: center; gap: 10px; }
+.sc-game .actions button { padding: 12px 30px; border-radius: 12px; font-size: 15px; font-weight: 400; border: 1px solid var(--line2); color: var(--head); background: var(--card); }
+.sc-game .actions #scHint { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 500; }
+@media (max-width: 640px) {
+  .sc-game { padding: 20px 16px; border-radius: 16px; }
+  .sc-slot, .sc-tile { --s: min(54px, calc((100vw - 74px - (var(--sc-n, 8) - 1) * 6px) / var(--sc-n, 8))); border-radius: 12px; }
+  .sc-row { gap: 6px; }
+  .sc-game .actions { align-self: stretch; }
+  .sc-game .actions button { flex: 1 1 0; padding: 12px 8px; }
+}
+@media (min-width: 900px) { main.narrow:has(.sc-game) { max-width: 1000px; } }

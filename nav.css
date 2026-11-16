@@ -27,8 +27,41 @@
 
 /* Each game has its own accent color. The whole site already uses --accent / --accent-soft, so one override here recolors the page.
    Crosswords keeps the default blue from crossword.css. Orange and green use the darker "button" shade so white text stays readable. */
-html[data-game="top5"]       { --accent: #c2540a; --accent-soft: #ffeadb; --bg: #fffaf5; --border: #f5cfae; --head: #7a3300; }
-html[data-game="scramble"]   { --accent: #7a4fd6; --accent-soft: #ece5fb; --bg: #faf8fe; --border: #cdbdf0; --head: #43257f; }
-html[data-game="wordsearch"] { --accent: #0f7d4a; --accent-soft: #dcf4e7; --bg: #f6fcf9; --border: #b9e3cc; --head: #0b5230; }
+html[data-game="top5"]       { --accent: #c2540a; --accent-soft: #ffeadb; --bg: #fffaf5; --border: #f5cfae; --head: #7a3300; --main: #f58220; --line2: #e6b58a; --ph: #9a8068; }
+html[data-game="scramble"]   { --accent: #7a4fd6; --accent-soft: #ece5fb; --bg: #faf8fe; --border: #cdbdf0; --head: #43257f; --main: #7a4fd6; --line2: #b79ee8; --ph: #6a5a96; }
+html[data-game="wordsearch"] { --accent: #0f7d4a; --accent-soft: #dcf4e7; --bg: #f6fcf9; --border: #b9e3cc; --head: #0b5230; --main: #14975a; --line2: #8fcfae; --ph: #4f7f66; }
 /* Page background, borders and the main heading also follow the game, as in the design. Cards stay white. */
 html[data-game="top5"] h1, html[data-game="scramble"] h1, html[data-game="wordsearch"] h1 { color: var(--head); }
+html:not([data-game="top5"]):not([data-game="scramble"]):not([data-game="wordsearch"]) { --head: #0a3f8f; --main: #006aff; --line2: #9db9df; }
+
+/* Language switch. Computer: at the right end of the game tabs. Phone: in the top bar. */
+.topbar { max-width: 1000px; margin: 0 auto; position: relative; height: 0; }
+.topbar .brand, .topbar .pill-slot:empty { display: none; }
+.top-right { position: absolute; top: 24px; right: 16px; z-index: 2; }
+.lang-switch { display: flex; gap: 6px; align-items: baseline; font-size: 13px; color: #3d5573; white-space: nowrap; }
+.lang-switch [aria-current] { color: #10233d; font-weight: 500; }
+.lang-switch a { color: #3d5573; text-decoration: none; }
+.lang-switch a:hover { color: var(--accent); text-decoration: underline; }
+.lang-switch .sep { opacity: .5; }
+.games-nav { padding-right: 90px; } /* room for the language switch */
+@media (max-width: 640px) { .games-nav { padding-right: 4px; } }
+
+/* Heading row: heading + description on the left, a small pill (round / progress) on the right */
+.page-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; padding-top: 8px; margin-bottom: 20px; }
+.page-head .ph-text { min-width: 0; }
+.page-head h1 { font-size: 44px; line-height: 1.15; margin: 0 0 6px; }
+.page-head .intro { margin: 0; padding: 0; border: 0; font-size: 17px; color: #3d5573; }
+.pill { flex: none; font-size: 14px; font-weight: 500; padding: 5px 14px; border-radius: 14px; background: var(--accent-soft); color: var(--head); white-space: nowrap; }
+
+@media (max-width: 640px) {
+  .topbar { height: auto; display: flex; justify-content: space-between; align-items: center; padding: 18px 16px 0; }
+  .topbar .brand { display: block; font-size: 15px; font-weight: 500; color: #10233d; text-decoration: none; }
+  .topbar .pill-slot:empty { display: none; }
+  .top-right { position: static; display: flex; align-items: center; gap: 10px; }
+  .pill-slot .pill { margin: 0; font-size: 13px; padding: 4px 12px; border-radius: 12px; }
+  html.with-top main { padding-top: 14px; }
+  .page-head { padding-top: 0; }
+  .page-head h1 { font-size: 28px; margin-bottom: 4px; }
+  .page-head .intro { font-size: 15px; line-height: 1.45; }
+  .page-head { margin-bottom: 14px; }
+}

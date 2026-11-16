@@ -66,18 +66,37 @@
 /* Georgian has no capitals: text-transform would turn the letters into Mtavruli, so switch it off */
 html:lang(ka) .t5-kicker { text-transform: none; letter-spacing: 0; }
 
-/* Computer layout (as in the design): wide page, the list on the left, lives + answer box + buttons on the right */
-@media (min-width: 900px) {
-  #top5 main.narrow { max-width: 1000px; }
-  .t5-game { display: grid; grid-template-columns: minmax(0, 1fr) 340px; column-gap: 32px; align-items: start; }
-  .t5-game .meta { display: contents; }
-  .t5-head { grid-column: 1; grid-row: 1; margin-bottom: 4px; }
-  .t5-game .count { grid-column: 1; grid-row: 2; margin: 0; }
-  .t5-board { grid-column: 1; grid-row: 3 / span 6; margin: 12px 0 0; }
-  .t5-lives { grid-column: 2; grid-row: 1; align-self: end; margin-bottom: 8px; }
-  .t5-note { grid-column: 2; grid-row: 2; }
-  .t5-form { grid-column: 2; grid-row: 3; margin-top: 12px; }
-  .t5-msg { grid-column: 2; grid-row: 4; margin: 0 0 8px; }
-  .t5-game .actions { grid-column: 2; grid-row: 5; justify-content: flex-start; }
-  .t5-rules { max-width: none; }
+/* Layout from the design: a white card with the list on the left, lives + answer box + links on the right */
+.t5-game { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+.t5-card { flex: 1 1 520px; min-width: 0; background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.t5-side { flex: 0 1 340px; min-width: 280px; display: flex; flex-direction: column; gap: 14px; }
+.t5-pips, .t5-asof { display: none; }
+.t5-cardhead { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.t5-title { font-size: 17px; font-weight: 500; line-height: 1.3; margin: 0; }
+.t5-cardhead .count { color: var(--head); font-size: 14px; white-space: nowrap; }
+.t5-board { margin: 0; gap: 8px; }
+.t5-row { padding: 12px 14px; border-radius: 10px; gap: 14px; }
+.t5-row.found { background: var(--accent-soft); border-color: var(--border); }
+.t5-row.found .t5-rank { background: var(--main); color: #fff; }
+.t5-row.found .t5-val { color: var(--head); }
+.t5-lives { justify-content: space-between; color: var(--head); }
+.t5-dots { display: flex; gap: 6px; }
+.t5-dot { width: 16px; height: 16px; background: var(--main); }
+.t5-dot.lost { background: var(--border); }
+.t5-input { border: 1px solid var(--line2); padding: 13px 16px; }
+.t5-input::placeholder { color: var(--ph); opacity: 1; }
+.t5-form { margin: 0; }
+.t5-msg { margin: 0; min-height: 0; }
+.t5-note { margin: 0; }
+.t5-game .actions { justify-content: flex-start; gap: 18px; }
+.t5-game .actions button { background: none; border: 0; padding: 0; font-size: 14px; color: var(--head); text-decoration: underline; cursor: pointer; }
+.t5-game .actions button:disabled { opacity: .4; }
+@media (max-width: 640px) {
+  .t5-game { gap: 14px; }
+  .t5-card { padding: 14px; border-radius: 14px; flex-basis: 100%; }
+  .t5-side { flex-basis: 100%; min-width: 0; }
+  .t5-title { font-size: 15px; }
+  .t5-cardhead .count { font-size: 13px; }
+  .t5-row { padding: 10px 12px; gap: 12px; }
 }
+@media (min-width: 900px) { #top5 main.narrow { max-width: 1000px; } }
