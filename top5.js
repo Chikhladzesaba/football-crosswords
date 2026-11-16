@@ -94,7 +94,10 @@
       li.className = "t5-row" + (found[i] ? " found" : reveal ? " missed" : "");
       const show = found[i] || reveal;
       li.innerHTML = `<span class="t5-rank">${i + 1}</span><span class="t5-name"></span><span class="t5-val"></span>`;
-      li.querySelector(".t5-name").textContent = show ? it.name : it.hint ? it.hint : "? ? ?";
+      const nm = li.querySelector(".t5-name");
+      if (show) nm.textContent = it.name;
+      else if (it.hint) nm.textContent = it.hint;
+      else nm.classList.add("t5-blank");
       li.querySelector(".t5-val").textContent = show ? `${it.value} ${list.unit}` : "";
       b.appendChild(li);
     });
