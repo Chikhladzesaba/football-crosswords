@@ -14,7 +14,7 @@
   const KA = P.lang === "ka";
   const T = KA ? {
     back: "← ყველა კროსვორდი", check: "შემოწმება", clearWord: "სიტყვის წაშლა", reveal: "სიტყვის ჩვენება", letter: "ასოს ჩვენება",
-    playNext: "ითამაშე სხვა კროსვორდი", allDone: "ყველა კროსვორდი ამოხსნილი გაქვს! 🏆", home: "ყველა კროსვორდი",
+    playNext: "ითამაშე სხვა კროსვორდი", more: "ითამაშე სხვა კროსვორდები", allDone: "ყველა კროსვორდი ამოხსნილი გაქვს! 🏆", home: "ყველა კროსვორდი",
     help: (l, w, a) => [(l || w) && [l && `${l} ასო`, w && `${w} სიტყვა`].filter(Boolean).join(" და ") + " ნაჩვენები", a && "ავტომატური შემოწმებით"].filter(Boolean).join(", ") || "დახმარების გარეშე",
     clear: "თავიდან", share: "გაზიარება", auto: "ავტ. შემოწმება",
     howTo: "თამაშის წესები", howToItems: [
@@ -42,7 +42,7 @@
     size: () => "",
   } : {
     back: "← All crosswords", check: "Check letters", clearWord: "Clear word", reveal: "Reveal word", letter: "Reveal letter",
-    playNext: "Play another", allDone: "You've solved every crossword! 🏆", home: "See all crosswords",
+    playNext: "Play another", more: "Play more crosswords", allDone: "You've solved every crossword! 🏆", home: "See all crosswords",
     help: (l, w, a) => [(l || w) && [l && `${l} letter${l === 1 ? "" : "s"}`, w && `${w} word${w === 1 ? "" : "s"}`].filter(Boolean).join(" and ") + " revealed", a && "auto-check on"].filter(Boolean).join(", ") || "no help",
     clear: "Start over", share: "Share", auto: "Auto-check",
     howTo: "How to play?", howToItems: [
@@ -99,13 +99,11 @@
             <button id="btnSharePuzzle" type="button">${T.share}</button>
           </div>
           <p class="share-note" id="sharePuzzleNote" hidden></p>
-          <details class="howto"><summary>${T.howTo}</summary><ul>${T.howToItems.map((t) => `<li>${t}</li>`).join("")}</ul></details>
           <div class="result" id="result" hidden>
             <p id="resultText"></p>
             <button class="primary" id="btnShareResult" type="button">${T.shareResult}</button>
             <p class="share-note" id="shareResultNote" hidden></p>
           </div>
-          <div class="next" id="next" hidden><h3>${T.playNext}</h3><div class="next-list" id="nextList"></div></div>
           <div class="clues">
             <section><h3>${T.across}</h3><ol id="across"></ol></section>
             <section><h3>${T.down}</h3><ol id="down"></ol></section>
@@ -114,6 +112,10 @@
       </div>
       ${P.note ? `<p class="legend">${P.note}</p>` : ""}
     </main>
+    <div class="below">
+      <section class="more" id="next" hidden><h2>${T.more}</h2><div class="next-list" id="nextList"></div></section>
+      <details class="howto"><summary>${T.howTo}</summary><ul>${T.howToItems.map((t) => `<li>${t}</li>`).join("")}</ul></details>
+    </div>
     <div class="win" id="win" role="dialog" aria-modal="true" aria-labelledby="winTitle" hidden>
       <div class="win-card">
         <button class="win-x" id="winX" type="button" aria-label="${T.close}">×</button>
@@ -390,17 +392,22 @@
     if (!mine.length) return;
     const me = mine.find((c) => c.folder === P.id) || {};
     const solved = readJSON("crossword:solved", {});
-    const open = mine.filter((c) => c.folder !== P.id && !solved[c.folder]);
-    const picks = [];
-    [(c) => c.topic === me.topic, (c) => c.difficulty === me.difficulty, () => true].forEach((rule) => {
-      const c = open.find((x) => rule(x) && !picks.includes(x));
-      if (c && picks.length < 2) picks.push(c);
-    });
+    const others = mine.filter((c) => c.folder !== P.id);
+    // Always shown under the puzzle: the other crosswords with the same topic AND the same difficulty (unsolved first)
+    let picks = others.filter((c) => c.topic === me.topic && c.difficulty === me.difficulty)
+      .sort((x, y) => !!solved[x.folder] - !!solved[y.folder]).slice(0, 3);
+    let all = false;
+    if (!picks.length && (state.done || state.wasDone)) { // finished and nothing similar: suggest up to two unsolved ones
+      const open = others.filter((c) => !solved[c.folder]);
+      [(c) => c.topic === me.topic, (c) => c.difficulty === me.difficulty, () => true].forEach((rule) => {
+        const c = open.find((x) => rule(x) && !picks.includes(x));
+        if (c && picks.length < 2) picks.push(c);
+      });
+      all = !picks.length;
+    }
     const box = $("nextList");
     box.innerHTML = "";
-    if (!picks.length) {
-      box.innerHTML = `<p class="all-done">${T.allDone}</p><a class="next-card" href="${KA ? "../ka/" : "../"}"><span class="name">${T.home}</span></a>`;
-    }
+    if (all) box.innerHTML = `<p class="all-done">${T.allDone}</p><a class="next-card" href="${KA ? "../ka/" : "../"}"><span class="name">${T.home}</span></a>`;
     picks.forEach((c) => {
       const a = document.createElement("a");
       a.className = "next-card"; a.href = "../" + c.folder + "/";
@@ -408,7 +415,7 @@
       a.querySelector(".name").textContent = c.name;
       box.appendChild(a);
     });
-    $("next").hidden = false;
+    $("next").hidden = !(picks.length || all);
   }
 
   // ---- SHARING ------------------------------------------------------------
@@ -503,7 +510,7 @@
   });
   $("btnClear").addEventListener("click", () => {
     Object.values(cells).forEach((c) => { c.input.value = ""; c.input.readOnly = false; c.el.classList.remove("wrong", "revealed"); });
-    stopTimer(); state.elapsed = 0; state.done = false; state.wasDone = false; state.revealed.clear(); state.hinted.clear(); state.shown.clear(); state.autoUsed = state.auto; $("next").hidden = true;
+    stopTimer(); state.elapsed = 0; state.done = false; state.wasDone = false; state.revealed.clear(); state.hinted.clear(); state.shown.clear(); state.autoUsed = state.auto; withList(showNext);
     $("timer").textContent = "00:00"; $("result").hidden = true;
     afterChange();
     select(words[0].cells[0], words[0].dir);
@@ -607,4 +614,5 @@
   try { if (localStorage.getItem("crossword:autocheck") === "1" && !state.done) { state.auto = true; state.autoUsed = true; $("btnAuto").setAttribute("aria-pressed", "true"); } } catch (e) {}
   afterChange();
   select(words[0].cells[0], words[0].dir);
+  withList(showNext); // "Play more crosswords" under the puzzle
 })();

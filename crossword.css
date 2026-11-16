@@ -250,16 +250,23 @@ body.typing .clue-bar {
 .daily-card .meta-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .daily-card .cta { color: var(--accent); }
 
-/* "How to play?" under the buttons, closed until tapped */
-.howto { font-size: 14px; color: var(--muted); }
-.howto summary { cursor: pointer; color: var(--accent); width: fit-content; list-style: none; }
+/* "How to play" row under the puzzle, closed until tapped (same look as the Top 5 rules) */
+.below { max-width: 1000px; margin: 0 auto; padding: 8px 16px 48px; }
+.howto { margin-top: 24px; border-top: 1px solid var(--border); font-size: 14px; line-height: 1.55; color: var(--muted); }
+.howto summary { cursor: pointer; padding: 14px 0; font-size: 15px; font-weight: 500; color: var(--ink); list-style: none; display: flex; justify-content: space-between; align-items: center; }
 .howto summary::-webkit-details-marker { display: none; }
-.howto summary::before { content: "▸ "; }
-.howto[open] summary::before { content: "▾ "; }
-.howto ul { margin: 8px 0 0; padding: 12px 14px 12px 30px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; line-height: 1.5; }
+.howto summary::after { content: "+"; font-size: 20px; font-weight: 350; color: var(--muted); }
+.howto[open] summary::after { content: "−"; }
+.howto ul { margin: 0 0 8px; padding: 0 0 0 18px; }
 .howto li + li { margin-top: 4px; }
 .howto b { color: var(--ink); font-weight: 500; }
-body.typing .howto { display: none; }
+/* "Play more crosswords": same topic and difficulty */
+.more { margin-top: 16px; }
+.more h2 { font-size: 18px; font-weight: 500; margin: 0 0 10px; }
+.more[hidden] { display: none; }
+.more .next-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+.more .next-card { padding: 14px 16px; }
+body.typing .below { display: none; }
 
 /* ---- Win popup ---- */
 .win { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center;

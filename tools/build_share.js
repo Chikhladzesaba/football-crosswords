@@ -85,7 +85,7 @@ function puzzlePage(c, p) {
 ${headTags({ title, description, url, image: url + "share.png" })}
 ${FONT_LINKS}
   <link rel="stylesheet" href="../nav.css?v=5">
-  <link rel="stylesheet" href="../crossword.css?v=12">
+  <link rel="stylesheet" href="../crossword.css?v=13">
   ${ANALYTICS}
 </head>
 <body>
@@ -105,7 +105,7 @@ ${clues}
     </main>
   </div>
   <script src="puzzle.js"></script>
-  <script src="../crossword.js?v=4"></script>
+  <script src="../crossword.js?v=5"></script>
 </body>
 </html>
 `;
@@ -124,7 +124,7 @@ function puzzlePageKa(c, p) {
 ${headTags({ title: KA.title(c), description: KA.description(c, level), url, image: url + "share.png", brand: KA.brand, locale: "ka_GE", noindex: !KA_PUBLIC })}
 ${FONT_LINKS}
   <link rel="stylesheet" href="../nav.css?v=5">
-  <link rel="stylesheet" href="../crossword.css?v=12">
+  <link rel="stylesheet" href="../crossword.css?v=13">
   ${ANALYTICS}
 </head>
 <body>
@@ -148,7 +148,7 @@ ${list("D")}
     </main>
   </div>
   <script src="puzzle.js"></script>
-  <script src="../crossword.js?v=4"></script>
+  <script src="../crossword.js?v=5"></script>
 </body>
 </html>
 `;
@@ -165,7 +165,7 @@ function kaHomePage() {
 ${headTags({ title: KA.homeTitle, description: KA.homeIntro, url, image: url + "share.png", brand: KA.brand, locale: "ka_GE", noindex: !KA_PUBLIC, alternates: KA_PUBLIC ? HOME_ALTERNATES : [] })}
 ${FONT_LINKS.replace(/\.\.\//g, "")}
   <link rel="stylesheet" href="../nav.css?v=5">
-  <link rel="stylesheet" href="../crossword.css?v=12">
+  <link rel="stylesheet" href="../crossword.css?v=13">
   ${ANALYTICS}
 </head>
 <body>
