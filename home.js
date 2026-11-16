@@ -196,6 +196,7 @@
 
   // ---- The Scramble game (scramble/ and gamoicani-pekhburtelebis-gvarebi/), a card above the crosswords ----
   function gameCard() {
+    if (KA) return; // Georgian home: the game bar at the top already links to the games
     const a = document.createElement("a");
     a.className = "daily-card"; a.href = KA ? "../gamoicani-pekhburtelebis-gvarebi/" : "scramble/";
     const kicker = document.createElement("span"); kicker.className = "kicker"; kicker.textContent = KA ? "ახალი თამაში" : "New game";

@@ -7,7 +7,7 @@
 // All words are spellings that already appear on the site (crosswords or Scramble).
 window.WORDSEARCH_TEXT = {
   backHref: "../ka/", back: "← სხვა თამაშები",
-  h1: "სიტყვების <em>ძებნა</em>",
+  h1: "სკაუტი",
   intro: "იპოვე ფეხბურთის დამალული სიტყვები: ფეხბურთელები, მწვრთნელები, სტადიონები და გუნდები.",
   cats: { players: "ფეხბურთელები", coaches: "მწვრთნელები", stadiums: "სტადიონები", teams: "გუნდები" },
   found: (f, t) => `${f} / ${t} ნაპოვნია`,
@@ -29,7 +29,7 @@ window.WORDSEARCH_TEXT = {
   perfect: "⭐ დახმარების გარეშე!",
   share: "გაუზიარე შედეგი", again: "ისევ ითამაშე", seeGrid: "ბადის ნახვა",
   copied: "დაკოპირდა! ჩასვი სადმე და გაუზიარე.",
-  shareTitle: "⚽ სიტყვების ძებნა",
+  shareTitle: "⚽ სკაუტი",
   shareLine: (f, t, time, help) => `${f === t ? "🏆" : "✅"} ${f}/${t} · ${time} წუთი · ${help}`,
   shareHelp: (h) => (h ? `${h} მინიშნება` : "დახმარების გარეშე"),
   ariaGrid: "ასოების ბადე", ariaTime: "დრო",

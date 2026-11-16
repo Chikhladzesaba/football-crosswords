@@ -6,7 +6,7 @@
   const root = new URL(".", document.currentScript.src).href; // folder that holds nav.js = the site root
   const first = location.pathname.split("/").filter(Boolean)[0] || "";
   const GAME_OF = { top5: "top5", "gamoicani-top5": "top5", scramble: "scramble", "gamoicani-pekhburtelebis-gvarebi": "scramble",
-    wordsearch: "wordsearch", "sityvebis-dzebna": "wordsearch" };
+    wordsearch: "wordsearch", "skauti": "wordsearch" };
   const cur = GAME_OF[first] || "crosswords"; // every other folder is a crossword (or a home page)
   const S = (d, w) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="' + (w || 1.6) + '" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + "</svg>";
   const ICON = {
@@ -16,7 +16,7 @@
     wordsearch: S([3.5, 9.7, 15.9].map((y) => [3.5, 9.7, 15.9].map((x) => '<rect x="' + x + '" y="' + y + '" width="4.6" height="4.6" rx="1"' + (y === 9.7 ? ' fill="currentColor" fill-opacity=".3"' : "") + "/>").join("")).join(""), 1.5),
   };
   const ITEMS = KA
-    ? [["crosswords", "კროსვორდი", "ka/"], ["top5", "Top 5", "gamoicani-top5/"], ["scramble", "დალაგობანა", "gamoicani-pekhburtelebis-gvarebi/"], ["wordsearch", "სკაუტი", "sityvebis-dzebna/"]]
+    ? [["crosswords", "კროსვორდი", "ka/"], ["top5", "Top 5", "gamoicani-top5/"], ["scramble", "დალაგობანა", "gamoicani-pekhburtelebis-gvarebi/"], ["wordsearch", "სკაუტი", "skauti/"]]
     : [["crosswords", "Crosswords", ""], ["top5", "Top 5", "top5/"], ["scramble", "Scramble", "scramble/"], ["wordsearch", "Word Search", "wordsearch/"]];
   const nav = document.createElement("nav");
   nav.className = "games-nav"; nav.setAttribute("aria-label", KA ? "თამაშები" : "Games");
