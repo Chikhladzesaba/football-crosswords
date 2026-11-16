@@ -1,0 +1,68 @@
+// Georgian version of the Word Search game (test). Same game code as English (wordsearch.js).
+// WORDSEARCH_TEXT = every word the player sees (wordsearch.js has the English default).
+// WORDSEARCH_WORDS = the word pool. One word per line, Georgian letters, no spaces.
+// cat = players | coaches | stadiums | teams.  lvl = easy | medium | hard.
+// The game picks 10 words each round: 4 easy, 3 medium, 3 hard. So keep at least 4 easy, 3 medium and 3 hard words here.
+// Keep every word 14 letters or fewer (the grid is 14 x 14).
+// All words are spellings that already appear on the site (crosswords or Scramble).
+window.WORDSEARCH_TEXT = {
+  backHref: "../ka/", back: "← სხვა თამაშები",
+  h1: "სიტყვების <em>ძებნა</em>",
+  intro: "იპოვე ფეხბურთის დამალული სიტყვები: ფეხბურთელები, მწვრთნელები, სტადიონები და გუნდები.",
+  cats: { players: "ფეხბურთელები", coaches: "მწვრთნელები", stadiums: "სტადიონები", teams: "გუნდები" },
+  found: (f, t) => `${f} / ${t} ნაპოვნია`,
+  hint: "მინიშნება", give: "დანებება", newGame: "ახალი თამაში",
+  rulesTitle: "როგორ ვითამაშოთ",
+  rules: [
+    "ბადეში 10 ფეხბურთის სიტყვაა დამალული: ფეხბურთელები, მწვრთნელები, სტადიონები და გუნდები.",
+    "გადაატარე თითი (ან მაუსი) ასოებზე და სიტყვას მონიშნავ. ან დააკლიკე პირველ ასოს, მერე ბოლო ასოს.",
+    "სიტყვები სწორ ხაზზეა: გვერდზე, ქვემოთ ან დიაგონალზე. რთული სიტყვები უკუღმაც შეიძლება იყოს.",
+    "გაიჭედე? „მინიშნება“ ერთი სიტყვის პირველ ასოს მონიშნავს. საბოლოო შედეგში ეს დახმარებად ჩაითვლება.",
+  ],
+  hintMsg: "ერთი პირველი ასო მონიშნულია.",
+  wrong: "ასეთი სიტყვა სიაში არ არის.",
+  foundMsg: (w) => `ნაპოვნია: ${w}!`,
+  wonTitle: "გილოცავ, ყველა იპოვე! 🏆",
+  wonText: (t, h) => `${t}` + (h ? ` · ${h} მინიშნება` : ""),
+  lostTitle: "აი, სიტყვები",
+  lostText: (f, t) => `${t} სიტყვიდან ${f} იპოვე.`,
+  perfect: "⭐ დახმარების გარეშე!",
+  share: "გაუზიარე შედეგი", again: "ისევ ითამაშე", seeGrid: "ბადის ნახვა",
+  copied: "დაკოპირდა! ჩასვი სადმე და გაუზიარე.",
+  shareTitle: "⚽ სიტყვების ძებნა",
+  shareLine: (f, t, time, help) => `${f === t ? "🏆" : "✅"} ${f}/${t} · ${time} წუთი · ${help}`,
+  shareHelp: (h) => (h ? `${h} მინიშნება` : "დახმარების გარეშე"),
+  ariaGrid: "ასოების ბადე", ariaTime: "დრო",
+};
+
+window.WORDSEARCH_WORDS = [
+  // Players
+  { w: "მესი", cat: "players", lvl: "easy" },
+  { w: "რონალდუ", cat: "players", lvl: "easy" },
+  { w: "მარადონა", cat: "players", lvl: "easy" },
+  { w: "მოდრიჩი", cat: "players", lvl: "medium" },
+  { w: "სალაჰი", cat: "players", lvl: "medium" },
+  { w: "ლევანდოვსკი", cat: "players", lvl: "hard" },
+  { w: "კვარაცხელია", cat: "players", lvl: "hard" },
+  // Coaches
+  { w: "ფერგიუსონი", cat: "coaches", lvl: "easy" },
+  { w: "მოურინიო", cat: "coaches", lvl: "easy" },
+  { w: "კლოპი", cat: "coaches", lvl: "medium" },
+  { w: "ვენგერი", cat: "coaches", lvl: "medium" },
+  { w: "ანჩელოტი", cat: "coaches", lvl: "medium" },
+  { w: "ბეკენბაუერი", cat: "coaches", lvl: "hard" },
+  // Stadiums
+  { w: "უემბლი", cat: "stadiums", lvl: "easy" },
+  { w: "ენფილდი", cat: "stadiums", lvl: "easy" },
+  { w: "კამპნოუ", cat: "stadiums", lvl: "easy" },
+  { w: "ბერნაბეუ", cat: "stadiums", lvl: "medium" },
+  { w: "მარაკანა", cat: "stadiums", lvl: "medium" },
+  { w: "მესტალია", cat: "stadiums", lvl: "hard" },
+  // Teams
+  { w: "ლივერპული", cat: "teams", lvl: "easy" },
+  { w: "ბარსელონა", cat: "teams", lvl: "easy" },
+  { w: "იუვენტუსი", cat: "teams", lvl: "medium" },
+  { w: "ბენფიკა", cat: "teams", lvl: "medium" },
+  { w: "გალატასარაი", cat: "teams", lvl: "hard" },
+  { w: "დორტმუნდი", cat: "teams", lvl: "hard" },
+];
