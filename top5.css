@@ -1,21 +1,21 @@
 /* Top 5 game. Uses the colours and buttons from crossword.css. */
 .t5-head { margin-bottom: 14px; }
-.t5-kicker { font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: .04em; margin: 0 0 4px; }
-.t5-title { font-size: 24px; font-weight: 600; line-height: 1.2; margin: 0 0 6px; }
+.t5-kicker { font-size: 13px; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: .04em; margin: 0 0 4px; }
+.t5-title { font-size: 24px; font-weight: 500; line-height: 1.2; margin: 0 0 6px; }
 .t5-asof { font-size: 13px; color: var(--muted); margin: 0; }
 
 .t5-board { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; padding: 0; list-style: none; }
 .t5-row { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; min-height: 56px; }
-.t5-rank { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 600; display: flex; align-items: center; justify-content: center; font-size: 15px; }
-.t5-name { flex: 1; font-weight: 600; font-size: 17px; color: var(--muted); letter-spacing: .08em; overflow-wrap: anywhere; }
+.t5-rank { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 500; display: flex; align-items: center; justify-content: center; font-size: 15px; }
+.t5-name { flex: 1; font-weight: 500; font-size: 17px; color: var(--muted); letter-spacing: .08em; overflow-wrap: anywhere; }
 .t5-name.t5-blank { flex: none; width: 45%; max-width: 220px; height: 14px; border-radius: 7px; background: #e3e7ef; }
 .t5-val { flex: none; font-size: 15px; color: var(--muted); }
 .t5-row.found { background: var(--green); border-color: var(--green); animation: t5-pop .35s; }
 .t5-row.found .t5-rank { background: var(--green-ink); color: #fff; }
 .t5-row.found .t5-name { color: var(--ink); letter-spacing: 0; }
-.t5-row.found .t5-val { color: var(--green-ink); font-weight: 600; }
+.t5-row.found .t5-val { color: var(--green-ink); font-weight: 500; }
 .t5-row.missed { background: var(--grey); }
-.t5-row.missed .t5-name { color: var(--muted); letter-spacing: 0; font-weight: 400; }
+.t5-row.missed .t5-name { color: var(--muted); letter-spacing: 0; font-weight: 350; }
 .t5-row.missed .t5-rank { background: #d5d9e2; color: var(--muted); }
 
 .t5-lives { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); }
@@ -26,8 +26,8 @@
 .t5-input { flex: 1; min-width: 0; font: inherit; font-size: 16px; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 12px; background: var(--card); color: var(--ink); }
 .t5-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
 .t5-msg { min-height: 22px; margin: 0 0 12px; font-size: 14px; color: var(--muted); }
-.t5-msg.good { color: var(--green-ink); font-weight: 600; }
-.t5-msg.bad { color: var(--red-ink); font-weight: 600; }
+.t5-msg.good { color: var(--green-ink); font-weight: 500; }
+.t5-msg.bad { color: var(--red-ink); font-weight: 500; }
 .t5-game .actions { justify-content: center; }
 .t5-game.shake .t5-form { animation: t5-shake .4s; }
 
@@ -40,9 +40,9 @@
 #top5 button, #top5 .t5-input { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 
 .t5-rules { margin-top: 32px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; line-height: 1.55; }
-.t5-rules summary { cursor: pointer; padding: 14px 0; font-size: 15px; font-weight: 600; color: var(--ink); list-style: none; display: flex; justify-content: space-between; align-items: center; }
+.t5-rules summary { cursor: pointer; padding: 14px 0; font-size: 15px; font-weight: 500; color: var(--ink); list-style: none; display: flex; justify-content: space-between; align-items: center; }
 .t5-rules summary::-webkit-details-marker { display: none; }
-.t5-rules summary::after { content: "+"; font-size: 20px; font-weight: 400; color: var(--muted); }
+.t5-rules summary::after { content: "+"; font-size: 20px; font-weight: 350; color: var(--muted); }
 .t5-rules[open] summary::after { content: "−"; }
 .t5-rules ul { margin: 0 0 8px; padding-left: 18px; }
 .t5-rules li { margin-bottom: 4px; }
@@ -56,9 +56,9 @@
 .t5-modal { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(17, 24, 39, .55); animation: t5-fade .2s; }
 .t5-modal[hidden] { display: none; }
 .t5-modal-card { width: 100%; max-width: 380px; text-align: center; background: var(--card); border-radius: 20px; padding: 28px 22px 22px; box-shadow: 0 20px 60px rgba(0, 0, 0, .25); animation: t5-pop .3s; }
-.t5-modal-card h2 { font-size: 26px; font-weight: 600; line-height: 1.2; margin: 0 0 10px; }
+.t5-modal-card h2 { font-size: 26px; font-weight: 500; line-height: 1.2; margin: 0 0 10px; }
 .t5-modal-card p { color: var(--muted); margin: 0 0 14px; }
-.t5-modal-card .win-perfect { color: var(--green-ink); background: var(--green); border-radius: 10px; padding: 8px 10px; font-weight: 600; }
+.t5-modal-card .win-perfect { color: var(--green-ink); background: var(--green); border-radius: 10px; padding: 8px 10px; font-weight: 500; }
 .t5-modal-card button { display: block; width: 100%; margin: 8px 0 0; }
 .t5-modal-card .t5-link { border: 0; background: none; color: var(--muted); text-decoration: underline; font-size: 14px; }
 @keyframes t5-fade { from { opacity: 0; } to { opacity: 1; } }
