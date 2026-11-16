@@ -288,7 +288,7 @@ ${gridSvg}
     const cells = new Set();
     p.words.forEach((w) => { for (let i = 0; i < w.answer.length; i++) cells.add((w.row + (w.dir === "D" ? i : 0)) + "," + (w.col + (w.dir === "A" ? i : 0))); });
     await shot(imageHtml({
-      title: p.title, sub: c.about, cta: ka ? "ითამაშე" : "Play", lang: ka ? "ka" : "en",
+      title: p.title, cta: ka ? "ითამაშე" : "Play", lang: ka ? "ka" : "en",
       grid: { rows: p.rows, cols: p.cols, cells: [...cells].map((k) => k.split(",").map(Number)) },
     }), path.join(ROOT, c.folder, "share.png"));
     write(path.join(ROOT, c.folder, "index.html"), puzzlePage(c, p));
