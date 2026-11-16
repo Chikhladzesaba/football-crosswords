@@ -1,0 +1,56 @@
+/* Word Search game. Uses the colours and buttons from crossword.css. */
+.ws-game { --ws: min(30px, calc((100vw - 44px) / 14)); }
+
+.ws-time { font-size: 15px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* The letter grid. touch-action: none lets you drag across letters without the page scrolling. */
+.ws-grid { display: grid; grid-template-columns: repeat(var(--n, 14), var(--ws)); width: max-content; max-width: 100%; margin: 12px auto 8px; padding: 4px; background: var(--card); border: 1px solid var(--border); border-radius: 14px; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; cursor: pointer; }
+.ws-cell { width: var(--ws); height: var(--ws); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: calc(var(--ws) * .52); color: var(--ink); border-radius: 8px; line-height: 1; }
+.ws-cell.sel { background: var(--accent); color: #fff; }
+.ws-cell.anchor { background: var(--accent-soft); color: var(--accent); outline: 2px solid var(--accent); outline-offset: -2px; }
+.ws-cell.nope { background: var(--red); color: var(--red-ink); }
+.ws-cell.hint { background: #fff1d6; outline: 2px solid #e0a100; outline-offset: -2px; animation: ws-pulse .8s infinite; }
+.ws-cell.missed { background: var(--grey); color: var(--muted); }
+/* Found words: six soft colours, so crossing words stay easy to tell apart */
+.ws-cell.f0, .ws-w.f0 { background: #d9f5e3; color: #13693a; }
+.ws-cell.f1, .ws-w.f1 { background: #e3efff; color: #0a4fb3; }
+.ws-cell.f2, .ws-w.f2 { background: #fff1d6; color: #8a5a00; }
+.ws-cell.f3, .ws-w.f3 { background: #fde4e1; color: #b3261e; }
+.ws-cell.f4, .ws-w.f4 { background: #eadcff; color: #5b2fa8; }
+.ws-cell.f5, .ws-w.f5 { background: #d8f3f3; color: #0b6b6b; }
+
+.ws-msg { min-height: 22px; margin: 4px 0 8px; font-size: 14px; text-align: center; color: var(--muted); }
+.ws-msg.good { color: var(--green-ink); font-weight: 600; }
+.ws-msg.bad { color: var(--red-ink); font-weight: 600; }
+
+/* The list of words to find, in groups */
+.ws-words { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; margin: 4px 0 16px; }
+.ws-group h3 { margin: 0 0 6px; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.ws-group ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+.ws-w { font-size: 13px; font-weight: 600; letter-spacing: .03em; padding: 4px 9px; border-radius: 999px; background: var(--card); border: 1px solid var(--border); color: var(--ink); }
+.ws-w.found { border-color: transparent; text-decoration: line-through; text-decoration-thickness: 2px; }
+
+.ws-game .actions { justify-content: center; }
+.ws-game button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+@keyframes ws-pulse { 50% { background: #ffe3a3; } }
+
+.ws-rules { margin-top: 32px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; line-height: 1.55; }
+.ws-rules summary { cursor: pointer; padding: 14px 0; font-size: 15px; font-weight: 600; color: var(--ink); list-style: none; display: flex; justify-content: space-between; align-items: center; }
+.ws-rules summary::-webkit-details-marker { display: none; }
+.ws-rules summary::after { content: "+"; font-size: 20px; font-weight: 400; color: var(--muted); }
+.ws-rules[open] summary::after { content: "−"; }
+.ws-rules ul { margin: 0 0 8px; padding-left: 18px; }
+.ws-rules li { margin-bottom: 4px; }
+
+.ws-modal { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(17, 24, 39, .55); animation: ws-fade .2s; }
+.ws-modal[hidden] { display: none; }
+.ws-modal-card { width: 100%; max-width: 380px; text-align: center; background: var(--card); border-radius: 20px; padding: 28px 22px 22px; box-shadow: 0 20px 60px rgba(0, 0, 0, .25); }
+.ws-modal-card h2 { font-size: 26px; font-weight: 600; line-height: 1.2; margin: 0 0 10px; }
+.ws-modal-card p { color: var(--muted); margin: 0 0 14px; }
+.ws-modal-card .win-perfect { color: var(--green-ink); background: var(--green); border-radius: 10px; padding: 8px 10px; font-weight: 600; }
+.ws-modal-card button { display: block; width: 100%; margin: 8px 0 0; }
+.ws-modal-card .ws-link { border: 0; background: none; color: var(--muted); text-decoration: underline; font-size: 14px; }
+@keyframes ws-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* Georgian has no capitals: text-transform would turn the letters into Mtavruli, so switch it off */
+html:lang(ka) .ws-group h3 { text-transform: none; letter-spacing: 0; }
