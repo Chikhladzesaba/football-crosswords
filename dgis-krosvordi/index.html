@@ -42,7 +42,6 @@
   (function () {
     var d = new Date();
     var iso = d.toLocaleDateString("en-CA"); // today in the player's own time, YYYY-MM-DD
-    var DAYS = ["კვირის", "ორშაბათის", "სამშაბათის", "ოთხშაბათის", "ხუთშაბათის", "პარასკევის", "შაბათის"]; // "of Monday" etc.
     var MONTHS = ["იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი", "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"];
     var LEVEL = { "Easy": "მარტივი", "Medium": "საშუალო", "Hard": "რთული", "Very hard": "ძალიან რთული" };
     function missing() {
@@ -54,7 +53,7 @@
     s.onload = function () {
       var p = (window.DAILY || {})[iso];
       if (!p) return missing();
-      var day = DAYS[d.getDay()] + " დღის კროსვორდი. " + d.getDate() + " " + MONTHS[d.getMonth()];
+      var day = "დღის კროსვორდი. " + d.getDate() + " " + MONTHS[d.getMonth()];
       var level = LEVEL[p.level] || p.level;
       window.PUZZLE = {
         id: "ka-daily-" + iso,
