@@ -7,6 +7,7 @@
 
   const words = P.words.map((w) => ({ ...w }));
   document.documentElement.style.setProperty("--cols", P.cols);
+  document.documentElement.style.setProperty("--rows", P.rows); // the computer layout sizes the squares so the whole puzzle fits the screen height
 
   // ---- LANGUAGE -----------------------------------------------------------
   // English by default. A puzzle with lang: ka in words.txt gets Georgian labels and a Georgian font.
@@ -83,9 +84,11 @@
         <div class="timer" id="timer" aria-label="Time">00:00</div>
       </div>
       <div class="board">
+        <div class="clue-bar" aria-live="polite"><b id="clueNum"></b><span id="clueText"></span></div>
         <div class="play">
-          <div class="clue-bar" aria-live="polite"><b id="clueNum"></b><span id="clueText"></span></div>
           <div class="grid" id="grid" role="grid" aria-label="Crossword grid"></div>
+        </div>
+        <div class="side">
           <div class="actions">
             <button class="primary" id="btnCheck" type="button">${T.check}</button>
             <button id="btnClearWord" type="button">${T.clearWord}</button>
@@ -103,10 +106,10 @@
             <p class="share-note" id="shareResultNote" hidden></p>
           </div>
           <div class="next" id="next" hidden><h3>${T.playNext}</h3><div class="next-list" id="nextList"></div></div>
-        </div>
-        <div class="clues">
-          <section><h3>${T.across}</h3><ol id="across"></ol></section>
-          <section><h3>${T.down}</h3><ol id="down"></ol></section>
+          <div class="clues">
+            <section><h3>${T.across}</h3><ol id="across"></ol></section>
+            <section><h3>${T.down}</h3><ol id="down"></ol></section>
+          </div>
         </div>
       </div>
       ${P.note ? `<p class="legend">${P.note}</p>` : ""}
@@ -201,6 +204,12 @@
     w.cells.forEach((c) => c.el.classList.add("inword"));
     cell.el.classList.add("active");
     words.forEach((x) => x.li.classList.toggle("current", x === w));
+    // On computers the clue lists scroll inside their own box (the card, or the whole panel when the cards are stacked)
+    const sec = w.li.closest("section"), box = sec && sec.scrollHeight > sec.clientHeight + 1 ? sec : w.li.closest(".clues");
+    if (box && box.scrollHeight > box.clientHeight) {
+      const t = w.li.getBoundingClientRect().top - box.getBoundingClientRect().top + box.scrollTop, b = t + w.li.offsetHeight;
+      if (t < box.scrollTop) box.scrollTop = t - 8; else if (b > box.scrollTop + box.clientHeight) box.scrollTop = b - box.clientHeight + 8;
+    }
     $("clueNum").textContent = w.num + w.dir;
     $("clueText").textContent = w.clue;
     if (document.activeElement !== cell.input) cell.input.focus({ preventScroll: true });
@@ -548,7 +557,7 @@
   const bar = root.querySelector(".clue-bar");
   const spacer = document.createElement("div");
   spacer.className = "clue-spacer";
-  bar.after(spacer);
+  $("grid").before(spacer); // inside the left column, between the clue bar and the grid
   const typing = () => document.body.classList.contains("typing");
   function placeBar() {
     if (!typing()) return;
