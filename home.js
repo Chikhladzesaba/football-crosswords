@@ -176,16 +176,19 @@
     const a = document.createElement("a");
     a.className = "daily-card"; a.href = KA ? "../dgis-krosvordi/" : "daily/";
     const kicker = document.createElement("span"); kicker.className = "kicker";
-    kicker.textContent = KA ? "დღის კროსვორდი · " + d.getDate() + " " + ["იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი", "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"][d.getMonth()]
+    kicker.textContent = KA ? d.getDate() + " " + ["იანვრის", "თებერვლის", "მარტის", "აპრილის", "მაისის", "ივნისის", "ივლისის", "აგვისტოს", "სექტემბრის", "ოქტომბრის", "ნოემბრის", "დეკემბრის"][d.getMonth()] + " კროსვორდი"
       : "Daily crossword · " + d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
-    const name = document.createElement("span"); name.className = "name"; name.textContent = KA ? "დღევანდელი კროსვორდი ყველა თემიდან" : "Today's mix of every topic";
+    const name = document.createElement("span"); name.className = "name"; name.textContent = KA ? "დღის კროსვორდი ყველა თემიდან" : "Today's mix of every topic";
     const lv = document.createElement("span"); lv.className = "level level-" + level.toLowerCase().replace(" ", "-"); lv.textContent = say(level);
     const meta = document.createElement("span"); meta.className = "meta-line"; meta.appendChild(lv);
     const st = document.createElement("span"); st.className = "status";
     if (solved[id]) { st.textContent = (KA ? T.solvedTag : "✓ Solved · ") + fmt(solved[id].time) + (solved[id].perfect ? " ⭐" : ""); a.classList.add("is-solved"); }
     else if (inProgress(id)) { st.classList.add("progress"); st.textContent = KA ? T.inProgress : "In progress"; }
-    else { st.classList.add("cta"); st.textContent = KA ? "ყოველდღე ახალი · ითამაშე →" : "New every day · Play →"; }
+    else { st.classList.add("cta"); st.textContent = KA ? "ორშაბათს ყველაზე მარტივია, კვირას ყველაზე რთული." : "New every day · Play →"; }
     meta.appendChild(st);
+    if (KA && st.classList.contains("cta")) { // "ითამაშე →" sits at the right edge of the card
+      const go = document.createElement("span"); go.className = "status cta"; go.style.marginLeft = "auto"; go.textContent = "ითამაშე →"; meta.appendChild(go);
+    }
     a.append(kicker, name, meta);
     const filters = document.querySelector(".filters");
     filters.parentNode.insertBefore(a, filters);
