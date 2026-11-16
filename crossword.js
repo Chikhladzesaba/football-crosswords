@@ -66,9 +66,6 @@
   };
   if (KA) {
     document.documentElement.lang = "ka";
-    const f = document.createElement("link"); f.rel = "stylesheet";
-    f.href = "https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600&family=Noto+Serif+Georgian:wght@400&display=swap";
-    document.head.appendChild(f);
   }
   // Letters players can type: English A–Z, plus Georgian ა–ჰ. Only English letters become capitals:
   // Georgian has no capitals in normal writing (upper-casing it would give Mtavruli).

@@ -68,10 +68,7 @@ function headTags({ title, description, url, image, brand = BRAND, locale = "en_
   <meta name="twitter:image" content="${image}">
   <meta name="theme-color" content="#006aff">`;
 }
-const FONT_LINKS = `  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%231f6feb'/><g fill='%23fff'><rect x='12' y='12' width='22' height='22' rx='3'/><rect x='39' y='12' width='22' height='22' rx='3'/><rect x='66' y='12' width='22' height='22' rx='3'/><rect x='12' y='39' width='22' height='22' rx='3'/><rect x='66' y='39' width='22' height='22' rx='3'/><rect x='12' y='66' width='22' height='22' rx='3'/><rect x='39' y='66' width='22' height='22' rx='3'/><rect x='66' y='66' width='22' height='22' rx='3'/></g><circle cx='50' cy='50' r='12' fill='%23fff'/><circle cx='50' cy='50' r='5' fill='%23111'/></svg>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">`;
+const FONT_LINKS = `  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%231f6feb'/><g fill='%23fff'><rect x='12' y='12' width='22' height='22' rx='3'/><rect x='39' y='12' width='22' height='22' rx='3'/><rect x='66' y='12' width='22' height='22' rx='3'/><rect x='12' y='39' width='22' height='22' rx='3'/><rect x='66' y='39' width='22' height='22' rx='3'/><rect x='12' y='66' width='22' height='22' rx='3'/><rect x='39' y='66' width='22' height='22' rx='3'/><rect x='66' y='66' width='22' height='22' rx='3'/></g><circle cx='50' cy='50' r='12' fill='%23fff'/><circle cx='50' cy='50' r='5' fill='%23111'/></svg>">`;
 
 // ---- a puzzle page: head tags + plain text Google can read before the game loads ----
 function puzzlePage(c, p) {
@@ -87,7 +84,7 @@ function puzzlePage(c, p) {
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 ${headTags({ title, description, url, image: url + "share.png" })}
 ${FONT_LINKS}
-  <link rel="stylesheet" href="../crossword.css">
+  <link rel="stylesheet" href="../crossword.css?v=3">
   ${ANALYTICS}
 </head>
 <body>
@@ -124,8 +121,7 @@ function puzzlePageKa(c, p) {
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 ${headTags({ title: KA.title(c), description: KA.description(c, level), url, image: url + "share.png", brand: KA.brand, locale: "ka_GE", noindex: !KA_PUBLIC })}
 ${FONT_LINKS}
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600&family=Noto+Serif+Georgian:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../crossword.css">
+  <link rel="stylesheet" href="../crossword.css?v=3">
   ${ANALYTICS}
 </head>
 <body>
@@ -164,8 +160,7 @@ function kaHomePage() {
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 ${headTags({ title: KA.homeTitle, description: KA.homeIntro, url, image: url + "share.png", brand: KA.brand, locale: "ka_GE", noindex: !KA_PUBLIC, alternates: KA_PUBLIC ? HOME_ALTERNATES : [] })}
 ${FONT_LINKS.replace(/\.\.\//g, "")}
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600&family=Noto+Serif+Georgian:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../crossword.css?v=2">
+  <link rel="stylesheet" href="../crossword.css?v=3">
   ${ANALYTICS}
 </head>
 <body>

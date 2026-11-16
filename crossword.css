@@ -1,3 +1,8 @@
+/* FiraGO (bBox Type), SIL Open Font License 1.1. Original files, unchanged; license in fonts/OFL.txt */
+@font-face { font-family: "FiraGO"; font-weight: 350; font-display: swap; src: url("fonts/FiraGO-Book.woff2") format("woff2"); }
+@font-face { font-family: "FiraGO"; font-weight: 400; font-display: swap; src: url("fonts/FiraGO-Regular.woff2") format("woff2"); }
+@font-face { font-family: "FiraGO"; font-weight: 500; font-display: swap; src: url("fonts/FiraGO-Medium.woff2") format("woff2"); }
+
 /* Football Crosswords — shared look for every puzzle and the home page.
    Same colours and fonts as Guess the Player. Change something here and every crossword changes with it. */
 :root {
@@ -23,7 +28,8 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: "Inter Tight", "Noto Sans Georgian", system-ui, sans-serif;
+  font-family: "FiraGO", system-ui, sans-serif;
+  font-weight: 350;
   line-height: 1.5;
 }
 
@@ -34,14 +40,14 @@ main {
 }
 main.narrow { max-width: 640px; }
 
-h1 { font-weight: 400; font-size: 40px; line-height: 1.1; margin: 0 0 8px; }
-h1 em { font-family: "Instrument Serif", "Noto Serif Georgian", serif; font-style: italic; }
+h1 { font-weight: 500; font-size: 40px; line-height: 1.1; margin: 0 0 8px; }
+h1 em { font-style: normal; }
 
 /* Home pages: English <-> Georgian switch, top right */
 /* (the home pages load crossword.css?v=2 so phones fetch this new version instead of an old saved copy) */
 .lang-switch { float: right; margin: 8px 0 0 16px; display: flex; gap: 6px; align-items: baseline;
-  font-size: 14px; font-family: "Inter Tight", "Noto Sans Georgian", system-ui, sans-serif; color: var(--muted); }
-.lang-switch [aria-current] { color: var(--ink); font-weight: 600; }
+  font-size: 14px; font-family: "FiraGO", system-ui, sans-serif; color: var(--muted); }
+.lang-switch [aria-current] { color: var(--ink); font-weight: 500; }
 .lang-switch a { color: var(--muted); text-decoration: none; }
 .lang-switch a:hover { color: var(--accent); text-decoration: underline; }
 .lang-switch .sep { opacity: .5; }
@@ -58,7 +64,7 @@ h1 em { font-family: "Instrument Serif", "Noto Serif Georgian", serif; font-styl
 
 .meta { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 12px; }
 .count { color: var(--muted); font-size: 14px; }
-.timer { font-weight: 600; font-size: 20px; font-variant-numeric: tabular-nums; }
+.timer { font-weight: 500; font-size: 20px; font-variant-numeric: tabular-nums; }
 
 /* ---- Puzzle page ---- */
 .board { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 28px; align-items: start; }
@@ -84,11 +90,11 @@ h1 em { font-family: "Instrument Serif", "Noto Serif Georgian", serif; font-styl
 .cell.open.solved.inword { background: var(--green); }
 .cell.open.solved.active { background: var(--accent); }
 .cell.wrong { background: var(--red) !important; border-color: var(--red-ink) !important; }
-.num { position: absolute; top: 1px; left: 3px; font-size: calc(var(--cell) * .22); line-height: 1; font-weight: 500; color: var(--muted); pointer-events: none; }
+.num { position: absolute; top: 1px; left: 3px; font-size: calc(var(--cell) * .22); line-height: 1; font-weight: 400; color: var(--muted); pointer-events: none; }
 .cell.active .num { color: #fff; }
 .cell input {
   width: 100%; height: 100%; border: 0; background: transparent; text-align: center; padding: calc(var(--cell) * .1) 0 0;
-  font-family: inherit; font-weight: 600; font-size: calc(var(--cell) * .5); text-transform: uppercase;
+  font-family: inherit; font-weight: 500; font-size: calc(var(--cell) * .5); text-transform: uppercase;
   color: var(--ink); caret-color: transparent; cursor: pointer; border-radius: 6px;
 }
 .cell input:focus { outline: none; }
@@ -107,7 +113,7 @@ h1 em { font-family: "Instrument Serif", "Noto Serif Georgian", serif; font-styl
 
 .actions { display: flex; flex-wrap: wrap; gap: 8px; }
 button {
-  font: inherit; font-weight: 500; padding: 12px 20px;
+  font: inherit; font-weight: 400; padding: 12px 20px;
   border: 1px solid var(--border); border-radius: 999px;
   background: var(--card); color: var(--ink); cursor: pointer;
 }
@@ -116,7 +122,7 @@ button.primary { background: var(--accent); border-color: var(--accent); color: 
 button.primary:hover { color: #fff; opacity: .9; }
 button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-.result { background: var(--green); color: var(--green-ink); border-radius: 14px; padding: 12px 16px; font-weight: 500; }
+.result { background: var(--green); color: var(--green-ink); border-radius: 14px; padding: 12px 16px; font-weight: 400; }
 .result p { margin: 0; }
 
 .clues { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; min-width: 0; }
@@ -124,10 +130,9 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 /* Georgian words are long: one wide clue column (Across above Down) instead of two narrow ones */
 html:lang(ka) .clues { grid-template-columns: minmax(0, 1fr); }
 /* Georgian has no real italic (the browser would just slant the letters), so titles stay upright */
-html:lang(ka) h1 em { font-family: inherit; font-style: normal; }
 html:lang(ka) .clues li { overflow-wrap: anywhere; }
 .clues section { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 12px 8px 4px; min-width: 0; }
-.clues h3 { font-size: 15px; font-weight: 600; margin: 0 8px 6px; }
+.clues h3 { font-size: 15px; font-weight: 500; margin: 0 8px 6px; }
 .clues ol { list-style: none; margin: 0; padding: 0; }
 .clues li {
   display: grid; grid-template-columns: 1.8em minmax(0, 1fr); gap: 4px;
@@ -137,16 +142,16 @@ html:lang(ka) .clues li { overflow-wrap: anywhere; }
 .clues li.current { background: var(--accent-soft); }
 .clues li.done { color: var(--muted); }
 .clues li.done .text { text-decoration: line-through; text-decoration-color: var(--border); }
-.clues li .n { font-weight: 600; }
+.clues li .n { font-weight: 500; }
 .len { color: var(--muted); font-size: 13px; white-space: nowrap; }
 .legend { color: var(--muted); font-size: 13px; margin-top: 24px; }
 
 /* ---- Home page: filters + list ---- */
 .filters { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
 .filter-group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-.filter-label { font-size: 13px; font-weight: 600; color: var(--muted); width: 72px; }
+.filter-label { font-size: 13px; font-weight: 500; color: var(--muted); width: 72px; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; min-width: 0; }
-.chip { padding: 6px 12px; font-size: 14px; font-weight: 500; }
+.chip { padding: 6px 12px; font-size: 14px; font-weight: 400; }
 .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
 .chip[aria-pressed="true"]:hover { color: #fff; }
 .shown { color: var(--muted); font-size: 13px; margin: 0 0 8px; }
@@ -159,11 +164,11 @@ html:lang(ka) .clues li { overflow-wrap: anywhere; }
   padding: 14px 16px; color: var(--ink); text-decoration: none;
 }
 .list a:hover { border-color: var(--accent); }
-.list .name { font-weight: 600; font-size: 17px; }
+.list .name { font-weight: 500; font-size: 17px; }
 .list .meta-line { display: flex; align-items: center; gap: 8px; }
 .list .size { color: var(--muted); font-size: 14px; }
 .list .about { flex-basis: 100%; color: var(--muted); font-size: 14px; }
-.level { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; }
+.level { font-size: 12px; font-weight: 500; padding: 2px 8px; border-radius: 999px; }
 .level-easy { background: var(--green); color: var(--green-ink); }
 .level-medium { background: var(--accent-soft); color: var(--accent); }
 .level-hard { background: #fff1c2; color: #7a5a00; }
@@ -190,25 +195,25 @@ html:lang(ka) .clues li { overflow-wrap: anywhere; }
   padding: 12px 14px; color: var(--ink); text-decoration: none;
 }
 .next-card:hover { border-color: var(--accent); }
-.next-card .name { font-weight: 600; }
+.next-card .name { font-weight: 500; }
 .next-card .meta-line { display: flex; align-items: center; gap: 8px; }
 .next-card .size { color: var(--muted); font-size: 13px; }
-.all-done { margin: 0 0 4px; font-weight: 600; }
+.all-done { margin: 0 0 4px; font-weight: 500; }
 
 /* ---- Home page: your stats + solved ticks ---- */
 .stats-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; margin: 0 0 20px;
   background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 10px 14px; font-size: 14px; color: var(--muted); }
-.stat b { color: var(--ink); font-weight: 600; margin-right: 4px; }
+.stat b { color: var(--ink); font-weight: 500; margin-right: 4px; }
 .reset { margin-left: auto; padding: 0; border: 0; background: none; font-size: 13px; color: var(--muted); text-decoration: underline; }
 .reset:hover { color: var(--accent); }
-.reset.confirm { color: var(--red-ink); font-weight: 600; }
-.status { font-size: 13px; font-weight: 600; color: var(--green-ink); }
-.status.progress { color: var(--muted); font-weight: 500; }
+.reset.confirm { color: var(--red-ink); font-weight: 500; }
+.status { font-size: 13px; font-weight: 500; color: var(--green-ink); }
+.status.progress { color: var(--muted); font-weight: 400; }
 .list a.is-solved { border-color: var(--green); }
 
 /* ---- Home page list: topic sections. Grid on computers, swipe rows on phones ---- */
 .topic-group h2 { font-size: 18px; margin: 22px 0 10px; display: flex; align-items: baseline; gap: 8px; }
-.topic-group h2 span { font-size: 13px; font-weight: 500; color: var(--muted); }
+.topic-group h2 span { font-size: 13px; font-weight: 400; color: var(--muted); }
 .topic-group .list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
 .topic-group .list li { min-width: 0; }
 .topic-group .list a { height: 100%; box-sizing: border-box; flex-direction: column; flex-wrap: nowrap; align-items: flex-start; justify-content: flex-start; gap: 6px; }
@@ -223,7 +228,7 @@ html:lang(ka) .clues li { overflow-wrap: anywhere; }
 }
 .topic-group .list .meta-line { flex-wrap: wrap; row-gap: 4px; }
 .topic-group .list .size, .topic-group .list .status { white-space: nowrap; }
-.see-all { margin-left: auto; padding: 0; border: 0; background: none; font-size: 14px; font-weight: 500; color: var(--accent); }
+.see-all { margin-left: auto; padding: 0; border: 0; background: none; font-size: 14px; font-weight: 400; color: var(--accent); }
 .see-all:hover { color: var(--accent); text-decoration: underline; }
 @media (min-width: 561px) { .see-all { display: none; } } /* computers already show every card */
 @media (max-width: 560px) {
@@ -245,8 +250,8 @@ body.typing .clue-bar {
   border: 1.5px solid var(--accent); border-radius: 14px; background: #fff; color: inherit; text-decoration: none;
 }
 .daily-card:hover { box-shadow: 0 2px 12px rgba(0, 106, 255, .12); }
-.daily-card .kicker { font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: .04em; }
-.daily-card .name { font-weight: 600; font-size: 19px; }
+.daily-card .kicker { font-size: 13px; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: .04em; }
+.daily-card .name { font-weight: 500; font-size: 19px; }
 .daily-card .meta-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .daily-card .cta { color: var(--accent); }
 
@@ -258,7 +263,7 @@ body.typing .clue-bar {
 .howto[open] summary::before { content: "▾ "; }
 .howto ul { margin: 8px 0 0; padding: 12px 14px 12px 30px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; line-height: 1.5; }
 .howto li + li { margin-top: 4px; }
-.howto b { color: var(--ink); font-weight: 600; }
+.howto b { color: var(--ink); font-weight: 500; }
 body.typing .howto { display: none; }
 
 /* ---- Win popup ---- */
@@ -268,9 +273,9 @@ body.typing .howto { display: none; }
 .win-card { position: relative; width: 100%; max-width: 360px; background: var(--card); border-radius: 18px;
   padding: 28px 22px 22px; text-align: center; box-shadow: 0 20px 60px rgba(0, 0, 0, .25); animation: win-pop .35s cubic-bezier(.2, 1.4, .4, 1); }
 .win-cup { width: 64px; height: 64px; margin: 0 auto 12px; animation: win-bounce 1s ease-in-out .3s 2; }
-.win-card h2 { font-size: 26px; font-weight: 600; margin: 0 0 8px; }
+.win-card h2 { font-size: 26px; font-weight: 500; margin: 0 0 8px; }
 .win-card p { color: var(--muted); margin: 0 0 14px; line-height: 1.45; }
-.win-card .win-perfect { color: var(--green-ink); background: var(--green); border-radius: 10px; padding: 8px 10px; font-weight: 600; }
+.win-card .win-perfect { color: var(--green-ink); background: var(--green); border-radius: 10px; padding: 8px 10px; font-weight: 500; }
 .win-card button { display: block; width: 100%; margin-top: 8px; }
 .win-card .win-x { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; margin: 0; padding: 0;
   border: 0; background: transparent; font-size: 26px; line-height: 1; color: var(--muted); }
@@ -286,3 +291,6 @@ body.typing .howto { display: none; }
    before the game loads. It looked squeezed, one word per line, so we hide it: the game
    builds its own clue list a moment later. */
 #crossword > main > .clues { display: none; }
+
+.credits { margin: 32px 0 0; font-size: 12px; color: var(--muted); }
+.credits a { color: inherit; }
