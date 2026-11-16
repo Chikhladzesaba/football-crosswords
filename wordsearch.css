@@ -44,12 +44,15 @@
 
 .ws-modal { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(17, 24, 39, .55); animation: ws-fade .2s; }
 .ws-modal[hidden] { display: none; }
-.ws-modal-card { width: 100%; max-width: 380px; text-align: center; background: var(--card); border-radius: 20px; padding: 28px 22px 22px; box-shadow: 0 20px 60px rgba(0, 0, 0, .25); }
-.ws-modal-card h2 { font-size: 26px; font-weight: 500; line-height: 1.2; margin: 0 0 10px; }
+.ws-modal-card { display: flex; flex-direction: column; width: 100%; max-width: 380px; text-align: center; background: var(--card); border-radius: 16px; padding: 28px 22px 22px; box-shadow: 0 20px 60px rgba(0, 0, 0, .25); }
+.ws-modal-card h2 { font-size: 26px; font-weight: 500; line-height: 1.2; margin: 0 0 10px; color: var(--head); }
 .ws-modal-card p { color: var(--muted); margin: 0 0 14px; }
-.ws-modal-card .win-perfect { color: var(--green-ink); background: var(--green); border-radius: 10px; padding: 8px 10px; font-weight: 500; }
+.ws-modal-card .win-perfect { color: var(--head); background: var(--accent-soft); border-radius: 10px; padding: 8px 10px; font-weight: 500; }
 .ws-modal-card button { display: block; width: 100%; margin: 8px 0 0; }
-.ws-modal-card .ws-link { border: 0; background: none; color: var(--muted); text-decoration: underline; font-size: 14px; }
+.ws-modal-card button:not(.primary):not(.ws-link) { border-color: var(--line2); color: var(--head); }
+.ws-modal-card .share-note { order: 3; margin: 8px 0 0; font-size: 13px; }
+.ws-modal-card .ws-link { order: 4; border: 0; background: none; color: var(--accent); text-decoration: none; font-size: 14px; }
+.ws-modal-card .ws-link:hover { text-decoration: underline; }
 @keyframes ws-fade { from { opacity: 0; } to { opacity: 1; } }
 
 /* Georgian has no capitals: text-transform would turn the letters into Mtavruli, so switch it off */

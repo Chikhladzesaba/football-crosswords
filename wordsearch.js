@@ -36,12 +36,12 @@
     hintMsg: "One first letter is marked.",
     wrong: "Not a word on the list.",
     foundMsg: (w) => `Found ${w}!`,
-    wonTitle: "You found them all! 🏆",
-    wonText: (t, h) => `${t}` + (h ? ` · ${h} hint${h === 1 ? "" : "s"}` : ""),
-    lostTitle: "Here are the words",
-    lostText: (f, t) => `You found ${f} of ${t}.`,
+    wonTitle: "Well done! 🏆",
+    wonText: (t, h, n) => `You found all ${n} in ${t}` + (h ? `, with ${h} hint${h === 1 ? "" : "s"}.` : "!"),
+    lostTitle: "Not this time",
+    lostText: (f, t) => (f ? `You found ${f} of ${t}. The rest are marked in the grid.` : "You didn't find any this time. The words are marked in the grid."),
     perfect: "⭐ With no help!",
-    share: "Share my result", again: "Play again", seeGrid: "See the grid",
+    share: "Share", againWon: "New game", againLost: "Try again", seeGrid: "See the grid",
     copied: "Copied! Paste it anywhere to share.",
     shareTitle: "⚽ Word Search",
     shareLine: (f, t, time, help) => `${f === t ? "🏆" : "✅"} ${f}/${t} words · ${time} · ${help}`,
@@ -73,8 +73,8 @@
         <p id="wsModalText"></p>
         <p class="win-perfect" id="wsPerfect" hidden>${TEXT.perfect}</p>
         <button class="primary" id="wsShare" type="button">${TEXT.share}</button>
+        <button id="wsAgain" type="button"></button>
         <p class="share-note" id="wsShareNote" hidden></p>
-        <button id="wsAgain" type="button">${TEXT.again}</button>
         <button class="ws-link" id="wsSee" type="button">${TEXT.seeGrid}</button>
       </div>
     </div>`;
@@ -280,7 +280,12 @@
   function modal(won) {
     const n = found.filter(Boolean).length;
     $("wsModalTitle").textContent = won ? TEXT.wonTitle : TEXT.lostTitle;
-    $("wsModalText").textContent = won ? TEXT.wonText(timeText, hints) : TEXT.lostText(n, placed.length);
+    $("wsModalText").textContent = won ? TEXT.wonText(timeText, hints, placed.length) : TEXT.lostText(n, placed.length);
+    // Won: Share is the main button. Gave up: "Try again" is the main button and Share comes second.
+    const share = $("wsShare"), again = $("wsAgain");
+    again.textContent = won ? TEXT.againWon : TEXT.againLost;
+    share.className = won ? "primary" : ""; again.className = won ? "" : "primary";
+    share.style.order = won ? 1 : 2; again.style.order = won ? 2 : 1;
     $("wsPerfect").hidden = !(won && hints === 0);
     $("wsShareNote").hidden = true;
     $("wsModal").hidden = false;
