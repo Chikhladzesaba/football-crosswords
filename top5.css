@@ -103,3 +103,9 @@ html:lang(ka) .t5-kicker { text-transform: none; letter-spacing: 0; }
   .t5-row { padding: 10px 12px; gap: 12px; }
 }
 @media (min-width: 900px) { #top5 main.narrow { max-width: 1000px; } }
+
+.t5-row.can-hint { cursor: pointer; }
+.t5-row.can-hint:hover, .t5-row.can-hint:focus-visible { border-color: var(--accent); outline: none; }
+.t5-tip { font-size: 13px; color: var(--muted); margin: 0 0 8px; }
+.t5-hint-ic { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; margin-left: auto; border-radius: 10px; color: var(--accent); background: var(--accent-soft); flex: none; }
+.t5-row.can-hint:hover .t5-hint-ic { background: var(--accent); color: #fff; }

@@ -16,21 +16,22 @@
     asOf: (d) => `Numbers as of ${d}`,
     found: (f, t) => `${f} of ${t} found`,
     lives: "Lives", ariaRound: "Round", ariaLives: "Lives", ariaGuess: "Your guess",
-    placeholder: "Type a name", guess: "Guess", hint: "Show first letter", give: "Give up",
+    placeholder: "Type a name", guess: "Guess", give: "Give up",
+    hintTip: "Stuck? Click the bulb on a slot to show the first letter of its name.", hintAria: "Show the first letter of this name",
     rulesTitle: "How to play",
     rules: [
       "One game is 3 lists in a row. Finish a list and the next one starts. Finish all 3 and you win.",
       "You see a list, for example the top scorers in a competition. The names are hidden.",
       "Type a name and press Guess. If it is in the list, it jumps into its place and shows its number. You can guess in any order.",
       "A wrong name costs a life. You get 3 lives for each list. Out of lives, or giving up, ends the game.",
-      "Stuck? “Show first letter” gives the first letter of the highest hidden name. It counts as help in your final result.",
+      "Stuck? Click the bulb on any empty slot to show the first letter of its name. You can do it as many times as you like. It counts as help in your final result.",
       "Surnames are fine. Small typing mistakes and accents do not matter.",
     ],
     vague: "Too vague. Be more specific.",
     already: (name) => `${name} is already in.`,
     yes: (name, rank) => `Yes! ${name} is number ${rank}.`,
     notIn: (n) => `Not in the Top ${n}.`,
-    hintMsg: (letter) => `The highest hidden name starts with “${letter}”.`,
+    hintMsg: (letter) => `That name starts with “${letter}”.`,
     source: "Source",
     listDone: (n) => `List ${n} done! 🎉 Next list coming up…`,
     gaveUp: "Here are the answers.", outOfLives: "Out of lives. Here are the answers.",
@@ -57,6 +58,7 @@
           <div class="t5-cardhead"><h2 class="t5-title" id="t5Title"></h2><div class="count" id="t5Count"></div></div>
           <p class="t5-asof" id="t5AsOf"></p>
           <ol class="t5-board" id="t5Board"></ol>
+          <p class="t5-tip">${TEXT.hintTip}</p>
         </div>
         <div class="t5-side">
         <div class="t5-lives" id="t5Lives" aria-label="${TEXT.ariaLives}"></div>
@@ -67,7 +69,6 @@
         </form>
         <p class="t5-msg" id="t5Msg" aria-live="polite"></p>
         <div class="actions">
-          <button id="t5Hint" type="button">${TEXT.hint}</button>
           <button id="t5Give" type="button">${TEXT.give}</button>
         </div>
         </div>
@@ -131,7 +132,7 @@
     $("t5Note").hidden = true;
     $("t5Msg").textContent = ""; $("t5Msg").className = "t5-msg";
     $("t5Input").value = ""; $("t5Input").disabled = false;
-    $("t5Hint").disabled = false; $("t5Give").disabled = false;
+    $("t5Give").disabled = false;
     drawBoard(); drawLives();
     if (matchMedia("(pointer: fine)").matches) $("t5Input").focus();
   }
@@ -145,6 +146,9 @@
     }
   }
 
+  // lightbulb icon shown on rows whose first letter can still be revealed
+  const HINT_ICON = `<span class="t5-hint-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg></span>`;
+
   function drawBoard(reveal) {
     const b = $("t5Board"); b.innerHTML = "";
     list.items.forEach((it, i) => {
@@ -157,6 +161,13 @@
       else if (it.hint) nm.textContent = it.hint;
       else nm.classList.add("t5-blank");
       li.querySelector(".t5-val").textContent = show ? `${it.value} ${list.unit}` : "";
+      // A hidden row without a hint can be clicked to show the first letter of its name (as many times as you like, once per row)
+      if (!show && !it.hint && !over) {
+        li.insertAdjacentHTML("beforeend", HINT_ICON);
+        li.classList.add("can-hint"); li.tabIndex = 0; li.setAttribute("role", "button"); li.setAttribute("aria-label", TEXT.hintAria);
+        li.addEventListener("click", () => hint(i));
+        li.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); hint(i); } });
+      }
       b.appendChild(li);
     });
     $("t5Count").textContent = TEXT.found(found.filter(Boolean).length, list.items.length);
@@ -203,14 +214,10 @@
     if (lives <= 0) finish(false);
   }
 
-  function hint() {
-    if (over) return;
-    // Each click gives the first letter of the next place that has no hint yet (when all have one, it repeats the first)
-    let i = found.findIndex((f, k) => !f && !list.items[k].hint);
-    if (i < 0) i = found.findIndex((f) => !f);
-    if (i < 0) return;
+  function hint(i) {
+    if (over || found[i] || list.items[i].hint) return;
     const n = list.items[i];
-    if (!n.hint) { n.hint = n.name[0] + " …"; hints++; drawBoard(); }
+    n.hint = n.name[0] + " …"; hints++; drawBoard();
     say(TEXT.hintMsg(n.name[0]));
   }
 
@@ -222,7 +229,7 @@
   // End of one list. Won: next list starts by itself (or the game is won after the last one). Lost: the game is over.
   function finish(won, gaveUp) {
     over = true;
-    $("t5Input").disabled = true; $("t5Hint").disabled = true; $("t5Give").disabled = true;
+    $("t5Input").disabled = true; $("t5Give").disabled = true;
     drawBoard(true); showNote();
     if (won) {
       done = round + 1; drawPips();
@@ -269,7 +276,6 @@
   }
 
   $("t5Form").addEventListener("submit", guess);
-  $("t5Hint").addEventListener("click", hint);
   $("t5Give").addEventListener("click", () => { if (!over) finish(false, true); });
   $("t5Share").addEventListener("click", share);
   $("t5Again").addEventListener("click", newRun);
