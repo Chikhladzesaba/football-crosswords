@@ -139,6 +139,7 @@
     });
     const size = Math.min(Math.max(slots.length, 6), 8); // long names wrap onto two rows instead of shrinking
     root.style.setProperty("--sc-n", size);
+    root.style.setProperty("--sc-nd", Math.min(Math.max(slots.length, 6), 12)); // computer: every letter on one row
   }
 
   function place(tile) {
