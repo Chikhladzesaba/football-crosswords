@@ -42,7 +42,7 @@
   (function () {
     var d = new Date();
     var iso = d.toLocaleDateString("en-CA"); // today in the player's own time, YYYY-MM-DD
-    var DAYS = ["კვირა", "ორშაბათი", "სამშაბათი", "ოთხშაბათი", "ხუთშაბათი", "პარასკევი", "შაბათი"];
+    var DAYS = ["კვირის", "ორშაბათის", "სამშაბათის", "ოთხშაბათის", "ხუთშაბათის", "პარასკევის", "შაბათის"]; // "of Monday" etc.
     var MONTHS = ["იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი", "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"];
     var LEVEL = { "Easy": "მარტივი", "Medium": "საშუალო", "Hard": "რთული", "Very hard": "ძალიან რთული" };
     function missing() {
@@ -54,13 +54,13 @@
     s.onload = function () {
       var p = (window.DAILY || {})[iso];
       if (!p) return missing();
-      var day = DAYS[d.getDay()] + ", " + d.getDate() + " " + MONTHS[d.getMonth()];
+      var day = DAYS[d.getDay()] + " დღის კროსვორდი. " + d.getDate() + " " + MONTHS[d.getMonth()];
       var level = LEVEL[p.level] || p.level;
       window.PUZZLE = {
         id: "ka-daily-" + iso,
         lang: "ka",
         title: "დღის <em>კროსვორდი</em>",
-        intro: day + " · " + level + ". ყოველდღე ახალი კითხვები ყველა თემიდან: ორშაბათს მარტივია, კვირას ყველაზე რთული. დასაწყებად დააკლიკე უჯრას; მიმართულების შესაცვლელად კიდევ ერთხელ დააკლიკე.",
+        intro: day + " · სირთულე: " + level.toLowerCase() + ". კროსვორდის კითხვები ყოველდღე იცვლება და რთულდება. ორშაბათს მარტივია, კვირას ყველაზე რთული.",
         note: "არაოფიციალური ფანების თამაში. თითოეული კითხვა იწყება იმ კროსვორდის სახელით, საიდანაც არის აღებული. ახალი კროსვორდი ყოველდღე შუაღამისას, შენი დროით.",
         rows: p.rows, cols: p.cols, words: p.words,
         shareName: "დღის კროსვორდი · " + d.getDate() + " " + MONTHS[d.getMonth()],
