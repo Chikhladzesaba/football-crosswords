@@ -106,6 +106,7 @@ h1 em { font-style: normal; }
 .actions button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
 
 .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.actions-break { display: none; }
 button {
   font: inherit; font-weight: 400; padding: 12px 20px;
   border: 1px solid var(--border); border-radius: 12px;
@@ -321,27 +322,34 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
    The grid gets the whole height under the game tabs (squares are sized from the screen height; --rows comes from crossword.js).
    Title, timer, clue, buttons and the clue lists live in the right-hand column. A long clue list scrolls inside its own box. */
 @media (min-width: 761px) {
-  :root { --nav-h: 46px; --cell: max(22px, min(56px, calc((100dvh - var(--nav-h) - 20px) / var(--rows) - 2px), calc(640px / var(--cols) - 2px))); }
+  :root { --nav-h: 46px; --cell: max(22px, min(56px, calc((100dvh - var(--nav-h) - 52px) / var(--rows) - 2px), calc(640px / var(--cols) - 2px))); }
   /* a slimmer game-tab bar on puzzle pages gives the squares more height */
   body:has(#crossword) .games-nav { padding-top: 6px; }
   body:has(#crossword) .games-nav a { padding: 7px 14px; }
   body:has(#crossword) .top-right { top: 14px; }
   #crossword > main {
-    display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+    display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr) auto;
     column-gap: 28px; row-gap: 8px; align-items: start;
-    height: calc(100dvh - var(--nav-h)); padding: 10px 16px 6px; overflow: hidden;
+    height: calc(100dvh - var(--nav-h)); padding: 22px 16px 14px; overflow: hidden;
   }
   .board { display: contents; } /* the grid column and the right-hand column become direct parts of the page grid */
-  .play { grid-column: 1; grid-row: 1 / 6; gap: 0; }
+  .play { grid-column: 1; grid-row: 1 / 5; gap: 0; }
   #crossword > main > .back { grid-column: 2; grid-row: 1; margin: 0; font-size: 13px; justify-self: start; }
   #crossword > main > h1 { grid-column: 2; grid-row: 2; margin: 0; font-size: 28px; line-height: 1.2; align-self: end; }
   #crossword > main > .meta { grid-column: 2; grid-row: 1; margin: 0; gap: 14px; justify-self: end; align-self: center; align-items: baseline; } /* same row as the back link, so a long title never collides with it */
   #crossword > main > .intro { display: none; } /* still in the page for Google; the "How to play" box covers it */
-  .board > .clue-bar { grid-column: 2; grid-row: 3; height: 66px; min-height: 0; overflow-y: auto; padding: 8px 14px; font-size: 15px; line-height: 1.4; align-items: flex-start; }
-  .side { grid-column: 2; grid-row: 4; align-self: stretch; min-height: 0; overflow: hidden; gap: 10px; }
-  #crossword > main > .legend { grid-column: 2; grid-row: 5; margin: 0; font-size: 12px; }
-  .actions { gap: 6px; }
+  .side { grid-column: 2; grid-row: 3; align-self: stretch; min-height: 0; overflow: hidden; gap: 10px; }
+  #crossword > main > .legend { grid-column: 2; grid-row: 4; margin: 0; font-size: 12px; }
+  .actions { gap: 6px 8px; align-items: center; }
   .actions button { padding: 8px 14px; font-size: 14px; }
+  /* main buttons in the first line; the rarely used ones sit below as quiet text buttons */
+  .actions .actions-break { display: block; order: 1; flex-basis: 100%; height: 0; }
+  .actions .quiet { order: 2; border-color: transparent; background: none; color: var(--muted); padding: 3px 8px; font-size: 13px; }
+  .actions .quiet:hover { color: var(--accent); background: var(--accent-soft); }
+  .actions .quiet[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
+  .actions .quiet:first-of-type { margin-left: -8px; }
+  /* the open clue is highlighted in the list, so the separate clue bar is not needed here (it stays on phones) */
+  .board > .clue-bar { display: none; }
   .clues { flex: 1 1 auto; min-height: 0; overflow-y: auto; align-content: stretch; grid-template-rows: minmax(0, 1fr); }
   .clues section { overflow-y: auto; }
   html:lang(ka) .clues { grid-template-rows: none; }

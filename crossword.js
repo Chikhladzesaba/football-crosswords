@@ -91,12 +91,13 @@
         <div class="side">
           <div class="actions">
             <button class="primary" id="btnCheck" type="button">${T.check}</button>
-            <button id="btnClearWord" type="button">${T.clearWord}</button>
-            <button id="btnAuto" type="button" aria-pressed="false">${T.auto}</button>
             <button id="btnLetter" type="button">${T.letter}</button>
             <button id="btnReveal" type="button">${T.reveal}</button>
-            <button id="btnClear" type="button">${T.clear}</button>
-            <button id="btnSharePuzzle" type="button">${T.share}</button>
+            <span class="actions-break" aria-hidden="true"></span>
+            <button class="quiet" id="btnAuto" type="button" aria-pressed="false">${T.auto}</button>
+            <button class="quiet" id="btnClearWord" type="button">${T.clearWord}</button>
+            <button class="quiet" id="btnClear" type="button">${T.clear}</button>
+            <button class="quiet" id="btnSharePuzzle" type="button">${T.share}</button>
           </div>
           <p class="share-note" id="sharePuzzleNote" hidden></p>
           <div class="result" id="result" hidden>
