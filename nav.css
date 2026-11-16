@@ -1,0 +1,26 @@
+/* Game switcher (built by nav.js). Tabs at the top on a computer, a bar at the bottom on a phone. Each game has its own colors. */
+.games-nav a[data-game="crosswords"] { --g: #006aff; --soft: #e3efff; --ink: #0a3f8f; }
+.games-nav a[data-game="top5"]       { --g: #f58220; --soft: #ffeadb; --ink: #7a3300; }
+.games-nav a[data-game="scramble"]   { --g: #7a4fd6; --soft: #ece5fb; --ink: #43257f; }
+.games-nav a[data-game="wordsearch"] { --g: #14975a; --soft: #dcf4e7; --ink: #0b5230; }
+
+.games-nav { max-width: 1000px; margin: 0 auto; padding: 14px 16px 0; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 6px; border-bottom: 1px solid #cfe0f5; }
+.games-nav a { display: flex; align-items: center; gap: 8px; padding: 10px 14px; margin-bottom: -1px; border-bottom: 3px solid transparent; color: #3d5573; font-size: 15px; font-weight: 400; text-decoration: none; white-space: nowrap; }
+.games-nav a:hover { background: var(--soft); border-radius: 10px 10px 0 0; }
+.games-nav a[aria-current="page"] { background: var(--soft); border-bottom-color: var(--g); border-radius: 10px 10px 0 0; color: var(--ink); font-weight: 500; }
+.games-nav .ico { display: flex; }
+.games-nav svg { width: 20px; height: 20px; flex: none; color: var(--g); }
+
+@media (max-width: 640px) {
+  body { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
+  .games-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; max-width: none; margin: 0; padding: 8px 4px calc(10px + env(safe-area-inset-bottom)); gap: 0;
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: #fff; border-top: 1px solid #cfe0f5; border-bottom: 0; }
+  .games-nav a { flex-direction: column; justify-content: flex-start; gap: 3px; padding: 6px 0; margin: 0; border: 0; border-radius: 10px; font-size: 11px; line-height: 1.2; }
+  .games-nav a:hover { background: none; }
+  .games-nav a[aria-current="page"] { background: none; border: 0; }
+  .games-nav .ico { width: 44px; height: 28px; align-items: center; justify-content: center; border-radius: 14px; }
+  .games-nav a[aria-current="page"] .ico { background: var(--soft); }
+  .games-nav svg { width: 22px; height: 22px; }
+  body.kb-open .games-nav, body.typing .games-nav { display: none; }
+  body.kb-open, body.typing { padding-bottom: 0; }
+}

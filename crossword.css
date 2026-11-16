@@ -292,5 +292,3 @@ body.typing .howto { display: none; }
    builds its own clue list a moment later. */
 #crossword > main > .clues { display: none; }
 
-.credits { margin: 32px 0 0; font-size: 12px; color: var(--muted); }
-.credits a { color: inherit; }
