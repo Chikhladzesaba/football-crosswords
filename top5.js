@@ -205,7 +205,9 @@
 
   function hint() {
     if (over) return;
-    const i = found.findIndex((f) => !f);
+    // Each click gives the first letter of the next place that has no hint yet (when all have one, it repeats the first)
+    let i = found.findIndex((f, k) => !f && !list.items[k].hint);
+    if (i < 0) i = found.findIndex((f) => !f);
     if (i < 0) return;
     const n = list.items[i];
     if (!n.hint) { n.hint = n.name[0] + " …"; hints++; drawBoard(); }
