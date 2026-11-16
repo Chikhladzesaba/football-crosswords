@@ -6,6 +6,7 @@
 .sc-chip { padding: 8px 14px; border-radius: 999px; background: var(--card); border: 1.5px solid var(--border); color: var(--ink); font-family: inherit; font-size: 14px; cursor: pointer; }
 .sc-chip.on { background: var(--accent); border-color: var(--accent); color: #fff; }
 .sc-game { display: flex; flex-direction: column; gap: 16px; }
+.sc-game[hidden] { display: none; } /* the game box goes away when the result screen shows */
 .sc-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
 .sc-slots { min-height: 52px; padding: 14px 8px; background: var(--accent-soft); border-radius: 14px; }
 .sc-slot, .sc-tile {
@@ -24,12 +25,15 @@
 .sc-slots.wrong .sc-slot.filled:not(.locked) { background: var(--red); border-color: var(--red-ink); }
 .sc-slots.shown .sc-slot { background: var(--grey); border-color: var(--border); color: var(--muted); }
 .sc-game .actions { justify-content: center; }
-.sc-end { text-align: center; background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 28px 22px; }
-.sc-end h2 { font-size: 26px; font-weight: 500; margin: 0 0 8px; }
+.sc-end { display: flex; flex-direction: column; align-items: center; text-align: center; background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px 22px; }
+.sc-end[hidden] { display: none; }
+.sc-end h2 { font-size: 26px; font-weight: 500; margin: 0 0 8px; color: var(--head); }
 .sc-end p { color: var(--muted); margin: 0 0 14px; }
-.sc-end .win-perfect { color: var(--green-ink); background: var(--green); border-radius: 10px; padding: 8px 10px; font-weight: 500; }
+.sc-end .win-perfect { color: var(--head); background: var(--accent-soft); border-radius: 10px; padding: 8px 10px; font-weight: 500; }
 .sc-end button { display: block; width: 100%; max-width: 320px; margin: 8px auto 0; }
-.sc-link { display: inline-block; margin-top: 16px; color: var(--accent); }
+.sc-end button:not(.primary) { border-color: var(--line2); color: var(--head); }
+.sc-end .share-note { order: 3; margin: 8px 0 0; font-size: 13px; }
+.sc-link { order: 4; display: inline-block; margin-top: 16px; color: var(--accent); }
 @keyframes sc-shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
 
 /* Phones: a quick double tap on a letter must not zoom the page or select text */

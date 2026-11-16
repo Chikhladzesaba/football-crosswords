@@ -34,11 +34,11 @@
     source: "Source",
     listDone: (n) => `List ${n} done! 🎉 Next list coming up…`,
     gaveUp: "Here are the answers.", outOfLives: "Out of lives. Here are the answers.",
-    wonTitle: (total) => `You won! ${total} tops in a row 🏆`, lostTitle: "Game over",
+    wonTitle: () => "Well done! 🏆", wonText: (total) => `You guessed ${total} lists in a row!`, lostTitle: "Game over",
     hintsUsed: (h) => `You used ${h} letter hint${plural(h)}.`,
-    lostText: (done, total) => `You completed ${done} of ${total} lists.`,
+    lostText: (done, total) => (done ? `You completed ${done} of ${total} lists.` : "You didn't complete any list this time."),
     perfect: "⭐ With no help!",
-    share: "Share my result", again: "Play again", seeLast: "See the last list", seeAnswers: "See the answers",
+    share: "Share", againWon: "New game", againLost: "Try again", seeLast: "See the last list", seeAnswers: "See the answers",
     copied: "Copied! Paste it anywhere to share.",
     shareTitle: "⚽ Guess the Top 5",
     shareScore: (won, done, total, help) => `${won ? "🏆" : "✅"} ${done}/${total} tops in a row · ${help}`,
@@ -83,8 +83,8 @@
         <p id="t5ModalText"></p>
         <p class="win-perfect" id="t5Perfect" hidden>${TEXT.perfect}</p>
         <button class="primary" id="t5Share" type="button">${TEXT.share}</button>
+        <button id="t5Again" type="button"></button>
         <p class="share-note" id="t5ShareNote" hidden></p>
-        <button id="t5Again" type="button">${TEXT.again}</button>
         <button class="t5-link" id="t5See" type="button">${TEXT.seeAnswers}</button>
       </div>
     </div>`;
@@ -241,8 +241,13 @@
   function modal(won) {
     $("t5ModalTitle").textContent = won ? TEXT.wonTitle(ROUNDS) : TEXT.lostTitle;
     $("t5ModalText").textContent = won
-      ? (hints ? TEXT.hintsUsed(hints) : "")
+      ? TEXT.wonText(ROUNDS) + (hints ? " " + TEXT.hintsUsed(hints) : "")
       : TEXT.lostText(done, ROUNDS) + (hints ? " " + TEXT.hintsUsed(hints) : "");
+    // Won: Share is the main button. Lost: "Try again" is the main button and Share comes second.
+    const share = $("t5Share"), again = $("t5Again");
+    again.textContent = won ? TEXT.againWon : TEXT.againLost;
+    share.className = won ? "primary" : ""; again.className = won ? "" : "primary";
+    share.style.order = won ? 1 : 2; again.style.order = won ? 2 : 1;
     $("t5Perfect").hidden = !(won && hints === 0);
     $("t5See").textContent = won ? TEXT.seeLast : TEXT.seeAnswers;
     $("t5ShareNote").hidden = true;

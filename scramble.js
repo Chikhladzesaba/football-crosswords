@@ -15,10 +15,10 @@
     lenAll: "ყველა", lenN: (n) => `${n}+ ასო`, lenLabel: "გვარის მინიმალური სიგრძე",
     progress: (i, n) => `${i} / ${n}`, score: (s) => `სწორი პასუხები: ${s}`,
     hint: "ასოს ჩვენება", clear: "წაშლა", skip: "გამოტოვება",
-    endTitle: "გილოცავ! 🏆", endTitleLow: "შედეგი",
-    endText: (s, n) => `${n}-დან ${s} გვარი გამოიცანი!`,
-    perfect: "⭐ დახმარების გამოყენების გარეშე!", help: (h) => `დახმარებით ნახე ${h} ასო.`,
-    share: "შედეგის გაზიარება", again: "თავიდან თამაში", crosswords: "ითამაშე კროსვორდი",
+    endTitle: "გილოცავ! 🏆", endTitleMid: "კარგი შედეგია!", endTitleLow: "ამჯერად არ გამოგივიდა",
+    endText: (s, n) => (s === n ? `${n}-ვე გვარი გამოიცანი!` : `${n} გვარიდან ${s} გამოიცანი.`),
+    perfect: "⭐ დახმარების გამოყენების გარეშე!", help: (h) => `ასოს ჩვენება ${h}-ჯერ გამოიყენე.`,
+    share: "გააზიარე", againWon: "ახალი თამაში", againLost: "კიდევ სცადე", crosswords: "ითამაშე კროსვორდი",
     shareText: (s, n, h) => `⚽ გვარების დალაგობანა\n✅ ${s}/${n} · ${h ? h + " ასო ნაჩვენები" : "დახმარების გარეშე"}`,
     copied: "დაკოპირდა! ჩასვი სადაც გინდა.",
     rulesTitle: "თამაშის წესები",
@@ -29,10 +29,10 @@
     lenAll: "All", lenN: (n) => `${n}+ letters`, lenLabel: "Minimum name length",
     progress: (i, n) => `${i} of ${n}`, score: (s) => `Correct: ${s}`,
     hint: "Show letter", clear: "Delete", skip: "Skip",
-    endTitle: "You did it! 🏆", endTitleLow: "Your result",
-    endText: (s, n) => `You got ${s} of ${n} names!`,
+    endTitle: "You did it! 🏆", endTitleMid: "Nice result!", endTitleLow: "Not this time",
+    endText: (s, n) => (s === n ? `You got all ${n} names!` : `You got ${s} of ${n} names.`),
     perfect: "⭐ With no help!", help: (h) => `You used ${h} letter hint${h === 1 ? "" : "s"}.`,
-    share: "Share my result", again: "Play again", crosswords: "Play a crossword",
+    share: "Share", againWon: "New game", againLost: "Try again", crosswords: "Play a crossword",
     shareText: (s, n, h) => `⚽ Name Scramble\n✅ ${s}/${n} · ${h ? h + " letter hint" + (h === 1 ? "" : "s") : "no help"}`,
     copied: "Copied! Paste it anywhere to share.",
     rulesTitle: "How to play",
@@ -59,8 +59,8 @@
         <p class="win-perfect" id="scPerfect" hidden>${T.perfect}</p>
         <p id="scHelp" hidden></p>
         <button class="primary" id="scShare" type="button">${T.share}</button>
+        <button id="scAgain" type="button"></button>
         <p class="share-note" id="scNote" hidden></p>
-        <button id="scAgain" type="button">${T.again}</button>
         <a class="sc-link" href="${HOME}">${T.crosswords}</a>
       </div>
       <details class="sc-rules">
@@ -205,7 +205,13 @@
 
   function finish() {
     $("scGame").hidden = true; $("scEnd").hidden = false;
-    $("scEndTitle").textContent = score === names.length ? T.endTitle : T.endTitleLow;
+    const all = score === names.length;
+    $("scEndTitle").textContent = all ? T.endTitle : score * 2 >= names.length ? T.endTitleMid : T.endTitleLow;
+    // All correct: Share is the main button. Otherwise "Try again" is the main button and Share comes second.
+    const share = $("scShare"), again = $("scAgain");
+    again.textContent = all ? T.againWon : T.againLost;
+    share.className = all ? "primary" : ""; again.className = all ? "" : "primary";
+    share.style.order = all ? 1 : 2; again.style.order = all ? 2 : 1;
     $("scEndText").textContent = T.endText(score, names.length);
     $("scPerfect").hidden = !(score === names.length && hints === 0);
     $("scHelp").hidden = hints === 0;
