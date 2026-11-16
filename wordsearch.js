@@ -51,7 +51,6 @@
 
   root.innerHTML = `
     <main class="narrow">
-      <a class="back" href="${TEXT.backHref}">${TEXT.back}</a>
       <h1>${TEXT.h1}</h1>
       <p class="intro">${TEXT.intro}</p>
       <div class="ws-game" id="wsGame">

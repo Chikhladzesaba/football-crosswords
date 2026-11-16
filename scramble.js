@@ -41,7 +41,6 @@
 
   root.innerHTML = `
     <main class="narrow">
-      <a class="back" href="${HOME}">${T.back}</a>
       <h1>${T.title}</h1>
       <p class="intro">${T.intro}</p>
       <div class="sc-filter"><div class="sc-label">${T.lenLabel}</div><div class="sc-chips" id="scLen"></div></div>
