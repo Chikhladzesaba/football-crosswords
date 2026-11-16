@@ -28,7 +28,7 @@
     rulesTitle: "How to play",
     rules: [
       "Ten football words are hidden in the grid. Players, coaches, stadiums and teams.",
-      "Drag your finger (or mouse) across the letters to mark a word. Or tap the first letter, then tap the last letter.",
+      "Tap the first letter of a word, then tap the last letter. On a computer you can also drag the mouse across the letters.",
       "Words run straight: across, down or diagonally. The harder words can also be backwards.",
       "Stuck? “Show a hint” marks the first letter of one word. It counts as help in your final result.",
       "Names are written without spaces and accents: Bernabéu is BERNABEU.",
@@ -223,7 +223,7 @@
     }
   }
 
-  // Pointer events work for mouse, pen and touch. touch-action: none (in the CSS) stops the page from scrolling while dragging.
+  // Pointer events work for mouse, pen and touch. on phones the CSS uses touch-action: pan-y, so the page can still scroll; a scroll cancels the drag (pointercancel) and is not counted as a wrong answer.
   function cellAt(e) {
     const rect = $("wsGrid").getBoundingClientRect();
     const c = Math.min(SIZE - 1, Math.max(0, Math.floor(((e.clientX - rect.left) / rect.width) * SIZE)));
