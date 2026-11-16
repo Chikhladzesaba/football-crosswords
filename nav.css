@@ -24,3 +24,9 @@
   body.kb-open .games-nav, body.typing .games-nav { display: none; }
   body.kb-open, body.typing { padding-bottom: 0; }
 }
+
+/* Each game has its own accent color. The whole site already uses --accent / --accent-soft, so one override here recolors the page.
+   Crosswords keeps the default blue from crossword.css. Orange and green use the darker "button" shade so white text stays readable. */
+html[data-game="top5"]       { --accent: #c2540a; --accent-soft: #ffeadb; }
+html[data-game="scramble"]   { --accent: #7a4fd6; --accent-soft: #ece5fb; }
+html[data-game="wordsearch"] { --accent: #0f7d4a; --accent-soft: #dcf4e7; }

@@ -8,6 +8,7 @@
   const GAME_OF = { top5: "top5", "gamoicani-top5": "top5", scramble: "scramble", "gamoicani-pekhburtelebis-gvarebi": "scramble",
     wordsearch: "wordsearch", "skauti": "wordsearch" };
   const cur = GAME_OF[first] || "crosswords"; // every other folder is a crossword (or a home page)
+  document.documentElement.dataset.game = cur; // nav.css gives each game its own accent color from this
   const S = (d, w) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="' + (w || 1.6) + '" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + "</svg>";
   const ICON = {
     crosswords: S('<rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M9.2 3.5v17M14.8 3.5v17M3.5 9.2h17M3.5 14.8h17"/>'),
