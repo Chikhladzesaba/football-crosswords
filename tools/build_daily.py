@@ -1,8 +1,10 @@
 """Builds the Daily crossword: one small mixed crossword per day, the same for everyone.
 
-Usage:  python3 tools/build_daily.py            (from the repo folder)
-Reads   crosswords.js (English puzzles only) and every <folder>/words.txt
-Writes  daily/YYYY-MM.js  (one file per month; daily/index.html loads the month it needs)
+Usage:  python3 tools/build_daily.py            English Daily  (from the repo folder)
+        python3 tools/build_daily.py ka         Georgian Daily
+Reads   crosswords.js (the puzzles of that language) and every <folder>/words.txt
+Writes  daily/YYYY-MM.js  (English) or dgis-krosvordi/YYYY-MM.js  (Georgian), one file per month;
+        the page next to them loads the month it needs
 
 How a day is picked:
   - Difficulty follows the weekday: Mon/Tue Easy, Wed/Thu Medium, Fri/Sat Hard, Sun Very hard.
@@ -12,31 +14,37 @@ How a day is picked:
 Days that already exist up to tomorrow are never changed, so a player's saved progress stays valid.
 Run it again after adding a crossword: only future days are rebuilt, with the new clues in the mix.
 """
-import json, random, re, unicodedata
+import json, random, re, sys, unicodedata
 from datetime import date, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "daily"
-FIRST, LAST = date(2026, 11, 11), date(2027, 12, 31)
+LANG = sys.argv[1] if len(sys.argv) > 1 else "en"
+OUT = ROOT / ("daily" if LANG == "en" else "dgis-krosvordi")
+# Georgian has fewer clues (about 430 against 770), so its Daily is built for a shorter time. Raise LAST when more crosswords are added.
+FIRST, LAST = (date(2026, 11, 11), date(2027, 12, 31)) if LANG == "en" else (date(2026, 11, 16), date(2027, 2, 28))
 LEVEL = {0: "Easy", 1: "Easy", 2: "Medium", 3: "Medium", 4: "Hard", 5: "Hard", 6: "Very hard"}  # Monday = 0
 SIZE = {"Easy": 8, "Medium": 9, "Hard": 10, "Very hard": 10}
 MAXCOLS, MAXROWS = 11, 13
+# Which crossword levels feed a day. Georgian has only about 44 Very hard clues, so Sundays also take Hard ones (Very hard first).
+FEED = {"Very hard": ("Very hard", "Hard")} if LANG == "ka" else {}
 
 # ---- the pool: every clue of every English crossword ----
 blocks = re.findall(r"\{[^{}]*folder:[^{}]*\}", (ROOT / "crosswords.js").read_text(encoding="utf-8"))
 field = lambda b, k: (re.search(k + r':\s*"([^"]*)"', b) or [None, None])[1]
 POOL = []
 for b in blocks:
-    if field(b, "lang") not in (None, "en"):
+    if (field(b, "lang") or "en") != LANG:
         continue
     folder, name, level = field(b, "folder"), field(b, "name"), field(b, "difficulty")
     for line in (ROOT / folder / "words.txt").read_text(encoding="utf-8").splitlines():
         if "|" not in line or line.strip().startswith("#"):
             continue
         a, clue = [x.strip() for x in line.split("|", 1)]
-        a = a.lstrip("*").strip().upper()
-        if a.isascii() and a.isalpha():
+        a = a.lstrip("*").strip()
+        if LANG == "en":
+            a = a.upper()  # never for Georgian: Python would turn it into Mtavruli capitals
+        if (a.isascii() and a.isalpha()) if LANG == "en" else re.fullmatch(r"[ა-ჰ]+", a):
             POOL.append({"answer": a, "clue": f"{name}: {clue}", "level": level, "key": f"{folder}/{a}"})
 
 
@@ -44,7 +52,24 @@ def plain(s):  # "Götze" -> "GOTZE", for comparing answers with clue text
     return unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode().upper()
 
 
+# Georgian: a name changes its ending (კლოპი, კლოპის, კლოპთან, კლოპმა). These are the endings we know.
+KA_END = {v + e for v in ("", "ა", "ე", "ი", "ო", "უ") for e in (
+    "", "ს", "მ", "ც", "ის", "ით", "ად", "ში", "ზე", "თან", "დან", "მდე", "სთან", "სთვის", "ისთვის", "თვის",
+    "გან", "სგან", "ისგან", "ისა", "სა", "ებ", "ები", "ებს", "ებმა", "ების", "ებში", "ებთან", "ებით")}
+KA_END |= {e + "ც" for e in list(KA_END)}
+
+
+def gives_away_ka(answer, text):
+    stem = answer[:-1] if len(answer) >= 4 and answer[-1] in "აეიოუ" else answer
+    for tok in re.findall(r"[ა-ჰ]+", text):
+        if tok.startswith(stem) and tok[len(stem):] in KA_END:
+            return True
+    return len(stem) >= 7 and stem in re.sub(r"[^ა-ჰ]", "", text)  # "რეალ მადრიდი" -> რეალმადრიდი
+
+
 def gives_away(answer, text):
+    if LANG == "ka":
+        return gives_away_ka(answer, text)
     t = plain(text)
     if re.search(r"\b" + answer + r"\b", t):
         return True
@@ -134,10 +159,11 @@ for f in sorted(OUT.glob("20*.js")) if OUT.exists() else []:
 def make_day(d):
     level = LEVEL[d.weekday()]
     rng = random.Random("daily-" + d.isoformat())
-    pool = [c for c in POOL if c["level"] == level]
+    feed = FEED.get(level, (level,))
+    pool = [c for c in POOL if c["level"] in feed]
     for attempt in range(400):
         # least recently used first, a little shuffled so days don't repeat the same pattern
-        pool.sort(key=lambda c: (last_used.get(c["key"], "0000"), rng.random()))
+        pool.sort(key=lambda c: (last_used.get(c["key"], "0000"), c["level"] != level, rng.random()))
         pick, seen = [], set()
         for c in pool[: max(40, SIZE[level] * 4) + attempt]:  # widen the search if a day is hard to fill
             if len(pick) == SIZE[level]:
@@ -177,4 +203,8 @@ for m, ds in months.items():
     (OUT / f"{m}.js").write_text(
         "// Generated by tools/build_daily.py. Don't edit by hand.\nwindow.DAILY = "
         + json.dumps(ds, ensure_ascii=False, separators=(",", ":")) + ";\n", encoding="utf-8")
-print(f"{len(POOL)} clues in the pool, {len(days)} days written to {OUT}")
+uses = {}
+for p in days.values():
+    for w in p["words"]:
+        uses[w["key"]] = uses.get(w["key"], 0) + 1
+print(f"{len(POOL)} clues in the pool, {len(days)} days written to {OUT}; a clue is used {sum(uses.values()) / len(uses):.1f} times on average, at most {max(uses.values())}")

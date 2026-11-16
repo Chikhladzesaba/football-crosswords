@@ -170,19 +170,21 @@
   }
   // ---- Today's Daily crossword (daily/), shown above everything else ----
   function dailyCard() {
-    const d = new Date(), id = "daily-" + d.toLocaleDateString("en-CA");
+    const d = new Date(), iso = d.toLocaleDateString("en-CA"), id = (KA ? "ka-daily-" : "daily-") + iso;
+    if (KA && iso > "2027-02-28") return; // the Georgian Daily is generated up to this date (tools/build_daily.py ka)
     const level = ["Very hard", "Easy", "Easy", "Medium", "Medium", "Hard", "Hard"][d.getDay()]; // same rule as tools/build_daily.py
     const a = document.createElement("a");
-    a.className = "daily-card"; a.href = "daily/";
+    a.className = "daily-card"; a.href = KA ? "../dgis-krosvordi/" : "daily/";
     const kicker = document.createElement("span"); kicker.className = "kicker";
-    kicker.textContent = "Daily crossword · " + d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
-    const name = document.createElement("span"); name.className = "name"; name.textContent = "Today's mix of every topic";
-    const lv = document.createElement("span"); lv.className = "level level-" + level.toLowerCase().replace(" ", "-"); lv.textContent = level;
+    kicker.textContent = KA ? "დღის კროსვორდი · " + d.getDate() + " " + ["იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი", "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"][d.getMonth()]
+      : "Daily crossword · " + d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+    const name = document.createElement("span"); name.className = "name"; name.textContent = KA ? "დღევანდელი კროსვორდი ყველა თემიდან" : "Today's mix of every topic";
+    const lv = document.createElement("span"); lv.className = "level level-" + level.toLowerCase().replace(" ", "-"); lv.textContent = say(level);
     const meta = document.createElement("span"); meta.className = "meta-line"; meta.appendChild(lv);
     const st = document.createElement("span"); st.className = "status";
-    if (solved[id]) { st.textContent = "✓ Solved · " + fmt(solved[id].time) + (solved[id].perfect ? " ⭐" : ""); a.classList.add("is-solved"); }
-    else if (inProgress(id)) { st.classList.add("progress"); st.textContent = "In progress"; }
-    else { st.classList.add("cta"); st.textContent = "New every day · Play →"; }
+    if (solved[id]) { st.textContent = (KA ? T.solvedTag : "✓ Solved · ") + fmt(solved[id].time) + (solved[id].perfect ? " ⭐" : ""); a.classList.add("is-solved"); }
+    else if (inProgress(id)) { st.classList.add("progress"); st.textContent = KA ? T.inProgress : "In progress"; }
+    else { st.classList.add("cta"); st.textContent = KA ? "ყოველდღე ახალი · ითამაშე →" : "New every day · Play →"; }
     meta.appendChild(st);
     a.append(kicker, name, meta);
     const filters = document.querySelector(".filters");
@@ -202,7 +204,7 @@
     filters.parentNode.insertBefore(a, filters);
   }
 
-  if (!KA) dailyCard(); // the Daily crossword is English only
+  dailyCard(); // English: daily/, Georgian: dgis-krosvordi/
   gameCard();
   stats();
   draw();
