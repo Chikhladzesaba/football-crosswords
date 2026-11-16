@@ -125,7 +125,7 @@
 
   // The list is drawn as one section per topic: a grid on computers, a sideways-swipe row on phones
   const mainEl = document.querySelector("main.narrow");
-  if (mainEl) mainEl.classList.remove("narrow"); // the home page uses the full width for the grid
+  if (mainEl) { mainEl.classList.remove("narrow"); mainEl.classList.add("home"); } // the home page uses the full width for the grid
   const groups = document.createElement("div");
   groups.id = "groups";
   document.getElementById("list").replaceWith(groups);
@@ -184,11 +184,8 @@
     const st = document.createElement("span"); st.className = "status";
     if (solved[id]) { st.textContent = (KA ? T.solvedTag : "✓ Solved · ") + fmt(solved[id].time) + (solved[id].perfect ? " ⭐" : ""); a.classList.add("is-solved"); }
     else if (inProgress(id)) { st.classList.add("progress"); st.textContent = KA ? T.inProgress : "In progress"; }
-    else { st.classList.add("cta"); st.textContent = KA ? "ორშაბათს ყველაზე მარტივია, კვირას ყველაზე რთული." : "New every day · Play →"; }
+    else { st.classList.add("cta"); st.textContent = KA ? "ითამაშე →" : "Play →"; } // as in the design: level chip + "Play →"
     meta.appendChild(st);
-    if (KA && st.classList.contains("cta")) { // "ითამაშე →" sits at the right edge of the card
-      const go = document.createElement("span"); go.className = "status cta"; go.style.marginLeft = "auto"; go.textContent = "ითამაშე →"; meta.appendChild(go);
-    }
     a.append(kicker, name, meta);
     const filters = document.querySelector(".filters");
     filters.parentNode.insertBefore(a, filters);
@@ -209,7 +206,7 @@
   }
 
   dailyCard(); // English: daily/, Georgian: dgis-krosvordi/
-  gameCard();
+  // (no Scramble card: the game tabs in the nav link to every game, as in the design)
   stats();
   draw();
 })();

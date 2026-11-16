@@ -8,9 +8,9 @@
 :root {
   --accent: #006aff;
   --accent-soft: #e3efff;
-  --ink: #1a1b22;
-  --muted: #5b6070;
-  --border: #c5dcf0;
+  --ink: #10233d;
+  --muted: #3d5573;
+  --border: #cfe0f5;
   --bg: #f7fbff;
   --card: #ffffff;
   --green: #d9f5e3;
@@ -108,7 +108,7 @@ h1 em { font-style: normal; }
 .actions { display: flex; flex-wrap: wrap; gap: 8px; }
 button {
   font: inherit; font-weight: 400; padding: 12px 20px;
-  border: 1px solid var(--border); border-radius: 999px;
+  border: 1px solid var(--border); border-radius: 12px;
   background: var(--card); color: var(--ink); cursor: pointer;
 }
 button:hover { border-color: var(--accent); color: var(--accent); }
@@ -143,10 +143,10 @@ html:lang(ka) .clues li { overflow-wrap: anywhere; }
 /* ---- Home page: filters + list ---- */
 .filters { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
 .filter-group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-.filter-label { font-size: 13px; font-weight: 500; color: var(--muted); width: 72px; }
+.filter-label { font-size: 13px; font-weight: 350; color: var(--muted); width: 70px; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; min-width: 0; }
-.chip { padding: 6px 12px; font-size: 14px; font-weight: 400; }
-.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.chip { padding: 6px 16px; font-size: 14px; font-weight: 350; border-color: #b9cfe9; border-radius: 20px; color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 500; }
 .chip[aria-pressed="true"]:hover { color: #fff; }
 .shown { color: var(--muted); font-size: 13px; margin: 0 0 8px; }
 .empty { color: var(--muted); background: var(--card); border: 1px dashed var(--border); border-radius: 14px; padding: 16px; margin: 0; }
@@ -155,22 +155,23 @@ html:lang(ka) .clues li { overflow-wrap: anywhere; }
 .list a {
   display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 12px;
   background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-  padding: 14px 16px; color: var(--ink); text-decoration: none;
+  padding: 18px; color: var(--ink); text-decoration: none;
 }
 .list a:hover { border-color: var(--accent); }
-.list .name { font-weight: 500; font-size: 17px; }
+.list .name { font-weight: 500; font-size: 18px; }
+.list .size { display: none; } /* the design cards show name, level and a short description only */
 .list .meta-line { display: flex; align-items: center; gap: 8px; }
 .list .size { color: var(--muted); font-size: 14px; }
 .list .about { flex-basis: 100%; color: var(--muted); font-size: 14px; }
-.level { font-size: 12px; font-weight: 500; padding: 2px 8px; border-radius: 999px; }
-.level-easy { background: var(--green); color: var(--green-ink); }
-.level-medium { background: var(--accent-soft); color: var(--accent); }
-.level-hard { background: #fff1c2; color: #7a5a00; }
-.level-very-hard { background: var(--red); color: var(--red-ink); }
+.level { font-size: 12px; font-weight: 400; padding: 3px 10px; border-radius: 10px; }
+.level-easy { background: #dcf4e7; color: #0b5230; }
+.level-medium { background: #e3efff; color: #0a3f8f; }
+.level-hard { background: #ffeadb; color: #7a3300; }
+.level-very-hard { background: #10233d; color: #fff; }
 @media (max-width: 560px) {
   .filter-group { gap: 6px; }
   .filter-label { width: 100%; }                 /* label above its buttons on phones */
-  .chip { padding: 6px 10px; font-size: 13px; }
+  .chip { padding: 6px 14px; font-size: 14px; }
 }
 
 /* ---- Sharing ---- */
@@ -240,11 +241,11 @@ body.typing .clue-bar {
 
 /* ---- Daily crossword card on the home page ---- */
 .daily-card {
-  display: flex; flex-direction: column; gap: 6px; margin: 0 0 18px; padding: 16px 18px;
-  border: 1.5px solid var(--accent); border-radius: 14px; background: #fff; color: inherit; text-decoration: none;
+  display: flex; flex-direction: column; gap: 6px; margin: 0 0 18px; padding: 16px;
+  border: 1.5px solid var(--accent); border-radius: 16px; background: #fff; color: inherit; text-decoration: none;
 }
 .daily-card:hover { box-shadow: 0 2px 12px rgba(0, 106, 255, .12); }
-.daily-card .kicker { font-size: 13px; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: .04em; }
+.daily-card .kicker { font-size: 13px; font-weight: 500; color: #0057d1; }
 .daily-card .name { font-weight: 500; font-size: 19px; }
 .daily-card .meta-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .daily-card .cta { color: var(--accent); }
@@ -286,3 +287,22 @@ body.typing .howto { display: none; }
    builds its own clue list a moment later. */
 #crossword > main > .clues { display: none; }
 
+
+/* ---- Home: daily card as a row on computers (as in the Home-desktop board) ---- */
+@media (min-width: 641px) {
+  .daily-card { padding: 18px 22px; display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 16px; row-gap: 4px; }
+  .daily-card .kicker, .daily-card .name { grid-column: 1; }
+  .daily-card .meta-line { grid-column: 2; grid-row: 1 / span 2; gap: 14px; }
+  .daily-card .name { font-size: 20px; }
+  .daily-card .cta { font-size: 15px; font-weight: 500; color: #0057d1; margin-left: 0 !important; }
+}
+
+/* ---- Home heading as in the board: 44px on computers, 28px on phones, no divider, the intro right under it ---- */
+main.home h1 { font-size: 44px; line-height: 1.15; margin: 0 0 6px; color: var(--head, #0a3f8f); }
+main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
+.daily-card .status.cta { margin-left: auto; }
+@media (max-width: 640px) {
+  main.home h1 { font-size: 28px; margin-bottom: 4px; }
+  main.home .intro { font-size: 15px; line-height: 1.45; margin-bottom: 14px; }
+  .daily-card .meta-line { justify-content: space-between; }
+}

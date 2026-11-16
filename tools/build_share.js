@@ -85,7 +85,7 @@ function puzzlePage(c, p) {
 ${headTags({ title, description, url, image: url + "share.png" })}
 ${FONT_LINKS}
   <link rel="stylesheet" href="../nav.css?v=5">
-  <link rel="stylesheet" href="../crossword.css?v=3">
+  <link rel="stylesheet" href="../crossword.css?v=5">
   ${ANALYTICS}
 </head>
 <body>
@@ -124,7 +124,7 @@ function puzzlePageKa(c, p) {
 ${headTags({ title: KA.title(c), description: KA.description(c, level), url, image: url + "share.png", brand: KA.brand, locale: "ka_GE", noindex: !KA_PUBLIC })}
 ${FONT_LINKS}
   <link rel="stylesheet" href="../nav.css?v=5">
-  <link rel="stylesheet" href="../crossword.css?v=3">
+  <link rel="stylesheet" href="../crossword.css?v=5">
   ${ANALYTICS}
 </head>
 <body>
@@ -165,7 +165,7 @@ function kaHomePage() {
 ${headTags({ title: KA.homeTitle, description: KA.homeIntro, url, image: url + "share.png", brand: KA.brand, locale: "ka_GE", noindex: !KA_PUBLIC, alternates: KA_PUBLIC ? HOME_ALTERNATES : [] })}
 ${FONT_LINKS.replace(/\.\.\//g, "")}
   <link rel="stylesheet" href="../nav.css?v=5">
-  <link rel="stylesheet" href="../crossword.css?v=3">
+  <link rel="stylesheet" href="../crossword.css?v=5">
   ${ANALYTICS}
 </head>
 <body>
@@ -192,7 +192,7 @@ ${FONT_LINKS.replace(/\.\.\//g, "")}
     <p class="empty" id="empty" hidden>ასეთი კროსვორდი ჯერ არ გვაქვს. სცადე სხვა სირთულე ან თემა.</p>
   </main>
   <script src="../crosswords.js"></script>
-  <script src="../home.js"></script>
+  <script src="../home.js?v=3"></script>
 </body>
 </html>
 `;
