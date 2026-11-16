@@ -65,3 +65,19 @@
 
 /* Georgian has no capitals: text-transform would turn the letters into Mtavruli, so switch it off */
 html:lang(ka) .t5-kicker { text-transform: none; letter-spacing: 0; }
+
+/* Computer layout (as in the design): wide page, the list on the left, lives + answer box + buttons on the right */
+@media (min-width: 900px) {
+  #top5 main.narrow { max-width: 1000px; }
+  .t5-game { display: grid; grid-template-columns: minmax(0, 1fr) 340px; column-gap: 32px; align-items: start; }
+  .t5-game .meta { display: contents; }
+  .t5-head { grid-column: 1; grid-row: 1; margin-bottom: 4px; }
+  .t5-game .count { grid-column: 1; grid-row: 2; margin: 0; }
+  .t5-board { grid-column: 1; grid-row: 3 / span 6; margin: 12px 0 0; }
+  .t5-lives { grid-column: 2; grid-row: 1; align-self: end; margin-bottom: 8px; }
+  .t5-note { grid-column: 2; grid-row: 2; }
+  .t5-form { grid-column: 2; grid-row: 3; margin-top: 12px; }
+  .t5-msg { grid-column: 2; grid-row: 4; margin: 0 0 8px; }
+  .t5-game .actions { grid-column: 2; grid-row: 5; justify-content: flex-start; }
+  .t5-rules { max-width: none; }
+}

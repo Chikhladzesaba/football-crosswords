@@ -54,3 +54,14 @@
 
 /* Georgian has no capitals: text-transform would turn the letters into Mtavruli, so switch it off */
 html:lang(ka) .ws-group h3 { text-transform: none; letter-spacing: 0; }
+
+/* Computer layout (as in the design): wide page, the letter grid on the left, count + words + buttons on the right */
+@media (min-width: 900px) {
+  #wordsearch main.narrow { max-width: 1000px; }
+  .ws-game { --ws: 32px; display: grid; grid-template-columns: max-content minmax(0, 1fr); column-gap: 32px; align-items: start; grid-template-rows: auto auto auto auto 1fr; }
+  .ws-grid { grid-column: 1; grid-row: 1 / span 5; margin: 0; }
+  .ws-game .meta { grid-column: 2; grid-row: 1; margin-bottom: 4px; }
+  .ws-msg { grid-column: 2; grid-row: 2; text-align: left; margin: 0 0 8px; }
+  .ws-words { grid-column: 2; grid-row: 3; }
+  .ws-game .actions { grid-column: 2; grid-row: 4; justify-content: flex-start; }
+}

@@ -44,3 +44,11 @@
 .sc-rules[open] summary::after { content: "−"; }
 .sc-rules ul { margin: 0 0 8px; padding-left: 18px; }
 .sc-rules li { margin-bottom: 4px; }
+
+/* Computer layout (as in the design): the heading lines up with the game bar, the game itself is a centered card */
+@media (min-width: 900px) {
+  main.narrow:has(.sc-game) { max-width: 1000px; }
+  .sc-filter, .sc-game, .sc-end, .sc-rules { max-width: 640px; margin-left: auto; margin-right: auto; }
+  .sc-filter, .sc-rules { width: 100%; }
+  .sc-game { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 28px 24px; }
+}
