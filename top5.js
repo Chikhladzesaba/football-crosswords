@@ -63,6 +63,10 @@
     return d[a.length][b.length];
   }
 
+  // Some lists have a tie: two names can share the same place (rank: 5). The "Top N" is the highest place.
+  const rankOf = (i) => list.items[i].rank || i + 1;
+  const topN = () => Math.max(...list.items.map((_, i) => rankOf(i)));
+
   // ---- State ----
   let order = [], pos = -1, list, found, lives, hints, over;
   const wanted = new URLSearchParams(location.search).get("list"); // ?list=laliga-scorers opens one list (for testing)
@@ -77,7 +81,7 @@
   function start(l) {
     list = l; list.items.forEach((it) => (it.hint = "")); found = list.items.map(() => false); lives = LIVES; hints = 0; over = false;
     $("t5End").hidden = true; $("t5Game").hidden = false;
-    $("t5Kicker").textContent = `Top ${list.items.length}`;
+    $("t5Kicker").textContent = `Top ${topN()}`;
     $("t5Title").textContent = list.title;
     $("t5AsOf").textContent = `Numbers as of ${list.asOf}`;
     $("t5Msg").textContent = ""; $("t5Msg").className = "t5-msg";
@@ -93,7 +97,7 @@
       const li = document.createElement("li");
       li.className = "t5-row" + (found[i] ? " found" : reveal ? " missed" : "");
       const show = found[i] || reveal;
-      li.innerHTML = `<span class="t5-rank">${i + 1}</span><span class="t5-name"></span><span class="t5-val"></span>`;
+      li.innerHTML = `<span class="t5-rank">${rankOf(i)}</span><span class="t5-name"></span><span class="t5-val"></span>`;
       const nm = li.querySelector(".t5-name");
       if (show) nm.textContent = it.name;
       else if (it.hint) nm.textContent = it.hint;
@@ -134,11 +138,11 @@
     if (i >= 0) {
       if (found[i]) return say(`${list.items[i].name} is already in.`);
       found[i] = true; list.items[i].hint = "";
-      drawBoard(); say(`Yes! ${list.items[i].name} is number ${i + 1}.`, "good");
+      drawBoard(); say(`Yes! ${list.items[i].name} is number ${rankOf(i)}.`, "good");
       if (found.every(Boolean)) finish(true);
       return;
     }
-    lives--; drawLives(); say("Not in the Top " + list.items.length + ".", "bad");
+    lives--; drawLives(); say("Not in the Top " + topN() + ".", "bad");
     const g = $("t5Game"); g.classList.remove("shake"); void g.offsetWidth; g.classList.add("shake");
     if (lives <= 0) finish(false);
   }
@@ -157,7 +161,7 @@
     $("t5Input").disabled = true; $("t5Hint").disabled = true; $("t5Give").disabled = true;
     drawBoard(true);
     const n = found.filter(Boolean).length, total = list.items.length;
-    $("t5EndTitle").textContent = won ? "You got the whole Top " + total + "! 🏆" : gaveUp ? "Here are the answers" : "Out of lives";
+    $("t5EndTitle").textContent = won ? "You got the whole Top " + topN() + "! 🏆" : gaveUp ? "Here are the answers" : "Out of lives";
     $("t5EndText").textContent = `You found ${n} of ${total}.` + (hints ? ` You used ${hints} letter hint${hints === 1 ? "" : "s"}.` : "");
     $("t5Perfect").hidden = !(won && hints === 0 && lives === LIVES);
     $("t5Note").innerHTML = (list.note ? list.note + " " : "") + (list.source ? `<a href="${list.source}" target="_blank" rel="noopener">Source</a>` : "");
@@ -171,7 +175,7 @@
     const n = found.filter(Boolean).length, total = list.items.length;
     const url = location.origin + location.pathname + "?utm_source=share&utm_medium=social&utm_campaign=top5";
     const help = hints ? `${hints} letter hint${hints === 1 ? "" : "s"}` : "no help";
-    const full = `⚽ Top ${total}: ${list.title}\n✅ ${n}/${total} · ${lives} ${lives === 1 ? "life" : "lives"} left · ${help}\n${url}`;
+    const full = `⚽ Top ${topN()}: ${list.title}\n✅ ${n}/${total} · ${lives} ${lives === 1 ? "life" : "lives"} left · ${help}\n${url}`;
     const note = $("t5ShareNote");
     if (navigator.share && matchMedia("(pointer: coarse)").matches) {
       try { await navigator.share({ text: full }); return; } catch (e) { if (e.name === "AbortError") return; }
