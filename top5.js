@@ -89,7 +89,23 @@
         <button class="t5-link" id="t5See" type="button">${TEXT.seeAnswers}</button>
       </div>
     </div>`;
+
   const $ = (id) => document.getElementById(id);
+
+  // On a phone the answer box must be visible without scrolling: put it (with the lives and messages) right under the list title.
+  // On a computer it stays in the right-hand column.
+  (function () {
+    const card = root.querySelector(".t5-card"), side = root.querySelector(".t5-side"), board = $("t5Board");
+    const onPhone = ["t5Form", "t5Msg", "t5Lives", "t5Note"].map($);
+    const onComputer = ["t5Lives", "t5Note", "t5Form", "t5Msg"].map($);
+    const mq = matchMedia("(max-width: 640px)");
+    function place() {
+      if (mq.matches) onPhone.forEach((el) => card.insertBefore(el, board));
+      else onComputer.forEach((el) => side.insertBefore(el, side.querySelector(".actions")));
+    }
+    place();
+    mq.addEventListener("change", place);
+  })();
 
   // ---- Helpers ----
   function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
