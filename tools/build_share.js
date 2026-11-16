@@ -297,7 +297,7 @@ ${gridSvg}
   // Sitemap + robots.txt (Georgian pages only once KA_PUBLIC is true)
   {
   const today = new Date().toISOString().slice(0, 10);
-  const urls = [SITE, SITE + "daily/", SITE + "scramble/", ...(KA_PUBLIC ? [SITE + "ka/", SITE + "gamoicani-pekhburtelebis-gvarebi/"] : []), ...LIST.filter((c) => langOf(c) === "en" || KA_PUBLIC).map((c) => SITE + c.folder + "/")]; // daily/ is hand-made
+  const urls = [SITE, SITE + "daily/", SITE + "scramble/", SITE + "top5/", SITE + "wordsearch/", ...(KA_PUBLIC ? [SITE + "ka/", SITE + "gamoicani-pekhburtelebis-gvarebi/", SITE + "gamoicani-top5/", SITE + "skauti/"] : []), ...LIST.filter((c) => langOf(c) === "en" || KA_PUBLIC).map((c) => SITE + c.folder + "/")]; // daily/ is hand-made
   write(path.join(ROOT, "sitemap.xml"),
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
     urls.map((u) => `  <url><loc>${u}</loc><lastmod>${today}</lastmod></url>`).join("\n") + `\n</urlset>\n`);
