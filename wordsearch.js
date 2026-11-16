@@ -20,7 +20,7 @@
 
   const TEXT = Object.assign({
     backHref: "../", back: "← All games",
-    h1: "Football <em>Word Search</em>",
+    h1: "Word <em>Search</em>",
     intro: "Find the hidden football words: players, coaches, stadiums and teams.",
     cats: { players: "Players", coaches: "Coaches", stadiums: "Stadiums", teams: "Teams" },
     found: (f, t) => `${f} of ${t} found`,
@@ -43,7 +43,7 @@
     perfect: "⭐ With no help!",
     share: "Share my result", again: "Play again", seeGrid: "See the grid",
     copied: "Copied! Paste it anywhere to share.",
-    shareTitle: "⚽ Football Word Search",
+    shareTitle: "⚽ Word Search",
     shareLine: (f, t, time, help) => `${f === t ? "🏆" : "✅"} ${f}/${t} words · ${time} · ${help}`,
     shareHelp: (h) => (h ? `${h} hint${h === 1 ? "" : "s"}` : "no help"),
     ariaGrid: "Letter grid", ariaTime: "Time",
