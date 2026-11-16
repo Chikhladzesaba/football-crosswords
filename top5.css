@@ -31,11 +31,6 @@
 .t5-game .actions { justify-content: center; }
 .t5-game.shake .t5-form { animation: t5-shake .4s; }
 
-.t5-end { text-align: center; background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 24px 20px; margin-top: 8px; }
-.t5-end h2 { font-size: 24px; font-weight: 600; margin: 0 0 8px; }
-.t5-end p { color: var(--muted); margin: 0 0 14px; }
-.t5-end .win-perfect { color: var(--green-ink); background: var(--green); border-radius: 10px; padding: 8px 10px; font-weight: 600; }
-.t5-end button { display: block; width: 100%; max-width: 320px; margin: 8px auto 0; }
 .t5-note { font-size: 13px; color: var(--muted); margin: 0 0 8px; }
 .t5-note a { color: var(--muted); }
 
@@ -51,3 +46,19 @@
 .t5-rules[open] summary::after { content: "−"; }
 .t5-rules ul { margin: 0 0 8px; padding-left: 18px; }
 .t5-rules li { margin-bottom: 4px; }
+
+.t5-pips { display: flex; gap: 6px; margin: 0 0 10px; }
+.t5-pip { width: 28px; height: 6px; border-radius: 3px; background: var(--border); }
+.t5-pip.now { background: var(--accent); }
+.t5-pip.done { background: var(--green-ink); }
+.t5-note { margin: 0 0 12px; }
+
+.t5-modal { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(17, 24, 39, .55); animation: t5-fade .2s; }
+.t5-modal[hidden] { display: none; }
+.t5-modal-card { width: 100%; max-width: 380px; text-align: center; background: var(--card); border-radius: 20px; padding: 28px 22px 22px; box-shadow: 0 20px 60px rgba(0, 0, 0, .25); animation: t5-pop .3s; }
+.t5-modal-card h2 { font-size: 26px; font-weight: 600; line-height: 1.2; margin: 0 0 10px; }
+.t5-modal-card p { color: var(--muted); margin: 0 0 14px; }
+.t5-modal-card .win-perfect { color: var(--green-ink); background: var(--green); border-radius: 10px; padding: 8px 10px; font-weight: 600; }
+.t5-modal-card button { display: block; width: 100%; margin: 8px 0 0; }
+.t5-modal-card .t5-link { border: 0; background: none; color: var(--muted); text-decoration: underline; font-size: 14px; }
+@keyframes t5-fade { from { opacity: 0; } to { opacity: 1; } }

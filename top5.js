@@ -1,24 +1,29 @@
-// Top 5: a list is shown with empty places. Type names: a right name fills its place, a wrong one costs a life.
+// Top 5: one game = 3 lists in a row. A list is shown with empty places. Type names: a right name fills its place, a wrong one costs a life.
+// Finish a list and the next one starts. Finish all 3 and you win. Lose a list (out of lives, or give up) and the game is over.
 // Lists are in top5-lists.js. Test version, English only.
 (function () {
   const root = document.getElementById("top5");
   const LISTS = window.TOP5_LISTS || [];
   if (!root || !LISTS.length) return;
   const LIVES = 3;
+  const ROUNDS = Math.min(3, LISTS.length);
+  const NEXT_DELAY = 2200; // ms to look at a finished list before the next one starts
 
   root.innerHTML = `
     <main class="narrow">
       <a class="back" href="../">← All games</a>
       <h1>Guess the <em>Top 5</em></h1>
-      <p class="intro">Name the players or clubs in the Top 5. Each right name fills its place. Three wrong guesses and it is over.</p>
+      <p class="intro">Name the players or clubs in the Top 5. Complete 3 lists in a row to win.</p>
       <div class="t5-game" id="t5Game">
         <div class="t5-head">
+          <div class="t5-pips" id="t5Pips" aria-label="Round"></div>
           <p class="t5-kicker" id="t5Kicker"></p>
           <h2 class="t5-title" id="t5Title"></h2>
           <p class="t5-asof" id="t5AsOf"></p>
         </div>
         <div class="meta"><div class="t5-lives" id="t5Lives" aria-label="Lives"></div><div class="count" id="t5Count"></div></div>
         <ol class="t5-board" id="t5Board"></ol>
+        <p class="t5-note" id="t5Note" hidden></p>
         <form class="t5-form" id="t5Form" autocomplete="off">
           <input class="t5-input" id="t5Input" type="text" placeholder="Type a name" enterkeyhint="go" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Your guess">
           <button class="primary" type="submit">Guess</button>
@@ -29,26 +34,29 @@
           <button id="t5Give" type="button">Give up</button>
         </div>
       </div>
-      <div class="t5-end" id="t5End" hidden>
-        <h2 id="t5EndTitle"></h2>
-        <p id="t5EndText"></p>
-        <p class="win-perfect" id="t5Perfect" hidden>⭐ With no help!</p>
-        <p class="t5-note" id="t5Note"></p>
-        <button class="primary" id="t5Share" type="button">Share my result</button>
-        <p class="share-note" id="t5ShareNote" hidden></p>
-        <button id="t5Next" type="button">Next list</button>
-      </div>
       <details class="t5-rules">
         <summary>How to play</summary>
         <ul>
+          <li>One game is 3 lists in a row. Finish a list and the next one starts. Finish all 3 and you win.</li>
           <li>You see a list, for example the top scorers in a competition. The names are hidden.</li>
           <li>Type a name and press Guess. If it is in the list, it jumps into its place and shows its number. You can guess in any order.</li>
-          <li>A wrong name costs a life. You have 3 lives.</li>
-          <li>Stuck? “Show first letter” gives the first letter of the highest hidden name. It counts as help in your result.</li>
+          <li>A wrong name costs a life. You get 3 lives for each list. Out of lives, or giving up, ends the game.</li>
+          <li>Stuck? “Show first letter” gives the first letter of the highest hidden name. It counts as help in your final result.</li>
           <li>Surnames are fine. Small typing mistakes and accents do not matter.</li>
         </ul>
       </details>
-    </main>`;
+    </main>
+    <div class="t5-modal" id="t5Modal" hidden>
+      <div class="t5-modal-card" role="dialog" aria-modal="true" aria-labelledby="t5ModalTitle">
+        <h2 id="t5ModalTitle"></h2>
+        <p id="t5ModalText"></p>
+        <p class="win-perfect" id="t5Perfect" hidden>⭐ With no help!</p>
+        <button class="primary" id="t5Share" type="button">Share my result</button>
+        <p class="share-note" id="t5ShareNote" hidden></p>
+        <button id="t5Again" type="button">Play again</button>
+        <button class="t5-link" id="t5See" type="button">See the answers</button>
+      </div>
+    </div>`;
   const $ = (id) => document.getElementById(id);
 
   // ---- Helpers ----
@@ -68,27 +76,42 @@
   const topN = () => Math.max(...list.items.map((_, i) => rankOf(i)));
 
   // ---- State ----
-  let order = [], pos = -1, list, found, lives, hints, over;
+  let run = [], round = 0, list, found, lives, hints = 0, over, done = 0, timer;
   const wanted = new URLSearchParams(location.search).get("list"); // ?list=laliga-scorers opens one list (for testing)
 
-  function nextList() {
-    if (wanted && pos < 0) { const i = LISTS.findIndex((l) => l.id === wanted); if (i >= 0) { order = [i]; } }
-    if (!order.length || pos + 1 >= order.length) { order = shuffle(LISTS.map((_, i) => i)); pos = -1; }
-    pos++;
-    start(LISTS[order[pos]]);
+  // A new game: pick 3 different lists at random (?list=id puts that list first)
+  function newRun() {
+    clearTimeout(timer);
+    let idx = shuffle(LISTS.map((_, i) => i));
+    const w = LISTS.findIndex((l) => l.id === wanted);
+    if (w >= 0) idx = [w, ...idx.filter((i) => i !== w)];
+    run = idx.slice(0, ROUNDS); round = 0; hints = 0; done = 0;
+    $("t5Modal").hidden = true;
+    start(LISTS[run[0]]);
   }
 
   function start(l) {
-    list = l; list.items.forEach((it) => (it.hint = "")); found = list.items.map(() => false); lives = LIVES; hints = 0; over = false;
-    $("t5End").hidden = true; $("t5Game").hidden = false;
-    $("t5Kicker").textContent = `Top ${topN()}`;
+    list = l; list.items.forEach((it) => (it.hint = "")); found = list.items.map(() => false); lives = LIVES; over = false;
+    $("t5Game").hidden = false;
+    $("t5Kicker").textContent = `Round ${round + 1} of ${ROUNDS} · Top ${topN()}`;
+    drawPips();
     $("t5Title").textContent = list.title;
     $("t5AsOf").textContent = `Numbers as of ${list.asOf}`;
+    $("t5Note").hidden = true;
     $("t5Msg").textContent = ""; $("t5Msg").className = "t5-msg";
     $("t5Input").value = ""; $("t5Input").disabled = false;
     $("t5Hint").disabled = false; $("t5Give").disabled = false;
     drawBoard(); drawLives();
     if (matchMedia("(pointer: fine)").matches) $("t5Input").focus();
+  }
+
+  function drawPips() {
+    const box = $("t5Pips"); box.innerHTML = "";
+    for (let i = 0; i < ROUNDS; i++) {
+      const p = document.createElement("span");
+      p.className = "t5-pip" + (i < done ? " done" : i === round ? " now" : "");
+      box.appendChild(p);
+    }
   }
 
   function drawBoard(reveal) {
@@ -156,26 +179,47 @@
     say(`The highest hidden name starts with “${n.name[0]}”.`);
   }
 
+  function showNote() {
+    $("t5Note").innerHTML = (list.note ? list.note + " " : "") + (list.source ? `<a href="${list.source}" target="_blank" rel="noopener">Source</a>` : "");
+    $("t5Note").hidden = false;
+  }
+
+  // End of one list. Won: next list starts by itself (or the game is won after the last one). Lost: the game is over.
   function finish(won, gaveUp) {
     over = true;
     $("t5Input").disabled = true; $("t5Hint").disabled = true; $("t5Give").disabled = true;
-    drawBoard(true);
-    const n = found.filter(Boolean).length, total = list.items.length;
-    $("t5EndTitle").textContent = won ? "You got the whole Top " + topN() + "! 🏆" : gaveUp ? "Here are the answers" : "Out of lives";
-    $("t5EndText").textContent = `You found ${n} of ${total}.` + (hints ? ` You used ${hints} letter hint${hints === 1 ? "" : "s"}.` : "");
-    $("t5Perfect").hidden = !(won && hints === 0 && lives === LIVES);
-    $("t5Note").innerHTML = (list.note ? list.note + " " : "") + (list.source ? `<a href="${list.source}" target="_blank" rel="noopener">Source</a>` : "");
+    drawBoard(true); showNote();
+    if (won) {
+      done = round + 1; drawPips();
+      if (round + 1 < ROUNDS) {
+        say(`List ${round + 1} done! 🎉 Next list coming up…`, "good");
+        timer = setTimeout(() => { round++; start(LISTS[run[round]]); }, NEXT_DELAY);
+      } else {
+        timer = setTimeout(() => modal(true), 900);
+      }
+    } else {
+      say(gaveUp ? "Here are the answers." : "Out of lives. Here are the answers.", "bad");
+      timer = setTimeout(() => modal(false), 700);
+    }
+  }
+
+  function modal(won) {
+    $("t5ModalTitle").textContent = won ? `You won! ${ROUNDS} tops in a row 🏆` : "Game over";
+    $("t5ModalText").textContent = won
+      ? (hints ? `You used ${hints} letter hint${hints === 1 ? "" : "s"}.` : "")
+      : `You completed ${done} of ${ROUNDS} lists.` + (hints ? ` You used ${hints} letter hint${hints === 1 ? "" : "s"}.` : "");
+    $("t5Perfect").hidden = !(won && hints === 0);
+    $("t5See").textContent = won ? "See the last list" : "See the answers";
     $("t5ShareNote").hidden = true;
-    $("t5End").hidden = false;
-    $("t5Next").textContent = pos + 1 >= order.length ? "Play again" : "Next list";
-    $("t5End").scrollIntoView({ behavior: "smooth", block: "nearest" });
+    $("t5Modal").hidden = false;
+    $("t5Again").focus();
   }
 
   async function share() {
-    const n = found.filter(Boolean).length, total = list.items.length;
+    const won = done === ROUNDS;
     const url = location.origin + location.pathname + "?utm_source=share&utm_medium=social&utm_campaign=top5";
     const help = hints ? `${hints} letter hint${hints === 1 ? "" : "s"}` : "no help";
-    const full = `⚽ Top ${topN()}: ${list.title}\n✅ ${n}/${total} · ${lives} ${lives === 1 ? "life" : "lives"} left · ${help}\n${url}`;
+    const full = `⚽ Guess the Top 5\n${won ? "🏆" : "✅"} ${done}/${ROUNDS} tops in a row · ${help}\n${url}`;
     const note = $("t5ShareNote");
     if (navigator.share && matchMedia("(pointer: coarse)").matches) {
       try { await navigator.share({ text: full }); return; } catch (e) { if (e.name === "AbortError") return; }
@@ -189,7 +233,9 @@
   $("t5Hint").addEventListener("click", hint);
   $("t5Give").addEventListener("click", () => { if (!over) finish(false, true); });
   $("t5Share").addEventListener("click", share);
-  $("t5Next").addEventListener("click", nextList);
+  $("t5Again").addEventListener("click", newRun);
+  $("t5See").addEventListener("click", () => { $("t5Modal").hidden = true; });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") $("t5Modal").hidden = true; });
 
-  nextList();
+  newRun();
 })();
