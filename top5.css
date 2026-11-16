@@ -8,6 +8,7 @@
 .t5-row { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; min-height: 56px; }
 .t5-rank { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 600; display: flex; align-items: center; justify-content: center; font-size: 15px; }
 .t5-name { flex: 1; font-weight: 600; font-size: 17px; color: var(--muted); letter-spacing: .08em; overflow-wrap: anywhere; }
+.t5-name.t5-blank { flex: none; width: 45%; max-width: 220px; height: 14px; border-radius: 7px; background: #e3e7ef; }
 .t5-val { flex: none; font-size: 15px; color: var(--muted); }
 .t5-row.found { background: var(--green); border-color: var(--green); animation: t5-pop .35s; }
 .t5-row.found .t5-rank { background: var(--green-ink); color: #fff; }
