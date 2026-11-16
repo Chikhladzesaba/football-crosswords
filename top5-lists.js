@@ -8,15 +8,15 @@ window.TOP5_LISTS = [
     id: "ucl-scorers",
     title: "Champions League all-time top scorers",
     unit: "goals",
-    asOf: "21 Oct 2026",
+    asOf: "4 Nov 2026",
     note: "Mbappé is still scoring, so his total will grow.",
-    source: "https://worldsoccertalk.com/news/kylian-mbappe-enters-champions-league-all-time-top-5-goalscorers-closing-in-on-cristiano-ronaldo-and-lionel-messi",
+    source: "https://www.si.com/soccer/kylian-mbappe-falls-agonizingly-short-famous-lionel-messi-champions-league-record",
     items: [
       { name: "Cristiano Ronaldo", alt: ["ronaldo", "cristiano", "cr7"], value: "140" },
       { name: "Lionel Messi", alt: ["messi", "leo messi"], value: "129" },
       { name: "Robert Lewandowski", alt: ["lewandowski", "lewy", "robert"], value: "109" },
       { name: "Karim Benzema", alt: ["benzema"], value: "90" },
-      { name: "Kylian Mbappé", alt: ["mbappe", "kylian"], value: "73+" },
+      { name: "Kylian Mbappé", alt: ["mbappe", "kylian"], value: "74+" },
     ],
   },
   {
