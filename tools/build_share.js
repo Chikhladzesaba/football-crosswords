@@ -3,6 +3,7 @@
 //   - <head> tags on every page: title, description, canonical link, Open Graph + Twitter preview tags
 //   - sitemap.xml and robots.txt
 // Run from the site folder:  node tools/build_share.js
+//   Only redraw the images:   node tools/build_share.js --images-only
 //   Only one language:        node tools/build_share.js --lang ka   (or --lang en)
 // Georgian crosswords (lang: "ka" in crosswords.js) get Georgian texts and stay hidden from Google
 // (noindex, not in the sitemap) while KA_PUBLIC below is false.
@@ -16,6 +17,8 @@ const SITE = "https://kickoffpuzzles.com/";
 const BRAND = "Football Crosswords";
 const KA_PUBLIC = true; // true = Georgian pages may appear on Google (live since Nov 2026)
 const ONLY = (process.argv.indexOf("--lang") > -1) ? process.argv[process.argv.indexOf("--lang") + 1] : null;
+const IMAGES_ONLY = process.argv.includes("--images-only"); // only redraw share.png files, leave pages/sitemap alone
+const write = (...a) => { if (!IMAGES_ONLY) fs.writeFileSync(...a); };
 const langOf = (c) => c.lang || "en";
 // Georgian texts (approved by Saba)
 const KA = {
@@ -30,7 +33,7 @@ const KA = {
 // Cloudflare Web Analytics (cookie-free visit counting). The token is public by design.
 const ANALYTICS = `<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3b650f1df19b43698cc1d110b8a5c6dc"}'></script><!-- End Cloudflare Web Analytics -->`;
 const ROOT = path.resolve(__dirname, "..");
-const FONTS = process.env.FONTS_DIR; // folder holding the three .woff2 files used in the images
+const FONTS = path.join(ROOT, "fonts"); // FiraGO (site font) used in the images
 
 // ---- read the crossword list (crosswords.js sets window.CROSSWORDS) ----
 const window = {};
@@ -198,8 +201,15 @@ ${FONT_LINKS.replace(/\.\.\//g, "")}
 `;
 }
 
+// grid picture of a real crossword (used on the two home images)
+function gridOf(folder) {
+  const p = readPuzzle(folder), cells = new Set();
+  p.words.forEach((w) => { for (let i = 0; i < w.answer.length; i++) cells.add((w.row + (w.dir === "D" ? i : 0)) + "," + (w.col + (w.dir === "A" ? i : 0))); });
+  return { rows: p.rows, cols: p.cols, cells: [...cells].map((k) => k.split(",").map(Number)) };
+}
+
 // ---- the share image ----
-function imageHtml({ titleHtml, kicker, chips, grid, lang = "en" }) {
+function imageHtml({ title, sub, cta, grid, lang = "en", filters }) {
   const f = (n) => "file://" + path.join(FONTS, n);
   let gridSvg = "";
   if (grid) {
@@ -209,29 +219,28 @@ function imageHtml({ titleHtml, kicker, chips, grid, lang = "en" }) {
     grid.cells.forEach(([r, c]) => cells.push(`<rect x="${c * cell + 1}" y="${r * cell + 1}" width="${cell - 3}" height="${cell - 3}" rx="${Math.max(2, cell * 0.14)}" />`));
     gridSvg = `<svg class="grid" width="${grid.cols * cell}" height="${grid.rows * cell}">${cells.join("")}</svg>`;
   }
+  const icon = `<rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M9.2 3.5v17M14.8 3.5v17M3.5 9.2h17M3.5 14.8h17"/>`;
   return `<!doctype html><html lang="${lang}"><head><style>
-@font-face { font-family: "Inter Tight"; font-weight: 400; src: url(${f("inter-tight-latin-400-normal.woff2")}); }
-@font-face { font-family: "Inter Tight"; font-weight: 600; src: url(${f("inter-tight-latin-600-normal.woff2")}); }
-@font-face { font-family: "Instrument Serif"; font-style: italic; src: url(${f("instrument-serif-latin-400-italic.woff2")}); }
-@font-face { font-family: "Noto Sans Georgian"; font-weight: 400; src: url(${f("noto-sans-georgian-georgian-400-normal.woff2")}); }
-@font-face { font-family: "Noto Sans Georgian"; font-weight: 600; src: url(${f("noto-sans-georgian-georgian-600-normal.woff2")}); }
-@font-face { font-family: "Noto Serif Georgian"; src: url(${f("noto-serif-georgian-georgian-400-normal.woff2")}); }
+@font-face { font-family: "FiraGO"; font-weight: 400; src: url(${f("FiraGO-Regular.woff2")}); }
+@font-face { font-family: "FiraGO"; font-weight: 500; src: url(${f("FiraGO-Medium.woff2")}); }
 * { box-sizing: border-box; margin: 0; }
-body { width: 1200px; height: 630px; background: #006aff; color: #fff; font-family: "Inter Tight", "Noto Sans Georgian", sans-serif;
-  display: flex; align-items: center; justify-content: space-between; padding: 72px 80px; overflow: hidden; }
-.text { display: flex; flex-direction: column; gap: 28px; max-width: ${grid ? 620 : 1040}px; }
-.kicker { font-size: 26px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; opacity: .8; }
-h1 { font-weight: 400; font-size: ${grid ? 84 : 112}px; line-height: 1.02; letter-spacing: -0.01em; }
-h1 em { font-family: "Instrument Serif", "Noto Serif Georgian", serif; font-style: italic; }
-html[lang=ka] h1 { font-size: ${grid ? 64 : 96}px; line-height: 1.12; }
-html[lang=ka] .kicker { text-transform: none; letter-spacing: 0; }
-html[lang=ka] h1 em { font-family: inherit; font-style: normal; }
-.chips { display: flex; gap: 14px; }
-.chip { font-size: 28px; font-weight: 600; padding: 10px 22px; border-radius: 999px; background: rgba(255,255,255,.16); }
-.chip.solid { background: #fff; color: #006aff; }
+body { width: 1200px; height: 630px; background: #006aff; color: #fff; font-family: "FiraGO", sans-serif; font-weight: 400;
+  display: flex; align-items: center; justify-content: space-between; padding: 64px 80px; overflow: hidden; }
+.text { display: flex; flex-direction: column; gap: 26px; max-width: 600px; }
+.brand { display: flex; align-items: center; gap: 14px; font-size: 26px; font-weight: 500; opacity: .9; }
+.brand span { width: 52px; height: 52px; border-radius: 14px; background: #fff; display: flex; align-items: center; justify-content: center; }
+.brand svg { width: 32px; height: 32px; stroke: #006aff; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+h1 { font-weight: 500; font-size: ${lang === "ka" ? 64 : 76}px; line-height: 1.12; }
+h1 em { font-style: normal; }
+.filters { display: flex; flex-direction: column; gap: 14px; }
+.frow { display: flex; flex-wrap: wrap; gap: 10px; }
+.frow i { font-style: normal; font-size: 22px; font-weight: 500; padding: 8px 18px; border-radius: 14px; background: rgba(255,255,255,.18); }
+p.sub { font-size: 28px; line-height: 1.4; opacity: .92; }
+.cta { align-self: flex-start; font-size: 28px; font-weight: 500; padding: 12px 30px; border-radius: 14px; background: #fff; color: #0a3f8f; }
 .grid rect { fill: #fff; opacity: .92; }
 </style></head><body>
-<div class="text"><div class="kicker">${kicker}</div><h1>${titleHtml}</h1><div class="chips">${chips}</div></div>
+<div class="text"><div class="brand"><span><svg viewBox="0 0 24 24">${icon}</svg></span>Kickoff Puzzles</div>
+<h1>${title}</h1>${sub ? `<p class="sub">${sub}</p>` : ""}${filters ? `<div class="filters">${filters.map((r) => `<div class="frow">${r.map((t) => `<i>${t}</i>`).join("")}</div>`).join("")}</div>` : ""}${cta ? `<div class="cta">${cta}</div>` : ""}</div>
 ${gridSvg}
 </body></html>`;
 }
@@ -249,8 +258,7 @@ ${gridSvg}
 
   // Home page image (skipped with --lang ka) + tags (always, so the hreflang links stay in step)
   if (ONLY !== "ka") await shot(imageHtml({
-    titleHtml: "Football <em>Crosswords</em>", kicker: "No sign-up · Play on any device",
-    chips: `<span class="chip solid">Play free</span><span class="chip">World Cup · Champions League · Legends</span>`,
+    title: "Football Crosswords", filters: [["International", "Champions League", "Club football", "Legends"]], grid: gridOf("ballon-dor-winners"),
   }), path.join(ROOT, "share.png"));
   {
   let home = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
@@ -260,7 +268,7 @@ ${gridSvg}
     url: SITE, image: SITE + "share.png", alternates: KA_PUBLIC ? HOME_ALTERNATES : [],
   }) + "\n");
   if (!home.includes("cloudflareinsights")) home = home.replace("</head>", `  ${ANALYTICS}\n</head>`);
-  fs.writeFileSync(path.join(ROOT, "index.html"), home);
+  write(path.join(ROOT, "index.html"), home);
   }
 
   // One image + page per crossword
@@ -268,9 +276,9 @@ ${gridSvg}
   if (ONLY !== "en") {
     fs.mkdirSync(path.join(ROOT, "ka"), { recursive: true });
     await shot(imageHtml({
-      titleHtml: "საფეხბურთო <em>კროსვორდები</em>", kicker: "ქართულად", lang: "ka", chips: "",
+      title: "საფეხბურთო კროსვორდები", filters: [["ნაკრებები", "ჩემპიონთა ლიგა", "საკლუბო ფეხბურთი", "ლეგენდები"]], lang: "ka", grid: gridOf("ka-euro-2024"),
     }), path.join(ROOT, "ka", "share.png"));
-    fs.writeFileSync(path.join(ROOT, "ka", "index.html"), kaHomePage());
+    write(path.join(ROOT, "ka", "index.html"), kaHomePage());
   }
 
   const todo = LIST.filter((c) => !ONLY || langOf(c) === ONLY);
@@ -280,21 +288,20 @@ ${gridSvg}
     const cells = new Set();
     p.words.forEach((w) => { for (let i = 0; i < w.answer.length; i++) cells.add((w.row + (w.dir === "D" ? i : 0)) + "," + (w.col + (w.dir === "A" ? i : 0))); });
     await shot(imageHtml({
-      titleHtml: p.title, kicker: ka ? KA.brand : BRAND, lang: ka ? "ka" : "en",
-      chips: ka ? "" : `<span class="chip solid">${c.answers} answers</span>`,
+      title: p.title, sub: c.about, cta: ka ? "ითამაშე" : "Play", lang: ka ? "ka" : "en",
       grid: { rows: p.rows, cols: p.cols, cells: [...cells].map((k) => k.split(",").map(Number)) },
     }), path.join(ROOT, c.folder, "share.png"));
-    fs.writeFileSync(path.join(ROOT, c.folder, "index.html"), puzzlePage(c, p));
+    write(path.join(ROOT, c.folder, "index.html"), puzzlePage(c, p));
   }
 
   // Sitemap + robots.txt (Georgian pages only once KA_PUBLIC is true)
   {
   const today = new Date().toISOString().slice(0, 10);
   const urls = [SITE, SITE + "daily/", SITE + "scramble/", ...(KA_PUBLIC ? [SITE + "ka/", SITE + "gamoicani-pekhburtelebis-gvarebi/"] : []), ...LIST.filter((c) => langOf(c) === "en" || KA_PUBLIC).map((c) => SITE + c.folder + "/")]; // daily/ is hand-made
-  fs.writeFileSync(path.join(ROOT, "sitemap.xml"),
+  write(path.join(ROOT, "sitemap.xml"),
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
     urls.map((u) => `  <url><loc>${u}</loc><lastmod>${today}</lastmod></url>`).join("\n") + `\n</urlset>\n`);
-  fs.writeFileSync(path.join(ROOT, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}sitemap.xml\n`);
+  write(path.join(ROOT, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}sitemap.xml\n`);
   }
 
   await browser.close();
