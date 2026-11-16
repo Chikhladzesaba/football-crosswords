@@ -324,9 +324,9 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
   .play { grid-column: 1; grid-row: 1 / 6; gap: 0; }
   #crossword > main > .back { grid-column: 2; grid-row: 1; margin: 0; font-size: 13px; justify-self: start; }
   #crossword > main > h1 { grid-column: 2; grid-row: 2; margin: 0; font-size: 28px; line-height: 1.2; align-self: end; }
-  #crossword > main > .meta { grid-column: 2; grid-row: 2; margin: 0; gap: 14px; justify-self: end; align-self: end; align-items: baseline; }
+  #crossword > main > .meta { grid-column: 2; grid-row: 1; margin: 0; gap: 14px; justify-self: end; align-self: center; align-items: baseline; } /* same row as the back link, so a long title never collides with it */
   #crossword > main > .intro { display: none; } /* still in the page for Google; the "How to play" box covers it */
-  .board > .clue-bar { grid-column: 2; grid-row: 3; height: 84px; min-height: 0; overflow-y: auto; padding: 8px 14px; font-size: 15px; line-height: 1.4; align-items: flex-start; }
+  .board > .clue-bar { grid-column: 2; grid-row: 3; height: 66px; min-height: 0; overflow-y: auto; padding: 8px 14px; font-size: 15px; line-height: 1.4; align-items: flex-start; }
   .side { grid-column: 2; grid-row: 4; align-self: stretch; min-height: 0; overflow: hidden; gap: 10px; }
   #crossword > main > .legend { grid-column: 2; grid-row: 5; margin: 0; font-size: 12px; }
   .actions { gap: 6px; }
@@ -335,6 +335,10 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
   .clues section { overflow-y: auto; }
   html:lang(ka) .clues { grid-template-rows: none; }
   html:lang(ka) .clues section { overflow: visible; }
+  /* Georgian: Across and Down are stacked, so the whole list is one framed, scrolling box */
+  html:lang(ka) .clues { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 4px 0; }
+  html:lang(ka) .clues section { border: 0; border-radius: 0; background: none; padding: 8px 8px 0; }
+  html:lang(ka) .clues section + section { border-top: 1px solid var(--border); margin-top: 6px; }
   .clues li { padding: 6px 8px; }
   .clues h3 { margin-bottom: 2px; }
   .num { font-size: max(8px, calc(var(--cell) * .22)); }
