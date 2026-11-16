@@ -2,10 +2,13 @@
 // Words are in wordsearch-words.js. Test version, English only. All words the player sees are in TEXT below.
 (function () {
   const root = document.getElementById("wordsearch");
-  const POOL = window.WORDSEARCH_WORDS || [];
-  if (!root || !POOL.length) return;
+  const ALL_WORDS = window.WORDSEARCH_WORDS || [];
+  if (!root || !ALL_WORDS.length) return;
 
-  const SIZE = 14;                                  // the grid is 14 x 14
+  // The grid is 14 x 14 on a computer and 11 x 11 on a phone (bigger squares, fewer letters). Words longer than the grid are left out.
+  const SIZE = window.matchMedia("(max-width: 640px)").matches ? 11 : 14;
+  const POOL = ALL_WORDS.filter((x) => x.w.length <= SIZE);
+  root.style.setProperty("--n", SIZE);
   const MIX = { easy: 4, medium: 3, hard: 3 };      // words per round: 4 easy, 3 medium, 3 hard
   // Directions are [row step, column step]. Easy words only run left to right or top to bottom,
   // medium words may also run diagonally (still forward), hard words can run in all 8 directions, also backwards.
