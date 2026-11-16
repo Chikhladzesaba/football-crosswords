@@ -85,7 +85,7 @@ function puzzlePage(c, p) {
 ${headTags({ title, description, url, image: url + "share.png" })}
 ${FONT_LINKS}
   <link rel="stylesheet" href="../nav.css?v=5">
-  <link rel="stylesheet" href="../crossword.css?v=10">
+  <link rel="stylesheet" href="../crossword.css?v=12">
   ${ANALYTICS}
 </head>
 <body>
@@ -124,7 +124,7 @@ function puzzlePageKa(c, p) {
 ${headTags({ title: KA.title(c), description: KA.description(c, level), url, image: url + "share.png", brand: KA.brand, locale: "ka_GE", noindex: !KA_PUBLIC })}
 ${FONT_LINKS}
   <link rel="stylesheet" href="../nav.css?v=5">
-  <link rel="stylesheet" href="../crossword.css?v=10">
+  <link rel="stylesheet" href="../crossword.css?v=12">
   ${ANALYTICS}
 </head>
 <body>
@@ -165,7 +165,7 @@ function kaHomePage() {
 ${headTags({ title: KA.homeTitle, description: KA.homeIntro, url, image: url + "share.png", brand: KA.brand, locale: "ka_GE", noindex: !KA_PUBLIC, alternates: KA_PUBLIC ? HOME_ALTERNATES : [] })}
 ${FONT_LINKS.replace(/\.\.\//g, "")}
   <link rel="stylesheet" href="../nav.css?v=5">
-  <link rel="stylesheet" href="../crossword.css?v=10">
+  <link rel="stylesheet" href="../crossword.css?v=12">
   ${ANALYTICS}
 </head>
 <body>

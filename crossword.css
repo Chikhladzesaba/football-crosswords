@@ -314,11 +314,15 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
    The grid gets the whole height under the game tabs (squares are sized from the screen height; --rows comes from crossword.js).
    Title, timer, clue, buttons and the clue lists live in the right-hand column. A long clue list scrolls inside its own box. */
 @media (min-width: 761px) {
-  :root { --nav-h: 62px; --cell: max(22px, min(50px, calc((100dvh - var(--nav-h) - 40px) / var(--rows) - 2px), calc(620px / var(--cols) - 2px))); }
+  :root { --nav-h: 46px; --cell: max(22px, min(56px, calc((100dvh - var(--nav-h) - 20px) / var(--rows) - 2px), calc(640px / var(--cols) - 2px))); }
+  /* a slimmer game-tab bar on puzzle pages gives the squares more height */
+  body:has(#crossword) .games-nav { padding-top: 6px; }
+  body:has(#crossword) .games-nav a { padding: 7px 14px; }
+  body:has(#crossword) .top-right { top: 14px; }
   #crossword > main {
     display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto auto minmax(0, 1fr) auto;
     column-gap: 28px; row-gap: 8px; align-items: start;
-    height: calc(100dvh - var(--nav-h)); padding: 14px 16px 12px; overflow: hidden;
+    height: calc(100dvh - var(--nav-h)); padding: 10px 16px 6px; overflow: hidden;
   }
   .board { display: contents; } /* the grid column and the right-hand column become direct parts of the page grid */
   .play { grid-column: 1; grid-row: 1 / 6; gap: 0; }
