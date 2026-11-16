@@ -71,5 +71,5 @@ window.CROSSWORDS = [
   { folder: "ka-world-cup-2022", lang: "ka", name: "მსოფლიო ჩემპიონატი 2022", difficulty: "Medium", topic: "International", answers: 17, about: "2022 წლის მსოფლიო ჩემპიონატის ფეხბურთელები, გუნდები და სენსაციები." },
   { folder: "ka-world-stadiums", lang: "ka", name: "მსოფლიოს სტადიონები", difficulty: "Medium", topic: "Club football", answers: 15, about: "მსოფლიოს ცნობილი სტადიონები და მათი ისტორია." },
   { folder: "ka-top-scorers", lang: "ka", name: "ბომბარდირები", difficulty: "Medium", topic: "Legends", answers: 16, about: "ფეხბურთის საუკეთესო ბომბარდირები და მათი რეკორდები." },
-  { folder: "ka-world-cup-history", lang: "ka", name: "მსოფლიო ჩემპიონატების ისტორია", difficulty: "Very hard", topic: "International", answers: 17, about: "მსოფლიო ჩემპიონატების ისტორია 1930 წლიდან 1998 წლამდე." },
+  { folder: "ka-world-cup-history", lang: "ka", name: "მსოფლიო ჩემპიონატების ისტორია", difficulty: "Very hard", topic: "International", answers: 16, about: "მსოფლიო ჩემპიონატების ისტორია 1930 წლიდან 1998 წლამდე." },
 ];
