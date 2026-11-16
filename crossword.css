@@ -366,3 +366,25 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
   .board { gap: 12px; }
   .side { margin-top: 8px; }
 }
+
+/* ---- Phone: the whole puzzle fits in the space above the phone's keyboard, so nothing hides or jumps ---- */
+@media (max-width: 760px) {
+  body.phone-play { --kbh: 275px; /* about the height of the phone keyboard with its small toolbar */
+    --cell: max(20px, min(46px, calc((100dvh - 156px - var(--kbh)) / var(--rows) - 2px), calc((100vw - 32px) / var(--cols) - 2px))); }
+  body.phone-play .topbar { display: none; }
+  body.phone-play #crossword > main { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: 10px; row-gap: 6px; padding-top: 10px; align-items: center; }
+  /* one slim row: arrow back, title, progress and time */
+  body.phone-play #crossword > main > .back { grid-column: 1; grid-row: 1; margin: 0; font-size: 0; line-height: 0; padding: 4px 6px 4px 0; }
+  body.phone-play #crossword > main > .back::before { content: "\2190"; font-size: 22px; line-height: 1; }
+  body.phone-play #crossword > main > h1 { grid-column: 2; grid-row: 1; font-size: 18px; line-height: 1.2; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  body.phone-play #crossword > main > .meta { grid-column: 3; grid-row: 1; margin: 0; gap: 8px; align-items: baseline; }
+  body.phone-play .meta .count { display: none; }
+  body.phone-play .meta .play-count { color: var(--muted); font-size: 13px; white-space: nowrap; }
+  body.phone-play .meta .timer { font-size: 16px; }
+  body.phone-play #crossword > main > .intro { display: none; }
+  body.phone-play #crossword > main > .legend { grid-column: 1 / -1; }
+  body.phone-play .board { grid-column: 1 / -1; grid-row: 2; gap: 8px; }
+  body.phone-play .clue-bar { height: 88px; min-height: 0; overflow: hidden; padding: 8px 12px; font-size: 14px; line-height: 1.35; align-items: flex-start; }
+  body.phone-play .play { margin: 0 auto; }
+  body.phone-play .side { margin-top: 12px; }
+}

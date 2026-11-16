@@ -561,6 +561,7 @@
   // Phones keep their own keyboard. While typing we hide the title, pin the clue to the top of the
   // visible screen and scroll so the active square sits just above the keyboard.
   const touch = matchMedia("(pointer: coarse)").matches;
+  const PHONE = touch && matchMedia("(max-width: 760px)").matches; // phone layout (below)
   const vv = window.visualViewport; // the part of the page not covered by the keyboard
   const bar = root.querySelector(".clue-bar");
   const spacer = document.createElement("div");
@@ -574,15 +575,26 @@
   }
   let userScrolling = false, scrollTimer = null; // true while the finger moves the page
   function keepVisible() {
-    if (!touch || !state.cell || userScrolling) return; // never fight the user's own scroll
+    if (!touch || PHONE || !state.cell || userScrolling) return; // never fight the user's own scroll
     const r = state.cell.el.getBoundingClientRect();
     const top = (vv ? vv.offsetTop : 0) + (typing() ? bar.offsetHeight : 0) + 8;
     const bottom = (vv ? vv.offsetTop + vv.height : innerHeight) - 12;
     if (r.bottom > bottom) scrollBy(0, r.bottom - bottom);
     else if (r.top < top) scrollBy(0, r.top - top);
   }
+
+  // ---- PHONE LAYOUT -------------------------------------------------------
+  // On a phone the page keeps the phone's own keyboard. To stop the grid from hiding behind it or jumping around,
+  // the header is one slim row, the clue box has a fixed height and the squares are sized so the whole grid fits
+  // in the space above the keyboard (the CSS leaves room for it even before the keyboard is open).
+  if (PHONE) {
+    document.body.classList.add("phone-play");
+    const kc = document.createElement("span"); kc.className = "play-count"; $("count").after(kc); // short progress, e.g. 3/8
+    const upd = () => { kc.textContent = ($("count").textContent.match(/\d+\s*\/\s*\d+/) || [""])[0].replace(/\s/g, ""); };
+    new MutationObserver(upd).observe($("count"), { childList: true, characterData: true, subtree: true }); upd();
+  }
   let tapped = false; // the page focuses the first square on load; typing mode waits for a real tap
-  if (touch) {
+  if (touch && !PHONE) {
     root.addEventListener("pointerdown", () => (tapped = true), true);
     root.addEventListener("focusin", (e) => {
       if (!tapped || !e.target.closest("#grid")) return;
