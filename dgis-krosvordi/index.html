@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ka">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>დღის კროსვორდი | საფეხბურთო კროსვორდი</title>
+  <meta name="description" content="ახალი საფეხბურთო კროსვორდი ყოველ დღე, ყველა თემიდან. ორშაბათს მარტივია, კვირას ყველაზე რთული. შეგიძლია ითამაშო ტელეფონზეც და კომპიუტერზეც.">
+  <link rel="canonical" href="https://kickoffpuzzles.com/dgis-krosvordi/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="საფეხბურთო კროსვორდები">
+  <meta property="og:locale" content="ka_GE">
+  <meta property="og:title" content="დღის კროსვორდი | საფეხბურთო კროსვორდი">
+  <meta property="og:description" content="ახალი საფეხბურთო კროსვორდი ყოველ დღე. ორშაბათს მარტივია, კვირას ყველაზე რთული.">
+  <meta property="og:url" content="https://kickoffpuzzles.com/dgis-krosvordi/">
+  <meta property="og:image" content="https://kickoffpuzzles.com/ka/share.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="დღის კროსვორდი | საფეხბურთო კროსვორდი">
+  <meta name="twitter:description" content="ახალი საფეხბურთო კროსვორდი ყოველ დღე. ორშაბათს მარტივია, კვირას ყველაზე რთული.">
+  <meta name="twitter:image" content="https://kickoffpuzzles.com/ka/share.png">
+  <meta name="theme-color" content="#006aff">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%231f6feb'/><g fill='%23fff'><rect x='12' y='12' width='22' height='22' rx='3'/><rect x='39' y='12' width='22' height='22' rx='3'/><rect x='66' y='12' width='22' height='22' rx='3'/><rect x='12' y='39' width='22' height='22' rx='3'/><rect x='66' y='39' width='22' height='22' rx='3'/><rect x='12' y='66' width='22' height='22' rx='3'/><rect x='39' y='66' width='22' height='22' rx='3'/><rect x='66' y='66' width='22' height='22' rx='3'/></g><circle cx='50' cy='50' r='12' fill='%23fff'/><circle cx='50' cy='50' r='5' fill='%23111'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600&family=Noto+Serif+Georgian:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../crossword.css">
+  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3b650f1df19b43698cc1d110b8a5c6dc"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+  <!-- Hand-made page (tools/build_share.js does not touch it). The script below picks today's
+       crossword from dgis-krosvordi/YYYY-MM.js (made by: python3 tools/build_daily.py ka) and starts the game. -->
+  <div id="crossword">
+    <main>
+      <a class="back" href="../ka/">← ყველა კროსვორდი</a>
+      <h1>დღის <em>კროსვორდი</em></h1>
+      <p class="intro" id="dailyMsg">ახალი საფეხბურთო კროსვორდი ყოველდღე, ყველა თემიდან. ორშაბათს მარტივია, კვირას ყველაზე რთული.</p>
+    </main>
+  </div>
+  <script>
+  (function () {
+    var d = new Date();
+    var iso = d.toLocaleDateString("en-CA"); // today in the player's own time, YYYY-MM-DD
+    var DAYS = ["კვირა", "ორშაბათი", "სამშაბათი", "ოთხშაბათი", "ხუთშაბათი", "პარასკევი", "შაბათი"];
+    var MONTHS = ["იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი", "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"];
+    var LEVEL = { "Easy": "მარტივი", "Medium": "საშუალო", "Hard": "რთული", "Very hard": "ძალიან რთული" };
+    function missing() {
+      document.getElementById("dailyMsg").textContent = "დღევანდელი კროსვორდი ჯერ არ არის მზად. მოგვიანებით შემოიარე ან აირჩიე სხვა კროსვორდი სიიდან.";
+    }
+    var s = document.createElement("script");
+    s.src = iso.slice(0, 7) + ".js";
+    s.onerror = missing;
+    s.onload = function () {
+      var p = (window.DAILY || {})[iso];
+      if (!p) return missing();
+      var day = DAYS[d.getDay()] + ", " + d.getDate() + " " + MONTHS[d.getMonth()];
+      var level = LEVEL[p.level] || p.level;
+      window.PUZZLE = {
+        id: "ka-daily-" + iso,
+        lang: "ka",
+        title: "დღის <em>კროსვორდი</em>",
+        intro: day + " · " + level + ". ყოველდღე ახალი კითხვები ყველა თემიდან: ორშაბათს მარტივია, კვირას ყველაზე რთული. დასაწყებად დააკლიკე უჯრას; მიმართულების შესაცვლელად კიდევ ერთხელ დააკლიკე.",
+        note: "არაოფიციალური ფანების თამაში. თითოეული კითხვა იწყება იმ კროსვორდის სახელით, საიდანაც არის აღებული. ახალი კროსვორდი ყოველდღე შუაღამისას, შენი დროით.",
+        rows: p.rows, cols: p.cols, words: p.words,
+        shareName: "დღის კროსვორდი · " + d.getDate() + " " + MONTHS[d.getMonth()],
+        invite: "⚽ შეძლებ დღევანდელი საფეხბურთო კროსვორდის ამოხსნას? " + p.words.length + " პასუხი, სირთულე: " + level + ".",
+      };
+      var g = document.createElement("script");
+      g.src = "../crossword.js";
+      document.body.appendChild(g);
+    };
+    document.body.appendChild(s);
+  })();
+  </script>
+</body>
+</html>
