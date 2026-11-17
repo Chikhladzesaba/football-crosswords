@@ -634,11 +634,13 @@
       dir: SVG('<path d="M4 12h16m0 0-5-5m5 5-5 5"/>'),
       prev: SVG('<path d="m15 5-7 7 7 7"/>'),
       next: SVG('<path d="m9 5 7 7-7 7"/>'),
+      down: SVG('<path d="m6 9 6 6 6-6"/>'),
+      kbd: SVG('<rect x="2.5" y="6" width="19" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/>'),
       list: SVG('<path d="M8 6h12M8 12h12M8 18h12M3.5 6h.01M3.5 12h.01M3.5 18h.01"/>'),
     };
     const TXT = KA
-      ? { prev: "წინა", next: "შემდეგი", back: "წაშლა", shift: "Shift", dir: "მიმართულების შეცვლა", lang: { ka: "ABC", en: "ქარ" }, list: "ყველა კითხვა", keys: "კლავიატურა", group: "კლავიატურა" }
-      : { prev: "Prev", next: "Next", back: "Delete", shift: "Shift", dir: "Switch direction", lang: { ka: "ABC", en: "ქარ" }, list: "All clues", keys: "Keyboard", group: "Keyboard" };
+      ? { prev: "წინა", next: "შემდეგი", back: "წაშლა", shift: "Shift", dir: "მიმართულების შეცვლა", lang: { ka: "ABC", en: "ქარ" }, list: "ყველა კითხვა", keys: "კლავიატურა", close: "კლავიატურის დამალვა", group: "კლავიატურა" }
+      : { prev: "Prev", next: "Next", back: "Delete", shift: "Shift", dir: "Switch direction", lang: { ka: "ABC", en: "ქარ" }, list: "All clues", keys: "Keyboard", close: "Hide keyboard", group: "Keyboard" };
     let lang = KA ? "ka" : "en", shift = false, showList = false;
     const kb = document.createElement("div");
     kb.id = "kb"; kb.setAttribute("role", "group"); kb.setAttribute("aria-label", TXT.group);
@@ -648,21 +650,22 @@
       const rows = LAY[lang === "ka" && shift ? "kaShift" : lang];
       const keys = (r) => [...rows[r]].map((ch) => btn("key", ch, ch, ch)).join("");
       const sh = lang === "ka" ? btn("shift", IC.shift(shift), TXT.shift).replace("<button", '<button class="fk" aria-pressed="' + shift + '"') : "";
+      const top = btn("close", IC.down, TXT.close).replace("<button", '<button class="kbx"');
       const ctl = '<div class="kbr ctl">' +
           btn("lang", IC.lang + "<span>" + TXT.lang[lang] + "</span>", TXT.lang[lang]).replace("<button", '<button class="w1"') +
           btn("dir", IC.dir, TXT.dir).replace("<button", '<button class="w2"') +
-          btn("list", IC.list, showList ? TXT.keys : TXT.list).replace("<button", '<button class="w2' + (showList ? " on" : "") + '" aria-pressed="' + showList + '"') +
+          btn("list", showList ? IC.kbd : IC.list, showList ? TXT.keys : TXT.list).replace("<button", '<button class="w2' + (showList ? " on" : "") + '" aria-pressed="' + showList + '"') +
           btn("prev", IC.prev + "<span>" + TXT.prev + "</span>", TXT.prev) +
           btn("next", "<span>" + TXT.next + "</span>" + IC.next, TXT.next) +
         "</div>";
       if (showList) {
         const item = (w) => '<button type="button" data-a="clue" data-i="' + words.indexOf(w) + '" class="ci' + (state.cell && wordAt(state.cell, state.dir) === w ? " cur" : "") + (w.li.classList.contains("done") ? " done" : "") + '"><b>' + w.num + "</b><span>" + w.clue + "</span></button>";
         const grp = (d, h) => "<h4>" + h + "</h4>" + words.filter((w) => w.dir === d).map(item).join("");
-        kb.innerHTML = '<div class="kbl">' + grp("A", T.across) + grp("D", T.down) + "</div>" + ctl;
+        kb.innerHTML = top + '<div class="kbl">' + grp("A", T.across) + grp("D", T.down) + "</div>" + ctl;
         const cur = kb.querySelector(".ci.cur"); if (cur) kb.querySelector(".kbl").scrollTop = Math.max(0, cur.offsetTop - 44);
         return;
       }
-      kb.innerHTML =
+      kb.innerHTML = top +
         '<div class="kbr">' + keys(0) + "</div>" +
         '<div class="kbr">' + keys(1) + "</div>" +
         '<div class="kbr">' + sh + keys(2) + btn("back", IC.back, TXT.back).replace("<button", '<button class="fk"') + "</div>" + ctl;
@@ -677,6 +680,7 @@
       else if (a === "shift") { shift = !shift; renderKb(); }
       else if (a === "lang") { lang = lang === "ka" ? "en" : "ka"; shift = false; renderKb(); }
       else if (a === "dir") { if (c.words.A && c.words.D) select(c, other(state.dir)); }
+      else if (a === "close") { showList = false; shift = false; renderKb(); document.body.classList.remove("typing"); if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); }
       else if (a === "list") { showList = !showList; renderKb(); }
       else if (a === "clue") { const w = words[+b.dataset.i]; showList = false; select(w.cells[0], w.dir); renderKb(); }
       else if (a === "prev") { nextWord(-1); if (showList) renderKb(); }
