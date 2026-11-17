@@ -412,6 +412,8 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
   body.own-kb .cell, body.own-kb .grid { touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
   body.phone-play #kb { display: none; flex: none; flex-direction: column; gap: 11px; padding: 12px 8px max(10px, env(safe-area-inset-bottom)); background: #e0e1e7; border-radius: 14px 14px 0 0; -webkit-user-select: none; user-select: none; }
   body.phone-play.typing #kb { display: flex; }
+  /* With our own keyboard nothing needs the clue bar pinned to the top, so it stays in the page and never covers the grid */
+  body.phone-play.own-kb.typing .clue-bar { position: static; transform: none !important; border-radius: 10px; box-shadow: none; }
   .bar-back { display: none; }
   body.phone-play.typing .bar-back { display: flex; align-items: center; justify-content: center; flex: none; width: 34px; height: 34px; margin: -4px 0 0 -6px; border-radius: 50%; color: var(--accent); }
   body.phone-play.typing .bar-back:active { background: #cfe0f5; }
