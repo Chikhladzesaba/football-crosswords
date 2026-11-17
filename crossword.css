@@ -406,4 +406,25 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
   body.phone-play .share-note, body.phone-play .result { flex: none; }
   body.phone-play .clues { flex: 1 1 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
 }
+/* ---- Phone: our own keyboard (test version, opt-in with ?kb=own). It sits at the bottom of the fixed screen and takes space only while typing ---- */
+@media (max-width: 760px) {
+  body.phone-play.own-kb { --kbh: 245px; }
+  body.phone-play #kb { display: none; flex: none; flex-direction: column; gap: 11px; padding: 12px 8px max(10px, env(safe-area-inset-bottom)); background: #e0e1e7; border-radius: 14px 14px 0 0; -webkit-user-select: none; user-select: none; }
+  body.phone-play.typing #kb { display: flex; }
+  #kb .kbr { display: flex; justify-content: center; gap: 6px; }
+  #kb button { flex: 1 1 0; max-width: 40px; height: 44px; padding: 0 0 2px; border: 0; border-radius: 6px; background: #fff; color: var(--ink); font: 400 21px/1 "FiraGO", system-ui, sans-serif; box-shadow: 0 1px 0 #9a9ca4; touch-action: manipulation; -webkit-tap-highlight-color: transparent; cursor: pointer; }
+  #kb button:active { background: #d4d6dd; }
+  #kb .fk { flex: 0 0 50px; max-width: 50px; display: flex; align-items: center; justify-content: center; padding: 0; }
+  #kb .fk[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  #kb .ctl button { max-width: none; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 6px; font-size: 13px; font-weight: 500; color: #0a3f8f; }
+  #kb .kbl { position: relative; height: 164px; overflow-y: auto; -webkit-overflow-scrolling: touch; margin: 0 -2px; background: #fff; border-radius: 8px; padding: 0 8px 6px; }
+  #kb .kbl h4 { margin: 0; padding: 10px 2px 4px; font: 600 11px/1 "FiraGO", system-ui, sans-serif; color: #3d5573; letter-spacing: .04em; text-transform: uppercase; }
+  #kb .kbl .ci { display: flex; gap: 8px; align-items: flex-start; flex: none; width: 100%; max-width: none; height: auto; min-height: 38px; padding: 8px 6px; margin: 0; border-radius: 8px; background: none; box-shadow: none; text-align: left; font: 400 14px/1.3 "FiraGO", system-ui, sans-serif; color: var(--ink); }
+  #kb .kbl .ci b { flex: 0 0 22px; color: #006aff; font-weight: 600; }
+  #kb .kbl .ci.cur { background: #e3efff; }
+  #kb .kbl .ci.done { color: #14975a; }
+  #kb .ctl .on { background: #e3efff; }
+  #kb .ctl .w1 { flex: 0 0 64px; }
+  #kb .ctl .w2 { flex: 0 0 52px; }
+}
 @media (pointer: coarse) { .cell.active input:focus-visible { outline: none; } } /* the dark ring around the selected square stuck out of the grid on phones */

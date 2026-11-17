@@ -608,6 +608,100 @@
     if (vv) { vv.addEventListener("resize", fit); vv.addEventListener("scroll", fit); fit(); }
     addEventListener("scroll", () => { if (scrollY) scrollTo(0, 0); }, { passive: true });
   }
+  // ---- OWN KEYBOARD (phones, test version) --------------------------------
+  // Opt-in for now: open any crossword with ?kb=own to try it (?kb=native switches back). The squares keep their <input>,
+  // but inputmode="none" tells the phone not to show its own keyboard, so our buttons (below) type the letters instead.
+  let ownKb = false;
+  try {
+    const q = (location.search.match(/[?&]kb=(own|native)\b/) || [])[1];
+    if (q) localStorage.setItem("crossword:kb", q);
+    ownKb = localStorage.getItem("crossword:kb") === "own";
+  } catch (e) {}
+  if (PHONE && ownKb) {
+    document.body.classList.add("own-kb");
+    Object.values(cells).forEach((c) => c.input.setAttribute("inputmode", "none"));
+    const KA = document.documentElement.lang === "ka";
+    const LAY = {
+      ka: ["ქწერტყუიოპ", "ასდფგჰჯკლ", "ზხცვბნმ"],
+      kaShift: ["ქჭეღთყუიოპ", "აშდფგჰჟკლ", "ძხჩვბნმ"],
+      en: ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"],
+    };
+    const SVG = (d, fill) => '<svg width="22" height="22" viewBox="0 0 24 24" fill="' + (fill || "none") + '" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + "</svg>";
+    const IC = {
+      back: SVG('<path d="M21 6H9l-6 6 6 6h12a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1z"/><path d="m12 9.5 5 5m0-5-5 5"/>'),
+      shift: (on) => SVG('<path d="M12 4 3.5 12.5H8V19h8v-6.5h4.5z"/>', on ? "currentColor" : "none"),
+      lang: SVG('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"/>'),
+      dir: SVG('<path d="M4 12h16m0 0-5-5m5 5-5 5"/>'),
+      prev: SVG('<path d="m15 5-7 7 7 7"/>'),
+      next: SVG('<path d="m9 5 7 7-7 7"/>'),
+      list: SVG('<path d="M8 6h12M8 12h12M8 18h12M3.5 6h.01M3.5 12h.01M3.5 18h.01"/>'),
+    };
+    const TXT = KA
+      ? { prev: "წინა", next: "შემდეგი", back: "წაშლა", shift: "Shift", dir: "მიმართულების შეცვლა", lang: { ka: "ABC", en: "ქარ" }, list: "ყველა კითხვა", keys: "კლავიატურა", group: "კლავიატურა" }
+      : { prev: "Prev", next: "Next", back: "Delete", shift: "Shift", dir: "Switch direction", lang: { ka: "ABC", en: "ქარ" }, list: "All clues", keys: "Keyboard", group: "Keyboard" };
+    let lang = KA ? "ka" : "en", shift = false, showList = false;
+    const kb = document.createElement("div");
+    kb.id = "kb"; kb.setAttribute("role", "group"); kb.setAttribute("aria-label", TXT.group);
+    document.body.appendChild(kb);
+    const btn = (a, inner, label, k) => '<button type="button" data-a="' + a + '"' + (k ? ' data-k="' + k + '"' : "") + ' aria-label="' + label + '">' + inner + "</button>";
+    function renderKb() {
+      const rows = LAY[lang === "ka" && shift ? "kaShift" : lang];
+      const keys = (r) => [...rows[r]].map((ch) => btn("key", ch, ch, ch)).join("");
+      const sh = lang === "ka" ? btn("shift", IC.shift(shift), TXT.shift).replace("<button", '<button class="fk" aria-pressed="' + shift + '"') : "";
+      const ctl = '<div class="kbr ctl">' +
+          btn("lang", IC.lang + "<span>" + TXT.lang[lang] + "</span>", TXT.lang[lang]).replace("<button", '<button class="w1"') +
+          btn("dir", IC.dir, TXT.dir).replace("<button", '<button class="w2"') +
+          btn("list", IC.list, showList ? TXT.keys : TXT.list).replace("<button", '<button class="w2' + (showList ? " on" : "") + '" aria-pressed="' + showList + '"') +
+          btn("prev", IC.prev + "<span>" + TXT.prev + "</span>", TXT.prev) +
+          btn("next", "<span>" + TXT.next + "</span>" + IC.next, TXT.next) +
+        "</div>";
+      if (showList) {
+        const item = (w) => '<button type="button" data-a="clue" data-i="' + words.indexOf(w) + '" class="ci' + (state.cell && wordAt(state.cell, state.dir) === w ? " cur" : "") + (w.li.classList.contains("done") ? " done" : "") + '"><b>' + w.num + "</b><span>" + w.clue + "</span></button>";
+        const grp = (d, h) => "<h4>" + h + "</h4>" + words.filter((w) => w.dir === d).map(item).join("");
+        kb.innerHTML = '<div class="kbl">' + grp("A", T.across) + grp("D", T.down) + "</div>" + ctl;
+        const cur = kb.querySelector(".ci.cur"); if (cur) kb.querySelector(".kbl").scrollTop = Math.max(0, cur.offsetTop - 44);
+        return;
+      }
+      kb.innerHTML =
+        '<div class="kbr">' + keys(0) + "</div>" +
+        '<div class="kbr">' + keys(1) + "</div>" +
+        '<div class="kbr">' + sh + keys(2) + btn("back", IC.back, TXT.back).replace("<button", '<button class="fk"') + "</div>" + ctl;
+    }
+    renderKb();
+    setTimeout(() => (root.dataset.ready = "1"), 600); // ignore the automatic focus on load
+    const press = (b) => {
+      const a = b.dataset.a, c = state.cell;
+      if (!c || state.done) return;
+      if (a === "key") { onKey({ key: b.dataset.k, metaKey: false, ctrlKey: false, preventDefault() {} }, c); if (shift) { shift = false; renderKb(); } }
+      else if (a === "back") onKey({ key: "Backspace", preventDefault() {} }, c);
+      else if (a === "shift") { shift = !shift; renderKb(); }
+      else if (a === "lang") { lang = lang === "ka" ? "en" : "ka"; shift = false; renderKb(); }
+      else if (a === "dir") { if (c.words.A && c.words.D) select(c, other(state.dir)); }
+      else if (a === "list") { showList = !showList; renderKb(); }
+      else if (a === "clue") { const w = words[+b.dataset.i]; showList = false; select(w.cells[0], w.dir); renderKb(); }
+      else if (a === "prev") { nextWord(-1); if (showList) renderKb(); }
+      else if (a === "next") { nextWord(1); if (showList) renderKb(); }
+    };
+    // pointerdown = instant response. preventDefault keeps the focus on the square, so the keys never close the keyboard.
+    kb.addEventListener("pointerdown", (e) => { const b = e.target.closest("button"); if (!b || b.dataset.a === "clue") return; e.preventDefault(); press(b); }); // clue rows act on click, so scrolling the list doesn't pick one
+    kb.addEventListener("mousedown", (e) => e.preventDefault());
+    kb.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b && (e.detail === 0 || b.dataset.a === "clue")) press(b); }); // Enter/Space on a focused key (switch control, screen reader)
+    // The keyboard opens when a square is tapped and closes when the focus leaves the grid (like the phone's own keyboard)
+    const openKb = (e) => {
+      if (!e.target.closest("#grid")) return;
+      document.body.classList.add("typing");
+      requestAnimationFrame(keepVisible);
+    };
+    root.addEventListener("click", openKb); // a tap on a square (also when it is already the focused one)
+    root.addEventListener("focusin", (e) => { if (e.isTrusted && root.dataset.ready) openKb(e); });
+    root.addEventListener("focusout", () => setTimeout(() => {
+      const a = document.activeElement;
+      if (a && a.closest && a.closest("#grid")) return;
+      document.body.classList.remove("typing");
+    }, 60));
+    // Hint buttons shouldn't close the keyboard
+    ["btnCheck", "btnClearWord", "btnAuto", "btnLetter", "btnReveal"].forEach((id) => $(id).addEventListener("mousedown", (e) => e.preventDefault()));
+  }
   let tapped = false; // the page focuses the first square on load; typing mode waits for a real tap
   if (touch && !PHONE) {
     root.addEventListener("pointerdown", () => (tapped = true), true);
