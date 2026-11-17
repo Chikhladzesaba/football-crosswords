@@ -393,6 +393,8 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
   body.phone-play .play { flex: 0 1 auto; min-height: 96px; width: 100%; max-width: none; margin: 0; overflow: auto; overscroll-behavior: contain; display: block; scrollbar-width: none; }
   body.phone-play .play::-webkit-scrollbar { display: none; }
   body.phone-play .grid { margin: 0 auto; }
+  /* iPhone Safari zooms the whole page when it focuses a field whose text is smaller than 16px, and the page then stays zoomed and shifted. Squares are small, so the letter is never below 16px. */
+  body.phone-play .cell input { font-size: max(16px, calc(var(--cell) * .5)); }
   body.phone-play .clue-spacer { display: none; }
   body.phone-play .side { display: contents; }
   body.phone-play .actions { flex: none; gap: 4px 6px; justify-content: center; }

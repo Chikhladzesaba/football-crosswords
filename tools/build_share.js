@@ -90,7 +90,7 @@ ${FONT_LINKS}
   <link rel="preload" href="/fonts/FiraGO-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/FiraGO-Medium.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../nav.css?v=5">
-  <link rel="stylesheet" href="../crossword.css?v=16">
+  <link rel="stylesheet" href="../crossword.css?v=17">
   ${ANALYTICS}
 </head>
 <body>
@@ -131,7 +131,7 @@ ${FONT_LINKS}
   <link rel="preload" href="/fonts/FiraGO-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/FiraGO-Medium.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../nav.css?v=5">
-  <link rel="stylesheet" href="../crossword.css?v=16">
+  <link rel="stylesheet" href="../crossword.css?v=17">
   ${ANALYTICS}
 </head>
 <body>
@@ -174,7 +174,7 @@ ${FONT_LINKS.replace(/\.\.\//g, "")}
   <link rel="preload" href="/fonts/FiraGO-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/FiraGO-Medium.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../nav.css?v=5">
-  <link rel="stylesheet" href="../crossword.css?v=16">
+  <link rel="stylesheet" href="../crossword.css?v=17">
   ${ANALYTICS}
 </head>
 <body>
