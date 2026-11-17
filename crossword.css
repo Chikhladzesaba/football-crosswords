@@ -424,10 +424,13 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
   #kb .fk[aria-pressed="true"] { background: var(--ink); color: #fff; }
   #kb .ctl button { max-width: none; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 6px; font-size: 13px; font-weight: 500; color: #0a3f8f; }
   body.phone-play.own-kb.typing .actions, body.phone-play.own-kb.typing .share-note { display: none; }
-  #kb .kbtop { flex: none; display: flex; align-items: center; gap: 6px; margin: -6px 0 -2px; }
-  #kb .kba { flex: 0 1 auto; max-width: none; height: 30px; padding: 0 11px; border-radius: 15px; background: #fff; box-shadow: none; border: 1px solid #b9cfe9; font: 400 12.5px/1 "FiraGO", system-ui, sans-serif; color: var(--ink); white-space: nowrap; }
-  #kb .kba:first-child { background: #006aff; border-color: #006aff; color: #fff; }
-  #kb .kbx { flex: 0 0 38px; max-width: none; margin-left: auto; height: 30px; padding: 0; background: none; box-shadow: none; display: flex; align-items: center; justify-content: center; color: #3d5573; }
+  #kb .kbtop { flex: none; display: flex; align-items: center; gap: 2px; margin: -6px 0 -2px; }
+  #kb .kbscroll { flex: 1 1 auto; min-width: 0; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-right: 22px; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 26px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 26px), transparent); }
+  #kb .kbscroll::-webkit-scrollbar { display: none; }
+  #kb .kba { flex: none; max-width: none; height: 30px; padding: 0 11px; border-radius: 15px; background: #fff; box-shadow: none; border: 1px solid #b9cfe9; font: 400 12.5px/1 "FiraGO", system-ui, sans-serif; color: var(--ink); white-space: nowrap; }
+  #kb .kba.main { background: #006aff; border-color: #006aff; color: #fff; }
+  #kb .kba[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+  #kb .kbx { flex: 0 0 38px; max-width: none; height: 30px; padding: 0; background: none; box-shadow: none; display: flex; align-items: center; justify-content: center; color: #3d5573; }
   #kb .kbl { position: relative; height: 164px; overflow-y: auto; -webkit-overflow-scrolling: touch; margin: 0 -2px; background: #fff; border-radius: 8px; padding: 0 8px 6px; }
   #kb .kbl h4 { margin: 0; padding: 10px 2px 4px; font: 600 11px/1 "FiraGO", system-ui, sans-serif; color: #3d5573; letter-spacing: .04em; text-transform: uppercase; }
   #kb .kbl .ci { display: flex; gap: 8px; align-items: flex-start; flex: none; width: 100%; max-width: none; height: auto; min-height: 38px; padding: 8px 6px; margin: 0; border-radius: 8px; background: none; box-shadow: none; text-align: left; font: 400 14px/1.3 "FiraGO", system-ui, sans-serif; color: var(--ink); }
