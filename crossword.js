@@ -200,9 +200,11 @@
   const other = (d) => (d === "A" ? "D" : "A");
   const wordAt = (cell, dir) => cell.words[dir] || cell.words[other(dir)];
 
+  let onDirChange = () => {};
   function select(cell, dir) {
     if (!cell.words[dir]) dir = other(dir);
     state.cell = cell; state.dir = dir;
+    onDirChange();
     const w = cell.words[dir];
     Object.values(cells).forEach((c) => c.el.classList.remove("inword", "active"));
     w.cells.forEach((c) => c.el.classList.add("inword"));
@@ -635,13 +637,13 @@
     addEventListener("scroll", () => { if (scrollY) scrollTo(0, 0); }, { passive: true });
   }
   // ---- OWN KEYBOARD (phones, test version) --------------------------------
-  // Opt-in for now: open any crossword with ?kb=own to try it (?kb=native switches back). The squares keep their <input>,
+  // On by default on phones. ?kb=native switches back to the phone's own keyboard (and remembers it), ?kb=own turns ours on again. The squares keep their <input>,
   // but inputmode="none" tells the phone not to show its own keyboard, so our buttons (below) type the letters instead.
-  let ownKb = false;
+  let ownKb = true;
   try {
     const q = (location.search.match(/[?&]kb=(own|native)\b/) || [])[1];
     if (q) localStorage.setItem("crossword:kb", q);
-    ownKb = localStorage.getItem("crossword:kb") === "own";
+    ownKb = localStorage.getItem("crossword:kb") !== "native";
   } catch (e) {}
   if (PHONE && ownKb) {
     document.body.classList.add("own-kb");
@@ -674,6 +676,7 @@
       shift: (on) => SVG('<path d="M12 4 3.5 12.5H8V19h8v-6.5h4.5z"/>', on ? "currentColor" : "none"),
       lang: SVG('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"/>'),
       dir: SVG('<path d="M4 12h16m0 0-5-5m5 5-5 5"/>'),
+      dirD: SVG('<path d="M12 4v16m0 0-5-5m5 5 5-5"/>'),
       prev: SVG('<path d="m15 5-7 7 7 7"/>'),
       next: SVG('<path d="m9 5 7 7-7 7"/>'),
       down: SVG('<path d="m6 9 6 6 6-6"/>'),
@@ -696,7 +699,7 @@
       const top = '<div class="kbtop"><div class="kbscroll">' + ["btnCheck", "btnLetter", "btnReveal", "btnAuto", "btnClearWord", "btnClear", "btnSharePuzzle"].map(act).join("") + "</div>" + btn("close", IC.down, TXT.close).replace("<button", '<button class="kbx"') + "</div>";
       const ctl = '<div class="kbr ctl">' +
           btn("lang", IC.lang + "<span>" + TXT.lang[lang] + "</span>", TXT.lang[lang]).replace("<button", '<button class="w1"') +
-          btn("dir", IC.dir, TXT.dir).replace("<button", '<button class="w2"') +
+          btn("dir", state.dir === "D" ? IC.dirD : IC.dir, TXT.dir).replace("<button", '<button class="w2"') +
           btn("list", showList ? IC.kbd : IC.list, showList ? TXT.keys : TXT.list).replace("<button", '<button class="w2' + (showList ? " on" : "") + '" aria-pressed="' + showList + '"') +
           btn("prev", IC.prev + "<span>" + TXT.prev + "</span>", TXT.prev) +
           btn("next", "<span>" + TXT.next + "</span>" + IC.next, TXT.next) +
@@ -713,6 +716,7 @@
         '<div class="kbr">' + keys(1) + "</div>" +
         '<div class="kbr">' + sh + keys(2) + btn("back", IC.back, TXT.back).replace("<button", '<button class="fk"') + "</div>" + ctl;
     }
+    onDirChange = () => { const b = $("kb") && $("kb").querySelector('[data-a="dir"]'); if (b) b.innerHTML = state.dir === "D" ? IC.dirD : IC.dir; };
     renderKb();
     setTimeout(() => (root.dataset.ready = "1"), 600); // ignore the automatic focus on load
     const press = (b) => {
