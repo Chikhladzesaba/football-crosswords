@@ -409,6 +409,7 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
 /* ---- Phone: our own keyboard (test version, opt-in with ?kb=own). It sits at the bottom of the fixed screen and takes space only while typing ---- */
 @media (max-width: 760px) {
   body.phone-play.own-kb { --kbh: 275px; }
+  body.own-kb .cell, body.own-kb .grid { touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
   body.phone-play #kb { display: none; flex: none; flex-direction: column; gap: 11px; padding: 12px 8px max(10px, env(safe-area-inset-bottom)); background: #e0e1e7; border-radius: 14px 14px 0 0; -webkit-user-select: none; user-select: none; }
   body.phone-play.typing #kb { display: flex; }
   #kb .kbr { display: flex; justify-content: center; gap: 6px; }

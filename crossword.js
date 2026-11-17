@@ -601,6 +601,11 @@
     // The page is exactly as tall as the visible part of the screen (above the keyboard) and never scrolls itself
     const fit = () => {
       if (!vv) return;
+      if (document.body.classList.contains("own-kb")) { // no phone keyboard to make room for; just make sure nothing is shifted
+        document.body.style.setProperty("--vvh", vv.height + "px"); document.body.style.transform = "";
+        if (vv.offsetLeft || vv.offsetTop || scrollX || scrollY) scrollTo(0, 0);
+        return;
+      }
       document.body.style.setProperty("--vvh", vv.height + "px");
       document.body.style.transform = vv.offsetTop ? `translateY(${vv.offsetTop}px)` : "";
       keepVisible();
@@ -619,7 +624,15 @@
   } catch (e) {}
   if (PHONE && ownKb) {
     document.body.classList.add("own-kb");
-    Object.values(cells).forEach((c) => c.input.setAttribute("inputmode", "none"));
+    // The squares are never focused in this mode: Safari scrolls the whole page to reveal any focused field, even with its keyboard off,
+    // and that shifted everything. Our code keeps track of the selected square itself, and a tap on the square (not the field) selects it.
+    Object.values(cells).forEach((c) => {
+      c.input.setAttribute("inputmode", "none");
+      c.input.readOnly = true; c.input.tabIndex = -1;
+      c.input.focus = () => {};
+      c.input.style.pointerEvents = "none";
+      c.el.addEventListener("click", () => onCellTap(c));
+    });
     const KA = document.documentElement.lang === "ka";
     const LAY = {
       ka: ["ქწერტყუიოპ", "ასდფგჰჯკლ", "ზხცვბნმ"],
@@ -687,9 +700,9 @@
       else if (a === "next") { nextWord(1); if (showList) renderKb(); }
     };
     // pointerdown = instant response. preventDefault keeps the focus on the square, so the keys never close the keyboard.
-    kb.addEventListener("pointerdown", (e) => { const b = e.target.closest("button"); if (!b || b.dataset.a === "clue") return; e.preventDefault(); press(b); }); // clue rows act on click, so scrolling the list doesn't pick one
+    kb.addEventListener("pointerdown", (e) => { const b = e.target.closest("button"); if (!b || b.dataset.a === "clue" || b.dataset.a === "close") return; e.preventDefault(); press(b); }); // clue rows act on click so scrolling the list doesn't pick one; close acts on click so the same tap can't land on a square that moves under the finger
     kb.addEventListener("mousedown", (e) => e.preventDefault());
-    kb.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b && (e.detail === 0 || b.dataset.a === "clue")) press(b); }); // Enter/Space on a focused key (switch control, screen reader)
+    kb.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b && (e.detail === 0 || b.dataset.a === "clue" || b.dataset.a === "close")) press(b); }); // Enter/Space on a focused key (switch control, screen reader)
     // The keyboard opens when a square is tapped and closes when the focus leaves the grid (like the phone's own keyboard)
     const openKb = (e) => {
       if (!e.target.closest("#grid")) return;
