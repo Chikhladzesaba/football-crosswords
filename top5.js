@@ -17,21 +17,21 @@
     found: (f, t) => `${f} of ${t} found`,
     lives: "Lives", ariaRound: "Round", ariaLives: "Lives", ariaGuess: "Your guess",
     placeholder: "Type a name", guess: "Guess", give: "Give up",
-    hintTip: "Stuck? Click the bulb on a slot to show the first letter of its name.", hintAria: "Show the first letter of this name",
+    hintTip: "Stuck? Click the bulb on a slot. Every click shows one more letter of its name.", hintAria: "Show one more letter of this name",
     rulesTitle: "How to play",
     rules: [
       "One game is 3 lists in a row. Finish a list and the next one starts. Finish all 3 and you win.",
       "You see a list, for example the top scorers in a competition. The names are hidden.",
       "Type a name and press Guess. If it is in the list, it jumps into its place and shows its number. You can guess in any order.",
       "A wrong name costs a life. You get 3 lives for each list. Out of lives, or giving up, ends the game.",
-      "Stuck? Click the bulb on any empty slot to show the first letter of its name. You can do it as many times as you like. It counts as help in your final result.",
+      "Stuck? Click the bulb on any empty slot. The first letter of its name shows up, and every new click adds one more letter. You can do it as many times as you like. It counts as help in your final result.",
       "Surnames are fine. Small typing mistakes and accents do not matter.",
     ],
     vague: "Too vague. Be more specific.",
     already: (name) => `${name} is already in.`,
     yes: (name, rank) => `Yes! ${name} is number ${rank}.`,
     notIn: (n) => `Not in the Top ${n}.`,
-    hintMsg: (letter) => `That name starts with “${letter}”.`,
+    hintMsg: (start) => `That name starts with “${start}”.`,
     source: "Source",
     listDone: (n) => `List ${n} done! 🎉 Next list coming up…`,
     gaveUp: "Here are the answers.", outOfLives: "Out of lives. Here are the answers.",
@@ -139,7 +139,7 @@
   }
 
   function start(l) {
-    list = l; list.items.forEach((it) => (it.hint = "")); found = list.items.map(() => false); lives = LIVES; over = false;
+    list = l; list.items.forEach((it) => (it.shown = 0)); found = list.items.map(() => false); lives = LIVES; over = false;
     $("t5Game").hidden = false;
     $("t5Kicker").textContent = TEXT.kicker(round + 1, ROUNDS, topN());
     drawPips();
@@ -174,11 +174,11 @@
       li.innerHTML = `<span class="t5-rank">${rankOf(i)}</span><span class="t5-name"></span><span class="t5-val"></span>`;
       const nm = li.querySelector(".t5-name");
       if (show) nm.textContent = it.name;
-      else if (it.hint) nm.textContent = it.hint;
+      else if (it.shown) nm.textContent = hintStart(it) + " …";
       else nm.classList.add("t5-blank");
       li.querySelector(".t5-val").textContent = show ? `${it.value} ${list.unit}` : "";
-      // A hidden row without a hint can be clicked to show the first letter of its name (as many times as you like, once per row)
-      if (!show && !it.hint && !over) {
+      // A hidden row can be clicked to show one more letter of its name each time (the last letter is never shown)
+      if (!show && !over && it.shown < maxHint(it)) {
         li.insertAdjacentHTML("beforeend", HINT_ICON);
         li.classList.add("can-hint"); li.tabIndex = 0; li.setAttribute("role", "button"); li.setAttribute("aria-label", TEXT.hintAria);
         li.addEventListener("click", () => hint(i));
@@ -230,11 +230,23 @@
     if (lives <= 0) finish(false);
   }
 
+  // Hints: every click on the bulb shows one more letter, counted from the start of the name (spaces do not count).
+  // The name is never shown in full: the last letter always stays hidden.
+  const nameLetters = (it) => Array.from(it.name).filter((c) => c !== " ").length;
+  const maxHint = (it) => nameLetters(it) - 1;
+  function hintStart(it) {
+    let out = "", n = 0;
+    for (const c of Array.from(it.name)) {
+      if (c !== " ") { if (n === it.shown) break; n++; }
+      out += c;
+    }
+    return out.trim();
+  }
   function hint(i) {
-    if (over || found[i] || list.items[i].hint) return;
     const n = list.items[i];
-    n.hint = n.name[0] + " …"; hints++; drawBoard();
-    say(TEXT.hintMsg(n.name[0]));
+    if (over || found[i] || n.shown >= maxHint(n)) return;
+    n.shown++; hints++; drawBoard();
+    say(TEXT.hintMsg(hintStart(n)));
   }
 
   function showNote() {
