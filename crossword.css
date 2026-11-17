@@ -367,12 +367,17 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
   .side { margin-top: 8px; }
 }
 
-/* ---- Phone: the whole puzzle fits in the space above the phone's keyboard, so nothing hides or jumps ---- */
+/* ---- Phone: the page is one fixed screen above the keyboard. Only the clue list and, for tall puzzles, the grid box scroll inside themselves ---- */
 @media (max-width: 760px) {
+  html:has(body.phone-play) { overflow: hidden; overscroll-behavior: none; }
   body.phone-play { --kbh: 275px; /* about the height of the phone keyboard with its small toolbar */
-    --cell: max(20px, min(46px, calc((100dvh - 156px - var(--kbh)) / var(--rows) - 2px), calc((100vw - 32px) / var(--cols) - 2px))); }
+    /* squares never get smaller than 28px for the height; a tall puzzle then scrolls inside its own box instead of shrinking */
+    --cell: min(46px, calc((100vw - 32px) / var(--cols) - 2px), max(28px, calc((100dvh - 156px - var(--kbh)) / var(--rows) - 2px)));
+    position: fixed; top: 0; left: 0; right: 0; height: var(--vvh, 100dvh); overflow: hidden; display: flex; flex-direction: column; overscroll-behavior: none; }
+  body.phone-play.kb-open, body.phone-play.typing { padding-bottom: 0; }
   body.phone-play .topbar { display: none; }
-  body.phone-play #crossword > main { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: 10px; row-gap: 6px; padding-top: 10px; align-items: center; }
+  body.phone-play #crossword { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+  body.phone-play #crossword > main { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: auto minmax(0, 1fr); column-gap: 10px; row-gap: 6px; padding-top: 10px; padding-bottom: 6px; align-items: center; }
   /* one slim row: arrow back, title, progress and time */
   body.phone-play #crossword > main > .back { grid-column: 1; grid-row: 1; margin: 0; font-size: 0; line-height: 0; padding: 4px 6px 4px 0; }
   body.phone-play #crossword > main > .back::before { content: "\2190"; font-size: 22px; line-height: 1; }
@@ -381,10 +386,22 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
   body.phone-play .meta .count { display: none; }
   body.phone-play .meta .play-count { color: var(--muted); font-size: 13px; white-space: nowrap; }
   body.phone-play .meta .timer { font-size: 16px; }
-  body.phone-play #crossword > main > .intro { display: none; }
-  body.phone-play #crossword > main > .legend { grid-column: 1 / -1; }
-  body.phone-play .board { grid-column: 1 / -1; grid-row: 2; gap: 8px; }
-  body.phone-play .clue-bar { height: 88px; min-height: 0; overflow: hidden; padding: 8px 12px; font-size: 14px; line-height: 1.35; align-items: flex-start; }
-  body.phone-play .play { margin: 0 auto; }
-  body.phone-play .side { margin-top: 12px; }
+  body.phone-play #crossword > main > .intro, body.phone-play #crossword > main > .legend, body.phone-play .below { display: none; }
+  /* board = clue box, grid box, buttons, clue list. Only the grid box and the clue list can scroll; the clue list gets what is left */
+  body.phone-play .board { grid-column: 1 / -1; grid-row: 2; align-self: stretch; min-height: 0; display: flex; flex-direction: column; gap: 6px; }
+  body.phone-play .clue-bar { flex: none; height: 80px; min-height: 0; overflow: hidden; padding: 6px 12px; font-size: 14px; line-height: 1.3; align-items: flex-start; }
+  body.phone-play .play { flex: 0 1 auto; min-height: 96px; width: 100%; max-width: none; margin: 0; overflow: auto; overscroll-behavior: contain; display: block; scrollbar-width: none; }
+  body.phone-play .play::-webkit-scrollbar { display: none; }
+  body.phone-play .grid { margin: 0 auto; }
+  body.phone-play .clue-spacer { display: none; }
+  body.phone-play .side { display: contents; }
+  body.phone-play .actions { flex: none; gap: 4px 6px; justify-content: center; }
+  body.phone-play .actions .quiet:first-of-type { margin-left: 0; }
+  body.phone-play .actions button { padding: 7px 10px; font-size: 13px; }
+  body.phone-play .actions .actions-break { display: block; order: 1; flex-basis: 100%; height: 0; }
+  body.phone-play .actions .quiet { order: 2; border-color: transparent; background: none; color: var(--muted); padding: 3px 3px; font-size: 12px; }
+  body.phone-play .actions .quiet[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
+  body.phone-play .share-note, body.phone-play .result { flex: none; }
+  body.phone-play .clues { flex: 1 1 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
 }
+@media (pointer: coarse) { .cell.active input:focus-visible { outline: none; } } /* the dark ring around the selected square stuck out of the grid on phones */

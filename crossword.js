@@ -575,6 +575,12 @@
   }
   let userScrolling = false, scrollTimer = null; // true while the finger moves the page
   function keepVisible() {
+    if (PHONE && state.cell) { // phone: the grid scrolls inside its own box; keep the active square (and one square around it) in view
+      const box = $("grid").parentElement, r = state.cell.el.getBoundingClientRect(), b = box.getBoundingClientRect(), m = r.height;
+      if (r.bottom + m > b.bottom) box.scrollTop += r.bottom + m - b.bottom; else if (r.top - m < b.top) box.scrollTop -= b.top - (r.top - m);
+      if (r.right + m > b.right) box.scrollLeft += r.right + m - b.right; else if (r.left - m < b.left) box.scrollLeft -= b.left - (r.left - m);
+      return;
+    }
     if (!touch || PHONE || !state.cell || userScrolling) return; // never fight the user's own scroll
     const r = state.cell.el.getBoundingClientRect();
     const top = (vv ? vv.offsetTop : 0) + (typing() ? bar.offsetHeight : 0) + 8;
@@ -592,6 +598,15 @@
     const kc = document.createElement("span"); kc.className = "play-count"; $("count").after(kc); // short progress, e.g. 3/8
     const upd = () => { kc.textContent = ($("count").textContent.match(/\d+\s*\/\s*\d+/) || [""])[0].replace(/\s/g, ""); };
     new MutationObserver(upd).observe($("count"), { childList: true, characterData: true, subtree: true }); upd();
+    // The page is exactly as tall as the visible part of the screen (above the keyboard) and never scrolls itself
+    const fit = () => {
+      if (!vv) return;
+      document.body.style.setProperty("--vvh", vv.height + "px");
+      document.body.style.transform = vv.offsetTop ? `translateY(${vv.offsetTop}px)` : "";
+      keepVisible();
+    };
+    if (vv) { vv.addEventListener("resize", fit); vv.addEventListener("scroll", fit); fit(); }
+    addEventListener("scroll", () => { if (scrollY) scrollTo(0, 0); }, { passive: true });
   }
   let tapped = false; // the page focuses the first square on load; typing mode waits for a real tap
   if (touch && !PHONE) {
