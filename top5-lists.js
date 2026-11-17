@@ -128,4 +128,20 @@ window.TOP5_LISTS = [
       { name: "Thomas Müller", rank: 4, alt: ["muller", "mueller", "thomas", "thomas mueller", "thomas muller"], value: "163" },
     ],
   },
+  {
+    id: "laliga-titles",
+    title: "La Liga titles by club",
+    unit: "titles",
+    asOf: "end of 2025-26",
+    note: "Spanish top-flight titles since 1929. Real Madrid are seven titles ahead of Barcelona.",
+    source: "https://www.si.com/soccer/barcelona-clinch-29th-la-liga-title-el-clasico",
+    ambiguous: ["madrid"],
+    items: [
+      { name: "Real Madrid", alt: ["real", "los blancos"], value: "36" },
+      { name: "Barcelona", alt: ["barca", "fc barcelona", "fcb"], value: "29" },
+      { name: "Atlético Madrid", alt: ["atletico", "atletico madrid", "atleti"], value: "11" },
+      { name: "Athletic Club", alt: ["athletic", "athletic bilbao", "bilbao"], value: "8" },
+      { name: "Valencia", alt: ["valencia cf"], value: "6" },
+    ],
+  },
 ];

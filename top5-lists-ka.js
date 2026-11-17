@@ -175,4 +175,20 @@ window.TOP5_LISTS = [
       { name: "თომას მიულერი", rank: 4, alt: ["მიულერი", "მულერი", "თომასი", "თომას", "muller", "mueller", "thomas", "thomas muller", "thomas mueller"], value: "163" },
     ],
   },
+  {
+    id: "vis-aqvs-la-liga-yvelaze-metjer-mogebuli",
+    title: "ვის აქვს ლა ლიგა ყველაზე მეტჯერ მოგებული?",
+    unit: "ტიტული",
+    asOf: "2025-26 სეზონის დასასრულის მდგომარეობით",
+    note: "ესპანეთის უმაღლესი დივიზიონის ტიტულები 1929 წლიდან. რეალი ბარსელონაზე შვიდი ტიტულით წინ არის.",
+    source: "https://www.si.com/soccer/barcelona-clinch-29th-la-liga-title-el-clasico",
+    ambiguous: ["მადრიდი", "მადრიდ", "madrid", "ატლეტიკი", "ატლეტიკ", "ათლეტიკი", "ათლეტიკ"],
+    items: [
+      { name: "რეალ მადრიდი", alt: ["რეალი", "რეალ", "real madrid", "real", "los blancos"], value: "36" },
+      { name: "ბარსელონა", alt: ["ბარსა", "ბარსელონ", "barcelona", "barca", "fc barcelona", "fcb"], value: "29" },
+      { name: "ატლეტიკო მადრიდი", alt: ["ატლეტიკო", "ატლეტიკო მადრიდ", "atletico", "atletico madrid", "atleti"], value: "11" },
+      { name: "ატლეტიკ ბილბაო", alt: ["ათლეტიკ ბილბაო", "ბილბაო", "athletic", "athletic club", "athletic bilbao", "bilbao"], value: "8" },
+      { name: "ვალენსია", alt: ["valencia", "valencia cf"], value: "6" },
+    ],
+  },
 ];
