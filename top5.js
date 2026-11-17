@@ -9,7 +9,7 @@
 
   const plural = (n) => (n === 1 ? "" : "s");
   const TEXT = Object.assign({
-    backHref: "../", back: "← All games",
+    backHref: "/", back: "← All games",
     h1: "Guess the <em>Top 5</em>",
     intro: "Name the players or clubs in the Top 5. Complete 3 lists in a row to win.",
     kicker: (r, total, n) => `Round ${r} of ${total} · Top ${n}`,
@@ -125,7 +125,7 @@
 
   // ---- State ----
   let run = [], round = 0, list, found, lives, hints = 0, over, done = 0, timer;
-  const wanted = new URLSearchParams(location.search).get("list"); // ?list=laliga-scorers opens one list (for testing)
+  const wanted = window.TOP5_LIST || new URLSearchParams(location.search).get("list"); // the list's own page sets TOP5_LIST; ?list=laliga-scorers also opens one list first (for testing)
 
   // A new game: pick 3 different lists at random (?list=id puts that list first)
   function newRun() {
