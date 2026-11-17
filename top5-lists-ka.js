@@ -1,4 +1,5 @@
 // Georgian version of the Top 5 game (test). Same lists and numbers as top5-lists.js, so update both files together.
+// The list ids here are Georgian words in Latin letters (?list=seria-as-bombardirebi opens one list for testing). The English file keeps English ids.
 // TOP5_TEXT = every word the player sees (top5.js has the English default). TOP5_LISTS = the lists.
 // name = what we show. alt = other ways to type it (Georgian spellings, surnames, English names). Case and spaces do not matter.
 // A Georgian name ending in -ი also works without it (კეინ = კეინი), top5.js does that by itself.
@@ -51,7 +52,7 @@ const KANE = { name: "ჰარი კეინი", alt: ["კეინი", "�
 
 window.TOP5_LISTS = [
   {
-    id: "ucl-scorers",
+    id: "chempionta-ligis-bombardirebi",
     title: "ჩემპიონთა ლიგის ყველა დროის საუკეთესო ბომბარდირები",
     unit: "გოლი",
     asOf: "2026 წლის 4 ნოემბრის მდგომარეობით",
@@ -66,7 +67,7 @@ window.TOP5_LISTS = [
     ],
   },
   {
-    id: "pl-titles",
+    id: "premierligis-titulebi",
     title: "პრემიერლიგის ტიტულები კლუბების მიხედვით",
     unit: "ტიტული",
     asOf: "2025-26 სეზონის დასასრულის მდგომარეობით",
@@ -82,7 +83,7 @@ window.TOP5_LISTS = [
     ],
   },
   {
-    id: "laliga-scorers",
+    id: "la-ligis-bombardirebi",
     title: "ლა ლიგის ყველა დროის საუკეთესო ბომბარდირები",
     unit: "გოლი",
     asOf: "2026 წლის ნოემბრის მდგომარეობით",
@@ -97,7 +98,7 @@ window.TOP5_LISTS = [
     ],
   },
   {
-    id: "pl-scorers",
+    id: "premierligis-bombardirebi",
     title: "პრემიერლიგის ყველა დროის საუკეთესო ბომბარდირები",
     unit: "გოლი",
     asOf: "2026 წლის ნოემბრის მდგომარეობით",
@@ -112,7 +113,7 @@ window.TOP5_LISTS = [
     ],
   },
   {
-    id: "bundesliga-scorers",
+    id: "bundesligis-bombardirebi",
     title: "ბუნდესლიგის ყველა დროის საუკეთესო ბომბარდირები",
     unit: "გოლი",
     asOf: "2026 წლის 18 ოქტომბრის მდგომარეობით",
@@ -127,7 +128,7 @@ window.TOP5_LISTS = [
     ],
   },
   {
-    id: "wc-scorers",
+    id: "msoflio-chempionatis-bombardirebi",
     title: "მსოფლიო ჩემპიონატის ყველა დროის საუკეთესო ბომბარდირები",
     unit: "გოლი",
     asOf: "2026 წლის ფინალის შემდეგ",
@@ -143,7 +144,7 @@ window.TOP5_LISTS = [
     ],
   },
   {
-    id: "seriea-scorers",
+    id: "seria-as-bombardirebi",
     title: "სერია A-ს ყველა დროის საუკეთესო ბომბარდირები",
     unit: "გოლი",
     top: 5,
@@ -159,8 +160,8 @@ window.TOP5_LISTS = [
     ],
   },
   {
-    id: "ucl-appearances",
-    title: "ჩემპიონთა ლიგაში ყველაზე მეტი მატჩი",
+    id: "yvelaze-meti-matchi-chempionta-ligaze",
+    title: "ყველაზე მეტი მატჩი ჩემპიონთა ლიგაზე",
     unit: "მატჩი",
     top: 5,
     asOf: "2026 წლის 4 ნოემბრის მდგომარეობით",
