@@ -244,4 +244,20 @@ window.TOP5_LISTS = [
       { name: "Clarence Seedorf", alt: ["seedorf", "clarence"], value: "21.06" },
     ],
   },
+  {
+    id: "pl-appearances",
+    title: "Premier League all-time most appearances",
+    unit: "matches",
+    asOf: "end of 2025-26",
+    note: "Premier League matches only, since 1992. James Milner passed Gareth Barry in February 2026 and finished his career on 658.",
+    source: "https://www.premierleague.com/en/news/662064",
+    ambiguous: ["james"],
+    items: [
+      { name: "James Milner", alt: ["milner", "james milner", "jimmy milner"], value: "658" },
+      { name: "Gareth Barry", alt: ["barry", "gareth"], value: "653" },
+      { name: "Ryan Giggs", alt: ["giggs", "ryan"], value: "632" },
+      { name: "Frank Lampard", alt: ["lampard", "frank", "super frank"], value: "609" },
+      { name: "David James", alt: ["david james", "dave james", "david"], value: "572" },
+    ],
+  },
 ];
