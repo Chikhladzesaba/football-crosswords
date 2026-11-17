@@ -412,6 +412,9 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
   body.own-kb .cell, body.own-kb .grid { touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
   body.phone-play #kb { display: none; flex: none; flex-direction: column; gap: 11px; padding: 12px 8px max(10px, env(safe-area-inset-bottom)); background: #e0e1e7; border-radius: 14px 14px 0 0; -webkit-user-select: none; user-select: none; }
   body.phone-play.typing #kb { display: flex; }
+  .bar-back { display: none; }
+  body.phone-play.typing .bar-back { display: flex; align-items: center; justify-content: center; flex: none; width: 34px; height: 34px; margin: -4px 0 0 -6px; border-radius: 50%; color: var(--accent); }
+  body.phone-play.typing .bar-back:active { background: #cfe0f5; }
   #kb .kbr { display: flex; justify-content: center; gap: 6px; }
   #kb button { flex: 1 1 0; max-width: 40px; height: 44px; padding: 0 0 2px; border: 0; border-radius: 6px; background: #fff; color: var(--ink); font: 400 21px/1 "FiraGO", system-ui, sans-serif; box-shadow: 0 1px 0 #9a9ca4; touch-action: manipulation; -webkit-tap-highlight-color: transparent; cursor: pointer; }
   #kb button:active { background: #d4d6dd; }

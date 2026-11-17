@@ -624,6 +624,14 @@
   } catch (e) {}
   if (PHONE && ownKb) {
     document.body.classList.add("own-kb");
+    // The title row (with the back arrow) is hidden while typing, so the clue bar carries its own back arrow
+    const backLink = root.querySelector("a.back");
+    if (backLink) {
+      const ba = document.createElement("a");
+      ba.className = "bar-back"; ba.href = backLink.getAttribute("href"); ba.setAttribute("aria-label", backLink.textContent.trim());
+      ba.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m0 0 6-6m-6 6 6 6"/></svg>';
+      bar.prepend(ba);
+    }
     // The squares are never focused in this mode: Safari scrolls the whole page to reveal any focused field, even with its keyboard off,
     // and that shifted everything. Our code keeps track of the selected square itself, and a tap on the square (not the field) selects it.
     Object.values(cells).forEach((c) => {
