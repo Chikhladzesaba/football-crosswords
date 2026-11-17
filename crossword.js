@@ -448,7 +448,17 @@
   $("btnShareResult").addEventListener("click", () => share(resultText(), shareLink("result"), "shareResultNote"));
   $("winShare").addEventListener("click", () => share(resultText(), shareLink("result"), "winShareNote"));
   $("winX").addEventListener("click", closeWin);
-  $("winNext").addEventListener("click", () => { closeWin(); $("next").scrollIntoView({ behavior: "smooth", block: "center" }); });
+  $("winNext").addEventListener("click", () => {
+    closeWin();
+    // On phones the "play more" list under the puzzle is hidden, so go straight to the first suggested crossword (or the list of all crosswords)
+    if (!$("next").offsetParent) {
+      const a = $("nextList").querySelector("a"), back = root.querySelector("a.back");
+      const href = (a && a.getAttribute("href")) || (back && back.getAttribute("href"));
+      if (href) location.href = href;
+      return;
+    }
+    $("next").scrollIntoView({ behavior: "smooth", block: "center" });
+  });
   $("win").addEventListener("click", (e) => { if (e.target.id === "win") closeWin(); }); // tap outside the card
   addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("win").hidden) closeWin(); });
   $("btnSharePuzzle").addEventListener("click", () =>
