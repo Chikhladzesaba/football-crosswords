@@ -42,7 +42,7 @@ window.TOP5_TEXT = {
 };
 
 const MESSI = { name: "ლიონელ მესი", alt: ["მესი", "მესსი", "ლეო მესი", "ლეო", "ლიონელი", "messi", "leo messi", "lionel messi"] };
-const CR7 = { name: "კრიშტიანუ რონალდუ", alt: ["რონალდუ", "კრიშტიანუ", "კრისტიანუ რონალდუ", "კრისტიანო რონალდო", "ronaldo", "cristiano", "cr7", "cristiano ronaldo"] };
+const CR7 = { name: "კრიშტიანუ რონალდუ", alt: ["კრისტიანო", "კრიშტიანო", "კრიშტიანო რონალდო", "რონალდუ", "კრიშტიანუ", "კრისტიანუ რონალდუ", "კრისტიანო რონალდო", "ronaldo", "cristiano", "cr7", "cristiano ronaldo"] };
 const LEWA = { name: "რობერტ ლევანდოვსკი", alt: ["ლევანდოვსკი", "ლევა", "რობერტი", "lewandowski", "lewy", "robert"] };
 const BENZEMA = { name: "კარიმ ბენზემა", alt: ["ბენზემა", "კარიმი", "benzema", "karim"] };
 const MBAPPE = { name: "კილიან მბაპე", alt: ["მბაპე", "ემბაპე", "კილიანი", "mbappe", "kylian"] };
@@ -140,6 +140,38 @@ window.TOP5_LISTS = [
       { name: "რონალდო (ბრაზილია)", alt: ["რონალდო", "რონალდუ", "ნაზარიო", "რონალდო ნაზარიო", "ბრაზილიელი რონალდო", "ronaldo", "ronaldo nazario", "nazario", "r9", "ronaldo brazil", "brazilian ronaldo"], value: "15" },
       { ...GMULLER, rank: 5, value: "14" },
       { ...KANE, rank: 5, value: "14" },
+    ],
+  },
+  {
+    id: "seriea-scorers",
+    title: "სერია A-ს ყველა დროის საუკეთესო ბომბარდირები",
+    unit: "გოლი",
+    top: 5,
+    asOf: "2025-26 სეზონის დასასრულის მდგომარეობით",
+    note: "მხოლოდ ლიგის გოლები. მეაცა და ალტაფინი 216-216 გოლით მეოთხე ადგილს იზიარებენ.",
+    source: "https://rsssf.org/tablesi/italtops-allt.html",
+    items: [
+      { name: "სილვიო პიოლა", alt: ["პიოლა", "სილვიო", "piola", "silvio"], value: "274" },
+      { name: "ფრანჩესკო ტოტი", alt: ["ტოტი", "ფრანჩესკო", "totti", "francesco"], value: "250" },
+      { name: "გუნარ ნორდალი", alt: ["ნორდალი", "გუნარ", "გუნარი", "nordahl", "gunnar"], value: "225" },
+      { name: "ჯუზეპე მეაცა", rank: 4, alt: ["მეაცა", "ჯუზეპე", "meazza", "giuseppe"], value: "216" },
+      { name: "ჟოზე ალტაფინი", rank: 4, alt: ["ალტაფინი", "ჟოზე", "ხოზე", "altafini", "jose altafini", "jose", "mazola"], value: "216" },
+    ],
+  },
+  {
+    id: "ucl-appearances",
+    title: "ჩემპიონთა ლიგაში ყველაზე მეტი მატჩი",
+    unit: "მატჩი",
+    top: 5,
+    asOf: "2026 წლის 4 ნოემბრის მდგომარეობით",
+    note: "მესიმ და მიულერმა 163-163 მატჩი ითამაშეს და მეოთხე ადგილს იზიარებენ. ნოიერი ისევ თამაშობს, ამიტომ მისი მატჩების რაოდენობა გაიზრდება.",
+    source: "https://www.uefa.com/uefachampionsleague/news/0257-0e9a10f58015-92c648e6303d-1000--who-has-played-100-games/",
+    items: [
+      { ...CR7, value: "183" },
+      { name: "იკერ კასილასი", alt: ["კასილასი", "კასიასი", "კასილიასი", "იკერი", "იკერ", "casillas", "iker"], value: "177" },
+      { name: "მანუელ ნოიერი", alt: ["ნოიერი", "მანუელი", "მანუელ", "neuer", "manuel"], value: "164+" },
+      { ...MESSI, rank: 4, value: "163" },
+      { name: "თომას მიულერი", rank: 4, alt: ["მიულერი", "მულერი", "თომასი", "თომას", "muller", "mueller", "thomas", "thomas muller", "thomas mueller"], value: "163" },
     ],
   },
 ];

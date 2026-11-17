@@ -121,7 +121,7 @@
 
   // Some lists have a tie: two names can share the same place (rank: 5). The "Top N" is the highest place.
   const rankOf = (i) => list.items[i].rank || i + 1;
-  const topN = () => Math.max(...list.items.map((_, i) => rankOf(i)));
+  const topN = () => list.top || Math.max(...list.items.map((_, i) => rankOf(i))); // list.top = fixed size when the tie sits inside the five
 
   // ---- State ----
   let run = [], round = 0, list, found, lives, hints = 0, over, done = 0, timer;
