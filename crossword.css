@@ -180,6 +180,7 @@ html:lang(ka) .clues li { overflow-wrap: anywhere; }
 .share-note { margin: 0; font-size: 13px; color: var(--muted); white-space: pre-line; overflow-wrap: anywhere; }
 .result .share-note { color: var(--green-ink); }
 .result[hidden] { display: none; }
+.result-next { display: none; }
 
 /* ---- Play another (after finishing) ---- */
 .next[hidden] { display: none; }
@@ -404,6 +405,7 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
   body.phone-play .actions .quiet { order: 2; border-color: transparent; background: none; color: var(--muted); padding: 3px 3px; font-size: 12px; }
   body.phone-play .actions .quiet[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
   body.phone-play .share-note, body.phone-play .result { flex: none; }
+  body.phone-play .result-next { display: inline-block; }
   body.phone-play .clues { flex: 1 1 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
 }
 /* ---- Phone: our own keyboard (test version, opt-in with ?kb=own). It sits at the bottom of the fixed screen and takes space only while typing ---- */
@@ -415,6 +417,8 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
   /* With our own keyboard nothing needs the clue bar pinned to the top, so it stays in the page and never covers the grid */
   body.phone-play.own-kb.typing .clue-bar { position: static; transform: none !important; border-radius: 10px; box-shadow: none; }
   .bar-back { display: none; }
+  /* while typing, keep the crossword title in the top row so you know which crossword this is */
+  body.phone-play.own-kb.typing #crossword > main > h1 { display: block; font-size: 15px; font-weight: 500; color: var(--muted); }
   body.phone-play.typing .bar-back { display: flex; align-items: center; justify-content: center; flex: none; width: 34px; height: 34px; margin: -4px 0 0 -6px; border-radius: 50%; color: var(--accent); }
   body.phone-play.typing .bar-back:active { background: #cfe0f5; }
   #kb .kbr { display: flex; justify-content: center; gap: 6px; }

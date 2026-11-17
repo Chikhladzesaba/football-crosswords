@@ -103,6 +103,7 @@
           <div class="result" id="result" hidden>
             <p id="resultText"></p>
             <button class="primary" id="btnShareResult" type="button">${T.shareResult}</button>
+            <button class="result-next" id="btnNextResult" type="button">${T.playNext} →</button>
             <p class="share-note" id="shareResultNote" hidden></p>
           </div>
           <div class="clues">
@@ -448,9 +449,8 @@
   $("btnShareResult").addEventListener("click", () => share(resultText(), shareLink("result"), "shareResultNote"));
   $("winShare").addEventListener("click", () => share(resultText(), shareLink("result"), "winShareNote"));
   $("winX").addEventListener("click", closeWin);
-  $("winNext").addEventListener("click", () => {
-    closeWin();
-    // On phones the "play more" list under the puzzle is hidden, so go straight to the first suggested crossword (or the list of all crosswords)
+  // On phones the "play more" list under the puzzle is hidden, so go straight to the first suggested crossword (or the list of all crosswords)
+  function goNext() {
     if (!$("next").offsetParent) {
       const a = $("nextList").querySelector("a"), back = root.querySelector("a.back");
       const href = (a && a.getAttribute("href")) || (back && back.getAttribute("href"));
@@ -458,7 +458,9 @@
       return;
     }
     $("next").scrollIntoView({ behavior: "smooth", block: "center" });
-  });
+  }
+  $("winNext").addEventListener("click", () => { closeWin(); goNext(); });
+  $("btnNextResult").addEventListener("click", goNext);
   $("win").addEventListener("click", (e) => { if (e.target.id === "win") closeWin(); }); // tap outside the card
   addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("win").hidden) closeWin(); });
   $("btnSharePuzzle").addEventListener("click", () =>
