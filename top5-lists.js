@@ -144,4 +144,21 @@ window.TOP5_LISTS = [
       { name: "Valencia", alt: ["valencia cf"], value: "6" },
     ],
   },
+  {
+    id: "ucl-penalties",
+    title: "Champions League all-time most penalties scored",
+    unit: "penalties",
+    top: 5,
+    asOf: "17 Nov 2026",
+    note: "Ronaldo and Lewandowski are level on 19 and share 1st place. Van Nistelrooy and Agüero are level on 11 and share 5th place. Kane is still playing in the Champions League, so his total will grow.",
+    source: "https://www.uefa.com/uefachampionsleague/history/rankings/players/goals_penalty",
+    items: [
+      { name: "Cristiano Ronaldo", alt: ["ronaldo", "cristiano", "cr7"], value: "19" },
+      { name: "Robert Lewandowski", rank: 1, alt: ["lewandowski", "lewy", "robert"], value: "19" },
+      { name: "Lionel Messi", alt: ["messi", "leo messi"], value: "18" },
+      { name: "Harry Kane", alt: ["kane", "harry"], value: "17+" },
+      { name: "Ruud van Nistelrooy", rank: 5, alt: ["van nistelrooy", "nistelrooy", "ruud"], value: "11" },
+      { name: "Sergio Agüero", rank: 5, alt: ["aguero", "sergio", "kun aguero", "kun"], value: "11" },
+    ],
+  },
 ];

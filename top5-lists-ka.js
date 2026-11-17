@@ -191,4 +191,21 @@ window.TOP5_LISTS = [
       { name: "ვალენსია", alt: ["valencia", "valencia cf"], value: "6" },
     ],
   },
+  {
+    id: "vis-aqvs-chempionta-ligaze-yvelaze-meti-penalti-gatanili",
+    title: "ვის აქვს ჩემპიონთა ლიგაზე ყველაზე მეტი პენალტი გატანილი?",
+    unit: "პენალტი",
+    top: 5,
+    asOf: "2026 წლის 17 ნოემბრის მდგომარეობით",
+    note: "რონალდო და ლევანდოვსკი 19-19 პენალტით პირველ ადგილს იზიარებენ. ვან ნისტელროი და აგუერო 11-11 პენალტით მეხუთე ადგილს იზიარებენ. კეინი ჩემპიონთა ლიგაში ისევ თამაშობს, ამიტომ მისი რიცხვი გაიზრდება.",
+    source: "https://www.uefa.com/uefachampionsleague/history/rankings/players/goals_penalty",
+    items: [
+      { ...CR7, value: "19" },
+      { ...LEWA, rank: 1, value: "19" },
+      { ...MESSI, value: "18" },
+      { ...KANE, value: "17+" },
+      { name: "რუუდ ვან ნისტელროი", rank: 5, alt: ["ვან ნისტელროი", "ნისტელროი", "ვანნისტელროი", "რუუდი", "რუუდ", "van nistelrooy", "nistelrooy", "ruud"], value: "11" },
+      { name: "სერხიო აგუერო", rank: 5, alt: ["აგუერო", "სერხიო", "კუნ აგუერო", "კუნი", "aguero", "sergio", "kun aguero"], value: "11" },
+    ],
+  },
 ];
