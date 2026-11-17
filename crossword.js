@@ -575,10 +575,19 @@
   }
   let userScrolling = false, scrollTimer = null; // true while the finger moves the page
   function keepVisible() {
-    if (PHONE && state.cell) { // phone: the grid scrolls inside its own box; keep the active square (and one square around it) in view
-      const box = $("grid").parentElement, r = state.cell.el.getBoundingClientRect(), b = box.getBoundingClientRect(), m = r.height;
-      if (r.bottom + m > b.bottom) box.scrollTop += r.bottom + m - b.bottom; else if (r.top - m < b.top) box.scrollTop -= b.top - (r.top - m);
-      if (r.right + m > b.right) box.scrollLeft += r.right + m - b.right; else if (r.left - m < b.left) box.scrollLeft -= b.left - (r.left - m);
+    if (PHONE && state.cell) { // phone: the grid scrolls inside its own box; bring the WHOLE selected word into view so you can see how many letters it has
+      const box = $("grid").parentElement, b = box.getBoundingClientRect(), cw = wordAt(state.cell, state.dir).cells;
+      let l = 1e9, t = 1e9, r = -1e9, bt = -1e9;
+      cw.forEach((c) => { const q = c.el.getBoundingClientRect(); l = Math.min(l, q.left); t = Math.min(t, q.top); r = Math.max(r, q.right); bt = Math.max(bt, q.bottom); });
+      const pad = state.cell.el.getBoundingClientRect().height * 0.6;
+      const fit = (lo, hi, blo, bhi) => { // how far to scroll so [lo, hi] sits inside [blo, bhi]; if it is too long, line its start up
+        if (hi - lo + 2 * pad > bhi - blo) return lo - pad - blo;
+        if (lo - pad < blo) return lo - pad - blo;
+        if (hi + pad > bhi) return hi + pad - bhi;
+        return 0;
+      };
+      box.scrollTop += fit(t, bt, b.top, b.bottom);
+      box.scrollLeft += fit(l, r, b.left, b.right);
       return;
     }
     if (!touch || PHONE || !state.cell || userScrolling) return; // never fight the user's own scroll
