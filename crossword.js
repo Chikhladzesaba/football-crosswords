@@ -671,7 +671,8 @@
       const rows = LAY[lang === "ka" && shift ? "kaShift" : lang];
       const keys = (r) => [...rows[r]].map((ch) => btn("key", ch, ch, ch)).join("");
       const sh = lang === "ka" ? btn("shift", IC.shift(shift), TXT.shift).replace("<button", '<button class="fk" aria-pressed="' + shift + '"') : "";
-      const top = btn("close", IC.down, TXT.close).replace("<button", '<button class="kbx"');
+      const act = (id) => '<button type="button" class="kba" data-a="act" data-id="' + id + '">' + $(id).textContent.trim() + "</button>";
+      const top = '<div class="kbtop">' + act("btnCheck") + act("btnLetter") + act("btnReveal") + btn("close", IC.down, TXT.close).replace("<button", '<button class="kbx"') + "</div>";
       const ctl = '<div class="kbr ctl">' +
           btn("lang", IC.lang + "<span>" + TXT.lang[lang] + "</span>", TXT.lang[lang]).replace("<button", '<button class="w1"') +
           btn("dir", IC.dir, TXT.dir).replace("<button", '<button class="w2"') +
@@ -702,6 +703,7 @@
       else if (a === "lang") { lang = lang === "ka" ? "en" : "ka"; shift = false; renderKb(); }
       else if (a === "dir") { if (c.words.A && c.words.D) select(c, other(state.dir)); }
       else if (a === "close") { showList = false; shift = false; renderKb(); document.body.classList.remove("typing"); if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); }
+      else if (a === "act") { $(b.dataset.id).click(); if (showList) { showList = false; renderKb(); } }
       else if (a === "list") { showList = !showList; renderKb(); }
       else if (a === "clue") { const w = words[+b.dataset.i]; showList = false; select(w.cells[0], w.dir); renderKb(); }
       else if (a === "prev") { nextWord(-1); if (showList) renderKb(); }

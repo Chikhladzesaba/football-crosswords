@@ -370,7 +370,7 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
 /* ---- Phone: the page is one fixed screen above the keyboard. Only the clue list and, for tall puzzles, the grid box scroll inside themselves ---- */
 @media (max-width: 760px) {
   html:has(body.phone-play) { overflow: hidden; overscroll-behavior: none; }
-  body.phone-play { --kbh: 275px; /* about the height of the phone keyboard with its small toolbar */
+  body.phone-play { --kbh: 255px; /* about the height of the phone keyboard with its small toolbar */
     /* squares never get smaller than 28px for the height; a tall puzzle then scrolls inside its own box instead of shrinking */
     --cell: min(46px, calc((100vw - 32px) / var(--cols) - 2px), max(28px, calc((100dvh - 156px - var(--kbh)) / var(--rows) - 2px)));
     position: fixed; top: 0; left: 0; right: 0; height: var(--vvh, 100dvh); overflow: hidden; display: flex; flex-direction: column; overscroll-behavior: none; }
@@ -408,7 +408,7 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
 }
 /* ---- Phone: our own keyboard (test version, opt-in with ?kb=own). It sits at the bottom of the fixed screen and takes space only while typing ---- */
 @media (max-width: 760px) {
-  body.phone-play.own-kb { --kbh: 275px; }
+  body.phone-play.own-kb { --kbh: 255px; }
   body.own-kb .cell, body.own-kb .grid { touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
   body.phone-play #kb { display: none; flex: none; flex-direction: column; gap: 11px; padding: 12px 8px max(10px, env(safe-area-inset-bottom)); background: #e0e1e7; border-radius: 14px 14px 0 0; -webkit-user-select: none; user-select: none; }
   body.phone-play.typing #kb { display: flex; }
@@ -423,7 +423,11 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
   #kb .fk { flex: 0 0 50px; max-width: 50px; display: flex; align-items: center; justify-content: center; padding: 0; }
   #kb .fk[aria-pressed="true"] { background: var(--ink); color: #fff; }
   #kb .ctl button { max-width: none; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 6px; font-size: 13px; font-weight: 500; color: #0a3f8f; }
-  #kb .kbx { flex: none; max-width: none; width: 100%; height: 24px; margin: -8px 0 -4px; padding: 0; background: none; box-shadow: none; display: flex; align-items: center; justify-content: center; color: #3d5573; }
+  body.phone-play.own-kb.typing .actions, body.phone-play.own-kb.typing .share-note { display: none; }
+  #kb .kbtop { flex: none; display: flex; align-items: center; gap: 6px; margin: -6px 0 -2px; }
+  #kb .kba { flex: 0 1 auto; max-width: none; height: 30px; padding: 0 11px; border-radius: 15px; background: #fff; box-shadow: none; border: 1px solid #b9cfe9; font: 400 12.5px/1 "FiraGO", system-ui, sans-serif; color: var(--ink); white-space: nowrap; }
+  #kb .kba:first-child { background: #006aff; border-color: #006aff; color: #fff; }
+  #kb .kbx { flex: 0 0 38px; max-width: none; margin-left: auto; height: 30px; padding: 0; background: none; box-shadow: none; display: flex; align-items: center; justify-content: center; color: #3d5573; }
   #kb .kbl { position: relative; height: 164px; overflow-y: auto; -webkit-overflow-scrolling: touch; margin: 0 -2px; background: #fff; border-radius: 8px; padding: 0 8px 6px; }
   #kb .kbl h4 { margin: 0; padding: 10px 2px 4px; font: 600 11px/1 "FiraGO", system-ui, sans-serif; color: #3d5573; letter-spacing: .04em; text-transform: uppercase; }
   #kb .kbl .ci { display: flex; gap: 8px; align-items: flex-start; flex: none; width: 100%; max-width: none; height: auto; min-height: 38px; padding: 8px 6px; margin: 0; border-radius: 8px; background: none; box-shadow: none; text-align: left; font: 400 14px/1.3 "FiraGO", system-ui, sans-serif; color: var(--ink); }
