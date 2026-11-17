@@ -703,6 +703,13 @@
       if (a && a.closest && a.closest("#grid")) return;
       document.body.classList.remove("typing");
     }, 60));
+    // Tapping empty space outside the grid, the keyboard and the buttons closes the keyboard
+    document.addEventListener("click", (e) => {
+      if (!document.body.classList.contains("typing")) return;
+      if (e.target.closest(".cell, #kb, .clue-bar, button, a, .clues li")) return;
+      document.body.classList.remove("typing");
+      if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+    });
     // Hint buttons shouldn't close the keyboard
     ["btnCheck", "btnClearWord", "btnAuto", "btnLetter", "btnReveal"].forEach((id) => $(id).addEventListener("mousedown", (e) => e.preventDefault()));
   }
