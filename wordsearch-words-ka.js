@@ -3,7 +3,7 @@
 // WORDSEARCH_WORDS = the word pool. One word per line, Georgian letters, no spaces.
 // cat = players | coaches | stadiums | teams.  lvl = easy | medium | hard.
 // The game picks 10 words each round: 4 easy, 3 medium, 3 hard. So keep at least 4 easy, 3 medium and 3 hard words here.
-// Keep every word 14 letters or fewer (the grid is 14 x 14).
+// Keep every word 11 letters or fewer. The grid is 11 x 11 on a computer and 10 x 10 on a phone, and longer words are left out of the game.
 // All words are spellings that already appear on the site (crosswords or Scramble).
 window.WORDSEARCH_TEXT = {
   backHref: "../ka/", back: "← სხვა თამაშები",

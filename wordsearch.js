@@ -5,8 +5,8 @@
   const ALL_WORDS = window.WORDSEARCH_WORDS || [];
   if (!root || !ALL_WORDS.length) return;
 
-  // The grid is 14 x 14 on a computer and 11 x 11 on a phone (bigger squares, fewer letters). Words longer than the grid are left out.
-  const SIZE = window.matchMedia("(max-width: 640px)").matches ? 11 : 14;
+  // The grid is 11 x 11 on a computer and 10 x 10 on a phone (big squares, the whole grid fits on one screen). Words longer than the grid are left out.
+  const SIZE = window.matchMedia("(max-width: 640px)").matches ? 10 : 11;
   const POOL = ALL_WORDS.filter((x) => x.w.length <= SIZE);
   root.style.setProperty("--n", SIZE);
   const MIX = { easy: 4, medium: 3, hard: 3 };      // words per round: 4 easy, 3 medium, 3 hard
