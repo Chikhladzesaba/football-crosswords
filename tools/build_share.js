@@ -87,6 +87,8 @@ function puzzlePage(c, p) {
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 ${headTags({ title, description, url, image: url + "share.png" })}
 ${FONT_LINKS}
+  <link rel="preload" href="/fonts/FiraGO-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/FiraGO-Medium.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../nav.css?v=5">
   <link rel="stylesheet" href="../crossword.css?v=16">
   ${ANALYTICS}
@@ -126,6 +128,8 @@ function puzzlePageKa(c, p) {
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 ${headTags({ title: KA.title(c), description: KA.description(c, level), url, image: url + "share.png", brand: KA.brand, locale: "ka_GE", noindex: !KA_PUBLIC })}
 ${FONT_LINKS}
+  <link rel="preload" href="/fonts/FiraGO-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/FiraGO-Medium.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../nav.css?v=5">
   <link rel="stylesheet" href="../crossword.css?v=16">
   ${ANALYTICS}
@@ -167,6 +171,8 @@ function kaHomePage() {
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 ${headTags({ title: KA.homeTitle, description: KA.homeIntro, url, image: url + "share.png", brand: KA.brand, locale: "ka_GE", noindex: !KA_PUBLIC, alternates: KA_PUBLIC ? HOME_ALTERNATES : [] })}
 ${FONT_LINKS.replace(/\.\.\//g, "")}
+  <link rel="preload" href="/fonts/FiraGO-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/FiraGO-Medium.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../nav.css?v=5">
   <link rel="stylesheet" href="../crossword.css?v=16">
   ${ANALYTICS}
