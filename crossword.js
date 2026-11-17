@@ -697,6 +697,8 @@
       requestAnimationFrame(keepVisible);
     };
     root.addEventListener("click", openKb); // a tap on a square (also when it is already the focused one)
+    // iPhone sometimes drops the click on a square that is already focused, so open on finger-up too (a scroll cancels it)
+    root.addEventListener("pointerup", (e) => { if (e.pointerType !== "mouse" && e.target.closest(".cell")) openKb(e); });
     root.addEventListener("focusin", (e) => { if (e.isTrusted && root.dataset.ready) openKb(e); });
     root.addEventListener("focusout", () => setTimeout(() => {
       const a = document.activeElement;
