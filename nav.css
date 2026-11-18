@@ -71,3 +71,24 @@ html:not([data-game="top5"]):not([data-game="scramble"]):not([data-game="wordsea
 .kp-share[hidden] { display: none; }
 .kp-share.kp-share a, .kp-share.kp-share button { flex: none; width: auto; min-height: 0; margin: 0; font: inherit; font-size: 14px; line-height: 1; padding: 9px 14px; border: 1px solid #cfe0f5; border-radius: 999px; background: #fff; color: #0a3f8f; text-decoration: none; cursor: pointer; }
 .kp-share.kp-share a:hover, .kp-share.kp-share button:hover { background: #e3efff; }
+
+/* Footer (built by nav.js) */
+.site-footer { max-width: 1000px; margin: 0 auto; padding: 8px 16px 32px; text-align: center; font-size: 13px; color: #3d5573; }
+.site-footer nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin: 0 0 6px; }
+.site-footer a { color: #3d5573; text-decoration: none; }
+.site-footer a:hover { color: var(--accent); text-decoration: underline; }
+.site-footer p { margin: 0; }
+body.phone-play .site-footer, body.typing .site-footer { display: none; }
+
+/* About / Contact / Privacy / 404 pages */
+main.info h2 { font-size: 20px; font-weight: 500; margin: 28px 0 8px; color: #0a3f8f; }
+main.info p, main.info li { font-size: 16px; line-height: 1.65; margin: 0 0 10px; }
+main.info ul { margin: 0 0 10px; padding-left: 20px; }
+main.info a { color: var(--accent); }
+main.info .updated { font-size: 14px; color: var(--muted); }
+main.info .big-link { display: inline-block; margin: 4px 0 10px; font-size: 18px; font-weight: 500; }
+main.info .cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; }
+main.info .cta a { padding: 11px 18px; border: 1px solid var(--border); border-radius: 999px; background: #fff; color: #0a3f8f; text-decoration: none; }
+main.info .cta a:hover { background: var(--accent-soft); }
+main.info h1 { overflow-wrap: anywhere; }
+@media (max-width: 640px) { main.info h1 { font-size: 30px; } }
