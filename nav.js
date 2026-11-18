@@ -8,6 +8,7 @@
   const GAME_OF = { top5: "top5", "gamoicani-top5": "top5", scramble: "scramble", "gamoicani-pekhburtelebis-gvarebi": "scramble",
     wordsearch: "wordsearch", "skauti": "wordsearch" };
   const cur = GAME_OF[first] || "crosswords"; // every other folder is a crossword (or a home page)
+  const info = document.documentElement.dataset.page === "info"; // About, Contact, Privacy and the 404 page set <html data-page="info">
   document.documentElement.dataset.game = cur; // nav.css gives each game its own accent color from this
   const S = (d, w) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="' + (w || 1.6) + '" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + "</svg>";
   const ICON = {
@@ -24,7 +25,7 @@
   ITEMS.forEach(([id, name, path]) => {
     const a = document.createElement("a"); a.href = root + path; a.dataset.game = id;
     a.innerHTML = '<span class="ico">' + ICON[id] + "</span><span>" + name + "</span>";
-    if (id === cur) a.setAttribute("aria-current", "page");
+    if (id === cur && !info) a.setAttribute("aria-current", "page"); // About / Contact / Privacy pages are not a game: no tab is highlighted
     nav.appendChild(a);
   });
   document.body.insertBefore(nav, document.body.firstChild);
@@ -32,7 +33,7 @@
   // Language switch + (on phones) the small top bar with the brand name. The switch goes to the same game in the other language.
   const ALT = KA ? { crosswords: "", top5: "top5/", scramble: "scramble/", wordsearch: "wordsearch/" }
                  : { crosswords: "ka/", top5: "gamoicani-top5/", scramble: "gamoicani-pekhburtelebis-gvarebi/", wordsearch: "skauti/" };
-  const alt = root + ALT[cur];
+  const alt = root + (document.documentElement.dataset.alt != null ? document.documentElement.dataset.alt : ALT[cur]); // info pages say where their other-language version is (data-alt)
   const LANG = KA ? '<a href="' + alt + '" hreflang="en" lang="en" title="English">ინგ</a><span class="sep">|</span><span aria-current="true">ქა</span>'
                   : '<span aria-current="true">Eng</span><span class="sep">|</span><a href="' + alt + '" hreflang="ka" lang="ka" title="ქართული">Geo</a>';
   const top = document.createElement("div");
@@ -40,6 +41,19 @@
   top.innerHTML = '<a class="brand" href="' + root + (KA ? "ka/" : "") + '">Kickoff Puzzles</a><span class="top-right"><span class="pill-slot"></span><nav class="lang-switch" aria-label="' + (KA ? "ენა" : "Language") + '">' + LANG + "</nav></span>";
   document.body.insertBefore(top, document.body.firstChild);
   document.documentElement.classList.add("with-top");
+
+  // Footer with the About / Contact / Privacy links, added to every page. Hidden while playing a crossword on a phone (the page is a fixed-size app there).
+  const FT = KA ? { about: "ჩვენ შესახებ", contact: "კონტაქტი", privacy: "კონფიდენციალურობა", note: "არაოფიციალური თამაში." }
+                : { about: "About", contact: "Contact", privacy: "Privacy", note: "Unofficial fan game." };
+  const fbase = root + (KA ? "ka/" : "");
+  const addFooter = () => {
+    const f = document.createElement("footer");
+    f.className = "site-footer";
+    f.innerHTML = '<nav aria-label="' + (KA ? "საიტის ბმულები" : "Site links") + '"><a href="' + fbase + 'about/">' + FT.about + '</a><a href="' + fbase + 'contact/">' + FT.contact +
+      '</a><a href="' + fbase + 'privacy/">' + FT.privacy + "</a></nav><p>© 2026 Kickoff Puzzles · " + FT.note + "</p>";
+    document.body.appendChild(f);
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", addFooter); else addFooter();
 
   // On a phone the round / progress pill sits in the top bar (as in the design); on a computer it stays beside the heading.
   const mq = window.matchMedia("(max-width: 640px)");
