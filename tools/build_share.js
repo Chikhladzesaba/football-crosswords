@@ -27,7 +27,7 @@ const KA = {
   description: (c, level) => `${c.about} საფეხბურთო კროსვორდი, სირთულე: ${level}. შეგიძლია ითამაშო ტელეფონზეც და კომპიუტერზეც.`,
   level: { "Easy": "მარტივი", "Medium": "საშუალო", "Hard": "რთული", "Very hard": "ძალიან რთული" },
   homeTitle: "საფეხბურთო კროსვორდები",
-  homeIntro: "აირჩიე თემა, სირთულე, ითამაშე და გაუზიარე მეგობრებს.",
+  homeIntro: "კროსვორდები მსოფლიო ჩემპიონატზე, ჩემპიონთა ლიგაზე, პრემიერლიგაზე და სხვა საფეხბურთო თემებზე.",
   back: "← ყველა კროსვორდი", across: "ჰორიზონტალურად", down: "ვერტიკალურად",
 };
 // Cloudflare Web Analytics (cookie-free visit counting). The token is public by design.
@@ -275,7 +275,7 @@ ${gridSvg}
   let home = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
   home = home.replace(/  <title>[\s\S]*?(?=  <link rel="icon")/, headTags({
     title: `${BRAND}: free football crosswords to play online`,
-    description: `Free football crosswords on the World Cup, the Champions League, the Premier League, Ballon d'Or winners and more. Pick a difficulty and play on your phone or computer.`,
+    description: `Football crosswords on the World Cup, the Champions League, the Premier League and other football topics.`,
     url: SITE, image: SITE + "share.png", alternates: KA_PUBLIC ? HOME_ALTERNATES : [],
   }) + "\n");
   if (!home.includes("cloudflareinsights")) home = home.replace("</head>", `  ${ANALYTICS}\n</head>`);
