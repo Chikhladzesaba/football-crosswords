@@ -38,6 +38,11 @@ for (const g of GAMES) {
     h = swap(h, `<link rel="canonical" href="${SITE}/${g.folder}/">`, `<link rel="canonical" href="${url}">`);
     h = swap(h, `<meta property="og:url" content="${SITE}/${g.folder}/">`, `<meta property="og:url" content="${url}">`);
     h = h.replace(/(<meta property="og:title" content=")[^"]*(">)/, (_, a, b) => a + title + b);
+    if (list.desc) { // each page gets its own description (no repeated text, no "play on phone" line)
+      const desc = esc(list.desc);
+      h = h.replace(/(<meta name="description" content=")[^"]*(">)/, (_, a, b) => a + desc + b);
+      h = h.replace(/(<meta property="og:description" content=")[^"]*(">)/, (_, a, b) => a + desc + b);
+    }
     h = h.replace(/ *<link rel="alternate" hreflang="[^"]*" href="[^"]*">\n/g, ""); // the language links point to the game start pages, not to this list
     h = h.replace(/(href|src)="\.\.\//g, '$1="../../'); // the page sits one folder deeper
     h = swap(h, `<script src="../../${g.lists}`, `<script>window.TOP5_LIST = ${JSON.stringify(list.id)};</script>\n  <script src="../../${g.lists}`);

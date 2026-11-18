@@ -7,6 +7,7 @@ window.TOP5_LISTS = [
   {
     id: "ucl-scorers",
     title: "Champions League all-time top scorers",
+    desc: "Champions League all-time top scorers: the top 5.",
     unit: "goals",
     asOf: "4 Nov 2026",
     note: "Mbappé is still scoring, so his total will grow.",
@@ -22,6 +23,7 @@ window.TOP5_LISTS = [
   {
     id: "pl-titles",
     title: "Premier League titles by club",
+    desc: "Premier League titles by club: the top 5.",
     unit: "titles",
     asOf: "end of 2025-26",
     note: "Premier League era only (since 1992-93).",
@@ -38,6 +40,7 @@ window.TOP5_LISTS = [
   {
     id: "laliga-scorers",
     title: "La Liga all-time top scorers",
+    desc: "La Liga all-time top scorers: the top 5.",
     unit: "goals",
     asOf: "Nov 2026",
     note: "League goals only. All five have left La Liga.",
@@ -53,6 +56,7 @@ window.TOP5_LISTS = [
   {
     id: "pl-scorers",
     title: "Premier League all-time top scorers",
+    desc: "Premier League all-time top scorers: the top 5.",
     unit: "goals",
     asOf: "Nov 2026",
     note: "Premier League goals only (since 1992-93). None of the five plays in the league now.",
@@ -68,6 +72,7 @@ window.TOP5_LISTS = [
   {
     id: "bundesliga-scorers",
     title: "Bundesliga all-time top scorers",
+    desc: "Bundesliga all-time top scorers: the top 5.",
     unit: "goals",
     asOf: "18 Oct 2026",
     note: "League goals only. Very hard!",
@@ -83,6 +88,7 @@ window.TOP5_LISTS = [
   {
     id: "wc-scorers",
     title: "World Cup all-time top scorers",
+    desc: "World Cup all-time top scorers: the top 5.",
     unit: "goals",
     asOf: "after the 2026 final",
     note: "Müller and Kane are tied for 5th place with 14 goals each.",
@@ -99,6 +105,7 @@ window.TOP5_LISTS = [
   {
     id: "seriea-scorers",
     title: "Serie A all-time top scorers",
+    desc: "Serie A all-time top scorers: the top 5.",
     unit: "goals",
     top: 5,
     asOf: "end of 2025-26",
@@ -115,6 +122,7 @@ window.TOP5_LISTS = [
   {
     id: "ucl-appearances",
     title: "Champions League all-time most appearances",
+    desc: "Champions League all-time most appearances: the top 5.",
     unit: "matches",
     top: 5,
     asOf: "4 Nov 2026",
@@ -131,6 +139,7 @@ window.TOP5_LISTS = [
   {
     id: "laliga-titles",
     title: "La Liga titles by club",
+    desc: "La Liga titles by club: the top 5.",
     unit: "titles",
     asOf: "end of 2025-26",
     note: "Spanish top-flight titles since 1929. Real Madrid are seven titles ahead of Barcelona.",
@@ -147,6 +156,7 @@ window.TOP5_LISTS = [
   {
     id: "ucl-penalties",
     title: "Champions League all-time most penalties scored",
+    desc: "Champions League all-time most penalties scored: the top 5.",
     unit: "penalties",
     top: 5,
     asOf: "17 Nov 2026",
@@ -164,6 +174,7 @@ window.TOP5_LISTS = [
   {
     id: "ucl-minutes",
     title: "Champions League all-time most minutes played",
+    desc: "Champions League all-time most minutes played: the top 5.",
     unit: "minutes",
     top: 5,
     asOf: "17 Nov 2026",
@@ -180,6 +191,7 @@ window.TOP5_LISTS = [
   {
     id: "ucl-assists",
     title: "Champions League all-time most assists",
+    desc: "Champions League all-time most assists: the top 5.",
     unit: "assists",
     top: 5,
     asOf: "17 Nov 2026",
@@ -197,6 +209,7 @@ window.TOP5_LISTS = [
   {
     id: "ucl-clean-sheets",
     title: "Champions League goalkeepers with the most clean sheets",
+    desc: "Champions League goalkeepers with the most clean sheets: the top 5.",
     unit: "clean sheets",
     top: 5,
     asOf: "17 Nov 2026",
@@ -213,6 +226,7 @@ window.TOP5_LISTS = [
   {
     id: "ucl-titles",
     title: "Champions League titles by club",
+    desc: "Champions League titles by club: the top 5.",
     unit: "titles",
     top: 5,
     asOf: "17 Nov 2026",
@@ -230,6 +244,7 @@ window.TOP5_LISTS = [
   {
     id: "ucl-fastest-goals",
     title: "Champions League fastest goals",
+    desc: "Champions League fastest goals: the top 5.",
     unit: "seconds",
     top: 5,
     asOf: "17 Nov 2026",
@@ -247,6 +262,7 @@ window.TOP5_LISTS = [
   {
     id: "pl-appearances",
     title: "Premier League all-time most appearances",
+    desc: "Premier League all-time most appearances: the top 5.",
     unit: "matches",
     asOf: "end of 2025-26",
     note: "Premier League matches only, since 1992. James Milner passed Gareth Barry in February 2026 and finished his career on 658.",
@@ -263,6 +279,7 @@ window.TOP5_LISTS = [
   {
     id: "seriea-appearances",
     title: "Serie A all-time most appearances",
+    desc: "Serie A all-time most appearances: the top 5.",
     unit: "matches",
     asOf: "end of 2025-26",
     note: "Serie A league matches only. Maldini, Totti and Zanetti played all their Serie A matches for one club.",
@@ -278,6 +295,7 @@ window.TOP5_LISTS = [
   {
     id: "pl-assists",
     title: "Premier League all-time most assists",
+    desc: "Premier League all-time most assists: the top 5.",
     unit: "assists",
     asOf: "end of 2025-26",
     note: "Premier League assists only. Giggs is 43 clear of second place.",
@@ -293,6 +311,7 @@ window.TOP5_LISTS = [
   {
     id: "ucl-club-goals",
     title: "Champions League most goals for one club",
+    desc: "Champions League most goals for one club: the top 5.",
     unit: "goals",
     asOf: "4 Nov 2026",
     note: "Champions League matches only, qualifying rounds excluded. Only goals for one club count: Messi scored 120 of his 129 for Barcelona, Benzema 78 of his 90 for Real Madrid.",
@@ -308,6 +327,7 @@ window.TOP5_LISTS = [
   {
     id: "ucl-hat-tricks",
     title: "Champions League most hat-tricks",
+    desc: "Champions League most hat-tricks: the top 5.",
     unit: "hat-tricks",
     asOf: "4 Nov 2026",
     note: "Messi and Ronaldo are level on 8 and share 1st place.",
@@ -323,6 +343,7 @@ window.TOP5_LISTS = [
   {
     id: "ucl-coach-wins",
     title: "Champions League most wins as a coach",
+    desc: "Champions League most wins as a coach: the top 5.",
     unit: "wins",
     asOf: "4 Nov 2026",
     note: "Champions League matches since 1992-93.",
