@@ -68,3 +68,45 @@
   document.addEventListener("focusin", sync); document.addEventListener("focusout", () => setTimeout(sync, 50));
   if (vv) vv.addEventListener("resize", sync); window.addEventListener("resize", sync);
 })();
+
+// Share panel for computers (phones open their own share menu instead). Each game calls KPShare.open({ anchor, text, url, note })
+// from its share button: a small row appears under the button with WhatsApp, Facebook, X and Copy.
+// Facebook can only take a link, so it gets the url alone; WhatsApp, X and Copy get the full result text plus the link.
+window.KPShare = (function () {
+  const KA = document.documentElement.lang === "ka";
+  const L = KA ? { label: "გაზიარება", copy: "კოპირება", copied: "დაკოპირდა ✓" } : { label: "Share via", copy: "Copy", copied: "Copied ✓" };
+  const enc = encodeURIComponent;
+  function open(o) {
+    const a = o.anchor;
+    if (!a) return;
+    if (a._kpRow) { a._kpRow.hidden = !a._kpRow.hidden; return; } // second click on the share button closes the row
+    const full = o.text + "\n" + o.url;
+    const row = document.createElement("div");
+    row.className = "kp-share";
+    row.setAttribute("role", "group"); row.setAttribute("aria-label", L.label);
+    row.style.order = a.style.order; // inside the end-of-game cards the buttons are re-ordered; the row stays right under the share button
+    const link = (name, href) => {
+      const el = document.createElement("a");
+      el.textContent = name; el.href = href; el.target = "_blank"; el.rel = "noopener noreferrer";
+      return el;
+    };
+    row.appendChild(link("WhatsApp", "https://wa.me/?text=" + enc(full)));
+    row.appendChild(link("Facebook", "https://www.facebook.com/sharer/sharer.php?u=" + enc(o.url)));
+    row.appendChild(link("X", "https://twitter.com/intent/tweet?text=" + enc(o.text) + "&url=" + enc(o.url)));
+    const copy = document.createElement("button");
+    copy.type = "button"; copy.textContent = L.copy;
+    copy.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(full);
+        copy.textContent = L.copied;
+        clearTimeout(copy._t); copy._t = setTimeout(() => (copy.textContent = L.copy), 2500);
+      } catch (e) {
+        if (o.note) { o.note.textContent = full; o.note.hidden = false; } // clipboard blocked: show the text so it can be copied by hand
+      }
+    });
+    row.appendChild(copy);
+    a.insertAdjacentElement("afterend", row);
+    a._kpRow = row;
+  }
+  return { open };
+})();

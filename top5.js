@@ -293,11 +293,13 @@
   async function share() {
     const won = done === ROUNDS;
     const url = location.origin + location.pathname + "?utm_source=share&utm_medium=social&utm_campaign=top5";
-    const full = `${TEXT.shareTitle}\n${TEXT.shareScore(won, done, ROUNDS, TEXT.shareHelp(hints))}\n${url}`;
+    const text = `${TEXT.shareTitle}\n${TEXT.shareScore(won, done, ROUNDS, TEXT.shareHelp(hints))}`;
+    const full = `${text}\n${url}`;
     const note = $("t5ShareNote");
     if (navigator.share && matchMedia("(pointer: coarse)").matches) {
       try { await navigator.share({ text: full }); return; } catch (e) { if (e.name === "AbortError") return; }
     }
+    if (window.KPShare) { KPShare.open({ anchor: $("t5Share"), text, url, note }); return; } // computers: WhatsApp / Facebook / X / Copy
     try { await navigator.clipboard.writeText(full); note.textContent = TEXT.copied; } catch (e) { note.textContent = full; }
     note.hidden = false;
     clearTimeout(note._t); note._t = setTimeout(() => (note.hidden = true), 4000);
