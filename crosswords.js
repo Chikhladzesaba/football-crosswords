@@ -50,7 +50,7 @@ window.CROSSWORDS = [
   { folder: "ka-world-cup-winners", lang: "ka", name: "მსოფლიო ჩემპიონები", difficulty: "Easy", topic: "International", answers: 8, about: "მუნდიალის ჩემპიონები." },
   { folder: "ka-champions-league-winners", lang: "ka", name: "ჩემპიონთა ლიგის გამარჯვებულები", difficulty: "Easy", topic: "Champions League", answers: 15, about: "ყველაზე მნიშვნელოვანი საკლუბო ტიტულის მფლობელები." },
   { folder: "ka-famous-number-10s", lang: "ka", name: "ლეგენდარული 10 ნომრები", difficulty: "Easy", topic: "Legends", answers: 15, about: "ლეგენდარული 10 ნომრები." },
-  { folder: "ka-premier-league-champions", lang: "ka", name: "პრემიერ ლიგის ჩემპიონები", difficulty: "Easy", topic: "Club football", answers: 15, about: "ინგლისის ჩემპიონები და მათი მწვრთნელები 1992 წლიდან დღემდე." },
+  { folder: "ka-premier-league-champions", lang: "ka", name: "პრემიერლიგის ჩემპიონები", difficulty: "Easy", topic: "Club football", answers: 15, about: "ინგლისის ჩემპიონები და მათი მწვრთნელები 1992 წლიდან დღემდე." },
   { folder: "ka-famous-derbies", lang: "ka", name: "ცნობილი დერბები", difficulty: "Easy", topic: "Club football", answers: 13, about: "მსოფლიო ფეხბურთის ყველაზე ცნობილი დაპირისპირებები." },
   { folder: "ka-euro-2024", lang: "ka", name: "ევრო 2024", difficulty: "Medium", topic: "International", answers: 15, about: "ევროპის ჩემპიონატი, სადაც საქართველომ პირველად ითამაშა." },
   { folder: "ka-ballon-dor-winners", lang: "ka", name: "ოქროს ბურთის მფლობელები", difficulty: "Medium", topic: "Legends", answers: 21, about: "მსოფლიოს საუკეთესო ფეხბურთელები." },
