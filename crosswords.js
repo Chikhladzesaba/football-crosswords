@@ -61,6 +61,7 @@ window.CROSSWORDS = [
   { folder: "evropis-chempionatebis-istoria", lang: "ka", name: "ევროპის ჩემპიონატების ისტორია", difficulty: "Hard", topic: "International", answers: 16, about: "ევროპის ჩემპიონატების ფინალები, გოლები და გმირები 1960-2021 წლებში." },
   { folder: "ka-champions-league-2010s", lang: "ka", name: "ჩემპიონთა ლიგა: 2010-იანები", difficulty: "Very hard", topic: "Champions League", answers: 21, about: "ჩემპიონთა ლიგის ფინალები და სენსაციები 2010-2019 წლებში." },
   { folder: "ka-champions-league-2000s", lang: "ka", name: "ჩემპიონთა ლიგა: 2000-იანები", difficulty: "Hard", topic: "Champions League", answers: 17, about: "ჩემპიონთა ლიგის ისტორია. 2000-2009 წლები." },
+  { folder: "ka-transfers-1990s", lang: "ka", name: "ტრანსფერები 1990-იანებში", difficulty: "Hard", topic: "Club football", answers: 20, about: "ტრანსფერების ისტორია. 1990-1999 წლები." },
   { folder: "ka-lionel-messi", lang: "ka", name: "ლიონელ მესი", difficulty: "Medium", topic: "Legends", answers: 16, about: "რვა ოქროს ბურთი, მსოფლიო ჩემპიონის ტიტული და რეკორდებით სავსე კარიერა." },
   { folder: "ka-cristiano-ronaldo", lang: "ka", name: "კრიშტიანუ რონალდუ", difficulty: "Hard", topic: "Legends", answers: 17, about: "ევროპის ჩემპიონი, ჩემპიონთა ლიგის ხუთგზის გამარჯვებული და რეკორდებით სავსე კარიერა." },
   { folder: "ka-david-beckham", lang: "ka", name: "დევიდ ბექჰემი", difficulty: "Hard", topic: "Legends", answers: 17, about: "თავისი დროის ერთ-ერთი ყველაზე ცნობილი ფეხბურთელი, მოედანზეც და მის გარეთაც." },
