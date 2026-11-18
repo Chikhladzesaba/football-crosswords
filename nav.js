@@ -43,14 +43,14 @@
   document.documentElement.classList.add("with-top");
 
   // Footer with the About / Contact / Privacy links, added to every page. Hidden while playing a crossword on a phone (the page is a fixed-size app there).
-  const FT = KA ? { about: "ჩვენ შესახებ", contact: "კონტაქტი", privacy: "კონფიდენციალურობა", note: "არაოფიციალური თამაში." }
-                : { about: "About", contact: "Contact", privacy: "Privacy", note: "Unofficial fan game." };
+  const FT = KA ? { about: "ჩვენ შესახებ", contact: "კონტაქტი", privacy: "კონფიდენციალურობა" }
+                : { about: "About", contact: "Contact", privacy: "Privacy" };
   const fbase = root + (KA ? "ka/" : "");
   const addFooter = () => {
     const f = document.createElement("footer");
     f.className = "site-footer";
     f.innerHTML = '<nav aria-label="' + (KA ? "საიტის ბმულები" : "Site links") + '"><a href="' + fbase + 'about/">' + FT.about + '</a><a href="' + fbase + 'contact/">' + FT.contact +
-      '</a><a href="' + fbase + 'privacy/">' + FT.privacy + "</a></nav><p>© 2026 Kickoff Puzzles · " + FT.note + "</p>";
+      '</a><a href="' + fbase + 'privacy/">' + FT.privacy + "</a></nav><p>© 2026 Kickoff Puzzles</p>";
     document.body.appendChild(f);
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", addFooter); else addFooter();
