@@ -298,11 +298,13 @@
   async function share() {
     const n = found.filter(Boolean).length;
     const url = location.origin + location.pathname + "?utm_source=share&utm_medium=social&utm_campaign=wordsearch";
-    const full = `${TEXT.shareTitle}\n${TEXT.shareLine(n, placed.length, timeText, TEXT.shareHelp(hints))}\n${url}`;
+    const text = `${TEXT.shareTitle}\n${TEXT.shareLine(n, placed.length, timeText, TEXT.shareHelp(hints))}`;
+    const full = `${text}\n${url}`;
     const note = $("wsShareNote");
     if (navigator.share && matchMedia("(pointer: coarse)").matches) {
       try { await navigator.share({ text: full }); return; } catch (e) { if (e.name === "AbortError") return; }
     }
+    if (window.KPShare) { KPShare.open({ anchor: $("wsShare"), text, url, note }); return; } // computers: WhatsApp / Facebook / X / Copy
     try { await navigator.clipboard.writeText(full); note.textContent = TEXT.copied; } catch (e) { note.textContent = full; }
     note.hidden = false;
     clearTimeout(note._t); note._t = setTimeout(() => (note.hidden = true), 4000);

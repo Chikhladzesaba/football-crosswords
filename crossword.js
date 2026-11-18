@@ -32,7 +32,7 @@
       (l || w) && "დახმარებით ნახე " + [l && `${l} ასო`, w && `${w} სიტყვა`].filter(Boolean).join(" და ") + ".",
       a && ((l || w) ? "ავტომატური შემოწმებაც ჩართული გქონდა." : "ავტომატური შემოწმება გქონდა ჩართული, მაგრამ არაუშავს!"),
     ].filter(Boolean).join(" "),
-    shareResult: "შედეგის გაზიარება", across: "ჰორიზონტალურად", down: "ვერტიკალურად",
+    shareResult: "გაზიარება", across: "ჰორიზონტალურად", down: "ვერტიკალურად",
     solved: (a, b) => `${a} / ${b} ამოხსნილი`,
     done: (n, t) => `${n}-ვე კითხვა ${t}-ში გამოიცანი!`,
     result: (n, t, h) => `⚽ ${P.shareName || plainTitle}\n✅ ${n}/${n} · ${t.replace(/^0(?=\d:)/, "")} წუთი · ${h}`, // 04:32 → 4:32 წუთი
@@ -431,13 +431,14 @@
       `?utm_source=share&utm_medium=social&utm_campaign=${encodeURIComponent(P.id)}&utm_content=${content}`;
   }
   function resultText() { return T.result(words.length, fmt(state.elapsed), helpText()); }
-  async function share(text, url, noteId) {
+  async function share(text, url, noteId, anchor) {
     const note = $(noteId);
     const full = text + "\n" + url;
     if (navigator.share && matchMedia("(pointer: coarse)").matches) {
       try { await navigator.share({ text: full }); return; }
       catch (e) { if (e.name === "AbortError") return; } // the player closed the share menu
     }
+    if (window.KPShare) { KPShare.open({ anchor, text, url, note }); return; } // computers: WhatsApp / Facebook / X / Copy
     try {
       await navigator.clipboard.writeText(full);
       note.textContent = T.copied;
@@ -448,8 +449,8 @@
     clearTimeout(note._t);
     note._t = setTimeout(() => (note.hidden = true), 4000);
   }
-  $("btnShareResult").addEventListener("click", () => share(resultText(), shareLink("result"), "shareResultNote"));
-  $("winShare").addEventListener("click", () => share(resultText(), shareLink("result"), "winShareNote"));
+  $("btnShareResult").addEventListener("click", (e) => share(resultText(), shareLink("result"), "shareResultNote", e.currentTarget));
+  $("winShare").addEventListener("click", (e) => share(resultText(), shareLink("result"), "winShareNote", e.currentTarget));
   $("winX").addEventListener("click", closeWin);
   // On phones the "play more" list under the puzzle is hidden, so go straight to the first suggested crossword (or the list of all crosswords)
   function goNext() {
@@ -465,8 +466,8 @@
   $("btnNextResult").addEventListener("click", goNext);
   $("win").addEventListener("click", (e) => { if (e.target.id === "win") closeWin(); }); // tap outside the card
   addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("win").hidden) closeWin(); });
-  $("btnSharePuzzle").addEventListener("click", () =>
-    share(T.invite(words.length), shareLink("puzzle"), "sharePuzzleNote"));
+  $("btnSharePuzzle").addEventListener("click", (e) =>
+    share(T.invite(words.length), shareLink("puzzle"), "sharePuzzleNote", e.currentTarget));
 
   // ---- BUTTONS ------------------------------------------------------------
   $("btnCheck").addEventListener("click", () => {
