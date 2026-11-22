@@ -3,10 +3,10 @@
 // so you never need to edit this file when you add a crossword or a Top 5 list.
 (function () {
   const KA = document.documentElement.lang === "ka";
-  const BASE = KA ? "../../" : "../"; // this page sits in all/ (English) or ka/all/ (Georgian)
+  const BASE = "/"; // links start from the site root, so this page can live anywhere
   const PATH = KA
-    ? { crosswords: "ka/", top5: "gamoicani-top5/", scramble: "gamoicani-pekhburtelebis-gvarebi/", wordsearch: "skauti/" }
-    : { crosswords: "", top5: "top5/", scramble: "scramble/", wordsearch: "wordsearch/" };
+    ? { crosswords: "ka/crosswords/", top5: "gamoicani-top5/", scramble: "gamoicani-pekhburtelebis-gvarebi/", wordsearch: "skauti/" }
+    : { crosswords: "crosswords/", top5: "top5/", scramble: "scramble/", wordsearch: "wordsearch/" };
   const T = KA ? {
     names: { crosswords: "კროსვორდი", top5: "Top 5", scramble: "დალაგობანა", wordsearch: "სკაუტი" },
     topics: { International: "ნაკრებები", "Champions League": "ჩემპიონთა ლიგა", "Club football": "საკლუბო ფეხბურთი", Legends: "ლეგენდები" },

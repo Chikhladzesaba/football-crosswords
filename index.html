@@ -3,24 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Football Crosswords: free football crosswords to play online</title>
+  <title>All football puzzles: crosswords, Top 5, Scramble and Word Search | Kickoff Puzzles</title>
+  <meta name="description" content="Football crosswords, Top 5, Scramble and Word Search in one place. Pick a game and play.">
   <link rel="alternate" hreflang="en" href="https://kickoffpuzzles.com/">
   <link rel="alternate" hreflang="ka" href="https://kickoffpuzzles.com/ka/">
   <link rel="alternate" hreflang="x-default" href="https://kickoffpuzzles.com/">
-  <meta name="description" content="Football crosswords on the World Cup, the Champions League, the Premier League and other football topics.">
   <link rel="canonical" href="https://kickoffpuzzles.com/">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Football Crosswords">
-  <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="Football Crosswords: free football crosswords to play online">
-  <meta property="og:description" content="Football crosswords on the World Cup, the Champions League, the Premier League and other football topics.">
+  <meta property="og:site_name" content="Kickoff Puzzles">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="All football puzzles: crosswords, Top 5, Scramble and Word Search | Kickoff Puzzles">
+  <meta property="og:description" content="Football crosswords, Top 5, Scramble and Word Search in one place. Pick a game and play.">
   <meta property="og:url" content="https://kickoffpuzzles.com/">
   <meta property="og:image" content="https://kickoffpuzzles.com/share.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Football Crosswords: free football crosswords to play online">
-  <meta name="twitter:description" content="Football crosswords on the World Cup, the Champions League, the Premier League and other football topics.">
   <meta name="twitter:image" content="https://kickoffpuzzles.com/share.png">
   <meta name="theme-color" content="#006aff">
   <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -29,33 +27,21 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preload" href="/fonts/FiraGO-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/FiraGO-Medium.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="nav.css?v=5">
-  <link rel="stylesheet" href="crossword.css?v=26">
+  <link rel="stylesheet" href="/nav.css?v=5">
+  <link rel="stylesheet" href="/crossword.css?v=26">
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3b650f1df19b43698cc1d110b8a5c6dc"}'></script><!-- End Cloudflare Web Analytics -->
 </head>
 <body>
-  <script src="nav.js?v=3"></script>
+  <script src="/nav.js?v=5"></script>
   <main class="narrow">
-    <h1>Football <em>Crosswords</em></h1>
-    <p class="intro">Football crosswords on the World Cup, the Champions League, the Premier League and other football topics.</p>
-
-    <div class="filters">
-      <div class="filter-group">
-        <span class="filter-label">Difficulty</span>
-        <div class="chips" id="filter-difficulty"></div>
-      </div>
-      <div class="filter-group">
-        <span class="filter-label">Topic</span>
-        <div class="chips" id="filter-topic"></div>
-      </div>
-    </div>
-
-    <p class="shown" id="shown"></p>
-    <!-- The cards are drawn by home.js from the list in crosswords.js -->
-    <ul class="list" id="list"></ul>
-    <p class="empty" id="empty" hidden>No crosswords match these filters yet. Try another difficulty or topic.</p>
+    <h1 class="hub-title">All <em>Puzzles</em></h1>
+    <!-- One section per game, drawn by hub.js from the same lists the games use -->
+    <div id="groups"></div>
   </main>
-  <script src="crosswords.js"></script>
-  <script src="home.js?v=3"></script>
+  <script src="/crosswords.js"></script>
+  <script src="/top5-lists.js"></script>
+  <script src="/scramble-names.js"></script>
+  <script src="/wordsearch-words.js"></script>
+  <script src="/hub.js?v=2"></script>
 </body>
 </html>
