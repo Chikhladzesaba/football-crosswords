@@ -174,7 +174,7 @@ function kaHomePage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-${headTags({ title: KA.homeTitle, description: KA.homeIntro, url, image: SITE + "ka/share.png", brand: KA.brand, locale: "ka_GE", noindex: !KA_PUBLIC, alternates: KA_PUBLIC ? HOME_ALTERNATES : [] })}
+${headTags({ title: KA.homeTitle, description: KA.homeIntro, url, image: SITE + "ka/crosswords/share.png", brand: KA.brand, locale: "ka_GE", noindex: !KA_PUBLIC, alternates: KA_PUBLIC ? HOME_ALTERNATES : [] })}
 ${FONT_LINKS.replace(/\.\.\//g, "")}
   <link rel="preload" href="/fonts/FiraGO-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/FiraGO-Medium.woff2" as="font" type="font/woff2" crossorigin>
@@ -270,13 +270,13 @@ ${gridSvg}
   // Home page image (skipped with --lang ka) + tags (always, so the hreflang links stay in step)
   if (ONLY !== "ka") await shot(imageHtml({
     title: "Football Crosswords", filters: [["International", "Champions League", "Club football", "Legends"]], grid: gridOf("ballon-dor-winners"),
-  }), path.join(ROOT, "share.png"));
+  }), path.join(ROOT, "crosswords", "share.png"));
   {
   let home = fs.readFileSync(path.join(ROOT, "crosswords", "index.html"), "utf8");
   home = home.replace(/  <title>[\s\S]*?(?=  <link rel="icon")/, headTags({
     title: `${BRAND}: free football crosswords to play online`,
     description: `Football crosswords on the World Cup, the Champions League, the Premier League and other football topics.`,
-    url: SITE + "crosswords/", image: SITE + "share.png", alternates: KA_PUBLIC ? HOME_ALTERNATES : [],
+    url: SITE + "crosswords/", image: SITE + "crosswords/share.png", alternates: KA_PUBLIC ? HOME_ALTERNATES : [],
   }) + "\n");
   if (!home.includes("cloudflareinsights")) home = home.replace("</head>", `  ${ANALYTICS}\n</head>`);
   write(path.join(ROOT, "crosswords", "index.html"), home);
@@ -288,7 +288,7 @@ ${gridSvg}
     fs.mkdirSync(path.join(ROOT, "ka"), { recursive: true });
     await shot(imageHtml({
       title: "საფეხბურთო კროსვორდები", filters: [["ნაკრებები", "ჩემპიონთა ლიგა", "საკლუბო ფეხბურთი", "ლეგენდები"]], lang: "ka", grid: gridOf("ka-euro-2024"),
-    }), path.join(ROOT, "ka", "share.png"));
+    }), path.join(ROOT, "ka", "crosswords", "share.png"));
     fs.mkdirSync(path.join(ROOT, "ka", "crosswords"), { recursive: true });
     write(path.join(ROOT, "ka", "crosswords", "index.html"), kaHomePage());
   }
