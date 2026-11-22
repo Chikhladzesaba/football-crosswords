@@ -133,6 +133,8 @@
   groups.id = "groups";
   document.getElementById("list").replaceWith(groups);
 
+  const PHONE_Q = matchMedia("(max-width: 560px)"); // the phone layout (sideways-swipe rows)
+  PHONE_Q.addEventListener("change", () => draw());
   function draw() {
     groups.innerHTML = "";
     groups.classList.toggle("one-topic", chosen.topic !== "All"); // one topic: a normal list on phones too
@@ -146,27 +148,33 @@
       const sec = document.createElement("section"); sec.className = "topic-group"; sec.dataset.topic = t;
       const h = document.createElement("h2"); h.textContent = say(t); if (window.KPArt) h.prepend(window.KPArt.spotFor(t));
       const n = document.createElement("span"); n.textContent = inTopic.length; h.appendChild(n);
-      if (chosen.topic === "All" && inTopic.length > 1) { // "See all" opens the topic as a full list
-        const all = document.createElement("button");
-        all.type = "button"; all.className = "see-all"; all.textContent = T.seeAll;
-        all.addEventListener("click", () => {
-          [...document.querySelectorAll("#filter-topic .chip")].find((b) => b.textContent === say(t)).click();
-          window.scrollTo({ top: groups.getBoundingClientRect().top + scrollY - 70, behavior: "smooth" });
-        });
-        h.appendChild(all);
-      }
       const ul = document.createElement("ul"); ul.className = "list";
-      inTopic.forEach((c) => ul.appendChild(card(c)));
       // The newest crossword of the topic (the last one added to crosswords.js) is the big highlighted card
       const newest = list.filter((c) => c.topic === t).pop();
-      if (window.KPArt && window.KPArt.feature && inTopic.length > 1 && inTopic.includes(newest)) {
-        const li = ul.children[inTopic.indexOf(newest)];
-        li.classList.add("feature"); li.firstElementChild.appendChild(window.KPArt.feature(t));
-        ul.dataset.n = inTopic.length;
-        const rest = [...ul.children].filter((x) => !x.classList.contains("feature")); // on a phone the small boxes sit two under each other; an odd last one stands tall
-        if (rest.length % 2) { const tl = rest[rest.length - 1]; tl.classList.add("tall"); tl.firstElementChild.appendChild(window.KPArt.feature(inTopic[[...ul.children].indexOf(tl)].art || t)); } // the stretched box gets a drawing too, so it is not empty
+      // On the all-topics page each section shows 6 boxes (5 on a phone); "Show more" opens the rest. The big card always stays.
+      const limit = PHONE_Q.matches ? 5 : 6;
+      let vis = inTopic;
+      if (chosen.topic === "All" && inTopic.length > limit) {
+        const keep = new Set(inTopic.filter((c) => c !== newest).slice(0, inTopic.includes(newest) ? limit - 1 : limit));
+        if (inTopic.includes(newest)) keep.add(newest);
+        vis = inTopic.filter((c) => keep.has(c));
       }
-      sec.append(h, ul); groups.appendChild(sec);
+      vis.forEach((c) => ul.appendChild(card(c)));
+      if (window.KPArt && window.KPArt.feature && vis.length > 1 && vis.includes(newest)) {
+        const li = ul.children[vis.indexOf(newest)];
+        li.classList.add("feature"); li.firstElementChild.appendChild(window.KPArt.feature(t));
+        ul.dataset.n = vis.length;
+        const rest = [...ul.children].filter((x) => !x.classList.contains("feature")); // on a phone the small boxes sit two under each other; an odd last one stands tall
+        if (rest.length % 2) { const tl = rest[rest.length - 1]; tl.classList.add("tall"); tl.firstElementChild.appendChild(window.KPArt.feature(vis[[...ul.children].indexOf(tl)].art || t)); } // the stretched box gets a drawing too, so it is not empty
+      }
+      sec.append(h, ul);
+      if (vis.length < inTopic.length) { // some boxes are hidden: the link opens this topic on its own page (all of its crosswords)
+        const more = document.createElement("a");
+        more.className = "show-more"; more.href = location.pathname + "?topic=" + encodeURIComponent(t);
+        more.textContent = (KA ? "მეტის ნახვა" : "Show more") + " (" + (inTopic.length - vis.length) + ")";
+        sec.appendChild(more);
+      }
+      groups.appendChild(sec);
     });
     document.getElementById("empty").hidden = shown.length > 0;
     document.getElementById("shown").textContent = T.count(shown.length, list.length);
