@@ -974,3 +974,7 @@ html[data-skin][data-game][data-game][data-game] .site-footer a { white-space: n
 }
 /* masthead: the "Football games" line sits centred under the ball */
 @media (min-width: 641px) { html[data-skin] .kp-mast-grid .kp-cell-l .kp-date { text-align: center; left: 0; right: 0; } }
+
+/* phone crossword play: no footer (it was brought back by the paper footer rule above) */
+html[data-skin][data-game][data-game][data-game] body.phone-play .site-footer,
+html[data-skin][data-game][data-game][data-game] body.typing .site-footer { display: none; }
