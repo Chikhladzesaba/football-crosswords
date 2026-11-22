@@ -34,7 +34,7 @@ const GAMES = [
   { out: "top5/share.png", lang: "en", key: "top5", bg: "#c2540a", soft: "#ffeadb", ink: "#7a3300", title: "Guess the Top 5", sub: "Guess the record holders, top scorers and leaders.", cta: "Play", art: barsArt() },
   { out: "gamoicani-top5/share.png", lang: "ka", key: "top5", bg: "#c2540a", soft: "#ffeadb", ink: "#7a3300", title: "გამოიცანი ტოპ 5", sub: "გამოიცანი რეკორდსმენები, ბომბარდირები და ლიდერები.", cta: "ითამაშე", art: barsArt() },
   { out: "scramble/share.png", lang: "en", key: "scramble", bg: "#7a4fd6", soft: "#ece5fb", ink: "#43257f", title: "Name Scramble", sub: "Rearrange the letters and guess the footballers' names", cta: "Play", art: tilesArt("ISEM") },
-  { out: "gamoicani-pekhburtelebis-gvarebi/share.png", lang: "ka", key: "scramble", bg: "#7a4fd6", soft: "#ece5fb", ink: "#43257f", title: "გვარების დალაგობანა", sub: "დაალაგე ასოები და გამოიცანი ფეხბურთელების გვარები", cta: "ითამაშე", art: tilesArt("ესიმ") },
+  { out: "gamoicani-pekhburtelebis-gvarebi/share.png", lang: "ka", key: "scramble", bg: "#7a4fd6", soft: "#ece5fb", ink: "#43257f", title: "დალაგობანა", sub: "დაალაგე ასოები და გამოიცანი ფეხბურთელების გვარები", cta: "ითამაშე", art: tilesArt("ესიმ") },
   { out: "wordsearch/share.png", lang: "en", key: "scout", bg: "#0f7d4a", soft: "#dcf4e7", ink: "#0b5230", title: "Word Search", sub: "Find the footballers, coaches, clubs and other words hidden in the grid", cta: "Play", art: gridArt(["MESIBK", "RALOZD", "UGOTNA", "BENFIC", "LKLOPP", "ASTROH"]) },
   { out: "skauti/share.png", lang: "ka", key: "scout", bg: "#0f7d4a", soft: "#dcf4e7", ink: "#0b5230", title: "სკაუტი", sub: "იპოვე ცხრილში დამალული ფეხბურთელები, მწვრთნელები, გუნდები და სხვა სიტყვები", cta: "ითამაშე", art: gridArt() },
 ];

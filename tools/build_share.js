@@ -206,7 +206,7 @@ ${FONT_LINKS.replace(/\.\.\//g, "")}
     <p class="empty" id="empty" hidden>ასეთი კროსვორდი ჯერ არ გვაქვს. სცადე სხვა სირთულე ან თემა.</p>
   </main>
   <script src="/crosswords.js"></script>
-  <script src="/home.js?v=4"></script>
+  <script src="/home.js?v=5"></script>
 </body>
 </html>
 `;
