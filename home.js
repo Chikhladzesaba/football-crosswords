@@ -227,7 +227,7 @@
     const a = document.createElement("a");
     a.className = "daily-card"; a.href = KA ? "/gamoicani-pekhburtelebis-gvarebi/" : "/scramble/";
     const kicker = document.createElement("span"); kicker.className = "kicker"; kicker.textContent = KA ? "ახალი თამაში" : "New game";
-    const name = document.createElement("span"); name.className = "name"; name.textContent = KA ? "გვარების დალაგობანა" : "Name Scramble";
+    const name = document.createElement("span"); name.className = "name"; name.textContent = KA ? "დალაგობანა" : "Name Scramble";
     const st = document.createElement("span"); st.className = "status cta";
     st.textContent = KA ? "დაალაგე არეული ასოები და გამოიცანი ფეხბურთელების გვარები · ითამაშე →" : "Guess the player from mixed-up letters · Play →";
     a.append(kicker, name, st);
