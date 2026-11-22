@@ -941,3 +941,36 @@ html[data-skin] .hub .topic-group h2 .hub-name { font-style: normal; color: inhe
 @media (max-width: 640px) {
   .page-head { flex-direction: column; align-items: flex-start; gap: 12px; }
 }
+
+/* ---- 22 Nov: phone clean-up (written straight into this file; paper.src.css in the scratch folder is older) ---- */
+/* phone crossword: no clue lists under the grid (the clue bar above the grid shows the current clue) */
+@media (max-width: 760px) { html[data-skin][data-game][data-game][data-game] body.phone-play .clues { display: none; } }
+/* phone word search: the grid sits centred with the same space on the left and the right (16px each, like the page) */
+@media (max-width: 760px) {
+  html[data-skin][data-game][data-game][data-game] .ws-game { --ws: min(34px, calc((100vw - 56px - (var(--n, 14) - 1) * 4px) / var(--n, 14))); }
+  html[data-skin][data-game][data-game][data-game] .ws-grid { margin: 12px auto 8px; max-width: none; }
+}
+/* phones: no statistics box on the crosswords home (it stays on computers) */
+@media (max-width: 640px) { html[data-skin][data-game][data-game][data-game] .stats-bar { display: none; } }
+/* phones: the name in the header is never on two lines; it only gets smaller on narrow screens */
+@media (max-width: 640px) {
+  html[data-skin][data-game][data-game][data-game] .topbar .brand { font-size: clamp(18px, calc((100vw - 150px) / 6), 34px); white-space: nowrap; flex: 0 1 auto; min-width: 0; }
+  html[data-skin] .kp-phone-actions { flex: none; }
+}
+/* footer: one line, copyright on the left, links on the right; bottom space equals the top space */
+html[data-skin][data-game][data-game][data-game] .site-footer { display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 12px; text-align: left; margin-top: 28px; padding: 16px 16px max(12px, env(safe-area-inset-bottom)); font-size: 13px; }
+html[data-skin][data-game][data-game][data-game] .site-footer p { order: -1; margin: 0; white-space: nowrap; }
+html[data-skin][data-game][data-game][data-game] .site-footer nav { display: flex; flex-wrap: nowrap; justify-content: flex-end; gap: 16px; margin: 0; }
+html[data-skin][data-game][data-game][data-game] .site-footer a { white-space: nowrap; }
+@media (max-width: 480px) {
+  html[data-skin][data-game][data-game][data-game] .site-footer { font-size: clamp(10px, 3.2vw, 13px); gap: 8px; padding-left: 16px; padding-right: 16px; }
+  html[data-skin][data-game][data-game][data-game] .site-footer nav { gap: 10px; }
+}
+
+/* desktop masthead: the name is never on two lines, it shrinks with the middle box; the box keeps its height so the vertical lines stop at the bottom rule */
+@media (min-width: 641px) {
+  html[data-skin] .kp-mast-grid .kp-name { min-width: 0; overflow: visible; container-type: inline-size; }
+  html[data-skin] .kp-mast-grid .kp-title { white-space: nowrap; line-height: 1; font-size: min(70px, calc((min(100vw - 32px, 1000px) - 420px - 48px) / 5.9)); font-size: min(70px, calc((100cqw - 40px) / 5.9)); }
+}
+/* masthead: the "Football games" line sits centred under the ball */
+@media (min-width: 641px) { html[data-skin] .kp-mast-grid .kp-cell-l .kp-date { text-align: center; left: 0; right: 0; } }
