@@ -569,7 +569,7 @@ html[data-skin] .shown { margin-top: 24px; }
 
 /* ===== Crossword cards: tag first, then the title in capitals (semibold) ===== */
 html[data-skin] .topic-group .list a .meta-line { order: -1; }
-html[data-skin] .topic-group .list li.feature .kp-feat-art { order: -2; }
+html[data-skin] .topic-group .list li.feature .kp-feat-art { order: -1; }
 html[data-skin] .topic-group .list .name { text-transform: uppercase; font-family: var(--body); font-weight: 600; font-size: 16px; line-height: 1.3; letter-spacing: .03em; }
 html[data-skin]:lang(ka) .topic-group .list .name { font-family: var(--display); font-weight: 400; font-size: 17px; letter-spacing: -0.02em; line-height: 1.25; }
 html[data-skin] .topic-group .list li.feature .name { font-size: 26px; }
@@ -997,3 +997,14 @@ html[data-skin][data-game][data-game][data-game] body.typing .site-footer { disp
 /* word search: letters of found words are green and cannot be picked again */
 html[data-skin][data-game][data-game][data-game] .ws-cell.found, html[data-skin][data-game][data-game][data-game] .ws-cell.locked { background: #cdebd6 !important; color: #14643a !important; border-color: #2e9b5a !important; box-shadow: none !important; opacity: 1 !important; }
 html[data-skin][data-game][data-game][data-game] .ws-cell.locked { cursor: not-allowed; }
+
+/* English daily card: "Today's mix of every topic" is 40% bigger (21px -> 29.4px) */
+html[data-skin][data-game][data-game][data-game]:not(:lang(ka)) .daily-card .name { font-size: 29.4px; line-height: 1.1; }
+/* phone: the daily card drawing starts exactly under the left edge of the text */
+@media (max-width: 640px) {
+  html[data-skin][data-game][data-game][data-game] main.home .daily-card .kp-hero .kp-art { left: 10px; bottom: -10px; }
+}
+
+/* "Show more" under a crossword section */
+html[data-skin][data-game][data-game][data-game] .topic-group .show-more { display: block; width: fit-content; text-decoration: none; margin: 18px auto 0; padding: 10px 26px; font: inherit; font-size: 15px; color: var(--ink); background: transparent; border: 2px solid var(--ink); border-radius: 4px 7px 5px 8px / 7px 4px 8px 5px; cursor: pointer; }
+html[data-skin][data-game][data-game][data-game] .topic-group .show-more:hover { background: var(--ink); color: var(--paper); }

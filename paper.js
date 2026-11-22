@@ -53,6 +53,22 @@
     "Club football": BIG("shirt", 80, 10, 3.5) + BALL(244, 160, 22) + STAR4(40, 44, 1.4) + STAR4(262, 60, 1, "var(--sk-b)") + '<path d="M232 128q14-4 28 2M228 140q16 0 30 6" stroke-width="2"/>' + ROW(14, 176),
     Legends: BIG("medal", 80, 10, 3.6) + STAR4(40, 40, 1.5) + STAR4(258, 44, 1.2, "var(--sk-b)") + STAR4(250, 150, .9) + STAR4(46, 130, .8, "var(--sk-b)") + BALL(236, 176, 18) + ROW(14, 176),
   };
+  // Zidane card: the "roulette" spin (ball with two curved arrows around it), a number 10 and a small crossword row
+  FEAT.zidane = BALL(150, 98, 48) +
+    '<path d="M99 56A68 68 0 0 0 99 140" stroke-width="3.2"/><path d="M84 133L99 141L92 155" stroke-width="3.2"/>' +
+    '<path d="M201 140A68 68 0 0 0 201 56" stroke-width="3.2"/><path d="M216 63L201 55L208 41" stroke-width="3.2"/>' +
+    '<ellipse cx="150" cy="166" rx="50" ry="7" stroke-width="2" stroke-dasharray="3 7"/>' +
+    '<circle cx="250" cy="40" r="22" stroke-width="3"/>' + '<text x="250" y="48" text-anchor="middle" font-size="22" stroke="none" fill="currentColor" style="font-family:var(--display);font-weight:400">10</text>' +
+    STAR4(40, 40, 1.5) + STAR4(264, 138, 1, "var(--sk-b)") + STAR4(40, 130, .8, "var(--sk-b)") + ROW(14, 186);
+  // Manchester United card: the Red Devils' pitchfork, a ball, sparkles and a small crossword row
+  FEAT.united = '<path d="M114 78V46M186 78V46M150 90V34" stroke-width="3.4"/>' +
+    '<path d="M106 48l8-16 8 16zM178 48l8-16 8 16zM142 36l8-16 8 16z" stroke-width="3" stroke-linejoin="round"/>' +
+    '<path d="M114 78q0 16 36 16q36 0 36-16" stroke-width="3.4"/>' +
+    '<path d="M150 94V182" stroke-width="3.6"/><path d="M138 182h24" stroke-width="3.6"/>' +
+    BALL(240, 150, 22) + STAR4(40, 40, 1.5) + STAR4(262, 48, 1.1, "var(--sk-b)") + STAR4(52, 120, .8, "var(--sk-b)") + ROW(14, 186);
+  // Champions League 2010s card: a ball inside a ring of stars (the competition's "starball" idea) and a "2010s" tag
+  FEAT.ucl2010s = BALL(150, 82, 36) + '<ellipse cx="150" cy="82" rx="84" ry="56" stroke-width="2" stroke-dasharray="3 9"/>' + STAR4(150, 26, 1.2, "var(--sk-a)") + STAR4(209, 42, 0.85, "var(--sk-b)") + STAR4(234, 82, 1.2, "var(--sk-a)") + STAR4(209, 122, 0.85, "var(--sk-b)") + STAR4(150, 138, 1.2, "var(--sk-a)") + STAR4(91, 122, 0.85, "var(--sk-b)") + STAR4(66, 82, 1.2, "var(--sk-a)") + STAR4(91, 42, 0.85, "var(--sk-b)") +
+    '<rect x="116" y="164" width="86" height="28" rx="14" stroke-width="3"/><text x="159" y="184" text-anchor="middle" font-size="19" stroke="none" fill="currentColor" style="font-family:var(--display);font-weight:400">2010s</text>' + ROW(14, 190);
   // Big drawings for the "All" page: one per game
   const TXT = (x, y, t, size, extra) => '<text x="' + x + '" y="' + y + '" text-anchor="middle" font-size="' + size + '" stroke="none" fill="currentColor" style="font-family:var(--display);font-weight:700"' + (extra || "") + ">" + t + "</text>";
   const GRID4 = () => {
