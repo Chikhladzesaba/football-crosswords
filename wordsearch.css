@@ -96,4 +96,4 @@ html:lang(ka) .ws-group h3 { text-transform: none; letter-spacing: 0; }
 @media (pointer: coarse) { .ws-grid { touch-action: none; } }
 
 /* a letter whose words are all found: greyed out and not selectable */
-.ws-cell.locked { background: var(--grey); color: var(--muted); cursor: not-allowed; }
+.ws-cell.locked { cursor: not-allowed; }
