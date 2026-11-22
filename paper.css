@@ -974,3 +974,15 @@ html[data-skin][data-game][data-game][data-game] .site-footer a { white-space: n
 }
 /* masthead: the "Football games" line sits centred under the ball */
 @media (min-width: 641px) { html[data-skin] .kp-mast-grid .kp-cell-l .kp-date { text-align: center; left: 0; right: 0; } }
+
+/* Georgian footer on phones: the long link words must not push the page sideways. Smaller text, tighter gaps; if it still cannot fit, it wraps instead of overflowing. */
+@media (max-width: 480px) {
+  html[data-skin][data-game][data-game][data-game]:lang(ka) .site-footer { flex-wrap: wrap; row-gap: 6px; font-size: clamp(9px, 2.55vw, 13px); gap: 6px 8px; }
+  html[data-skin][data-game][data-game][data-game]:lang(ka) .site-footer nav { gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+}
+
+/* Section headers ("name ... see more"): on narrow phones the Georgian link may wrap below the name instead of pushing the page sideways. */
+@media (max-width: 420px) {
+  html[data-skin][data-game][data-game][data-game] .hub .topic-group h2 { flex-wrap: wrap; row-gap: 2px; }
+  html[data-skin][data-game][data-game][data-game] .topic-group > h2, html[data-skin][data-game][data-game][data-game] .topic-head { flex-wrap: wrap; }
+}

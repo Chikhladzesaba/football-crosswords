@@ -2,7 +2,7 @@
 // Every page loads it with <script src="…/nav.js"></script> right after <body>. It works out three things by itself:
 // the language (<html lang>), which game this page belongs to (first folder in the address), and where the site root is.
 // VISUAL TEST (local only): newspaper skin. Remove these two lines to go back to the normal look.
-document.write('<link rel="stylesheet" href="/paper.css?v=6">');
+document.write('<link rel="stylesheet" href="/paper.css?v=7">');
 (function () {
   const KA = document.documentElement.lang === "ka";
   const root = new URL(".", document.currentScript.src).href; // folder that holds nav.js = the site root
