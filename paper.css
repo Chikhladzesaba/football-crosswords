@@ -908,8 +908,9 @@ html[data-skin] .hub .topic-group h2 .hub-name { font-style: normal; color: inhe
 /* phone: the daily card drawing fills the free space and sits on the same line as "Play" */
 @media (max-width: 640px) {
   html[data-skin] main.home .daily-card[href*="krosvordi"], html[data-skin] main.home .daily-card[href$="/daily/"] { min-height: 300px; }
-  html[data-skin] main.home .daily-card .kp-hero { position: static; transform: none; flex: 1 1 auto; width: 100%; min-height: 120px; margin: 4px 0 -44px; display: flex; align-items: flex-end; justify-content: flex-start; }
-  html[data-skin] main.home .daily-card .kp-hero .kp-art { height: 100%; width: auto; max-width: 70%; }
+  /* Safari-safe: the box is the positioned parent and the drawing is placed inside it with explicit sizes (a % height inside a flex item is not reliable in Safari) */
+  html[data-skin] main.home .daily-card .kp-hero { position: relative; transform: none; flex: 1 1 auto; width: 100%; min-height: 150px; margin: 4px 0 -44px; display: block; }
+  html[data-skin] main.home .daily-card .kp-hero .kp-art { position: absolute; left: 0; bottom: 0; top: auto; height: 100%; width: auto; aspect-ratio: 260 / 210; max-width: 70%; }
 }
 /* phone swipe on the crossword home page: big box first, then pairs of small boxes stacked */
 @media (max-width: 560px) {
