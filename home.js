@@ -164,7 +164,7 @@
         li.classList.add("feature"); li.firstElementChild.appendChild(window.KPArt.feature(t));
         ul.dataset.n = inTopic.length;
         const rest = [...ul.children].filter((x) => !x.classList.contains("feature")); // on a phone the small boxes sit two under each other; an odd last one stands tall
-        if (rest.length % 2) { const tl = rest[rest.length - 1]; tl.classList.add("tall"); tl.firstElementChild.appendChild(window.KPArt.feature(t)); } // the stretched box gets a drawing too, so it is not empty
+        if (rest.length % 2) { const tl = rest[rest.length - 1]; tl.classList.add("tall"); tl.firstElementChild.appendChild(window.KPArt.feature(inTopic[[...ul.children].indexOf(tl)].art || t)); } // the stretched box gets a drawing too, so it is not empty
       }
       sec.append(h, ul); groups.appendChild(sec);
     });
