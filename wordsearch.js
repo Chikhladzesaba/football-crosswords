@@ -203,6 +203,11 @@
   }
   function clearAnchor() { if (anchor) cellEl(anchor[0], anchor[1]).classList.remove("anchor"); anchor = null; }
 
+  // A letter is "locked" (greyed out, cannot be picked) when every word that uses it has been found. A letter shared with a word still to find stays open.
+  const covers = (p, r, c) => p.cells.some(([a, b]) => a === r && b === c);
+  const isLocked = (r, c) => placed.some((p) => covers(p, r, c)) && placed.every((p, k) => found[k] || !covers(p, r, c));
+  function lockFound() { placed.forEach((p, k) => { if (found[k]) p.cells.forEach(([r, c]) => cellEl(r, c).classList.toggle("locked", isLocked(r, c))); }); }
+
   function tryWord(cells) {
     if (over || cells.length < 2) return false;
     const s = cells.map(([r, c]) => grid[r][c]).join(""), rev = [...s].reverse().join("");
@@ -211,6 +216,7 @@
     found[i] = true;
     placed[i].cells.forEach(([r, c]) => { const e = cellEl(r, c); e.classList.remove("hint"); COLOR_CLASSES.forEach((k) => e.classList.remove(k)); e.classList.add("found", "f" + (i % COLORS)); });
     $("ww-" + i).classList.add("found", "f" + (i % COLORS));
+    lockFound();
     drawCount(); say(TEXT.foundMsg(placed[i].w), "good");
     if (found.every(Boolean)) finish(true);
     return true;
@@ -237,6 +243,8 @@
   grd.addEventListener("pointerdown", (e) => {
     if (over) return;
     e.preventDefault();
+    const [lr, lc] = cellAt(e);
+    if (isLocked(lr, lc)) return; // an already found letter cannot be picked
     try { grd.setPointerCapture(e.pointerId); } catch (_) {}
     drag = { start: cellAt(e), end: cellAt(e), moved: false };
     showSel([drag.start]);

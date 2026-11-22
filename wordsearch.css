@@ -95,5 +95,5 @@ html:lang(ka) .ws-group h3 { text-transform: none; letter-spacing: 0; }
 /* Phones: dragging on the letters marks words in every direction (up, down, sideways, diagonal), so the grid itself does not scroll the page. Scroll by touching anywhere outside the grid. Tapping the first and last letter still works. */
 @media (pointer: coarse) { .ws-grid { touch-action: none; } }
 
-/* a word you have found fades to 60 percent */
-.ws-words .ws-w.found { opacity: .6; }
+/* a letter whose words are all found: greyed out and not selectable */
+.ws-cell.locked { cursor: not-allowed; }
