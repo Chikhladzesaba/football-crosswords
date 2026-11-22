@@ -4,7 +4,7 @@
   // One script for both home pages: index.html (English) and ka/index.html (<html lang="ka">, Georgian)
   const KA = document.documentElement.lang === "ka";
   const list = (window.CROSSWORDS || []).filter((c) => (c.lang || "en") === (KA ? "ka" : "en"));
-  const BASE = KA ? "../" : ""; // the Georgian home page sits one folder down, in ka/
+  const BASE = "/"; // links start from the site root (this page is /crosswords/ or /ka/crosswords/)
   const T = KA ? {
     All: "ყველა", Easy: "მარტივი", Medium: "საშუალო", Hard: "რთული", "Very hard": "ძალიან რთული",
     "Not solved": "ამოუხსნელი", Solved: "ამოხსნილი", status: "სტატუსი",
@@ -203,7 +203,7 @@
     if (KA && iso > "2027-02-28") return; // the Georgian Daily is generated up to this date (tools/build_daily.py ka)
     const level = ["Very hard", "Easy", "Easy", "Medium", "Medium", "Hard", "Hard"][d.getDay()]; // same rule as tools/build_daily.py
     const a = document.createElement("a");
-    a.className = "daily-card"; a.href = KA ? "../dgis-krosvordi/" : "daily/";
+    a.className = "daily-card"; a.href = KA ? "/dgis-krosvordi/" : "/daily/";
     const kicker = document.createElement("span"); kicker.className = "kicker";
     kicker.textContent = KA ? d.getDate() + " " + ["იანვრის", "თებერვლის", "მარტის", "აპრილის", "მაისის", "ივნისის", "ივლისის", "აგვისტოს", "სექტემბრის", "ოქტომბრის", "ნოემბრის", "დეკემბრის"][d.getMonth()] + " კროსვორდი"
       : "Daily crossword · " + d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
@@ -225,7 +225,7 @@
   function gameCard() {
     if (KA) return; // Georgian home: the game bar at the top already links to the games
     const a = document.createElement("a");
-    a.className = "daily-card"; a.href = KA ? "../gamoicani-pekhburtelebis-gvarebi/" : "scramble/";
+    a.className = "daily-card"; a.href = KA ? "/gamoicani-pekhburtelebis-gvarebi/" : "/scramble/";
     const kicker = document.createElement("span"); kicker.className = "kicker"; kicker.textContent = KA ? "ახალი თამაში" : "New game";
     const name = document.createElement("span"); name.className = "name"; name.textContent = KA ? "გვარების დალაგობანა" : "Name Scramble";
     const st = document.createElement("span"); st.className = "status cta";

@@ -111,7 +111,7 @@
   mast.className = "kp-mast";
   mast.innerHTML = '<div class="kp-mast-strip"></div>' + // the colour and language switches sit in this strip (placed by CSS)
     '<div class="kp-mast-grid"><div class="kp-cell kp-cell-l"><span class="kp-date kp-tag">' + (KA ? "საფეხბურთო თამაშები" : "Football games") + '</span><span class="kp-ballwrap">' + ART.ball + "</span></div>" +
-    '<a class="kp-name" href="' + home + 'all/"><span class="kp-title">Kickoff Puzzles</span></a>' +
+    '<a class="kp-name" href="' + home + '"><span class="kp-title">Kickoff Puzzles</span></a>' +
     '<div class="kp-cell kp-cell-r"><span class="kp-date">' + date + '</span><span class="kp-row"><span class="kp-pen">' + ART.pencil + '</span><span class="kp-est">Est. 2026</span></span></div></div>';
   // BALL-START
   // The ball in the masthead: click it and it drops, bounces slowly around the window; click (catch) it and it flies back to its place.
@@ -171,7 +171,6 @@
       const SV = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
       btn.innerHTML = SV.replace("<svg ", '<svg class="kp-bg-open" ') + '<path d="M3.4 6.6l17.1-.3M3.6 12.2l16.8.2M3.4 17.8l17-.3"/></svg>' + SV.replace("<svg ", '<svg class="kp-bg-close" ') + '<path d="M5.3 5.5l13.4 13.1M18.6 5.3L5.4 18.7"/></svg>';
       grp.append(pb, btn); top.appendChild(grp);
-      const brand = top.querySelector(".brand"); if (brand) brand.href = KA ? brand.href.replace(/ka\/?$/, "ka/all/") : brand.href.replace(/\/?$/, "/") + "all/"; // on a phone the logo opens the All page
       ov = document.createElement("div"); ov.className = "kp-menu"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-label", KA ? "მენიუ" : "Menu");
       const nav = document.createElement("nav"); nav.className = "kp-menu-nav";
       document.querySelectorAll(".games-nav a").forEach((a) => nav.appendChild(a.cloneNode(true)));

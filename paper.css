@@ -475,47 +475,47 @@ html[data-skin][data-game][data-game][data-game] .clues section { border-width: 
 }
 
 /* ===== Daily crossword card: taller, with a small crossword drawing (colour follows the ink switch) ===== */
-html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { position: relative; box-sizing: border-box; }
-html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href="daily/"]::before {
+html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href$="/daily/"] { position: relative; box-sizing: border-box; }
+html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href$="/daily/"]::before {
   content: ""; background: var(--ink); pointer-events: none;
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 132 112%22 fill=%22none%22 stroke=%22black%22 stroke-width=%223%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M10.9 12.5 L9.4 81.5 M30.9 12.5 L33.2 81.5 M54.7 12.5 L53.2 81.5 M75.4 12.5 L76.5 81.5 M99.2 12.5 L98.9 81.5 M8.5 14.7 L99.5 13.2 M8.5 35.4 L99.5 36.5 M8.5 59.2 L99.5 58.9 M8.5 79.2 L99.5 78.9%22/%3E%3Cg fill=%22black%22 stroke-width=%221%22%3E%3Cpath d=%22M33 15 L53 15.4 L52.7 35 L33.2 34.6Z%22/%3E%3Cpath d=%22M77 37 L97 37.4 L96.7 57 L77.2 56.6Z%22/%3E%3Cpath d=%22M11 59 L31 59.4 L30.7 79 L11.2 78.6Z%22/%3E%3Cpath d=%22M55 59 L75 59.4 L74.7 79 L55.2 78.6Z%22/%3E%3C/g%3E%3Cpath d=%22M13 19 v6 M12 20.5 l1-1.5%22 stroke-width=%222%22/%3E%3Cpath d=%22M57 41 h5 M59.5 41 v6%22 stroke-width=%222%22/%3E%3Cpath d=%22M101 84 L118 38 L127 42 L109 88 Z%22/%3E%3Cpath d=%22M101 84 L96 104 L109 88%22/%3E%3Cpath d=%22M113 54 L121 57%22 stroke-width=%222%22/%3E%3C/svg%3E") left center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 132 112%22 fill=%22none%22 stroke=%22black%22 stroke-width=%223%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M10.9 12.5 L9.4 81.5 M30.9 12.5 L33.2 81.5 M54.7 12.5 L53.2 81.5 M75.4 12.5 L76.5 81.5 M99.2 12.5 L98.9 81.5 M8.5 14.7 L99.5 13.2 M8.5 35.4 L99.5 36.5 M8.5 59.2 L99.5 58.9 M8.5 79.2 L99.5 78.9%22/%3E%3Cg fill=%22black%22 stroke-width=%221%22%3E%3Cpath d=%22M33 15 L53 15.4 L52.7 35 L33.2 34.6Z%22/%3E%3Cpath d=%22M77 37 L97 37.4 L96.7 57 L77.2 56.6Z%22/%3E%3Cpath d=%22M11 59 L31 59.4 L30.7 79 L11.2 78.6Z%22/%3E%3Cpath d=%22M55 59 L75 59.4 L74.7 79 L55.2 78.6Z%22/%3E%3C/g%3E%3Cpath d=%22M13 19 v6 M12 20.5 l1-1.5%22 stroke-width=%222%22/%3E%3Cpath d=%22M57 41 h5 M59.5 41 v6%22 stroke-width=%222%22/%3E%3Cpath d=%22M101 84 L118 38 L127 42 L109 88 Z%22/%3E%3Cpath d=%22M101 84 L96 104 L109 88%22/%3E%3Cpath d=%22M113 54 L121 57%22 stroke-width=%222%22/%3E%3C/svg%3E") left center / contain no-repeat; }
 @media (min-width: 641px) {
-  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { min-height: 192px; padding-left: 190px; }
-  html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href="daily/"]::before { position: absolute; left: 38px; top: 50%; width: 120px; height: 102px; transform: translateY(-50%); }
+  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href$="/daily/"] { min-height: 192px; padding-left: 190px; }
+  html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href$="/daily/"]::before { position: absolute; left: 38px; top: 50%; width: 120px; height: 102px; transform: translateY(-50%); }
 }
 @media (max-width: 640px) {
-  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { min-height: 0; }
-  html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href="daily/"]::before { flex: none; width: 100%; height: 60px; margin-bottom: 0; }
+  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href$="/daily/"] { min-height: 0; }
+  html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href$="/daily/"]::before { flex: none; width: 100%; height: 60px; margin-bottom: 0; }
 }
 
 /* ===== Daily crossword card: difficulty tag top right, "play" link bottom right ===== */
-html[data-skin] .daily-card[href*="krosvordi"] .meta-line, html[data-skin] .daily-card[href="daily/"] .meta-line { display: contents; }
-html[data-skin] .daily-card[href*="krosvordi"] .level, html[data-skin] .daily-card[href="daily/"] .level { position: absolute; top: 24px; right: 28px; margin: 0; }
-html[data-skin] .daily-card[href*="krosvordi"] .cta, html[data-skin] .daily-card[href="daily/"] .cta { position: absolute; bottom: 24px; right: 28px; margin: 0; }
+html[data-skin] .daily-card[href*="krosvordi"] .meta-line, html[data-skin] .daily-card[href$="/daily/"] .meta-line { display: contents; }
+html[data-skin] .daily-card[href*="krosvordi"] .level, html[data-skin] .daily-card[href$="/daily/"] .level { position: absolute; top: 24px; right: 28px; margin: 0; }
+html[data-skin] .daily-card[href*="krosvordi"] .cta, html[data-skin] .daily-card[href$="/daily/"] .cta { position: absolute; bottom: 24px; right: 28px; margin: 0; }
 @media (max-width: 640px) {
-  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { padding-bottom: 64px; }
-  html[data-skin] .daily-card[href*="krosvordi"] .level, html[data-skin] .daily-card[href="daily/"] .level { top: 18px; right: 18px; }
-  html[data-skin] .daily-card[href*="krosvordi"] .cta, html[data-skin] .daily-card[href="daily/"] .cta { bottom: 20px; right: 20px; }
+  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href$="/daily/"] { padding-bottom: 64px; }
+  html[data-skin] .daily-card[href*="krosvordi"] .level, html[data-skin] .daily-card[href$="/daily/"] .level { top: 18px; right: 18px; }
+  html[data-skin] .daily-card[href*="krosvordi"] .cta, html[data-skin] .daily-card[href$="/daily/"] .cta { bottom: 20px; right: 20px; }
 }
 @media (min-width: 641px) {
-  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { align-content: center; row-gap: 6px; padding-right: 170px; }
+  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href$="/daily/"] { align-content: center; row-gap: 6px; padding-right: 170px; }
 }
 @media (min-width: 641px) {
-  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { grid-template-columns: minmax(0, 1fr); }
+  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href$="/daily/"] { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* ===== Daily crossword card v2: date on top, title bottom-left, drawing top-left; equal 28px edges ===== */
 @media (min-width: 641px) {
-  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { padding: 24px 28px; align-content: space-between; row-gap: 0; }
-  html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href="daily/"]::before { left: 24px; top: 13px; width: 108px; height: 92px; transform: none; }
-  html[data-skin] .daily-card[href*="krosvordi"] .kicker, html[data-skin] .daily-card[href="daily/"] .kicker { margin: 3px 0 0; padding-left: 136px; align-self: start; }
-  html[data-skin] .daily-card[href*="krosvordi"] .name, html[data-skin] .daily-card[href="daily/"] .name { align-self: end; }
+  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href$="/daily/"] { padding: 24px 28px; align-content: space-between; row-gap: 0; }
+  html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href$="/daily/"]::before { left: 24px; top: 13px; width: 108px; height: 92px; transform: none; }
+  html[data-skin] .daily-card[href*="krosvordi"] .kicker, html[data-skin] .daily-card[href$="/daily/"] .kicker { margin: 3px 0 0; padding-left: 136px; align-self: start; }
+  html[data-skin] .daily-card[href*="krosvordi"] .name, html[data-skin] .daily-card[href$="/daily/"] .name { align-self: end; }
 }
 @media (max-width: 640px) {
-  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { padding: 22px 20px 64px; }
-  html[data-skin] .daily-card[href*="krosvordi"] .kicker, html[data-skin] .daily-card[href="daily/"] .kicker { position: absolute; top: 24px; left: 20px; margin: 0; }
-  html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href="daily/"]::before { margin-top: 30px; margin-bottom: 4px; }
-  html[data-skin] .daily-card[href*="krosvordi"] .level, html[data-skin] .daily-card[href="daily/"] .level { right: 20px; }
+  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href$="/daily/"] { padding: 22px 20px 64px; }
+  html[data-skin] .daily-card[href*="krosvordi"] .kicker, html[data-skin] .daily-card[href$="/daily/"] .kicker { position: absolute; top: 24px; left: 20px; margin: 0; }
+  html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href$="/daily/"]::before { margin-top: 30px; margin-bottom: 4px; }
+  html[data-skin] .daily-card[href*="krosvordi"] .level, html[data-skin] .daily-card[href$="/daily/"] .level { right: 20px; }
 }
 
 /* ===== Topic sections: one big highlighted card (the newest) with a drawing, other cards around it ===== */
@@ -749,10 +749,10 @@ html:lang(ka) .kp-cell-l .kp-date { text-transform: none; letter-spacing: .06em;
 .kp-cell-l .kp-art { width: 54px; height: 54px; }
 
 /* ===== Daily card uses the big drawing; intro text is one line that scrolls sideways ===== */
-html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href="daily/"]::before { display: none; }
+html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href$="/daily/"]::before { display: none; }
 html[data-skin] .daily-card .kp-hero { position: absolute; pointer-events: none; }
 @media (min-width: 641px) {
-  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { min-height: 230px; padding-left: 300px; }
+  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href$="/daily/"] { min-height: 230px; padding-left: 300px; }
   html[data-skin] .daily-card .kp-hero { left: 32px; right: auto; top: 50%; transform: translateY(-50%); width: 236px; }
 }
 @media (max-width: 640px) {
@@ -764,7 +764,7 @@ html[data-skin] main.home .intro .marquee > span { padding-right: 3em; }
 @media (min-width: 641px) and (hover: hover){html[data-skin] main.home .intro:hover .marquee{ animation-play-state: paused; }}
 @keyframes kp-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { html[data-skin] main.home .intro { overflow-x: auto; } html[data-skin] main.home .intro .marquee { animation: none; } }
-html[data-skin] main.home .daily-card[href*="krosvordi"], html[data-skin] main.home .daily-card[href="daily/"] { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; }
+html[data-skin] main.home .daily-card[href*="krosvordi"], html[data-skin] main.home .daily-card[href$="/daily/"] { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; }
 html[data-skin] main.home .daily-card .kicker { margin-bottom: 0; }
 @media (min-width: 641px) {
   html[data-skin] main.home .daily-card .kp-hero { position: absolute; left: 32px; right: auto; top: 50%; transform: translateY(-50%); width: 236px; }
@@ -778,7 +778,7 @@ html[data-skin] main.home .daily-card .kicker { margin-bottom: 0; }
 }
 html[data-skin] main.home .daily-card .kicker, html[data-skin] main.home .daily-card .name { align-self: flex-start; text-align: left; justify-self: start; }
 @media (min-width: 641px) {
-  html[data-skin] main.home .daily-card[href*="krosvordi"], html[data-skin] main.home .daily-card[href="daily/"] { padding: 28px 28px 28px 300px; }
+  html[data-skin] main.home .daily-card[href*="krosvordi"], html[data-skin] main.home .daily-card[href$="/daily/"] { padding: 28px 28px 28px 300px; }
   html[data-skin] main.home .daily-card .kicker { padding-left: 0 !important; margin: 3px 0 0 !important; }
 }
 @media (max-width: 640px) {
@@ -907,7 +907,7 @@ html[data-skin] .hub .topic-group h2 .hub-name { font-style: normal; color: inhe
 }
 /* phone: the daily card drawing fills the free space and sits on the same line as "Play" */
 @media (max-width: 640px) {
-  html[data-skin] main.home .daily-card[href*="krosvordi"], html[data-skin] main.home .daily-card[href="daily/"] { min-height: 300px; }
+  html[data-skin] main.home .daily-card[href*="krosvordi"], html[data-skin] main.home .daily-card[href$="/daily/"] { min-height: 300px; }
   html[data-skin] main.home .daily-card .kp-hero { position: static; transform: none; flex: 1 1 auto; width: 100%; min-height: 120px; margin: 4px 0 -44px; display: flex; align-items: flex-end; justify-content: flex-start; }
   html[data-skin] main.home .daily-card .kp-hero .kp-art { height: 100%; width: auto; max-width: 70%; }
 }
