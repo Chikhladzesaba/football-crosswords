@@ -993,3 +993,6 @@ html[data-skin][data-game][data-game][data-game] body.typing .site-footer { disp
   html[data-skin][data-game][data-game][data-game] .hub .topic-group h2 { flex-wrap: wrap; row-gap: 2px; }
   html[data-skin][data-game][data-game][data-game] .topic-group > h2, html[data-skin][data-game][data-game][data-game] .topic-head { flex-wrap: wrap; }
 }
+
+/* word search: letters of found words look disabled */
+html[data-skin][data-game][data-game][data-game] .ws-cell.locked { background: var(--grey); color: var(--muted); box-shadow: inset 0 0 0 1px var(--grey); opacity: .6; cursor: not-allowed; }
