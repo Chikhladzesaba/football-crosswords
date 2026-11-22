@@ -918,6 +918,9 @@ html[data-skin] .hub .topic-group h2 .hub-name { font-style: normal; color: inhe
   html[data-skin] main.home:not(.hub) .topic-group .list li, html[data-skin] main.home:not(.hub) .topic-group .list li.feature { flex: none; width: auto; min-width: 0; }
   html[data-skin] main.home:not(.hub) .topic-group .list li.feature { grid-row: 1 / span 2; }
   html[data-skin] main.home:not(.hub) .topic-group .list li.tall { grid-row: span 2; }
+  html[data-skin][data-game][data-game] .topic-group .list li.tall .kp-feat-art { display: block; order: -1; flex: 1 1 0; min-height: 130px; width: 100%; position: relative; pointer-events: none; color: var(--ink); margin-bottom: 8px; }
+  html[data-skin][data-game][data-game] .topic-group .list li.tall .kp-art { position: absolute; inset: 0; width: 100%; height: 100%; filter: url(#kp-rough); overflow: visible; }
+  html[data-skin][data-game][data-game] .topic-group .list li.tall a { justify-content: flex-end; gap: 10px; }
   html[data-skin] main.home:not(.hub) .topic-group .list li:not(.feature) a { min-height: 0; height: 100%; }
   html[data-skin] main.home:not(.hub) .one-topic .topic-group .list, html[data-skin] .one-topic main.home .topic-group .list { display: flex; flex-direction: column; grid-auto-flow: row; }
 }
