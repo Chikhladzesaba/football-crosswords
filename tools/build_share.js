@@ -254,7 +254,12 @@ const gapNote = (what, gap) => { if (gap < 24) console.log("  !! title is close 
     const ka = langOf(c) === "ka";
     const cells = new Set();
     p.words.forEach((w) => { for (let i = 0; i < w.answer.length; i++) cells.add((w.row + (w.dir === "D" ? i : 0)) + "," + (w.col + (w.dir === "A" ? i : 0))); });
-    gapNote(c.folder, await S.render(browser, { title: twoLines(plain(p.title)), words: plain(p.title).split(" "), art: S.gridArt({ rows: p.rows, cols: p.cols, cells: [...cells].map((k) => k.split(",").map(Number)) }) }, img(c.folder, "share.png")));
+    // clue numbers as on the site: left to right, top to bottom, one number per square where a word starts
+    const nums = {}; let n = 0;
+    [...p.words].sort((a, b) => a.row - b.row || a.col - b.col).forEach((w) => { const k = w.row + "," + w.col; if (!nums[k]) nums[k] = ++n; });
+    const w1 = p.words.find((w) => nums[w.row + "," + w.col] === 1) || p.words[0]; // the first word is shaded, like the site's selected word
+    const first = []; for (let i = 0; i < w1.answer.length; i++) first.push((w1.row + (w1.dir === "D" ? i : 0)) + "," + (w1.col + (w1.dir === "A" ? i : 0)));
+    gapNote(c.folder, await S.render(browser, { title: twoLines(plain(p.title)), words: plain(p.title).split(" "), art: S.gridArt({ rows: p.rows, cols: p.cols, cells: [...cells].map((k) => k.split(",").map(Number)), nums, first }) }, img(c.folder, "share.png")));
     write(path.join(ROOT, c.folder, "index.html"), puzzlePage(c, p));
   }
 

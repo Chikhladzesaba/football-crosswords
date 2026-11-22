@@ -69,16 +69,17 @@ function top5Art() {
 
 // four tilted letter tiles with a hard shadow, four dashed empty slots under them
 function scrambleArt(letters) {
-  const rot = [-4, 3, -2, 4];
+  const rot = [-4, 3, -2, 4, -3];
   const f = letterFont(letters);
+  const n = [...letters].length, step = n > 4 ? 88 : 108, tw = n > 4 ? 76 : 92;
   let o = "";
   [...letters].forEach((ch, i) => {
-    const x = 10 + i * 108;
-    o += `<g transform="rotate(${rot[i]} ${x + 46} 52)"><rect x="${x + 5}" y="9" width="92" height="98" rx="9" fill="${INK}" stroke="none"/><rect x="${x}" y="4" width="92" height="98" rx="9" fill="${PAPER}"/>` +
-      `<text x="${x + 46}" y="${ch.match(/[Ⴀ-ჿ]/) ? 78 : 80}" text-anchor="middle" font-size="62" stroke="none" fill="${INK}" style="font-family:${f}">${ch}</text></g>`;
-    o += `<rect x="${x}" y="142" width="92" height="98" rx="9" stroke-dasharray="7 6" stroke-width="2.6"/>`;
+    const x = 10 + i * step;
+    o += `<g transform="rotate(${rot[i]} ${x + tw / 2} 52)"><rect x="${x + 5}" y="9" width="${tw}" height="98" rx="9" fill="${INK}" stroke="none"/><rect x="${x}" y="4" width="${tw}" height="98" rx="9" fill="${PAPER}"/>` +
+      `<text x="${x + tw / 2}" y="${ch.match(/[Ⴀ-ჿ]/) ? 78 : 80}" text-anchor="middle" font-size="62" stroke="none" fill="${INK}" style="font-family:${f}">${ch}</text></g>`;
+    o += `<rect x="${x}" y="142" width="${tw}" height="98" rx="9" stroke-dasharray="7 6" stroke-width="2.6"/>`;
   });
-  return `<svg width="440" height="248" viewBox="0 0 440 248">${o}</svg>`;
+  return `<svg width="${10 + n * step + 4}" height="248" viewBox="0 0 ${10 + n * step + 4} 248">${o}</svg>`;
 }
 
 // 6x6 letter grid with a few grey highlighted cells
@@ -95,12 +96,16 @@ function wordsearchArt(rows, hits) {
   return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">${o}</svg>`;
 }
 
-// the real grid of one crossword as outlined cells
+// the real grid of one crossword, drawn like the crossword page of the site: squares that share their lines,
+// a small bold number where a word starts, the first word shaded grey
 function gridArt(grid) {
   const maxW = 440, maxH = 470;
   const cell = Math.floor(Math.min(maxW / grid.cols, maxH / grid.rows));
-  const cells = grid.cells.map(([r, c]) => `<rect x="${c * cell + 2}" y="${r * cell + 2}" width="${cell - 4}" height="${cell - 4}" rx="${Math.max(2, cell * 0.12)}" fill="${PAPER}" stroke-width="2.6"/>`);
-  return `<svg width="${grid.cols * cell}" height="${grid.rows * cell}" viewBox="0 0 ${grid.cols * cell} ${grid.rows * cell}">${cells.join("")}</svg>`;
+  const pad = 3, num = Math.max(9, Math.round(cell * 0.36));
+  const hl = new Set(grid.first || []), nums = grid.nums || {};
+  const sq = grid.cells.map(([r, c]) => `<rect x="${c * cell + pad}" y="${r * cell + pad}" width="${cell}" height="${cell}" fill="${hl.has(r + "," + c) ? GREY : PAPER}" stroke-width="2.4" stroke-linejoin="miter"/>`);
+  const nn = Object.keys(nums).map((k) => { const [r, c] = k.split(",").map(Number); return `<text x="${c * cell + pad + 2.5}" y="${r * cell + pad + num + 1}" font-size="${num}" stroke="none" fill="${INK}" style="font-family:'Poppins',sans-serif;font-weight:500">${nums[k]}</text>`; });
+  return `<svg width="${grid.cols * cell + 2 * pad}" height="${grid.rows * cell + 2 * pad}" viewBox="0 0 ${grid.cols * cell + 2 * pad} ${grid.rows * cell + 2 * pad}">${sq.join("")}${nn.join("")}</svg>`;
 }
 
 // ---------- Drawings that live in paper.js (read from the real site so they can never drift) ----------

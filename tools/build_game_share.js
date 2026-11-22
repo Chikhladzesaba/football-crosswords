@@ -10,8 +10,9 @@ const path = require("path");
 const { chromium } = require("playwright");
 const S = require("./share_style");
 
-const HITS = [[0, 0], [0, 1], [0, 2], [0, 3], [4, 1], [4, 2], [4, 3], [4, 4]];
-const ROWS_EN = ["MESIBK", "RALOZD", "UGOTNA", "BENFIC", "LKLOPP", "ASTROH"];
+const HITS_EN = [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [4, 1], [4, 2], [4, 3], [4, 4]]; // MESSI and another word
+const HITS_KA = [[0, 0], [0, 1], [0, 2], [0, 3], [4, 1], [4, 2], [4, 3], [4, 4]];       // მესი and another word
+const ROWS_EN = ["MESSIK", "RALOZD", "UGOTNA", "BENFIC", "LKLOPP", "ASTROH"];
 const ROWS_KA = ["მესიბკ", "რალოზდ", "უგოტნა", "ბენფიკ", "ლკლოპი", "ასტროხ"];
 
 (async () => {
@@ -22,10 +23,10 @@ const ROWS_KA = ["მესიბკ", "რალოზდ", "უგოტნა
     { out: "ka/share.png", title: ["Kickoff", "Puzzles"], art: S.allArt(site.all.ka) },
     { out: "top5/share.png", title: ["Guess the", "Top 5"], art: S.top5Art() },
     { out: "gamoicani-top5/share.png", title: ["გამოიცანი", "ტოპ 5"], art: S.top5Art() },
-    { out: "scramble/share.png", title: ["Name", "Scramble"], art: S.scrambleArt("ISEM") },
+    { out: "scramble/share.png", title: ["Name", "Scramble"], art: S.scrambleArt("SEMIS") },
     { out: "gamoicani-pekhburtelebis-gvarebi/share.png", title: ["დალაგობანა"], art: S.scrambleArt("ესიმ") },
-    { out: "wordsearch/share.png", title: ["Word", "Search"], art: S.wordsearchArt(ROWS_EN, HITS) },
-    { out: "skauti/share.png", title: ["სკაუტი"], art: S.wordsearchArt(ROWS_KA, HITS) },
+    { out: "wordsearch/share.png", title: ["Word", "Search"], art: S.wordsearchArt(ROWS_EN, HITS_EN) },
+    { out: "skauti/share.png", title: ["სკაუტი"], art: S.wordsearchArt(ROWS_KA, HITS_KA) },
   ];
   const only = process.argv[2] === "--out" ? process.argv[3] : null; // optional: write the files into another folder (for checking)
   for (const g of GAMES) {
