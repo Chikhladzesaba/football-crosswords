@@ -1,6 +1,8 @@
 // Game switcher: a bar at the bottom on a phone, tabs at the top on a computer.
 // Every page loads it with <script src="…/nav.js"></script> right after <body>. It works out three things by itself:
 // the language (<html lang>), which game this page belongs to (first folder in the address), and where the site root is.
+// VISUAL TEST (local only): newspaper skin. Remove these two lines to go back to the normal look.
+document.write('<link rel="stylesheet" href="/paper.css?v=1">');
 (function () {
   const KA = document.documentElement.lang === "ka";
   const root = new URL(".", document.currentScript.src).href; // folder that holds nav.js = the site root
@@ -12,10 +14,10 @@
   document.documentElement.dataset.game = cur; // nav.css gives each game its own accent color from this
   const S = (d, w) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="' + (w || 1.6) + '" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + "</svg>";
   const ICON = {
-    crosswords: S('<rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M9.2 3.5v17M14.8 3.5v17M3.5 9.2h17M3.5 14.8h17"/>'),
-    top5: S('<path d="M7 3.5h10v5.5a5 5 0 0 1-10 0V3.5zM7 5.5H3.5v1.5a3.5 3.5 0 0 0 3.5 3.5M17 5.5h3.5v1.5a3.5 3.5 0 0 1-3.5 3.5M12 14v4M7.5 20.5h9M9.5 18h5"/>'),
-    scramble: S('<rect x="3.5" y="8.5" width="6.5" height="7" rx="1.5"/><rect x="14" y="8.5" width="6.5" height="7" rx="1.5"/><path d="M7 5h10l-2-2M17 19H7l2 2"/>'),
-    wordsearch: S([3.5, 9.7, 15.9].map((y) => [3.5, 9.7, 15.9].map((x) => '<rect x="' + x + '" y="' + y + '" width="4.6" height="4.6" rx="1"' + (y === 9.7 ? ' fill="currentColor" fill-opacity=".3"' : "") + "/>").join("")).join(""), 1.5),
+    crosswords: S('<path d="M3.6 4.2L20.3 3.6 20.6 20.3 3.8 20.6z"/><path d="M9.3 3.8L9 20.4M14.9 3.7L15.1 20.4M3.8 9.5l16.6-.4M3.7 15l16.8.3"/><path d="M9.3 9.5h5.6V15H9.3z" fill="currentColor"/><path d="M4.6 5.6h2" stroke-width="1"/>'),
+    top5: S('<path d="M7 3.6l10-.2.2 5.4a5 5 0 0 1-10.2.3zM7 5.5l-3.5.1.1 1.4a3.5 3.5 0 0 0 3.6 3.4M17 5.4l3.5.2v1.4a3.5 3.5 0 0 1-3.5 3.4M12 14l.1 4M7.5 20.6l9-.2M9.5 18.2l5-.1"/><path d="M12 6.4l.8 1.7 1.8.2-1.3 1.2.3 1.8-1.6-.9-1.6.9.3-1.8-1.3-1.2 1.8-.2z" fill="currentColor" stroke-width="0.6"/>'),
+    scramble: S('<path d="M3.6 8.7l6.2-.3.2 7-6.3.2z"/><path d="M14 8.5l6.5.2-.2 7-6.4-.1z"/><path d="M6.4 12.2h.1M17 12h.1" stroke-width="2.4"/><path d="M7 4.8c3-1.4 7-1.2 10 .1l-2-2M17 19.2c-3 1.4-7 1.2-10-.1l2 2"/>'),
+    wordsearch: S('<path d="M3.6 3.8l11.4-.3.1 11.6-11.5.2z"/><path d="M7.4 3.7v11.5M11.2 3.6v11.6M3.7 7.6h11.4M3.7 11.4h11.4"/><circle cx="15.2" cy="15.2" r="4.6" fill="var(--card, #fff)" fill-opacity=".85"/><path d="M18.6 18.6l3 3.2"/>', 1.6),
   };
   const ITEMS = KA
     ? [["crosswords", "კროსვორდი", "ka/"], ["top5", "Top 5", "gamoicani-top5/"], ["scramble", "დალაგობანა", "gamoicani-pekhburtelebis-gvarebi/"], ["wordsearch", "სკაუტი", "skauti/"]]
@@ -34,13 +36,14 @@
   const ALT = KA ? { crosswords: "", top5: "top5/", scramble: "scramble/", wordsearch: "wordsearch/" }
                  : { crosswords: "ka/", top5: "gamoicani-top5/", scramble: "gamoicani-pekhburtelebis-gvarebi/", wordsearch: "skauti/" };
   const alt = root + (document.documentElement.dataset.alt != null ? document.documentElement.dataset.alt : ALT[cur]); // info pages say where their other-language version is (data-alt)
-  const LANG = KA ? '<a href="' + alt + '" hreflang="en" lang="en" title="English">ინგ</a><span class="sep">|</span><span aria-current="true">ქა</span>'
+  const LANG = KA ? '<a href="' + alt + '" hreflang="en" lang="en" title="English">ENG</a><span class="sep">|</span><span aria-current="true">ქა</span>'
                   : '<span aria-current="true">Eng</span><span class="sep">|</span><a href="' + alt + '" hreflang="ka" lang="ka" title="ქართული">Geo</a>';
   const top = document.createElement("div");
   top.className = "topbar";
   top.innerHTML = '<a class="brand" href="' + root + (KA ? "ka/" : "") + '">Kickoff Puzzles</a><span class="top-right"><span class="pill-slot"></span><nav class="lang-switch" aria-label="' + (KA ? "ენა" : "Language") + '">' + LANG + "</nav></span>";
   document.body.insertBefore(top, document.body.firstChild);
   document.documentElement.classList.add("with-top");
+  document.write('<script src="/paper.js?v=1"><\/script>'); // VISUAL TEST
 
   // Footer with the About / Contact / Privacy links, added to every page. Hidden while playing a crossword on a phone (the page is a fixed-size app there).
   const FT = KA ? { about: "ჩვენ შესახებ", contact: "კონტაქტი", privacy: "კონფიდენციალურობა" }

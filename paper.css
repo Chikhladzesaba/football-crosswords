@@ -1,0 +1,364 @@
+/* Kickoff Puzzles: newspaper art direction (visual test, local only).
+   Two skins on <html data-skin="bw|color">. Loaded after every other stylesheet, so it only overrides.
+   Delete the two lines at the top of nav.js and nothing of this runs. */
+
+@font-face { font-family: "Ranchers"; font-weight: 400; font-display: swap; src: url("/fonts/paper/ranchers.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-weight: 400; font-display: swap; src: url("/fonts/paper/poppins-400.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-weight: 500; font-display: swap; src: url("/fonts/paper/poppins-500.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-weight: 600; font-display: swap; src: url("/fonts/paper/poppins-600.woff2") format("woff2"); }
+
+@font-face { font-family: "FiraGO Title"; font-weight: 400; font-display: swap; src: url("/fonts/paper/firago-bold.woff2") format("woff2"); }
+@font-face { font-family: "Georgian Caps"; font-weight: 400; font-display: swap; unicode-range: U+10A0-10FF, U+1C90-1CBF, U+2D00-2D2F; src: url("/fonts/paper/noto-sans-georgian-bold.woff2") format("woff2"); }
+
+/* ============ Skins (variables). Triple attribute selectors beat the per-game colours in nav.css ============ */
+html[data-skin="bw"][data-game][data-game][data-game] {
+  --bg: #f9f2e2; --card: #f9f2e2; --ink: #1c1a17; --muted: #5b5446; --border: #b9ab8c;
+  --accent: #1c1a17; --accent-soft: #dcdad4; --head: #1c1a17; --main: #1c1a17; --line2: #1c1a17; --ph: #6b6354;
+  --green: #dcdad4; --green-ink: #1c1a17; --red: #f0d3c9; --red-ink: #a3321f; --grey: #dcdad4;
+  --rule: #1c1a17; --paper: #f9f2e2; --on-accent: #f9f2e2; --shadow: #1c1a17;
+  --display: "Ranchers", "FiraGO", system-ui, sans-serif; --serif: "Poppins", "FiraGO", system-ui, sans-serif; --body: "Poppins", "FiraGO", system-ui, sans-serif;
+  --sk-a: #dcdad4; --sk-b: #c4c1ba;
+  --lv-easy: transparent; --lv-medium: transparent; --lv-hard: transparent; --lv-very: #1c1a17;
+  --hl0: #dcdad4; --hl1: #dcdad4; --hl2: #dcdad4; --hl3: #dcdad4; --hl4: #dcdad4; --hl5: #dcdad4;
+  --hi: #dcdad4; --solved: #dcdad4; --soft-ink: #1c1a17;
+}
+html[data-skin="bw"][data-ink="red"][data-game][data-game][data-game] { --ink: #c0301c; --accent: #c0301c; --head: #c0301c; --main: #c0301c; --line2: #c0301c; --rule: #c0301c; --shadow: #c0301c; --green-ink: #c0301c; --soft-ink: #c0301c; --lv-very: #c0301c; --muted: #a8402f; --ph: #a8402f; --border: #a8402f; --sk-a: #e8a89c; --sk-b: #c0301c; }
+html[data-skin="bw"][data-ink="blue"][data-game][data-game][data-game] { --ink: #1f4fa8; --accent: #1f4fa8; --head: #1f4fa8; --main: #1f4fa8; --line2: #1f4fa8; --rule: #1f4fa8; --shadow: #1f4fa8; --green-ink: #1f4fa8; --soft-ink: #1f4fa8; --lv-very: #1f4fa8; --muted: #3a5fa0; --ph: #3a5fa0; --border: #3a5fa0; --sk-a: #a3b8e0; --sk-b: #1f4fa8; }
+
+/* ============ Page, paper grain, retro checker frame ============ */
+html[data-skin] body, html[data-skin] button, html[data-skin] input { font-family: var(--body); }
+html[data-skin] body { background: var(--bg); color: var(--ink); font-weight: 400; }
+html[data-skin] body::before { content: ""; position: fixed; inset: 0; z-index: 100; pointer-events: none; mix-blend-mode: multiply; opacity: .5; background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27240%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.75%27%20numOctaves%3D%273%27%20stitchTiles%3D%27stitch%27/%3E%3CfeColorMatrix%20values%3D%270%200%200%200%20.38%20%200%200%200%200%20.30%20%200%200%200%200%20.2%20%200%200%200%20.5%20-.12%27/%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23n%29%27/%3E%3C/svg%3E"); }
+.only-bw, .only-color { display: contents; }
+
+/* ============ Type ============ */
+html[data-skin] h1, html[data-skin] h2, html[data-skin] h3 { font-family: var(--display); }
+html[data-skin="bw"] h1 { font-weight: 400; letter-spacing: -.01em; }
+html[data-skin="bw"] h2, html[data-skin="bw"] h3 { font-weight: 400; }
+html[data-skin] .intro, html[data-skin] .page-head .intro { color: var(--muted); font-family: var(--serif); }
+
+html[data-skin] .intro { border-bottom: 0; }
+html[data-skin] .back, html[data-skin] .see-all, html[data-skin] .sc-link, html[data-skin] .t5-modal-card .t5-link, html[data-skin] .ws-modal-card .ws-link, html[data-skin] .cta { color: var(--ink); }
+html[data-skin] .back:hover { color: var(--accent); }
+
+/* ============ Masthead ============ */
+.kp-mast { max-width: 1000px; margin: 0 auto; padding: 16px 16px 0; text-align: center; }
+.kp-mast-top { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 6px; border-bottom: 2px solid var(--rule); font-size: 12px; letter-spacing: .12em; color: var(--muted); }
+html[data-skin]:not(:lang(ka)) .kp-mast-top { text-transform: uppercase; }
+.kp-name { position: relative; display: flex; align-items: center; justify-content: center; gap: 26px; padding: 10px 0 12px; text-decoration: none; color: var(--ink); }
+.kp-title { font-family: var(--display); font-size: 78px; line-height: 1; font-weight: 400; letter-spacing: -.02em; }
+.kp-flank .kp-art { width: 62px; height: 62px; filter: url(#kp-rough); }
+.kp-flank.r .kp-art { transform: scaleX(1); }
+.kp-sp { position: absolute; width: 30px; height: 30px; color: var(--accent); }
+.kp-sp.s1 { left: 6%; top: 4px; } .kp-sp.s2 { right: 6%; bottom: 10px; width: 28px; height: 28px; }
+.kp-sp .kp-art { width: 100%; height: 100%; }
+body:has(#crossword) .kp-mast { display: none; }
+@media (max-width: 640px) { .kp-mast { display: none; } }
+/* a rule + double rule frame around the section tabs, like a newspaper section bar */
+body:not(:has(#crossword)) .games-nav { border-top: 2px solid var(--rule); margin-top: 0; }
+@media (max-width: 640px) { body:not(:has(#crossword)) .games-nav { border-top: 0; } }
+
+/* ============ Game tabs (section bar) ============ */
+.games-nav a[data-game][data-game] { --g: var(--ink); --soft: var(--accent-soft); --ink: var(--rule); }
+html[data-skin] .games-nav { border-bottom: 2px solid var(--rule); padding-right: 200px; }
+html[data-skin] .games-nav a { color: var(--ink); border-bottom-width: 0; font-size: 13px; letter-spacing: .09em; font-weight: 500; padding-top: 11px; padding-bottom: 11px; margin-bottom: 0; }
+html[data-skin]:not(:lang(ka)) .games-nav a { text-transform: uppercase; }
+html[data-skin]:lang(ka) .games-nav a { font-size: 14px; letter-spacing: .02em; }
+html[data-skin] .games-nav svg { color: var(--ink); filter: url(#kp-rough-s); }
+html[data-skin] .games-nav a:hover { background: var(--accent-soft); border-radius: 0; }
+html[data-skin] .games-nav a[aria-current="page"] { background: var(--ink); color: var(--paper); border-radius: 0; }
+html[data-skin="color"] .games-nav a[aria-current="page"] { background: var(--accent); }
+html[data-skin] .games-nav a[aria-current="page"] svg { color: var(--paper); }
+html[data-skin] .games-nav a[aria-current="page"] .ico { background: none; }
+html[data-skin] .lang-switch, html[data-skin] .lang-switch a, html[data-skin] .site-footer, html[data-skin] .site-footer a { color: var(--muted); }
+html[data-skin] .lang-switch [aria-current] { color: var(--ink); }
+html[data-skin] .topbar .brand { font-family: var(--display); font-size: 17px; color: var(--ink); font-weight: 400; }
+html[data-skin] .top-right { display: flex; align-items: center; gap: 14px; }
+@media (max-width: 640px) {
+  html[data-skin] .games-nav { padding-right: 4px; background: var(--card); border-top: 2px solid var(--rule); border-bottom: 0; }
+  html[data-skin] .games-nav a { font-size: 10.5px; letter-spacing: .04em; padding-top: 6px; padding-bottom: 6px; }
+  html[data-skin] .games-nav a[aria-current="page"] { background: none; color: var(--ink); }
+  html[data-skin="color"] .games-nav a[aria-current="page"] { color: var(--accent); }
+  html[data-skin] .games-nav a[aria-current="page"] svg { color: var(--ink); }
+  html[data-skin="color"] .games-nav a[aria-current="page"] svg { color: var(--accent); }
+  html[data-skin] .games-nav a[aria-current="page"] .ico { background: var(--accent-soft); border-radius: 4px 9px 5px 10px / 9px 4px 10px 5px; }
+  html[data-skin] .kp-skin button span.x { display: none; }
+}
+
+/* ============ Skin toggle ============ */
+.kp-skin { display: inline-flex; border: 2px solid var(--rule); border-radius: 4px 8px 5px 9px / 8px 4px 9px 5px; overflow: hidden; background: var(--card); }
+.kp-skin button { border: 0 !important; display: inline-flex; align-items: center; gap: 5px; padding: 4px 9px; border: 0; border-radius: 0; background: none; font-size: 12px; font-weight: 400; color: var(--ink); line-height: 1.2; cursor: pointer; }
+html[data-skin] .kp-skin button { border: 0; border-radius: 0; }
+html[data-skin] .kp-skin button + button { border-left: 2px solid var(--rule); }
+.kp-skin button:hover { background: var(--accent-soft); color: var(--ink); border-color: var(--rule); }
+.kp-skin button[aria-pressed="true"] { background: none; }
+html[data-skin="color"] .kp-skin button[aria-pressed="true"] { background: var(--accent); }
+.kp-skin svg { width: 14px; height: 14px; }
+.kp-skin button[aria-pressed="true"][data-s="bw"] svg { color: var(--paper); }
+
+/* ============ Buttons, chips, cards: ink outlines, slightly wobbly corners ============ */
+html[data-skin] button { border: 2px solid var(--ink); border-radius: 5px 9px 6px 10px / 9px 5px 10px 6px; background: var(--card); color: var(--ink); font-weight: 400; }
+html[data-skin] button:hover { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+html[data-skin] button.primary { background: var(--accent); border-color: var(--ink); color: var(--paper); }
+html[data-skin] button.primary:hover { color: var(--paper); opacity: .88; background: var(--ink); }
+html[data-skin="color"] button.primary:hover { background: var(--accent); }
+html[data-skin] button:focus-visible { outline: 2px dashed var(--ink); outline-offset: 3px; }
+html[data-skin] .actions button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--ink); color: var(--ink); }
+html[data-skin] .actions .quiet, html[data-skin] .reset, html[data-skin] .see-all { border: 0 !important; background: none; box-shadow: none; }
+html[data-skin] .actions .quiet:hover { background: var(--accent-soft); color: var(--ink); }
+html[data-skin] .chip, html[data-skin] .sc-chip { border-radius: 4px 9px 5px 10px / 9px 4px 10px 5px; border: 2px solid var(--ink); background: var(--card); color: var(--ink); }
+html[data-skin] .chip[aria-pressed="true"], html[data-skin] .sc-chip.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+html[data-skin="color"] .chip[aria-pressed="true"], html[data-skin="color"] .sc-chip.on { background: var(--accent); }
+html[data-skin] .chip:hover { background: var(--accent-soft); color: var(--ink); }
+html[data-skin] .chip[aria-pressed="true"]:hover { background: var(--ink); color: var(--paper); }
+html[data-skin]:not(:lang(ka)) .filter-label, html[data-skin]:not(:lang(ka)) .sc-label { text-transform: uppercase; letter-spacing: .1em; font-size: 12px; }
+
+html[data-skin] .list a, html[data-skin] .daily-card, html[data-skin] .next-card, html[data-skin] .stats-bar, html[data-skin] .clues section, html[data-skin] .empty, html[data-skin] .t5-card, html[data-skin] .t5-row, html[data-skin] .sc-game, html[data-skin] .sc-end, html[data-skin] .ws-grid,
+html[data-skin] .win-card, html[data-skin] .t5-modal-card, html[data-skin] .ws-modal-card, html[data-skin] .t5-input {
+  background: var(--card); border: 2px solid var(--ink); border-radius: 6px 3px 7px 4px / 4px 7px 3px 6px; }
+html[data-skin] .list a:hover, html[data-skin] .next-card:hover { border-color: var(--ink); background: var(--card); transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); }
+html[data-skin] .list a, html[data-skin] .next-card { transition: transform .12s, box-shadow .12s; }
+html[data-skin] .list .name, html[data-skin] .next-card .name, html[data-skin] .daily-card .name { font-family: var(--serif); }
+html[data-skin] .list .about, html[data-skin] .size, html[data-skin] .count, html[data-skin] .legend, html[data-skin] .shown { color: var(--muted); }
+html[data-skin] .list a.is-solved { border-color: var(--ink); background: var(--solved); }
+html[data-skin] .status, html[data-skin] .status.progress { color: var(--ink); }
+
+/* difficulty = little printed stamps */
+html[data-skin] .level { border: 2px solid var(--ink); border-radius: 3px; background: transparent; color: var(--ink); padding: 2px 9px; font-weight: 500; }
+html[data-skin]:not(:lang(ka)) .level { text-transform: uppercase; letter-spacing: .08em; font-size: 10.5px; }
+html[data-skin] .level-easy { background: var(--lv-easy); color: var(--ink); }
+html[data-skin] .level-medium { background: var(--lv-medium); color: var(--ink); }
+html[data-skin] .level-hard { background: var(--lv-hard); color: var(--ink); }
+html[data-skin] .level-very-hard { background: var(--lv-very); color: var(--paper); }
+html[data-skin="bw"] .level-medium { border-style: dashed; }
+html[data-skin="bw"] .level-hard { border-width: 2px; }
+
+/* daily card = boxed "ad" with a double rule */
+html[data-skin] .daily-card { border: 2px solid var(--ink); }
+html[data-skin="bw"] .daily-card { background: var(--card); }
+html[data-skin] .daily-card .kicker, html[data-skin] .daily-card .cta { color: var(--ink); }
+html[data-skin]:not(:lang(ka)) .daily-card .kicker { text-transform: uppercase; letter-spacing: .1em; font-size: 12px; }
+html[data-skin] .daily-card .name { font-family: var(--display); font-size: 22px; font-weight: 400; }
+html[data-skin] .daily-card:hover { box-shadow: none; }
+
+/* home */
+html[data-skin] main.home { position: relative; }
+html[data-skin] main.home h1 { color: var(--ink); }
+html[data-skin="color"] main.home h1 { color: var(--accent); }
+html[data-skin] main.home .intro { max-width: 520px; }
+html[data-skin] main.home .intro { max-width: min(520px, calc(100% - 290px)); }
+@media (min-width: 641px) { html[data-skin] main.home h1 { padding-right: 270px; } }
+.kp-hero { position: absolute; right: 16px; top: 8px; width: 236px; color: var(--ink); pointer-events: none; }
+.kp-hero .kp-art { width: 100%; height: auto; filter: url(#kp-rough); overflow: visible; }
+@media (max-width: 640px) {
+  .kp-hero { width: 118px; right: 20px; top: 2px; }
+  html[data-skin] main.home h1 { font-size: 26px; padding-right: 125px; min-height: 92px; }
+  html[data-skin] main.home .intro { max-width: none; padding-right: 0; }
+  html[data-skin] .topbar .brand { font-size: 14px; white-space: nowrap; }
+  html[data-skin] .top-right { gap: 8px; }
+  html[data-skin] .pill-slot .pill { font-size: 11.5px; padding: 3px 8px; }
+  html[data-skin] .topbar:has(.pill-slot .pill) .brand { display: none; }
+  html[data-skin] .see-all { white-space: nowrap; }
+}
+html[data-skin] .topic-group h2 { display: flex; align-items: center; gap: 12px; border-top: 2px solid var(--ink); margin: 28px 0 12px; padding-top: 10px; font-size: 24px; position: relative; }
+.kp-spot { display: inline-flex; flex: none; width: 40px; height: 40px; color: var(--ink); }
+.kp-spot .kp-art { width: 100%; height: 100%; filter: url(#kp-rough-s); }
+html[data-skin] .topic-group h2 span:not(.kp-spot) { font-family: var(--body); border: 2px solid var(--ink); border-radius: 50%; min-width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; color: var(--ink); }
+html[data-skin] .stats-bar { color: var(--muted); }
+
+/* ============ Crossword puzzle ============ */
+html[data-skin] .grid { gap: 0; }
+html[data-skin] .cell { border-radius: 0; }
+html[data-skin] .cell.open { background: var(--card); border: 2px solid var(--ink); border-radius: 0; margin: 0 -2px -2px 0; }
+html[data-skin] .cell.open.inword { background: var(--hi); }
+html[data-skin] .cell.open.active { background: var(--ink); border-color: var(--ink); }
+html[data-skin="color"] .cell.open.active { background: var(--accent); }
+html[data-skin] .cell.open.solved { background: var(--solved); border-color: var(--ink); }
+html[data-skin="color"] .cell.open.solved { background: var(--solved); }
+html[data-skin] .cell.open.solved.inword { background: var(--solved); }
+html[data-skin="color"] .cell.open.solved.inword { background: var(--solved); }
+html[data-skin] .cell.open.solved.active { background: var(--ink); }
+html[data-skin="color"] .cell.open.solved.active { background: var(--accent); }
+html[data-skin] .cell.wrong { background: var(--red) !important; border-color: var(--red-ink) !important; }
+html[data-skin] .num { color: var(--ink); font-family: var(--serif); font-weight: 500; }
+html[data-skin] .cell.active .num { color: var(--paper); }
+html[data-skin] .cell input { font-family: var(--display); font-weight: 400; color: var(--ink); }
+html[data-skin] .cell.active input, html[data-skin] .cell.active.solved input { color: var(--paper); }
+html[data-skin] .cell.solved input { color: var(--ink); }
+html[data-skin] .cell.wrong input { color: var(--red-ink); }
+html[data-skin] .cell.open.wordwrong:not(.solved):not(.active) { background: var(--red); border-color: var(--ink); }
+html[data-skin] .clue-bar { background: var(--hi); border: 2px solid var(--ink); border-radius: 4px 8px 5px 9px / 8px 4px 9px 5px; font-family: var(--serif); }
+html[data-skin] .clue-bar b { color: var(--ink); }
+html[data-skin] .clues section { padding-top: 10px; }
+html[data-skin] .clues h3 { font-size: 13px; font-family: var(--body); font-weight: 500; letter-spacing: .12em; padding-bottom: 6px; border-bottom: 2px solid var(--ink); margin-bottom: 4px; }
+html[data-skin]:not(:lang(ka)) .clues h3 { text-transform: uppercase; }
+html[data-skin] .clues li { font-family: var(--serif); border-radius: 2px; }
+html[data-skin="bw"] .clues li { font-size: 13.5px; }
+html[data-skin] .clues li:hover { background: var(--grey); }
+html[data-skin] .clues li.current { background: var(--hi); box-shadow: inset 3px 0 0 var(--ink); }
+html[data-skin] .clues li .n { font-family: var(--body); font-weight: 500; }
+html[data-skin] .clues li.done .text { text-decoration-color: var(--ink); }
+html[data-skin] .result { background: var(--green); color: var(--ink); border: 2px solid var(--ink); border-radius: 6px 3px 7px 4px / 4px 7px 3px 6px; }
+html[data-skin] .result .share-note { color: var(--ink); }
+html[data-skin] .legend { font-family: var(--serif); }
+html[data-skin] .howto, html[data-skin] .t5-rules, html[data-skin] .sc-rules, html[data-skin] .ws-rules { border-top: 2px solid var(--ink); color: var(--muted); font-family: var(--serif); }
+html[data-skin] .howto summary, html[data-skin] .t5-rules summary, html[data-skin] .sc-rules summary, html[data-skin] .ws-rules summary { font-family: var(--display); color: var(--ink); }
+html[data-skin]:not(:lang(ka)) .howto summary, html[data-skin]:not(:lang(ka)) .t5-rules summary, html[data-skin]:not(:lang(ka)) .sc-rules summary, html[data-skin]:not(:lang(ka)) .ws-rules summary { font-size: 16px; }
+html[data-skin] .howto b { color: var(--ink); }
+html[data-skin] .more h2 { font-size: 22px; }
+html[data-skin] body.typing .clue-bar { box-shadow: 0 3px 0 var(--ink); border-radius: 0; }
+
+/* win popups: a newspaper "stamp" card */
+html[data-skin] .win, html[data-skin] .t5-modal, html[data-skin] .ws-modal { background: rgba(28, 26, 23, .55); }
+html[data-skin] .win-card, html[data-skin] .t5-modal-card, html[data-skin] .ws-modal-card { border-width: 2px; box-shadow: 6px 6px 0 var(--ink); }
+html[data-skin] .win-card h2, html[data-skin] .t5-modal-card h2, html[data-skin] .ws-modal-card h2, html[data-skin] .sc-end h2 { color: var(--ink); font-family: var(--display); }
+html[data-skin="color"] .win-card h2, html[data-skin="color"] .t5-modal-card h2, html[data-skin="color"] .ws-modal-card h2, html[data-skin="color"] .sc-end h2 { color: var(--accent); }
+html[data-skin] .win-card .win-perfect, html[data-skin] .t5-modal-card .win-perfect, html[data-skin] .ws-modal-card .win-perfect, html[data-skin] .sc-end .win-perfect { background: var(--hi); color: var(--ink); border: 2px dashed var(--ink); }
+html[data-skin] .t5-modal-card button:not(.primary):not(.t5-link), html[data-skin] .ws-modal-card button:not(.primary):not(.ws-link), html[data-skin] .sc-end button:not(.primary) { border-color: var(--ink); color: var(--ink); }
+html[data-skin] .win-cup svg > rect:first-child { fill: var(--ink); }
+html[data-skin="color"] .win-cup svg > rect:first-child { fill: var(--accent); }
+html[data-skin] .win-cup svg g:first-of-type { fill: var(--card); }
+html[data-skin] .win-cup svg { filter: url(#kp-rough-s); }
+html[data-skin] .confetti { background: var(--ink) !important; }
+html[data-skin="color"] .confetti:nth-child(5n+1) { background: #b8432a !important; } html[data-skin="color"] .confetti:nth-child(5n+2) { background: #f5c542 !important; } html[data-skin="color"] .confetti:nth-child(5n+3) { background: #4fb783 !important; } html[data-skin="color"] .confetti:nth-child(5n+4) { background: #a98be0 !important; }
+
+/* ============ Top 5 ============ */
+html[data-skin] .t5-kicker { color: var(--ink); }
+html[data-skin] .t5-row { border-radius: 4px 8px 5px 9px / 8px 4px 9px 5px; }
+html[data-skin] .t5-rank { background: transparent; color: var(--ink); border: 2px solid var(--ink); font-family: var(--display); }
+html[data-skin] .t5-name { color: var(--ink); }
+html[data-skin] .t5-name.t5-blank { background: repeating-linear-gradient(135deg, rgba(28,26,23,.35) 0 1px, transparent 1px 5px); border: 2px solid var(--ink); border-radius: 3px; }
+html[data-skin] .t5-row.found { background: var(--green); border-color: var(--ink); }
+html[data-skin] .t5-row.found .t5-rank { background: var(--ink); color: var(--paper); }
+html[data-skin="color"] .t5-row.found .t5-rank { background: var(--green-ink); }
+html[data-skin] .t5-row.found .t5-val { color: var(--ink); }
+html[data-skin] .t5-row.missed { background: var(--grey); }
+html[data-skin] .t5-row.missed .t5-rank { background: none; color: var(--muted); border-style: dashed; }
+html[data-skin] .t5-dot { background: var(--ink); } html[data-skin="color"] .t5-dot { background: var(--accent); } html[data-skin] .t5-dot.lost { background: none; border: 2px dashed var(--ink); }
+html[data-skin] .t5-input { border-radius: 4px 8px 5px 9px / 8px 4px 9px 5px; }
+html[data-skin] .t5-input:focus { outline: 2px dashed var(--ink); border-color: var(--ink); }
+html[data-skin] .t5-msg.good { color: var(--green-ink); } html[data-skin="bw"] .t5-msg.good { color: var(--ink); }
+html[data-skin] .t5-pip { background: var(--border); } html[data-skin] .t5-pip.now { background: var(--ink); } html[data-skin] .t5-pip.done { background: var(--ink); }
+html[data-skin] .t5-cardhead .count { color: var(--ink); }
+
+/* ============ Scramble ============ */
+html[data-skin] .sc-slot { background: var(--card); border: 2px dashed var(--ink); border-radius: 4px; }
+html[data-skin] .sc-slot.filled { border-style: solid; }
+html[data-skin] .sc-slot.locked { background: var(--grey); }
+html[data-skin] .sc-tile { background: var(--card); border: 2px solid var(--ink); border-radius: 4px 7px 5px 8px / 7px 4px 8px 5px; box-shadow: 2px 3px 0 var(--ink); font-family: var(--display); font-weight: 400; color: var(--ink); }
+html[data-skin] .sc-tile:hover { background: var(--hi); color: var(--ink); }
+html[data-skin] .sc-tile.used { box-shadow: none; opacity: .3; }
+html[data-skin] .sc-slots.right .sc-slot { background: var(--green); border-color: var(--ink); color: var(--ink); }
+html[data-skin] .sc-slots.wrong .sc-slot.filled:not(.locked) { background: var(--red); border-color: var(--red-ink); }
+html[data-skin] .sc-slots.shown .sc-slot { background: var(--grey); border-color: var(--ink); color: var(--muted); }
+html[data-skin] .sc-slot { font-family: var(--display); font-weight: 400; color: var(--ink); }
+
+/* ============ Word search ============ */
+html[data-skin] .ws-grid { padding: 10px; gap: 0; border-radius: 6px 3px 7px 4px / 4px 7px 3px 6px; }
+html[data-skin] .ws-cell { background: transparent; color: var(--ink); border-radius: 0; font-family: var(--display); font-weight: 400; box-shadow: inset 0 0 0 1px var(--ink); }
+html[data-skin] .ws-cell.sel { background: var(--ink); color: var(--paper); font-weight: 400; }
+html[data-skin="color"] .ws-cell.sel { background: var(--accent); }
+html[data-skin] .ws-cell.anchor { background: var(--hi); color: var(--ink); outline: 2px solid var(--ink); }
+html[data-skin] .ws-cell.nope { background: var(--red); color: var(--red-ink); }
+html[data-skin] .ws-cell.hint { background: var(--hi); outline: 2px dashed var(--ink); }
+html[data-skin] .ws-cell.missed { background: var(--grey); color: var(--muted); }
+html[data-skin] .ws-cell.f0, html[data-skin] .ws-cell.f1, html[data-skin] .ws-cell.f2, html[data-skin] .ws-cell.f3, html[data-skin] .ws-cell.f4, html[data-skin] .ws-cell.f5 { color: var(--ink); font-weight: 400; }
+html[data-skin="color"] .ws-cell.f0 { background: var(--hl0); } html[data-skin="color"] .ws-cell.f1 { background: var(--hl1); } html[data-skin="color"] .ws-cell.f2 { background: var(--hl2); } html[data-skin="color"] .ws-cell.f3 { background: var(--hl3); } html[data-skin="color"] .ws-cell.f4 { background: var(--hl4); } html[data-skin="color"] .ws-cell.f5 { background: var(--hl5); }
+html[data-skin] .ws-w, html[data-skin] .ws-w.f0, html[data-skin] .ws-w.f1, html[data-skin] .ws-w.f2, html[data-skin] .ws-w.f3, html[data-skin] .ws-w.f4, html[data-skin] .ws-w.f5 { background: var(--card); border: 2px solid var(--ink); color: var(--ink); border-radius: 4px 8px 5px 9px / 8px 4px 9px 5px; font-family: var(--serif); font-weight: 500; }
+html[data-skin] .ws-w.found { color: var(--muted); border-color: var(--ink); text-decoration-thickness: 1.5px; }
+html[data-skin="color"] .ws-w.f0.found { background: var(--hl0); } html[data-skin="color"] .ws-w.f1.found { background: var(--hl1); } html[data-skin="color"] .ws-w.f2.found { background: var(--hl2); } html[data-skin="color"] .ws-w.f3.found { background: var(--hl3); } html[data-skin="color"] .ws-w.f4.found { background: var(--hl4); } html[data-skin="color"] .ws-w.f5.found { background: var(--hl5); }
+html[data-skin] .ws-msg.good { color: var(--ink); } html[data-skin] .ws-time { color: var(--ink); }
+html[data-skin] .pill { background: transparent; border: 2px solid var(--ink); color: var(--ink); border-radius: 4px 9px 5px 10px / 9px 4px 10px 5px; }
+
+/* ============ Footer + info pages ============ */
+html[data-skin] .site-footer { border-top: 2px solid var(--rule); max-width: 968px; margin-top: 28px; padding-top: 16px; font-family: var(--serif); }
+html[data-skin] main.info h2 { color: var(--ink); }
+html[data-skin] main.info a { color: var(--ink); text-decoration-thickness: 1.5px; }
+html[data-skin] main.info .cta a { background: var(--card); border: 2px solid var(--ink); border-radius: 5px 9px 6px 10px / 9px 5px 10px 6px; color: var(--ink); }
+html[data-skin] main.info p, html[data-skin] main.info li { font-family: var(--serif); }
+html[data-skin] .kp-share.kp-share a, html[data-skin] .kp-share.kp-share button { border: 2px solid var(--ink); background: var(--card); color: var(--ink); border-radius: 5px 9px 6px 10px / 9px 5px 10px 6px; }
+
+/* the checker frame must not cover the tabs on puzzle pages (no masthead there) */
+@media (min-width: 761px) {
+}
+
+@media (max-width: 760px) { html[data-skin="color"] body.phone-play { top: 16px; height: calc(var(--vvh, 100dvh) - 32px); } }
+
+/* same for both skins: found words in Word Search use the skin's highlighter colours */
+html[data-skin] .ws-cell.f0 { background: var(--hl0); } html[data-skin] .ws-cell.f1 { background: var(--hl1); } html[data-skin] .ws-cell.f2 { background: var(--hl2); } html[data-skin] .ws-cell.f3 { background: var(--hl3); } html[data-skin] .ws-cell.f4 { background: var(--hl4); } html[data-skin] .ws-cell.f5 { background: var(--hl5); }
+html[data-skin] .ws-w.f0.found { background: var(--hl0); } html[data-skin] .ws-w.f1.found { background: var(--hl1); } html[data-skin] .ws-w.f2.found { background: var(--hl2); } html[data-skin] .ws-w.f3.found { background: var(--hl3); } html[data-skin] .ws-w.f4.found { background: var(--hl4); } html[data-skin] .ws-w.f5.found { background: var(--hl5); }
+html[data-skin] .daily-card { background: var(--daily); }
+html[data-skin="bw"][data-game][data-game][data-game] { --daily: #f9f2e2; --solved: #dcdad4; --hl0: #dcdad4; --hl1: #c9c6bf; --hl2: #dcdad4; --hl3: #c9c6bf; --hl4: #dcdad4; --hl5: #c9c6bf; }
+html[data-skin="color"][data-game][data-game][data-game] { --daily: #fbeeb8; }
+
+/* Ranchers = titles and bold highlights (one weight only, never faux-bold) */
+html[data-skin] h1, html[data-skin] h2, html[data-skin] h3, html[data-skin] b, html[data-skin] strong, html[data-skin] .level, html[data-skin] .clue-bar b, html[data-skin] .stat b, html[data-skin] .t5-rank, html[data-skin] .kp-title, html[data-skin] .topbar .brand { font-family: var(--display); font-weight: 400; letter-spacing: .02em; }
+html[data-skin] h1 { letter-spacing: .01em; }
+html[data-skin] .clues h3 { font-family: var(--body); font-weight: 500; letter-spacing: .12em; }
+html[data-skin] .clues li .n, html[data-skin] .num { font-family: var(--display); font-weight: 400; }
+html[data-skin] .chip[aria-pressed="true"], html[data-skin] button.primary, html[data-skin] .sc-chip.on { font-weight: 500; }
+html[data-skin] .games-nav a, html[data-skin] .kp-skin button, html[data-skin] .lang-switch { font-family: var(--body); }
+/* Georgian uses FiraGO (neither chosen font has Georgian letters) */
+/* Georgian version: titles in Gugeshashvili Rachveli, everything else in FiraGO */
+html[data-skin][data-game][data-game][data-game]:lang(ka) { --display: "Georgian Caps", "FiraGO Title", "FiraGO", system-ui, sans-serif; --serif: "FiraGO", system-ui, sans-serif; --body: "FiraGO", system-ui, sans-serif; }
+html[data-skin]:lang(ka) h1, html[data-skin]:lang(ka) h2, html[data-skin]:lang(ka) h3, html[data-skin]:lang(ka) .list .name, html[data-skin]:lang(ka) .daily-card .name, html[data-skin]:lang(ka) b, html[data-skin]:lang(ka) .level, html[data-skin]:lang(ka) .kp-title { font-weight: 400; letter-spacing: 0; }
+html[data-skin]:lang(ka) .kp-title { letter-spacing: .01em; }
+
+/* game action buttons carried their own 1px border */
+html[data-skin] .sc-game .actions button, html[data-skin] .ws-game .actions button, html[data-skin] .t5-game .actions button { border: 2px solid var(--ink); border-radius: 5px 9px 6px 10px / 9px 5px 10px 6px; color: var(--ink); }
+html[data-skin] .sc-game .actions button.primary, html[data-skin] .ws-game .actions button.primary, html[data-skin] .t5-game .actions button.primary { color: var(--paper); }
+
+html[data-skin] .kp-skin button:hover { background: none; }
+html[data-skin] .kp-skin button + button { border-left: 0; }
+html[data-skin] .kp-skin .dot { display: block; width: 16px; height: 16px; border-radius: 50%; border: 2px solid transparent; box-shadow: inset 0 0 0 2px var(--paper); }
+html[data-skin] .kp-skin button[data-s="black"] .dot { background: #1c1a17; }
+html[data-skin] .kp-skin button[data-s="red"] .dot { background: #c0301c; }
+html[data-skin] .kp-skin button[data-s="blue"] .dot { background: #1f4fa8; }
+html[data-skin] .kp-skin button[aria-pressed="true"] .dot { border-color: var(--ink); }
+
+/* English site name keeps the English title font (Ranchers) on Georgian pages too */
+html[data-skin][data-game][data-game][data-game]:lang(ka) .kp-title, html[data-skin][data-game][data-game][data-game]:lang(ka) .topbar .brand { font-family: "Ranchers", system-ui, sans-serif; letter-spacing: .02em; }
+html[data-skin] .clues li .n { white-space: nowrap; }
+html[data-skin] .topic-group h2 .kp-spot, html[data-skin] .kp-spot { color: var(--ink) !important; }
+html[data-skin] .win-cup svg g[clip-path] { fill: var(--ink); stroke: var(--ink); }
+html[data-skin] .win-cup svg circle[stroke="#111"] { stroke: var(--ink); }
+
+/* Icons and illustrations: tinted/grey fills removed (outline only), solid fills stay in the ink colour */
+html[data-skin] svg.kp-art [fill="var(--sk-a)"], html[data-skin] svg.kp-art [fill="var(--sk-b)"] { fill: none !important; }
+html[data-skin] svg.kp-art [fill="currentColor"] { fill: var(--ink) !important; }
+
+/* ===== Buttons: on hover the colours always reverse ===== */
+html[data-skin][data-game][data-game][data-game] button:not(:disabled):hover { background: var(--ink); color: var(--paper); border-color: var(--ink); opacity: 1; }
+html[data-skin][data-game][data-game][data-game] button.primary:not(:disabled):hover, html[data-skin][data-game][data-game][data-game] #scHint:not(:disabled):hover, html[data-skin][data-game][data-game][data-game] #wsHint:not(:disabled):hover,
+html[data-skin][data-game][data-game][data-game] .chip[aria-pressed="true"]:hover,
+html[data-skin][data-game][data-game][data-game] .sc-chip.on:hover,
+html[data-skin][data-game][data-game][data-game] .actions button[aria-pressed="true"]:hover { background: var(--card); color: var(--ink); border-color: var(--ink); }
+html[data-skin][data-game][data-game][data-game] .kp-skin button:hover { background: none; color: var(--ink); }
+
+/* ===== Word search: every letter in its own box ===== */
+html[data-skin][data-game][data-game][data-game] .ws-grid { gap: 4px; padding: 12px; }
+html[data-skin][data-game][data-game][data-game] .ws-cell { box-shadow: none; border: 2px solid var(--ink); border-radius: 4px 7px 5px 8px / 7px 4px 8px 5px; background: var(--card); }
+html[data-skin][data-game][data-game][data-game] .ws-cell.sel { background: var(--ink); color: var(--paper); }
+html[data-skin][data-game][data-game][data-game] .ws-cell.anchor { background: var(--hi); outline: 0; border-style: dashed; }
+html[data-skin][data-game][data-game][data-game] .ws-cell.nope { background: var(--red); color: var(--red-ink); }
+html[data-skin][data-game][data-game][data-game] .ws-cell.hint { background: var(--hi); outline: 0; border-style: dashed; }
+html[data-skin][data-game][data-game][data-game] .ws-cell.missed { background: var(--grey); }
+html[data-skin][data-game][data-game][data-game] .ws-cell.f0, html[data-skin][data-game][data-game][data-game] .ws-cell.f1, html[data-skin][data-game][data-game][data-game] .ws-cell.f2, html[data-skin][data-game][data-game][data-game] .ws-cell.f3, html[data-skin][data-game][data-game][data-game] .ws-cell.f4, html[data-skin][data-game][data-game][data-game] .ws-cell.f5 { background: var(--grey); }
+@media (max-width: 760px) { html[data-skin][data-game][data-game][data-game] .ws-game { --ws: min(30px, calc((100vw - 64px - (var(--n, 14) - 1) * 4px) / var(--n, 14))); } html[data-skin][data-game][data-game][data-game] .ws-grid { padding: 8px; } }
+
+/* Rules block: same space under it as above it */
+html[data-skin] main:has(> details:last-child), html[data-skin] .below:has(> details:last-child) { padding-bottom: 0; margin-bottom: 0; }
+html[data-skin] body:has(main > details:last-child, .below > details:last-child) .site-footer { margin-top: 0; }
+
+/* ===== Crossword: selection and hover are inverted (ink fill, paper letters) ===== */
+html[data-skin][data-game][data-game][data-game] .cell.open.inword { background: color-mix(in srgb, var(--ink) 24%, var(--card)); }
+html[data-skin][data-game][data-game][data-game] .cell.open.solved.inword { background: color-mix(in srgb, var(--ink) 24%, var(--card)); }
+html[data-skin][data-game][data-game][data-game] .cell.open:hover, html[data-skin][data-game][data-game][data-game] .cell.open.active, html[data-skin][data-game][data-game][data-game] .cell.open.solved.active { background: var(--ink); border-color: var(--ink); }
+html[data-skin][data-game][data-game][data-game] .cell.open:hover input, html[data-skin][data-game][data-game][data-game] .cell.open:hover .num, html[data-skin][data-game][data-game][data-game] .cell.active input, html[data-skin][data-game][data-game][data-game] .cell.active .num { color: var(--paper); }
+html[data-skin][data-game][data-game][data-game] .clues li:hover, html[data-skin][data-game][data-game][data-game] .clues li.current { background: var(--ink); color: var(--paper); }
+html[data-skin][data-game][data-game][data-game] .clues li:hover *, html[data-skin][data-game][data-game][data-game] .clues li.current * { color: var(--paper); }
+html[data-skin][data-game][data-game][data-game] .cell.open, html[data-skin][data-game][data-game][data-game] .cell.open.active { border-radius: 0; }
+/* Georgian titles in capitals: the title font draws Mkhedruli letters as Mtavruli capitals (browsers do not all convert them with text-transform) */
+
+/* Georgian capitals: letter spacing -2 (= -0.02em) */
+html[data-skin][data-game][data-game][data-game]:lang(ka) h1, html[data-skin][data-game][data-game][data-game]:lang(ka) h2, html[data-skin][data-game][data-game][data-game]:lang(ka) h3, html[data-skin][data-game][data-game][data-game]:lang(ka) b, html[data-skin][data-game][data-game][data-game]:lang(ka) strong, html[data-skin][data-game][data-game][data-game]:lang(ka) .level, html[data-skin][data-game][data-game][data-game]:lang(ka) .clue-bar b, html[data-skin][data-game][data-game][data-game]:lang(ka) .stat b, html[data-skin][data-game][data-game][data-game]:lang(ka) .t5-rank, html[data-skin][data-game][data-game][data-game]:lang(ka) .t5-title, html[data-skin][data-game][data-game][data-game]:lang(ka) .clues li .n, html[data-skin][data-game][data-game][data-game]:lang(ka) .num, html[data-skin][data-game][data-game][data-game]:lang(ka) .howto summary, html[data-skin][data-game][data-game][data-game]:lang(ka) .t5-rules summary, html[data-skin][data-game][data-game][data-game]:lang(ka) .sc-rules summary, html[data-skin][data-game][data-game][data-game]:lang(ka) .ws-rules summary, html[data-skin][data-game][data-game][data-game]:lang(ka) .ws-cell, html[data-skin][data-game][data-game][data-game]:lang(ka) .sc-tile, html[data-skin][data-game][data-game][data-game]:lang(ka) .sc-slot { letter-spacing: -0.02em; }
