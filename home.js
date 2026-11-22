@@ -125,7 +125,7 @@
 
   // The list is drawn as one section per topic: a grid on computers, a sideways-swipe row on phones
   const mainEl = document.querySelector("main.narrow");
-  if (mainEl) { mainEl.classList.remove("narrow"); mainEl.classList.add("home"); } // the home page uses the full width for the grid
+  if (mainEl) { mainEl.classList.remove("narrow"); mainEl.classList.add("home"); if (window.KPArt) mainEl.appendChild(window.KPArt.hero()); } // the home page uses the full width for the grid
   const groups = document.createElement("div");
   groups.id = "groups";
   document.getElementById("list").replaceWith(groups);
@@ -140,8 +140,8 @@
     TOPICS.forEach((t) => {
       const inTopic = shown.filter((c) => c.topic === t);
       if (!inTopic.length) return;
-      const sec = document.createElement("section"); sec.className = "topic-group";
-      const h = document.createElement("h2"); h.textContent = say(t);
+      const sec = document.createElement("section"); sec.className = "topic-group"; sec.dataset.topic = t;
+      const h = document.createElement("h2"); h.textContent = say(t); if (window.KPArt) h.prepend(window.KPArt.spotFor(t));
       const n = document.createElement("span"); n.textContent = inTopic.length; h.appendChild(n);
       if (chosen.topic === "All" && inTopic.length > 1) { // "See all" opens the topic as a full list
         const all = document.createElement("button");
