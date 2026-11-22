@@ -1,5 +1,5 @@
 // Builds the SEO + sharing parts of the site from crosswords.js:
-//   - share.png (1200x630) for the home page and every crossword
+//   - share.png (1200x630) for the Crosswords home pages and every crossword (the All pages' images come from build_game_share.js)
 //   - <head> tags on every page: title, description, canonical link, Open Graph + Twitter preview tags
 //   - sitemap.xml and robots.txt
 // Run from the site folder:  node tools/build_share.js
@@ -33,7 +33,6 @@ const KA = {
 // Cloudflare Web Analytics (cookie-free visit counting). The token is public by design.
 const ANALYTICS = `<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3b650f1df19b43698cc1d110b8a5c6dc"}'></script><!-- End Cloudflare Web Analytics -->`;
 const ROOT = path.resolve(__dirname, "..");
-const FONTS = path.join(ROOT, "fonts"); // FiraGO (site font) used in the images
 
 // ---- read the crossword list (crosswords.js sets window.CROSSWORDS) ----
 const window = {};
@@ -212,65 +211,23 @@ ${FONT_LINKS.replace(/\.\.\//g, "")}
 `;
 }
 
-// grid picture of a real crossword (used on the two home images)
-function gridOf(folder) {
-  const p = readPuzzle(folder), cells = new Set();
-  p.words.forEach((w) => { for (let i = 0; i < w.answer.length; i++) cells.add((w.row + (w.dir === "D" ? i : 0)) + "," + (w.col + (w.dir === "A" ? i : 0))); });
-  return { rows: p.rows, cols: p.cols, cells: [...cells].map((k) => k.split(",").map(Number)) };
-}
-
 // ---- the share image ----
-function imageHtml({ title, sub, cta, grid, lang = "en", filters }) {
-  const f = (n) => "file://" + path.join(FONTS, n);
-  let gridSvg = "";
-  if (grid) {
-    const maxW = 380, maxH = 470;
-    const cell = Math.floor(Math.min(maxW / grid.cols, maxH / grid.rows));
-    const cells = [];
-    grid.cells.forEach(([r, c]) => cells.push(`<rect x="${c * cell + 1}" y="${r * cell + 1}" width="${cell - 3}" height="${cell - 3}" rx="${Math.max(2, cell * 0.14)}" />`));
-    gridSvg = `<svg class="grid" width="${grid.cols * cell}" height="${grid.rows * cell}">${cells.join("")}</svg>`;
-  }
-  const icon = `<rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M9.2 3.5v17M14.8 3.5v17M3.5 9.2h17M3.5 14.8h17"/>`;
-  return `<!doctype html><html lang="${lang}"><head><style>
-@font-face { font-family: "FiraGO"; font-weight: 400; src: url(${f("FiraGO-Regular.woff2")}); }
-@font-face { font-family: "FiraGO"; font-weight: 500; src: url(${f("FiraGO-Medium.woff2")}); }
-* { box-sizing: border-box; margin: 0; }
-body { width: 1200px; height: 630px; background: #006aff; color: #fff; font-family: "FiraGO", sans-serif; font-weight: 400;
-  display: flex; align-items: center; justify-content: space-between; padding: 64px 80px; overflow: hidden; }
-.text { display: flex; flex-direction: column; gap: 26px; max-width: 600px; }
-.brand { display: flex; align-items: center; gap: 14px; font-size: 26px; font-weight: 500; opacity: .9; }
-.brand span { width: 52px; height: 52px; border-radius: 14px; background: #fff; display: flex; align-items: center; justify-content: center; }
-.brand svg { width: 32px; height: 32px; stroke: #006aff; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-h1 { font-weight: 500; font-size: ${lang === "ka" ? 64 : 76}px; line-height: 1.12; }
-h1 em { font-style: normal; }
-.filters { display: flex; flex-direction: column; gap: 14px; }
-.frow { display: flex; flex-wrap: wrap; gap: 10px; }
-.frow i { font-style: normal; font-size: 22px; font-weight: 500; padding: 8px 18px; border-radius: 14px; background: rgba(255,255,255,.18); }
-p.sub { font-size: 28px; line-height: 1.4; opacity: .92; }
-.cta { align-self: flex-start; font-size: 28px; font-weight: 500; padding: 12px 30px; border-radius: 14px; background: #fff; color: #0a3f8f; }
-.grid rect { fill: #fff; opacity: .92; }
-</style></head><body>
-<div class="text"><div class="brand"><span><svg viewBox="0 0 24 24">${icon}</svg></span>Kickoff Puzzles</div>
-<h1>${title}</h1>${sub ? `<p class="sub">${sub}</p>` : ""}${filters ? `<div class="filters">${filters.map((r) => `<div class="frow">${r.map((t) => `<i>${t}</i>`).join("")}</div>`).join("")}</div>` : ""}${cta ? `<div class="cta">${cta}</div>` : ""}</div>
-${gridSvg}
-</body></html>`;
-}
+// Every image is drawn by tools/share_style.js (newspaper style: paper, black ink, Ranchers title, hand-drawn picture).
+// Nothing about colours or fonts is decided in this file, so the old coloured look cannot come back from here.
+const S = require("./share_style");
+const OUT_ARG = process.argv.indexOf("--out") > -1 ? process.argv[process.argv.indexOf("--out") + 1] : null; // write the images into another folder (to check them)
+const img = (...p) => { const f = path.join(OUT_ARG || ROOT, ...p); fs.mkdirSync(path.dirname(f), { recursive: true }); return f; };
+const plain = (t) => t.replace(/<[^>]*>/g, ""); // titles may contain <em>; the image uses plain text
+const twoLines = (t) => { const w = t.split(" "); return w.length > 1 ? [w[0], w.slice(1).join(" ")] : [t]; };
+const gapNote = (what, gap) => { if (gap < 24) console.log("  !! title is close to the picture (" + gap + "px):", what); };
 
 (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
-  async function shot(html, out) {
-    const tmp = path.join(FONTS, "_share.html");
-    fs.writeFileSync(tmp, html);
-    await page.goto("file://" + tmp);
-    await page.evaluate(() => document.fonts.ready);
-    await page.screenshot({ path: out });
-  }
+  const site = await S.siteArt(browser); // the crossword + ball + pencil drawing comes from paper.js on the real site
 
   // Home page image (skipped with --lang ka) + tags (always, so the hreflang links stay in step)
-  if (ONLY !== "ka") await shot(imageHtml({
-    title: "Football Crosswords", filters: [["International", "Champions League", "Club football", "Legends"]], grid: gridOf("ballon-dor-winners"),
-  }), path.join(ROOT, "crosswords", "share.png"));
+  if (ONLY !== "ka") gapNote("crosswords home", await S.render(browser, { title: ["Football", "Crosswords"], art: S.heroArt(site.hero) }, img("crosswords", "share.png")));
   {
   let home = fs.readFileSync(path.join(ROOT, "crosswords", "index.html"), "utf8");
   home = home.replace(/  <title>[\s\S]*?(?=  <link rel="icon")/, headTags({
@@ -286,9 +243,7 @@ ${gridSvg}
   // Georgian home page image + page
   if (ONLY !== "en") {
     fs.mkdirSync(path.join(ROOT, "ka"), { recursive: true });
-    await shot(imageHtml({
-      title: "საფეხბურთო კროსვორდები", filters: [["ნაკრებები", "ჩემპიონთა ლიგა", "საკლუბო ფეხბურთი", "ლეგენდები"]], lang: "ka", grid: gridOf("ka-euro-2024"),
-    }), path.join(ROOT, "ka", "crosswords", "share.png"));
+    gapNote("ka crosswords home", await S.render(browser, { title: ["საფეხბურთო", "კროსვორდები"], art: S.heroArt(site.hero) }, img("ka", "crosswords", "share.png")));
     fs.mkdirSync(path.join(ROOT, "ka", "crosswords"), { recursive: true });
     write(path.join(ROOT, "ka", "crosswords", "index.html"), kaHomePage());
   }
@@ -299,10 +254,12 @@ ${gridSvg}
     const ka = langOf(c) === "ka";
     const cells = new Set();
     p.words.forEach((w) => { for (let i = 0; i < w.answer.length; i++) cells.add((w.row + (w.dir === "D" ? i : 0)) + "," + (w.col + (w.dir === "A" ? i : 0))); });
-    await shot(imageHtml({
-      title: p.title, cta: ka ? "ითამაშე" : "Play", lang: ka ? "ka" : "en",
-      grid: { rows: p.rows, cols: p.cols, cells: [...cells].map((k) => k.split(",").map(Number)) },
-    }), path.join(ROOT, c.folder, "share.png"));
+    // clue numbers as on the site: left to right, top to bottom, one number per square where a word starts
+    const nums = {}; let n = 0;
+    [...p.words].sort((a, b) => a.row - b.row || a.col - b.col).forEach((w) => { const k = w.row + "," + w.col; if (!nums[k]) nums[k] = ++n; });
+    const w1 = p.words.find((w) => nums[w.row + "," + w.col] === 1) || p.words[0]; // the first word is shaded, like the site's selected word
+    const first = []; for (let i = 0; i < w1.answer.length; i++) first.push((w1.row + (w1.dir === "D" ? i : 0)) + "," + (w1.col + (w1.dir === "A" ? i : 0)));
+    gapNote(c.folder, await S.render(browser, { title: twoLines(plain(p.title)), words: plain(p.title).split(" "), art: S.gridArt({ rows: p.rows, cols: p.cols, cells: [...cells].map((k) => k.split(",").map(Number)), nums, first }) }, img(c.folder, "share.png")));
     write(path.join(ROOT, c.folder, "index.html"), puzzlePage(c, p));
   }
 
