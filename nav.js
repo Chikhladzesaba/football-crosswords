@@ -69,7 +69,7 @@ document.write('<link rel="stylesheet" href="/paper.css?v=3">');
     const pill = document.querySelector("[data-pill]");
     if (!pill) return;
     const slot = top.querySelector(".pill-slot");
-    if (mq.matches) {
+    if (false) { // phones: the pill stays under the title so the logo fits in the header
       if (pill.parentNode !== slot) { pillHome = { parent: pill.parentNode, next: pill.nextSibling }; slot.appendChild(pill); }
     } else if (pillHome && pill.parentNode === slot) { pillHome.parent.insertBefore(pill, pillHome.next); }
   };

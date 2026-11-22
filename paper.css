@@ -935,3 +935,8 @@ html[data-skin] .hub .topic-group h2 .hub-name { font-style: normal; color: inhe
 @media (max-width: 640px) {
   html[data-skin] .daily-card .kp-hero .kp-art { filter: none; }
 }
+
+/* Phones: the round / progress pill sits under the title (the header keeps the logo) */
+@media (max-width: 640px) {
+  .page-head { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
