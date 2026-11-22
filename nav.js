@@ -2,26 +2,29 @@
 // Every page loads it with <script src="…/nav.js"></script> right after <body>. It works out three things by itself:
 // the language (<html lang>), which game this page belongs to (first folder in the address), and where the site root is.
 // VISUAL TEST (local only): newspaper skin. Remove these two lines to go back to the normal look.
-document.write('<link rel="stylesheet" href="/paper.css?v=1">');
+document.write('<link rel="stylesheet" href="/paper.css?v=2">');
 (function () {
   const KA = document.documentElement.lang === "ka";
   const root = new URL(".", document.currentScript.src).href; // folder that holds nav.js = the site root
   const first = location.pathname.split("/").filter(Boolean)[0] || "";
   const GAME_OF = { top5: "top5", "gamoicani-top5": "top5", scramble: "scramble", "gamoicani-pekhburtelebis-gvarebi": "scramble",
-    wordsearch: "wordsearch", "skauti": "wordsearch" };
-  const cur = GAME_OF[first] || "crosswords"; // every other folder is a crossword (or a home page)
+    wordsearch: "wordsearch", "skauti": "wordsearch", all: "all" };
+  const seg = location.pathname.split("/").filter(Boolean);
+  const cur = (first === "ka" && seg[1] === "all") ? "all" : (GAME_OF[first] || "crosswords"); // every other folder is a crossword (or a home page)
   const info = document.documentElement.dataset.page === "info"; // About, Contact, Privacy and the 404 page set <html data-page="info">
   document.documentElement.dataset.game = cur; // nav.css gives each game its own accent color from this
   const S = (d, w) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="' + (w || 1.6) + '" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + "</svg>";
   const ICON = {
+    all: S('<path d="M3.6 3.9l7-.3.2 6.7-7 .2zM13.5 3.7l7 .2-.2 6.6-6.9-.1zM3.7 13.6l6.9-.2.1 7-7 .1zM13.4 13.5l7-.1.1 6.9-7 .2z"/><path d="M6 6.7h2.2M16 6.6h2.2" stroke-width="1"/>'),
     crosswords: S('<path d="M3.6 4.2L20.3 3.6 20.6 20.3 3.8 20.6z"/><path d="M9.3 3.8L9 20.4M14.9 3.7L15.1 20.4M3.8 9.5l16.6-.4M3.7 15l16.8.3"/><path d="M9.3 9.5h5.6V15H9.3z" fill="currentColor"/><path d="M4.6 5.6h2" stroke-width="1"/>'),
     top5: S('<path d="M7 3.6l10-.2.2 5.4a5 5 0 0 1-10.2.3zM7 5.5l-3.5.1.1 1.4a3.5 3.5 0 0 0 3.6 3.4M17 5.4l3.5.2v1.4a3.5 3.5 0 0 1-3.5 3.4M12 14l.1 4M7.5 20.6l9-.2M9.5 18.2l5-.1"/><path d="M12 6.4l.8 1.7 1.8.2-1.3 1.2.3 1.8-1.6-.9-1.6.9.3-1.8-1.3-1.2 1.8-.2z" fill="currentColor" stroke-width="0.6"/>'),
     scramble: S('<path d="M3.6 8.7l6.2-.3.2 7-6.3.2z"/><path d="M14 8.5l6.5.2-.2 7-6.4-.1z"/><path d="M6.4 12.2h.1M17 12h.1" stroke-width="2.4"/><path d="M7 4.8c3-1.4 7-1.2 10 .1l-2-2M17 19.2c-3 1.4-7 1.2-10-.1l2 2"/>'),
     wordsearch: S('<path d="M3.6 3.8l11.4-.3.1 11.6-11.5.2z"/><path d="M7.4 3.7v11.5M11.2 3.6v11.6M3.7 7.6h11.4M3.7 11.4h11.4"/><circle cx="15.2" cy="15.2" r="4.6" fill="var(--card, #fff)" fill-opacity=".85"/><path d="M18.6 18.6l3 3.2"/>', 1.6),
   };
   const ITEMS = KA
-    ? [["crosswords", "კროსვორდი", "ka/"], ["top5", "Top 5", "gamoicani-top5/"], ["scramble", "დალაგობანა", "gamoicani-pekhburtelebis-gvarebi/"], ["wordsearch", "სკაუტი", "skauti/"]]
-    : [["crosswords", "Crosswords", ""], ["top5", "Top 5", "top5/"], ["scramble", "Scramble", "scramble/"], ["wordsearch", "Word Search", "wordsearch/"]];
+    ? [["all", "ყველა", "ka/all/"], ["crosswords", "კროსვორდი", "ka/"], ["top5", "Top 5", "gamoicani-top5/"], ["scramble", "დალაგობანა", "gamoicani-pekhburtelebis-gvarebi/"], ["wordsearch", "სკაუტი", "skauti/"]]
+    : [["all", "All", "all/"], ["crosswords", "Crosswords", ""], ["top5", "Top 5", "top5/"], ["scramble", "Scramble", "scramble/"], ["wordsearch", "Word Search", "wordsearch/"]];
+  window.KPNav = { ICON: ICON }; // hub.js draws the same icons beside each section title
   const nav = document.createElement("nav");
   nav.className = "games-nav"; nav.setAttribute("aria-label", KA ? "თამაშები" : "Games");
   ITEMS.forEach(([id, name, path]) => {
@@ -33,8 +36,8 @@ document.write('<link rel="stylesheet" href="/paper.css?v=1">');
   document.body.insertBefore(nav, document.body.firstChild);
 
   // Language switch + (on phones) the small top bar with the brand name. The switch goes to the same game in the other language.
-  const ALT = KA ? { crosswords: "", top5: "top5/", scramble: "scramble/", wordsearch: "wordsearch/" }
-                 : { crosswords: "ka/", top5: "gamoicani-top5/", scramble: "gamoicani-pekhburtelebis-gvarebi/", wordsearch: "skauti/" };
+  const ALT = KA ? { all: "all/", crosswords: "", top5: "top5/", scramble: "scramble/", wordsearch: "wordsearch/" }
+                 : { all: "ka/all/", crosswords: "ka/", top5: "gamoicani-top5/", scramble: "gamoicani-pekhburtelebis-gvarebi/", wordsearch: "skauti/" };
   const alt = root + (document.documentElement.dataset.alt != null ? document.documentElement.dataset.alt : ALT[cur]); // info pages say where their other-language version is (data-alt)
   const LANG = KA ? '<a href="' + alt + '" hreflang="en" lang="en" title="English">ENG</a><span class="sep">|</span><span aria-current="true">ქა</span>'
                   : '<span aria-current="true">Eng</span><span class="sep">|</span><a href="' + alt + '" hreflang="ka" lang="ka" title="ქართული">Geo</a>';
@@ -43,7 +46,7 @@ document.write('<link rel="stylesheet" href="/paper.css?v=1">');
   top.innerHTML = '<a class="brand" href="' + root + (KA ? "ka/" : "") + '">Kickoff Puzzles</a><span class="top-right"><span class="pill-slot"></span><nav class="lang-switch" aria-label="' + (KA ? "ენა" : "Language") + '">' + LANG + "</nav></span>";
   document.body.insertBefore(top, document.body.firstChild);
   document.documentElement.classList.add("with-top");
-  document.write('<script src="/paper.js?v=1"><\/script>'); // VISUAL TEST
+  document.write('<script src="/paper.js?v=2"><\/script>'); // VISUAL TEST
 
   // Footer with the About / Contact / Privacy links, added to every page. Hidden while playing a crossword on a phone (the page is a fixed-size app there).
   const FT = KA ? { about: "ჩვენ შესახებ", contact: "კონტაქტი", privacy: "კონფიდენციალურობა" }

@@ -47,7 +47,7 @@ h1 em { font-style: normal; }
 /* (the home pages load crossword.css?v=2 so phones fetch this new version instead of an old saved copy) */
 
 .back { display: inline-block; color: var(--accent); text-decoration: none; font-size: 14px; margin-bottom: 12px; }
-.back:hover { text-decoration: underline; }
+@media (min-width: 641px) and (hover: hover){.back:hover{ text-decoration: underline; }}
 
 .intro {
   color: var(--muted);
@@ -112,9 +112,9 @@ button {
   border: 1px solid var(--border); border-radius: 12px;
   background: var(--card); color: var(--ink); cursor: pointer;
 }
-button:hover { border-color: var(--accent); color: var(--accent); }
+@media (min-width: 641px) and (hover: hover){button:hover{ border-color: var(--accent); color: var(--accent); }}
 button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-button.primary:hover { color: #fff; opacity: .9; }
+@media (min-width: 641px) and (hover: hover){button.primary:hover{ color: #fff; opacity: .9; }}
 button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 .result { background: var(--green); color: var(--green-ink); border-radius: 14px; padding: 12px 16px; font-weight: 400; }
@@ -133,7 +133,7 @@ html:lang(ka) .clues li { overflow-wrap: anywhere; }
   display: grid; grid-template-columns: 1.8em minmax(0, 1fr); gap: 4px;
   padding: 8px; border-radius: 10px; cursor: pointer; font-size: 14px;
 }
-.clues li:hover { background: var(--grey); }
+@media (min-width: 641px) and (hover: hover){.clues li:hover{ background: var(--grey); }}
 .clues li.current { background: var(--accent-soft); }
 .clues li.done { color: var(--muted); }
 .clues li.done .text { text-decoration: line-through; text-decoration-color: var(--border); }
@@ -148,7 +148,7 @@ html:lang(ka) .clues li { overflow-wrap: anywhere; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; min-width: 0; }
 .chip { padding: 6px 16px; font-size: 14px; font-weight: 350; border-color: #b9cfe9; border-radius: 20px; color: var(--ink); }
 .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 500; }
-.chip[aria-pressed="true"]:hover { color: #fff; }
+@media (min-width: 641px) and (hover: hover){.chip[aria-pressed="true"]:hover{ color: #fff; }}
 .shown { color: var(--muted); font-size: 13px; margin: 0 0 8px; }
 .empty { color: var(--muted); background: var(--card); border: 1px dashed var(--border); border-radius: 14px; padding: 16px; margin: 0; }
 
@@ -158,7 +158,7 @@ html:lang(ka) .clues li { overflow-wrap: anywhere; }
   background: var(--card); border: 1px solid var(--border); border-radius: 14px;
   padding: 18px; color: var(--ink); text-decoration: none;
 }
-.list a:hover { border-color: var(--accent); }
+@media (min-width: 641px) and (hover: hover){.list a:hover{ border-color: var(--accent); }}
 .list .name { font-weight: 500; font-size: 18px; }
 .list .size { display: none; } /* the design cards show name, level and a short description only */
 .list .meta-line { display: flex; align-items: center; gap: 8px; }
@@ -191,7 +191,7 @@ html:lang(ka) .clues li { overflow-wrap: anywhere; }
   background: var(--card); border: 1px solid var(--border); border-radius: 14px;
   padding: 12px 14px; color: var(--ink); text-decoration: none;
 }
-.next-card:hover { border-color: var(--accent); }
+@media (min-width: 641px) and (hover: hover){.next-card:hover{ border-color: var(--accent); }}
 .next-card .name { font-weight: 500; }
 .next-card .meta-line { display: flex; align-items: center; gap: 8px; }
 .next-card .size { color: var(--muted); font-size: 13px; }
@@ -202,7 +202,7 @@ html:lang(ka) .clues li { overflow-wrap: anywhere; }
   background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 10px 14px; font-size: 14px; color: var(--muted); }
 .stat b { color: var(--ink); font-weight: 500; margin-right: 4px; }
 .reset { margin-left: auto; padding: 0; border: 0; background: none; font-size: 13px; color: var(--muted); text-decoration: underline; }
-.reset:hover { color: var(--accent); }
+@media (min-width: 641px) and (hover: hover){.reset:hover{ color: var(--accent); }}
 .reset.confirm { color: var(--red-ink); font-weight: 500; }
 .status { font-size: 13px; font-weight: 500; color: var(--green-ink); }
 .status.progress { color: var(--muted); font-weight: 400; }
@@ -226,7 +226,7 @@ html:lang(ka) .clues li { overflow-wrap: anywhere; }
 .topic-group .list .meta-line { flex-wrap: wrap; row-gap: 4px; }
 .topic-group .list .size, .topic-group .list .status { white-space: nowrap; }
 .see-all { margin-left: auto; padding: 0; border: 0; background: none; font-size: 14px; font-weight: 400; color: var(--accent); }
-.see-all:hover { color: var(--accent); text-decoration: underline; }
+@media (min-width: 641px) and (hover: hover){.see-all:hover{ color: var(--accent); text-decoration: underline; }}
 @media (min-width: 561px) { .see-all { display: none; } } /* computers already show every card */
 @media (max-width: 560px) {
   .one-topic .topic-group .list { flex-direction: column; overflow: visible; margin: 0; padding: 0; }
@@ -246,7 +246,7 @@ body.typing .clue-bar {
   display: flex; flex-direction: column; gap: 6px; margin: 0 0 18px; padding: 16px;
   border: 1.5px solid var(--accent); border-radius: 16px; background: #fff; color: inherit; text-decoration: none;
 }
-.daily-card:hover { box-shadow: 0 2px 12px rgba(0, 106, 255, .12); }
+@media (min-width: 641px) and (hover: hover){.daily-card:hover{ box-shadow: 0 2px 12px rgba(0, 106, 255, .12); }}
 .daily-card .kicker { font-size: 13px; font-weight: 500; color: #0057d1; }
 .daily-card .name { font-weight: 500; font-size: 19px; }
 .daily-card .meta-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
@@ -346,7 +346,7 @@ main.home .intro { font-size: 17px; margin: 0 0 20px; padding: 0; border: 0; }
   /* main buttons in the first line; the rarely used ones sit below as quiet text buttons */
   .actions .actions-break { display: block; order: 1; flex-basis: 100%; height: 0; }
   .actions .quiet { order: 2; border-color: transparent; background: none; color: var(--muted); padding: 3px 8px; font-size: 13px; }
-  .actions .quiet:hover { color: var(--accent); background: var(--accent-soft); }
+  @media (min-width: 641px) and (hover: hover){.actions .quiet:hover{ color: var(--accent); background: var(--accent-soft); }}
   .actions .quiet[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
   .actions .quiet:first-of-type { margin-left: -8px; }
   /* the open clue is highlighted in the list, so the separate clue bar is not needed here (it stays on phones) */

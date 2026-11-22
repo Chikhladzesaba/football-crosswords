@@ -65,12 +65,15 @@
       });
     // Reset: first tap asks, second tap deletes every saved puzzle, tick and stat on this device
     const reset = document.createElement("button");
-    reset.type = "button"; reset.className = "reset"; reset.textContent = T.reset;
+    reset.type = "button"; reset.className = "reset";
+    const lbl = document.createElement("span"); lbl.textContent = T.reset;
+    reset.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6.5h16M9.5 6.5V4.2h5v2.3M6.3 6.5l.9 13.3h9.6l.9-13.3M10 10.5v6M14 10.5v6"/></svg>';
+    reset.appendChild(lbl);
     reset.addEventListener("click", () => {
       if (!reset.classList.contains("confirm")) {
         reset.classList.add("confirm");
-        reset.textContent = T.resetAgain;
-        setTimeout(() => { reset.classList.remove("confirm"); reset.textContent = T.reset; }, 4000);
+        lbl.textContent = T.resetAgain;
+        setTimeout(() => { reset.classList.remove("confirm"); lbl.textContent = T.reset; }, 4000);
         return;
       }
       try { Object.keys(localStorage).filter((k) => k.startsWith("crossword:")).forEach((k) => localStorage.removeItem(k)); } catch (e) {}
@@ -125,7 +128,7 @@
 
   // The list is drawn as one section per topic: a grid on computers, a sideways-swipe row on phones
   const mainEl = document.querySelector("main.narrow");
-  if (mainEl) { mainEl.classList.remove("narrow"); mainEl.classList.add("home"); if (window.KPArt) mainEl.appendChild(window.KPArt.hero()); } // the home page uses the full width for the grid
+  if (mainEl) { mainEl.classList.remove("narrow"); mainEl.classList.add("home"); const intro = mainEl.querySelector(".intro"); if (intro) { const txt = intro.textContent.trim(); intro.textContent = ""; const track = document.createElement("span"); track.className = "marquee"; for (let i = 0; i < 2; i++) { const part = document.createElement("span"); part.textContent = txt; if (i) part.setAttribute("aria-hidden", "true"); track.appendChild(part); } intro.appendChild(track); } } // the home page uses the full width for the grid
   const groups = document.createElement("div");
   groups.id = "groups";
   document.getElementById("list").replaceWith(groups);
@@ -154,6 +157,15 @@
       }
       const ul = document.createElement("ul"); ul.className = "list";
       inTopic.forEach((c) => ul.appendChild(card(c)));
+      // The newest crossword of the topic (the last one added to crosswords.js) is the big highlighted card
+      const newest = list.filter((c) => c.topic === t).pop();
+      if (window.KPArt && window.KPArt.feature && inTopic.length > 1 && inTopic.includes(newest)) {
+        const li = ul.children[inTopic.indexOf(newest)];
+        li.classList.add("feature"); li.firstElementChild.appendChild(window.KPArt.feature(t));
+        ul.dataset.n = inTopic.length;
+        const rest = [...ul.children].filter((x) => !x.classList.contains("feature")); // on a phone the small boxes sit two under each other; an odd last one stands tall
+        if (rest.length % 2) rest[rest.length - 1].classList.add("tall");
+      }
       sec.append(h, ul); groups.appendChild(sec);
     });
     document.getElementById("empty").hidden = shown.length > 0;
@@ -168,6 +180,23 @@
     document.querySelector(".filters").appendChild(g);
     buttons("status", ["Not solved", "Solved"]);
   }
+  // ---- Each filter row becomes a dropdown button (the chips stay as the menu, so the filtering code is unchanged) ----
+  document.querySelectorAll(".filters .filter-group").forEach((g) => {
+    const label = g.querySelector(".filter-label"), chips = g.querySelector(".chips");
+    const trigger = document.createElement("button");
+    trigger.type = "button"; trigger.className = "dd-trigger"; trigger.setAttribute("aria-haspopup", "true"); trigger.setAttribute("aria-expanded", "false");
+    const value = document.createElement("span"); value.className = "dd-value";
+    const caret = document.createElement("span"); caret.className = "dd-caret"; caret.setAttribute("aria-hidden", "true");
+    trigger.append(label, value, caret);
+    g.classList.add("dd"); g.insertBefore(trigger, chips);
+    const sync = () => { const on = chips.querySelector('[aria-pressed="true"]'); value.textContent = on ? on.textContent : ""; };
+    const setOpen = (open) => { g.classList.toggle("open", open); trigger.setAttribute("aria-expanded", open ? "true" : "false"); };
+    sync();
+    trigger.addEventListener("click", (e) => { e.stopPropagation(); const open = !g.classList.contains("open"); document.querySelectorAll(".filter-group.open").forEach((x) => x.classList.remove("open")); setOpen(open); });
+    chips.addEventListener("click", () => { sync(); setOpen(false); });
+  });
+  document.addEventListener("click", () => document.querySelectorAll(".filter-group.open").forEach((x) => { x.classList.remove("open"); const t = x.querySelector(".dd-trigger"); if (t) t.setAttribute("aria-expanded", "false"); }));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") document.querySelectorAll(".filter-group.open").forEach((x) => x.classList.remove("open")); });
   // ---- Today's Daily crossword (daily/), shown above everything else ----
   function dailyCard() {
     const d = new Date(), iso = d.toLocaleDateString("en-CA"), id = (KA ? "ka-daily-" : "daily-") + iso;
@@ -178,7 +207,7 @@
     const kicker = document.createElement("span"); kicker.className = "kicker";
     kicker.textContent = KA ? d.getDate() + " " + ["იანვრის", "თებერვლის", "მარტის", "აპრილის", "მაისის", "ივნისის", "ივლისის", "აგვისტოს", "სექტემბრის", "ოქტომბრის", "ნოემბრის", "დეკემბრის"][d.getMonth()] + " კროსვორდი"
       : "Daily crossword · " + d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
-    const name = document.createElement("span"); name.className = "name"; name.textContent = KA ? "დღის კროსვორდი ყველა თემიდან" : "Today's mix of every topic";
+    const name = document.createElement("span"); name.className = "name"; name.append(...(KA ? ["დღის კროსვორდი", "ყველა თემიდან"] : ["Today's mix", "of every topic"]).flatMap((l, i) => i ? [document.createElement("br"), l] : [l]));
     const lv = document.createElement("span"); lv.className = "level level-" + level.toLowerCase().replace(" ", "-"); lv.textContent = say(level);
     const meta = document.createElement("span"); meta.className = "meta-line"; meta.appendChild(lv);
     const st = document.createElement("span"); st.className = "status";
@@ -187,6 +216,7 @@
     else { st.classList.add("cta"); st.textContent = KA ? "ითამაშე →" : "Play →"; } // as in the design: level chip + "Play →"
     meta.appendChild(st);
     a.append(kicker, name, meta);
+    if (window.KPArt) a.appendChild(window.KPArt.hero()); // the big crossword + ball + pencil drawing
     const filters = document.querySelector(".filters");
     filters.parentNode.insertBefore(a, filters);
   }
@@ -209,4 +239,7 @@
   // (no Scramble card: the game tabs in the nav link to every game, as in the design)
   stats();
   draw();
+  // ?topic=Legends (used by the All page) opens the home page with that topic already chosen
+  const wanted = new URLSearchParams(location.search).get("topic");
+  if (wanted) { const chip = [...document.querySelectorAll("#filter-topic .chip")].find((b) => b.textContent === say(wanted)); if (chip) chip.click(); }
 })();

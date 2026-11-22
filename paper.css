@@ -39,7 +39,7 @@ html[data-skin] .intro, html[data-skin] .page-head .intro { color: var(--muted);
 
 html[data-skin] .intro { border-bottom: 0; }
 html[data-skin] .back, html[data-skin] .see-all, html[data-skin] .sc-link, html[data-skin] .t5-modal-card .t5-link, html[data-skin] .ws-modal-card .ws-link, html[data-skin] .cta { color: var(--ink); }
-html[data-skin] .back:hover { color: var(--accent); }
+@media (min-width: 641px) and (hover: hover){html[data-skin] .back:hover{ color: var(--accent); }}
 
 /* ============ Masthead ============ */
 .kp-mast { max-width: 1000px; margin: 0 auto; padding: 16px 16px 0; text-align: center; }
@@ -65,7 +65,7 @@ html[data-skin] .games-nav a { color: var(--ink); border-bottom-width: 0; font-s
 html[data-skin]:not(:lang(ka)) .games-nav a { text-transform: uppercase; }
 html[data-skin]:lang(ka) .games-nav a { font-size: 14px; letter-spacing: .02em; }
 html[data-skin] .games-nav svg { color: var(--ink); filter: url(#kp-rough-s); }
-html[data-skin] .games-nav a:hover { background: var(--accent-soft); border-radius: 0; }
+@media (min-width: 641px) and (hover: hover){html[data-skin] .games-nav a:hover{ background: var(--accent-soft); border-radius: 0; }}
 html[data-skin] .games-nav a[aria-current="page"] { background: var(--ink); color: var(--paper); border-radius: 0; }
 html[data-skin="color"] .games-nav a[aria-current="page"] { background: var(--accent); }
 html[data-skin] .games-nav a[aria-current="page"] svg { color: var(--paper); }
@@ -90,7 +90,7 @@ html[data-skin] .top-right { display: flex; align-items: center; gap: 14px; }
 .kp-skin button { border: 0 !important; display: inline-flex; align-items: center; gap: 5px; padding: 4px 9px; border: 0; border-radius: 0; background: none; font-size: 12px; font-weight: 400; color: var(--ink); line-height: 1.2; cursor: pointer; }
 html[data-skin] .kp-skin button { border: 0; border-radius: 0; }
 html[data-skin] .kp-skin button + button { border-left: 2px solid var(--rule); }
-.kp-skin button:hover { background: var(--accent-soft); color: var(--ink); border-color: var(--rule); }
+@media (min-width: 641px) and (hover: hover){.kp-skin button:hover{ background: var(--accent-soft); color: var(--ink); border-color: var(--rule); }}
 .kp-skin button[aria-pressed="true"] { background: none; }
 html[data-skin="color"] .kp-skin button[aria-pressed="true"] { background: var(--accent); }
 .kp-skin svg { width: 14px; height: 14px; }
@@ -98,25 +98,25 @@ html[data-skin="color"] .kp-skin button[aria-pressed="true"] { background: var(-
 
 /* ============ Buttons, chips, cards: ink outlines, slightly wobbly corners ============ */
 html[data-skin] button { border: 2px solid var(--ink); border-radius: 5px 9px 6px 10px / 9px 5px 10px 6px; background: var(--card); color: var(--ink); font-weight: 400; }
-html[data-skin] button:hover { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+@media (min-width: 641px) and (hover: hover){html[data-skin] button:hover{ border-color: var(--ink); background: var(--ink); color: var(--paper); }}
 html[data-skin] button.primary { background: var(--accent); border-color: var(--ink); color: var(--paper); }
-html[data-skin] button.primary:hover { color: var(--paper); opacity: .88; background: var(--ink); }
-html[data-skin="color"] button.primary:hover { background: var(--accent); }
+@media (min-width: 641px) and (hover: hover){html[data-skin] button.primary:hover{ color: var(--paper); opacity: .88; background: var(--ink); }}
+@media (min-width: 641px) and (hover: hover){html[data-skin="color"] button.primary:hover{ background: var(--accent); }}
 html[data-skin] button:focus-visible { outline: 2px dashed var(--ink); outline-offset: 3px; }
 html[data-skin] .actions button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--ink); color: var(--ink); }
 html[data-skin] .actions .quiet, html[data-skin] .reset, html[data-skin] .see-all { border: 0 !important; background: none; box-shadow: none; }
-html[data-skin] .actions .quiet:hover { background: var(--accent-soft); color: var(--ink); }
+@media (min-width: 641px) and (hover: hover){html[data-skin] .actions .quiet:hover{ background: var(--accent-soft); color: var(--ink); }}
 html[data-skin] .chip, html[data-skin] .sc-chip { border-radius: 4px 9px 5px 10px / 9px 4px 10px 5px; border: 2px solid var(--ink); background: var(--card); color: var(--ink); }
 html[data-skin] .chip[aria-pressed="true"], html[data-skin] .sc-chip.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 html[data-skin="color"] .chip[aria-pressed="true"], html[data-skin="color"] .sc-chip.on { background: var(--accent); }
-html[data-skin] .chip:hover { background: var(--accent-soft); color: var(--ink); }
-html[data-skin] .chip[aria-pressed="true"]:hover { background: var(--ink); color: var(--paper); }
+@media (min-width: 641px) and (hover: hover){html[data-skin] .chip:hover{ background: var(--accent-soft); color: var(--ink); }}
+@media (min-width: 641px) and (hover: hover){html[data-skin] .chip[aria-pressed="true"]:hover{ background: var(--ink); color: var(--paper); }}
 html[data-skin]:not(:lang(ka)) .filter-label, html[data-skin]:not(:lang(ka)) .sc-label { text-transform: uppercase; letter-spacing: .1em; font-size: 12px; }
 
 html[data-skin] .list a, html[data-skin] .daily-card, html[data-skin] .next-card, html[data-skin] .stats-bar, html[data-skin] .clues section, html[data-skin] .empty, html[data-skin] .t5-card, html[data-skin] .t5-row, html[data-skin] .sc-game, html[data-skin] .sc-end, html[data-skin] .ws-grid,
 html[data-skin] .win-card, html[data-skin] .t5-modal-card, html[data-skin] .ws-modal-card, html[data-skin] .t5-input {
   background: var(--card); border: 2px solid var(--ink); border-radius: 6px 3px 7px 4px / 4px 7px 3px 6px; }
-html[data-skin] .list a:hover, html[data-skin] .next-card:hover { border-color: var(--ink); background: var(--card); transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); }
+@media (min-width: 641px) and (hover: hover){html[data-skin] .list a:hover, html[data-skin] .next-card:hover{ border-color: var(--ink); background: var(--card); transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); }}
 html[data-skin] .list a, html[data-skin] .next-card { transition: transform .12s, box-shadow .12s; }
 html[data-skin] .list .name, html[data-skin] .next-card .name, html[data-skin] .daily-card .name { font-family: var(--serif); }
 html[data-skin] .list .about, html[data-skin] .size, html[data-skin] .count, html[data-skin] .legend, html[data-skin] .shown { color: var(--muted); }
@@ -139,7 +139,7 @@ html[data-skin="bw"] .daily-card { background: var(--card); }
 html[data-skin] .daily-card .kicker, html[data-skin] .daily-card .cta { color: var(--ink); }
 html[data-skin]:not(:lang(ka)) .daily-card .kicker { text-transform: uppercase; letter-spacing: .1em; font-size: 12px; }
 html[data-skin] .daily-card .name { font-family: var(--display); font-size: 22px; font-weight: 400; }
-html[data-skin] .daily-card:hover { box-shadow: none; }
+@media (min-width: 641px) and (hover: hover){html[data-skin] .daily-card:hover{ box-shadow: none; }}
 
 /* home */
 html[data-skin] main.home { position: relative; }
@@ -194,7 +194,7 @@ html[data-skin] .clues h3 { font-size: 13px; font-family: var(--body); font-weig
 html[data-skin]:not(:lang(ka)) .clues h3 { text-transform: uppercase; }
 html[data-skin] .clues li { font-family: var(--serif); border-radius: 2px; }
 html[data-skin="bw"] .clues li { font-size: 13.5px; }
-html[data-skin] .clues li:hover { background: var(--grey); }
+@media (min-width: 641px) and (hover: hover){html[data-skin] .clues li:hover{ background: var(--grey); }}
 html[data-skin] .clues li.current { background: var(--hi); box-shadow: inset 3px 0 0 var(--ink); }
 html[data-skin] .clues li .n { font-family: var(--body); font-weight: 500; }
 html[data-skin] .clues li.done .text { text-decoration-color: var(--ink); }
@@ -246,7 +246,7 @@ html[data-skin] .sc-slot { background: var(--card); border: 2px dashed var(--ink
 html[data-skin] .sc-slot.filled { border-style: solid; }
 html[data-skin] .sc-slot.locked { background: var(--grey); }
 html[data-skin] .sc-tile { background: var(--card); border: 2px solid var(--ink); border-radius: 4px 7px 5px 8px / 7px 4px 8px 5px; box-shadow: 2px 3px 0 var(--ink); font-family: var(--display); font-weight: 400; color: var(--ink); }
-html[data-skin] .sc-tile:hover { background: var(--hi); color: var(--ink); }
+@media (min-width: 641px) and (hover: hover){html[data-skin] .sc-tile:hover{ background: var(--hi); color: var(--ink); }}
 html[data-skin] .sc-tile.used { box-shadow: none; opacity: .3; }
 html[data-skin] .sc-slots.right .sc-slot { background: var(--green); border-color: var(--ink); color: var(--ink); }
 html[data-skin] .sc-slots.wrong .sc-slot.filled:not(.locked) { background: var(--red); border-color: var(--red-ink); }
@@ -308,7 +308,7 @@ html[data-skin]:lang(ka) .kp-title { letter-spacing: .01em; }
 html[data-skin] .sc-game .actions button, html[data-skin] .ws-game .actions button, html[data-skin] .t5-game .actions button { border: 2px solid var(--ink); border-radius: 5px 9px 6px 10px / 9px 5px 10px 6px; color: var(--ink); }
 html[data-skin] .sc-game .actions button.primary, html[data-skin] .ws-game .actions button.primary, html[data-skin] .t5-game .actions button.primary { color: var(--paper); }
 
-html[data-skin] .kp-skin button:hover { background: none; }
+@media (min-width: 641px) and (hover: hover){html[data-skin] .kp-skin button:hover{ background: none; }}
 html[data-skin] .kp-skin button + button { border-left: 0; }
 html[data-skin] .kp-skin .dot { display: block; width: 16px; height: 16px; border-radius: 50%; border: 2px solid transparent; box-shadow: inset 0 0 0 2px var(--paper); }
 html[data-skin] .kp-skin button[data-s="black"] .dot { background: #1c1a17; }
@@ -327,13 +327,10 @@ html[data-skin] .win-cup svg circle[stroke="#111"] { stroke: var(--ink); }
 html[data-skin] svg.kp-art [fill="var(--sk-a)"], html[data-skin] svg.kp-art [fill="var(--sk-b)"] { fill: none !important; }
 html[data-skin] svg.kp-art [fill="currentColor"] { fill: var(--ink) !important; }
 
-/* ===== Buttons: on hover the colours always reverse ===== */
-html[data-skin][data-game][data-game][data-game] button:not(:disabled):hover { background: var(--ink); color: var(--paper); border-color: var(--ink); opacity: 1; }
-html[data-skin][data-game][data-game][data-game] button.primary:not(:disabled):hover, html[data-skin][data-game][data-game][data-game] #scHint:not(:disabled):hover, html[data-skin][data-game][data-game][data-game] #wsHint:not(:disabled):hover,
-html[data-skin][data-game][data-game][data-game] .chip[aria-pressed="true"]:hover,
-html[data-skin][data-game][data-game][data-game] .sc-chip.on:hover,
-html[data-skin][data-game][data-game][data-game] .actions button[aria-pressed="true"]:hover { background: var(--card); color: var(--ink); border-color: var(--ink); }
-html[data-skin][data-game][data-game][data-game] .kp-skin button:hover { background: none; color: var(--ink); }
+@media (min-width: 641px) and (hover: hover){/* ===== Buttons: on hover the colours always reverse ===== */
+html[data-skin][data-game][data-game][data-game] button:not(:disabled):hover{ background: var(--ink); color: var(--paper); border-color: var(--ink); opacity: 1; }}
+@media (min-width: 641px) and (hover: hover){html[data-skin][data-game][data-game][data-game] button.primary:not(:disabled):hover, html[data-skin][data-game][data-game][data-game] #scHint:not(:disabled):hover, html[data-skin][data-game][data-game][data-game] #wsHint:not(:disabled):hover, html[data-skin][data-game][data-game][data-game] .chip[aria-pressed="true"]:hover, html[data-skin][data-game][data-game][data-game] .sc-chip.on:hover, html[data-skin][data-game][data-game][data-game] .actions button[aria-pressed="true"]:hover{ background: var(--card); color: var(--ink); border-color: var(--ink); }}
+@media (min-width: 641px) and (hover: hover){html[data-skin][data-game][data-game][data-game] .kp-skin button:hover{ background: none; color: var(--ink); }}
 
 /* ===== Word search: every letter in its own box ===== */
 html[data-skin][data-game][data-game][data-game] .ws-grid { gap: 4px; padding: 12px; }
@@ -353,10 +350,10 @@ html[data-skin] body:has(main > details:last-child, .below > details:last-child)
 /* ===== Crossword: selection and hover are inverted (ink fill, paper letters) ===== */
 html[data-skin][data-game][data-game][data-game] .cell.open.inword { background: var(--hi); }
 html[data-skin][data-game][data-game][data-game] .cell.open.solved.inword { background: var(--hi); }
-html[data-skin][data-game][data-game][data-game] .cell.open:hover, html[data-skin][data-game][data-game][data-game] .cell.open.active, html[data-skin][data-game][data-game][data-game] .cell.open.solved.active { background: var(--ink); border-color: var(--ink); }
-html[data-skin][data-game][data-game][data-game] .cell.open:hover input, html[data-skin][data-game][data-game][data-game] .cell.open:hover .num, html[data-skin][data-game][data-game][data-game] .cell.active input, html[data-skin][data-game][data-game][data-game] .cell.active .num { color: var(--paper); }
-html[data-skin][data-game][data-game][data-game] .clues li:hover, html[data-skin][data-game][data-game][data-game] .clues li.current { background: var(--ink); color: var(--paper); }
-html[data-skin][data-game][data-game][data-game] .clues li:hover *, html[data-skin][data-game][data-game][data-game] .clues li.current * { color: var(--paper); }
+html[data-skin][data-game][data-game][data-game] .cell.open.active, html[data-skin][data-game][data-game][data-game] .cell.open.solved.active{ background: var(--ink); border-color: var(--ink); }@media (min-width: 641px) and (hover: hover){html[data-skin][data-game][data-game][data-game] .cell.open:hover{ background: var(--ink); border-color: var(--ink); }}
+html[data-skin][data-game][data-game][data-game] .cell.active input, html[data-skin][data-game][data-game][data-game] .cell.active .num{ color: var(--paper); }@media (min-width: 641px) and (hover: hover){html[data-skin][data-game][data-game][data-game] .cell.open:hover input, html[data-skin][data-game][data-game][data-game] .cell.open:hover .num{ color: var(--paper); }}
+html[data-skin][data-game][data-game][data-game] .clues li.current{ background: var(--ink); color: var(--paper); }@media (min-width: 641px) and (hover: hover){html[data-skin][data-game][data-game][data-game] .clues li:hover{ background: var(--ink); color: var(--paper); }}
+html[data-skin][data-game][data-game][data-game] .clues li.current *{ color: var(--paper); }@media (min-width: 641px) and (hover: hover){html[data-skin][data-game][data-game][data-game] .clues li:hover *{ color: var(--paper); }}
 html[data-skin][data-game][data-game][data-game] .cell.open, html[data-skin][data-game][data-game][data-game] .cell.open.active { border-radius: 0; }
 /* Georgian titles in capitals: the title font draws Mkhedruli letters as Mtavruli capitals (browsers do not all convert them with text-transform) */
 
@@ -366,7 +363,7 @@ html[data-skin][data-game][data-game][data-game]:lang(ka) h1, html[data-skin][da
 /* ===== Phone keyboard in the newspaper style ===== */
 html[data-skin] body.phone-play #kb { background: var(--hi); border-radius: 0; border-top: 2px solid var(--ink); }
 html[data-skin] body.phone-play #kb button { background: var(--card); color: var(--ink); border: 2px solid var(--ink); border-radius: 4px 8px 5px 9px / 8px 4px 9px 5px; box-shadow: none; font-family: var(--body); }
-html[data-skin] body.phone-play #kb button:active, html[data-skin] body.phone-play #kb button:hover { background: var(--ink); color: var(--paper); }
+html[data-skin] body.phone-play #kb button:active{ background: var(--ink); color: var(--paper); }@media (min-width: 641px) and (hover: hover){html[data-skin] body.phone-play #kb button:hover{ background: var(--ink); color: var(--paper); }}
 html[data-skin] body.phone-play #kb .fk[aria-pressed="true"], html[data-skin] body.phone-play #kb .kba[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 html[data-skin] body.phone-play #kb .ctl button { color: var(--ink); }
 html[data-skin] body.phone-play #kb .ctl .on { background: var(--hi); color: var(--ink); }
@@ -425,4 +422,512 @@ html[data-skin][data-game][data-game][data-game] .clues section { border-width: 
 }
 @media (min-width: 641px) {
   html[data-skin] body:not(:has(#crossword)) .top-right { top: 20px; }
+}
+
+/* ===== Home page layout: more air, clear hierarchy (layout only, same fonts and colours) ===== */
+@media (min-width: 641px) {
+  html[data-skin] main.home { padding-top: 40px; }
+  html[data-skin] main.home h1 { margin-bottom: 14px; }
+  html[data-skin] main.home .intro { margin-bottom: 40px; line-height: 1.6; max-width: min(560px, calc(100% - 290px)); }
+
+  /* 1 · Today's crossword: the one big thing */
+  html[data-skin] .daily-card { padding: 30px 36px; margin-bottom: 28px; gap: 10px 24px; align-items: center; }
+  html[data-skin] .daily-card .kicker { display: block; margin-bottom: 8px; color: var(--muted); letter-spacing: .08em; }
+  html[data-skin] .daily-card .name { font-size: 30px; line-height: 1.2; }
+  html[data-skin] .daily-card .meta-line { gap: 24px; }
+  html[data-skin] .daily-card .cta { font-size: 17px; }
+
+  /* 2 · Your progress: three calm blocks with dividers */
+  html[data-skin] .stats-bar { gap: 0; padding: 0; margin-bottom: 44px; align-items: stretch; overflow: hidden; }
+  html[data-skin] .stats-bar .stat { display: flex; align-items: baseline; gap: 12px; padding: 20px 32px; font-size: 14px; line-height: 1.3; }
+  html[data-skin] .stats-bar .stat + .stat { border-left: 2px solid var(--ink); }
+  html[data-skin] .stats-bar .stat b { order: 2; font-size: 22px; line-height: 1; margin: 0; font-family: var(--display); font-weight: 400; color: var(--ink); }
+  html[data-skin] .stats-bar .reset { margin-left: auto; align-self: center; padding: 0 32px; }
+
+  /* 3 · Filters: labelled rows, then a quiet result count */
+  html[data-skin] .filters { gap: 16px; margin-bottom: 0; }
+  html[data-skin] .filter-group { gap: 20px; align-items: center; }
+  html[data-skin] .filter-label { width: 96px; flex: none; }
+  html[data-skin] .chips { gap: 10px; }
+  html[data-skin] .chip { padding: 8px 20px; }
+  html[data-skin] .shown { margin: 28px 0 0; font-size: 13px; }
+
+  /* 4 · Topic sections: clear breaks, roomier cards */
+  html[data-skin] .topic-group h2 { margin: 28px 0 22px; padding-top: 28px; gap: 14px; }
+  html[data-skin] .topic-group:first-child h2 { margin-top: 14px; }
+  html[data-skin] .topic-group .list { gap: 20px; }
+  html[data-skin] .topic-group .list a { padding: 20px 22px; gap: 10px; }
+}
+@media (max-width: 640px) {
+  html[data-skin] main.home .intro { margin-bottom: 24px; line-height: 1.55; }
+  html[data-skin] .daily-card { padding: 22px 20px; margin-bottom: 22px; gap: 8px 16px; }
+  html[data-skin] .daily-card .kicker { margin-bottom: 6px; color: var(--muted); }
+  html[data-skin] .daily-card .name { font-size: 22px; line-height: 1.2; }
+  html[data-skin] .stats-bar { gap: 0; padding: 0; margin-bottom: 28px; overflow: hidden; display: flex; flex-direction: column; align-items: stretch; }
+  html[data-skin] .stats-bar .stat { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 14px 18px; font-size: 14px; line-height: 1.3; }
+  html[data-skin] .stats-bar .stat:nth-child(n+2) { border-top: 2px solid var(--ink); }
+  html[data-skin] .stats-bar .stat b { order: 2; font-size: 20px; line-height: 1; margin: 0; font-family: var(--display); font-weight: 400; color: var(--ink); }
+  html[data-skin] .stats-bar .reset { border-top: 2px solid var(--ink); padding: 12px 18px; text-align: left; margin: 0; }
+  html[data-skin] .filters { gap: 16px; }
+  html[data-skin] .filter-group { gap: 8px; }
+  html[data-skin] .shown { margin: 20px 0 0; }
+  html[data-skin] .topic-group h2 { margin: 22px 0 16px; padding-top: 22px; }
+}
+
+/* ===== Daily crossword card: taller, with a small crossword drawing (colour follows the ink switch) ===== */
+html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { position: relative; box-sizing: border-box; }
+html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href="daily/"]::before {
+  content: ""; background: var(--ink); pointer-events: none;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 132 112%22 fill=%22none%22 stroke=%22black%22 stroke-width=%223%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M10.9 12.5 L9.4 81.5 M30.9 12.5 L33.2 81.5 M54.7 12.5 L53.2 81.5 M75.4 12.5 L76.5 81.5 M99.2 12.5 L98.9 81.5 M8.5 14.7 L99.5 13.2 M8.5 35.4 L99.5 36.5 M8.5 59.2 L99.5 58.9 M8.5 79.2 L99.5 78.9%22/%3E%3Cg fill=%22black%22 stroke-width=%221%22%3E%3Cpath d=%22M33 15 L53 15.4 L52.7 35 L33.2 34.6Z%22/%3E%3Cpath d=%22M77 37 L97 37.4 L96.7 57 L77.2 56.6Z%22/%3E%3Cpath d=%22M11 59 L31 59.4 L30.7 79 L11.2 78.6Z%22/%3E%3Cpath d=%22M55 59 L75 59.4 L74.7 79 L55.2 78.6Z%22/%3E%3C/g%3E%3Cpath d=%22M13 19 v6 M12 20.5 l1-1.5%22 stroke-width=%222%22/%3E%3Cpath d=%22M57 41 h5 M59.5 41 v6%22 stroke-width=%222%22/%3E%3Cpath d=%22M101 84 L118 38 L127 42 L109 88 Z%22/%3E%3Cpath d=%22M101 84 L96 104 L109 88%22/%3E%3Cpath d=%22M113 54 L121 57%22 stroke-width=%222%22/%3E%3C/svg%3E") left center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 132 112%22 fill=%22none%22 stroke=%22black%22 stroke-width=%223%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M10.9 12.5 L9.4 81.5 M30.9 12.5 L33.2 81.5 M54.7 12.5 L53.2 81.5 M75.4 12.5 L76.5 81.5 M99.2 12.5 L98.9 81.5 M8.5 14.7 L99.5 13.2 M8.5 35.4 L99.5 36.5 M8.5 59.2 L99.5 58.9 M8.5 79.2 L99.5 78.9%22/%3E%3Cg fill=%22black%22 stroke-width=%221%22%3E%3Cpath d=%22M33 15 L53 15.4 L52.7 35 L33.2 34.6Z%22/%3E%3Cpath d=%22M77 37 L97 37.4 L96.7 57 L77.2 56.6Z%22/%3E%3Cpath d=%22M11 59 L31 59.4 L30.7 79 L11.2 78.6Z%22/%3E%3Cpath d=%22M55 59 L75 59.4 L74.7 79 L55.2 78.6Z%22/%3E%3C/g%3E%3Cpath d=%22M13 19 v6 M12 20.5 l1-1.5%22 stroke-width=%222%22/%3E%3Cpath d=%22M57 41 h5 M59.5 41 v6%22 stroke-width=%222%22/%3E%3Cpath d=%22M101 84 L118 38 L127 42 L109 88 Z%22/%3E%3Cpath d=%22M101 84 L96 104 L109 88%22/%3E%3Cpath d=%22M113 54 L121 57%22 stroke-width=%222%22/%3E%3C/svg%3E") left center / contain no-repeat; }
+@media (min-width: 641px) {
+  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { min-height: 192px; padding-left: 190px; }
+  html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href="daily/"]::before { position: absolute; left: 38px; top: 50%; width: 120px; height: 102px; transform: translateY(-50%); }
+}
+@media (max-width: 640px) {
+  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { min-height: 0; }
+  html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href="daily/"]::before { flex: none; width: 100%; height: 60px; margin-bottom: 0; }
+}
+
+/* ===== Daily crossword card: difficulty tag top right, "play" link bottom right ===== */
+html[data-skin] .daily-card[href*="krosvordi"] .meta-line, html[data-skin] .daily-card[href="daily/"] .meta-line { display: contents; }
+html[data-skin] .daily-card[href*="krosvordi"] .level, html[data-skin] .daily-card[href="daily/"] .level { position: absolute; top: 24px; right: 28px; margin: 0; }
+html[data-skin] .daily-card[href*="krosvordi"] .cta, html[data-skin] .daily-card[href="daily/"] .cta { position: absolute; bottom: 24px; right: 28px; margin: 0; }
+@media (max-width: 640px) {
+  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { padding-bottom: 64px; }
+  html[data-skin] .daily-card[href*="krosvordi"] .level, html[data-skin] .daily-card[href="daily/"] .level { top: 18px; right: 18px; }
+  html[data-skin] .daily-card[href*="krosvordi"] .cta, html[data-skin] .daily-card[href="daily/"] .cta { bottom: 20px; right: 20px; }
+}
+@media (min-width: 641px) {
+  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { align-content: center; row-gap: 6px; padding-right: 170px; }
+}
+@media (min-width: 641px) {
+  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ===== Daily crossword card v2: date on top, title bottom-left, drawing top-left; equal 28px edges ===== */
+@media (min-width: 641px) {
+  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { padding: 24px 28px; align-content: space-between; row-gap: 0; }
+  html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href="daily/"]::before { left: 24px; top: 13px; width: 108px; height: 92px; transform: none; }
+  html[data-skin] .daily-card[href*="krosvordi"] .kicker, html[data-skin] .daily-card[href="daily/"] .kicker { margin: 3px 0 0; padding-left: 136px; align-self: start; }
+  html[data-skin] .daily-card[href*="krosvordi"] .name, html[data-skin] .daily-card[href="daily/"] .name { align-self: end; }
+}
+@media (max-width: 640px) {
+  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { padding: 22px 20px 64px; }
+  html[data-skin] .daily-card[href*="krosvordi"] .kicker, html[data-skin] .daily-card[href="daily/"] .kicker { position: absolute; top: 24px; left: 20px; margin: 0; }
+  html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href="daily/"]::before { margin-top: 30px; margin-bottom: 4px; }
+  html[data-skin] .daily-card[href*="krosvordi"] .level, html[data-skin] .daily-card[href="daily/"] .level { right: 20px; }
+}
+
+/* ===== Topic sections: one big highlighted card (the newest) with a drawing, other cards around it ===== */
+html[data-skin] .kp-feat-art { display: none; }
+html[data-skin] .topic-group .list li.feature .kp-feat-art { display: block; order: -1; flex: 1 1 0; min-height: 130px; width: 100%; position: relative; pointer-events: none; color: var(--ink); margin-bottom: 8px; }
+html[data-skin] .topic-group .list li.feature .kp-art { position: absolute; inset: 0; width: 100%; height: 100%; filter: url(#kp-rough); overflow: visible; }
+html[data-skin] .topic-group .list li.feature a { justify-content: flex-end; gap: 12px; padding: 28px 30px; background: var(--accent-soft); }
+html[data-skin] .topic-group .list li.feature a.is-solved { background: var(--solved); }
+html[data-skin] .topic-group .list li.feature .name { font-size: 28px; line-height: 1.15; font-family: var(--display); font-weight: 400; }
+html[data-skin] .topic-group .list li.feature .about { font-size: 15px; -webkit-line-clamp: 2; }
+@media (min-width: 561px) {
+  html[data-skin] .topic-group .list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  html[data-skin] .topic-group .list li.feature { grid-column: span 2; order: -1; }
+  html[data-skin] .topic-group .list li.feature a { min-height: 400px; }
+}
+@media (min-width: 900px) {
+  html[data-skin] .topic-group .list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  html[data-skin] .topic-group .list li.feature { grid-row: span 2; }
+  html[data-skin] .topic-group .list[data-n="2"] li:not(.feature) { grid-row: span 2; }
+  html[data-skin] .topic-group .list[data-n="2"] li:not(.feature) a { justify-content: flex-end; }
+}
+@media (max-width: 560px) {
+  html[data-skin] .topic-group .list li.feature { order: -1; flex: 0 0 88%; }
+  html[data-skin] .topic-group .list li.feature a { min-height: 340px; padding: 22px 20px; }
+  html[data-skin] .topic-group .list li.feature .name { font-size: 24px; }
+  html[data-skin] .one-topic .topic-group .list li.feature { flex: none; }
+}
+
+/* ===== Filters as dropdown buttons ===== */
+html[data-skin] .filters { flex-direction: row; flex-wrap: wrap; align-items: flex-start; gap: 14px 16px; }
+html[data-skin] .filters .filter-group.dd { position: relative; display: block; }
+html[data-skin] .filters .filter-group.dd.open { z-index: 40; }
+html[data-skin] .filters .dd-trigger { display: inline-flex; align-items: center; gap: 12px; min-width: 200px; padding: 10px 16px; font-family: var(--body); font-size: 15px; line-height: 1.2; color: var(--ink); background: var(--card); border: 2px solid var(--ink); border-radius: 4px 9px 5px 10px / 9px 4px 10px 5px; cursor: pointer; text-align: left; }
+html[data-skin] .filters .dd-trigger .filter-label { width: auto; flex: none; color: var(--muted); font-size: 13px; }
+html[data-skin] .filters .dd-trigger .dd-value { flex: 1 1 auto; font-weight: 500; color: var(--ink); }
+html[data-skin] .filters .dd-trigger .dd-caret { flex: none; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform .12s; }
+html[data-skin] .filters .filter-group.open .dd-trigger .dd-caret { transform: translateY(2px) rotate(-135deg); }
+html[data-skin] .filters .filter-group.open .dd-trigger{ background: var(--ink); color: var(--paper); }@media (min-width: 641px) and (hover: hover){html[data-skin] .filters .dd-trigger:hover{ background: var(--ink); color: var(--paper); }}
+html[data-skin] .filters .filter-group.open .dd-trigger .filter-label, html[data-skin] .filters .filter-group.open .dd-trigger .dd-value{ color: var(--paper); }@media (min-width: 641px) and (hover: hover){html[data-skin] .filters .dd-trigger:hover .filter-label, html[data-skin] .filters .dd-trigger:hover .dd-value{ color: var(--paper); }}
+html[data-skin] .filters .dd .chips { display: none; position: absolute; top: calc(100% + 8px); left: 0; min-width: 100%; width: max-content; max-width: 86vw; flex-direction: column; flex-wrap: nowrap; gap: 2px; padding: 8px; background: var(--card); border: 2px solid var(--ink); border-radius: 5px 10px 6px 11px / 10px 5px 11px 6px; box-shadow: 4px 4px 0 var(--ink); }
+html[data-skin] .filters .dd.open .chips { display: flex; }
+html[data-skin] .filters .dd .chip { width: 100%; text-align: left; border: 0; border-radius: 3px; background: transparent; padding: 10px 14px; font-size: 15px; white-space: nowrap; }
+@media (min-width: 641px) and (hover: hover){html[data-skin] .filters .dd .chip:hover{ background: var(--hi); color: var(--ink); }}
+html[data-skin] .filters .dd .chip[aria-pressed="true"]{ background: var(--ink); color: var(--paper); }@media (min-width: 641px) and (hover: hover){html[data-skin] .filters .dd .chip[aria-pressed="true"]:hover{ background: var(--ink); color: var(--paper); }}
+html[data-skin] .shown { margin-top: 24px; }
+@media (max-width: 560px) {
+  html[data-skin] .filters { flex-direction: column; align-items: stretch; gap: 10px; }
+  html[data-skin] .filters .dd-trigger { width: 100%; min-width: 0; }
+  html[data-skin] .filters .dd .chips { width: 100%; max-width: none; }
+}
+
+/* ===== Crossword cards: tag first, then the title in capitals (semibold) ===== */
+html[data-skin] .topic-group .list a .meta-line { order: -1; }
+html[data-skin] .topic-group .list li.feature .kp-feat-art { order: -2; }
+html[data-skin] .topic-group .list .name { text-transform: uppercase; font-family: var(--body); font-weight: 600; font-size: 16px; line-height: 1.3; letter-spacing: .03em; }
+html[data-skin]:lang(ka) .topic-group .list .name { font-family: var(--display); font-weight: 400; font-size: 17px; letter-spacing: -0.02em; line-height: 1.25; }
+html[data-skin] .topic-group .list li.feature .name { font-size: 26px; }
+html[data-skin]:lang(ka) .topic-group .list li.feature .name { font-size: 28px; }
+html[data-skin] .topic-group .list li.feature .name { font-family: var(--body); font-weight: 600; text-transform: uppercase; letter-spacing: .02em; }
+html[data-skin]:lang(ka) .topic-group .list li.feature .name { font-family: var(--display); font-weight: 400; letter-spacing: -0.02em; }
+
+/* ===== "All" hub page ===== */
+html[data-skin] .hub .topic-group:first-of-type h2 { margin-top: 18px; }
+html[data-skin] .hub .topic-group h2 .hub-ico { width: 34px; height: 34px; display: inline-flex; flex: none; }
+html[data-skin] .hub .topic-group h2 .hub-ico svg { width: 100%; height: 100%; }
+html[data-skin] .hub .hub-more { order: 5; align-self: flex-start; margin-top: 6px; padding: 10px 18px; background: var(--ink); color: var(--paper, var(--card)); font-family: var(--body); font-weight: 600; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; border: 2px solid var(--ink); }
+html[data-skin]:lang(ka) .hub .hub-more { font-family: var(--display); font-weight: 400; letter-spacing: 0; font-size: 15px; text-transform: none; }
+@media (min-width: 641px) and (hover: hover){html[data-skin] .hub .topic-group .list li.feature a:hover .hub-more{ background: transparent; color: var(--ink); }}
+@media (max-width: 640px) {
+  html[data-skin] .games-nav { flex-wrap: nowrap; }
+  html[data-skin] .games-nav a { flex: 1 1 0; min-width: 0; font-size: 10px; letter-spacing: 0; }
+  html[data-skin]:lang(ka) .games-nav a { font-size: 10.5px; }
+  html[data-skin] .games-nav a > span:last-child { max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+  html[data-skin] .games-nav .ico { width: 36px; }
+}
+@media (max-width: 640px) { html[data-skin] .games-nav { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+
+/* Reset button: plain text button with a bin icon, under the stats bar, aligned with the page text, red on hover */
+html[data-skin][data-game][data-game][data-game] .reset { display: inline-flex; align-items: center; gap: 7px; margin: -22px 0 26px 0 !important; padding: 4px 0 !important; border: 0 !important; border-radius: 0 !important; background: none !important; box-shadow: none !important; color: var(--muted) !important; font-family: var(--body); font-size: 13px; font-weight: 500; text-decoration: none !important; text-align: left; cursor: pointer; }
+html[data-skin]:lang(ka) .reset { font-family: var(--display); font-weight: 400; font-size: 14px; }
+html[data-skin][data-game][data-game][data-game] .reset span { text-decoration: none; }
+html[data-skin][data-game][data-game][data-game] .reset svg { flex: none; }
+html[data-skin][data-game][data-game][data-game] .reset:focus-visible{ color: #c0281c !important; background: none !important; }@media (min-width: 641px) and (hover: hover){html[data-skin][data-game][data-game][data-game] .reset:hover{ color: #c0281c !important; background: none !important; }}
+html[data-skin][data-game][data-game][data-game] .reset.confirm { color: #c0281c !important; }
+
+/* Reset sits inside the stats bar, on the right */
+html[data-skin][data-game][data-game][data-game] .stats-bar .reset { margin: 0 0 0 auto !important; align-self: center; padding: 4px 32px !important; }
+@media (max-width: 760px) {
+  html[data-skin][data-game][data-game][data-game] .stats-bar .reset { margin: 0 !important; align-self: stretch; padding: 14px 18px !important; border-top: 2px solid var(--ink) !important; }
+}
+
+/* English: swap fonts between card title and tag (title = display, tag = body semibold) */
+html[data-skin]:not(:lang(ka)) .list .name, html[data-skin]:not(:lang(ka)) .daily-card .name { font-family: var(--display) !important; font-weight: 400 !important; letter-spacing: .02em; font-size: 21px; line-height: 1.15; }
+html[data-skin]:not(:lang(ka)) .topic-group .list li.feature .name { font-size: 32px; letter-spacing: .02em; }
+html[data-skin]:not(:lang(ka)) .list .level { font-family: var(--body) !important; font-weight: 600 !important; letter-spacing: .08em; font-size: 10.5px; }
+
+/* "See more" on the All page: plain text button with an underline, no fill */
+html[data-skin] .hub .hub-more { padding: 4px 0 !important; background: none !important; border: 0 !important; border-bottom: 2px solid var(--ink) !important; color: var(--ink) !important; align-self: flex-start; }
+@media (min-width: 641px) and (hover: hover){html[data-skin] .hub .topic-group .list li.feature a:hover .hub-more{ border-bottom-color: transparent !important; text-decoration: none; }}
+
+
+/* ===== All page v2: category boxes (one highlighted) + the four game boxes ===== */
+html[data-skin] .hub .topic-group h2 a { color: inherit; text-decoration: none; }
+@media (min-width: 641px) and (hover: hover){html[data-skin] .hub .topic-group h2 a:hover{ text-decoration: underline; text-underline-offset: 5px; }}
+html[data-skin] .hub .topic-group .list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; overflow: visible; }
+html[data-skin] .hub .topic-group .list li.feature { grid-column: 1; grid-row: 1 / span var(--rows, 2); order: 0; flex: none; }
+html[data-skin] .hub .topic-group .list li.feature a { min-height: 0; height: 100%; }
+html[data-skin] .hub .topic-group .list li:not(.feature) { grid-column: auto; order: 0; }
+html[data-skin] .hub .topic-group .list li.wide { grid-column: span 2; }
+html[data-skin] .hub .topic-group .list li:not(.feature) a { justify-content: center; min-height: 150px; }
+html[data-skin] .hub .topic-group .list li.feature .kp-feat-art { min-height: 200px; }
+html[data-skin] .hub .topic-group .list li.feature .about { -webkit-line-clamp: 3; }
+/* the four game boxes at the top: every box is a big one with a drawing */
+html[data-skin] .hub .hub-games:first-child h2 { display: none; }
+html[data-skin] .hub .hub-games { margin-top: 6px; }
+html[data-skin] .hub .hub-games .list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+html[data-skin] .hub .hub-games .list li.feature { grid-column: auto; grid-row: auto; }
+html[data-skin] .hub .hub-games .list li.feature a { min-height: 340px; padding: 22px 20px; }
+html[data-skin] .hub .hub-games .list li.feature .name { font-size: 26px; }
+html[data-skin]:lang(ka) .hub .hub-games .list li.feature .name { font-size: 24px; }
+@media (min-width: 761px) and (max-width: 1023px) {
+  html[data-skin] .hub .topic-group .list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  html[data-skin] .hub .topic-group .list li.feature { grid-column: 1 / span 2; grid-row: auto; order: -1; }
+  html[data-skin] .hub .topic-group .list li.feature a { min-height: 380px; }
+  html[data-skin] .hub .topic-group .list li.wide { grid-column: span 2; }
+  html[data-skin] .hub .hub-games .list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  html[data-skin] .hub .hub-games .list li.feature { grid-column: auto; order: 0; }
+}
+@media (max-width: 760px) {
+  html[data-skin] .hub .topic-group .list, html[data-skin] .hub .hub-games .list { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  html[data-skin] .hub .topic-group .list li.feature { grid-column: auto; grid-row: auto; order: -1; }
+  html[data-skin] .hub .topic-group .list li.feature a { min-height: 340px; }
+  html[data-skin] .hub .topic-group .list li.wide { grid-column: auto; }
+  html[data-skin] .hub .hub-games .list li.feature { order: 0; }
+}
+@media (min-width: 761px) {
+  html[data-skin] .hub .topic-group .list.pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  html[data-skin] .hub .topic-group .list.pair li.feature { grid-column: auto; grid-row: auto; }
+}
+html[data-skin] .hub .hub-games .list li.feature a { min-height: 280px; }
+html[data-skin] .hub .hub-games { margin-top: 28px; }
+
+/* "See more" in the top right corner of each section on the All page: plain text link */
+html[data-skin][data-game][data-game][data-game] .hub .topic-group h2 .hub-all { margin-left: auto; padding: 4px 0; background: none; border: 0; border-bottom: 2px solid var(--ink); color: var(--ink); font-family: var(--body); font-weight: 600; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
+html[data-skin][data-game][data-game][data-game]:lang(ka) .hub .topic-group h2 .hub-all { font-family: var(--display); font-weight: 400; letter-spacing: 0; font-size: 15px; text-transform: none; }
+@media (min-width: 641px) and (hover: hover){html[data-skin][data-game][data-game][data-game] .hub .topic-group h2 .hub-all:hover{ border-bottom-color: transparent; }}
+html[data-skin][data-game][data-game][data-game] .hub .topic-group h2 .hub-all { border-bottom: 0; padding: 6px 10px; margin-right: -10px; transition: none; }
+html[data-skin][data-game][data-game][data-game] .hub .topic-group h2 .hub-all:focus-visible{ background: var(--ink); color: var(--paper, var(--card)); border-bottom: 0; }@media (min-width: 641px) and (hover: hover){html[data-skin][data-game][data-game][data-game] .hub .topic-group h2 .hub-all:hover{ background: var(--ink); color: var(--paper, var(--card)); border-bottom: 0; }}
+
+/* Game boxes at the top of the All page: drawing and title centred in the box */
+html[data-skin] .hub .hub-games .list li.feature a { justify-content: center; align-items: center; text-align: center; gap: 18px; }
+html[data-skin] .hub .hub-games .list li.feature .kp-feat-art { flex: 0 0 auto; width: 100%; height: 170px; min-height: 0; order: -2; }
+html[data-skin] .hub .hub-games .list li.feature .name { text-align: center; }
+
+/* ===== New masthead (desktop): a strip with the colour + language switches, then a 3-cell nameplate between thick rules ===== */
+.kp-mast { padding: 8px 16px 0; }
+.kp-mast-strip { height: 40px; }
+.kp-mast-grid { display: grid; grid-template-columns: 170px minmax(0, 1fr) 230px; height: 136px; border-top: 3px solid var(--rule); border-bottom: 3px solid var(--rule); }
+.kp-cell { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.kp-cell-l .kp-art { width: 66px; height: 66px; filter: url(#kp-rough); }
+.kp-mast-grid .kp-name { padding: 0; border-left: 3px solid var(--rule); border-right: 3px solid var(--rule); gap: 0; height: 100%; }
+.kp-cell-r { align-items: stretch; justify-content: space-between; padding: 12px 16px 12px 18px; text-align: left; }
+.kp-cell-r .kp-date { font-size: 12px; letter-spacing: .1em; line-height: 1.4; color: var(--muted); padding-bottom: 8px; border-bottom: 1px solid var(--rule); opacity: .9; text-transform: uppercase; }
+html:lang(ka) .kp-cell-r .kp-date { text-transform: none; letter-spacing: .06em; font-size: 13px; }
+.kp-cell-r .kp-row { display: flex; align-items: flex-end; justify-content: space-between; }
+.kp-cell-r .kp-pen .kp-art { width: 42px; height: 42px; filter: url(#kp-rough); display: block; }
+.kp-cell-r .kp-est { font-size: 13px; letter-spacing: .12em; color: var(--muted); }
+@media (min-width: 641px) {
+  /* the colour dots (left) and the language switch (right) move up into the strip above the nameplate */
+  html[data-skin][data-game][data-game][data-game] body:not(:has(#crossword)) .top-right { top: -176px !important; height: 40px !important; left: 16px; right: 16px; justify-content: space-between; align-items: center; }
+  html[data-skin][data-game][data-game][data-game] body:not(:has(#crossword)) .top-right .kp-skin { border: 0; background: none; border-radius: 0; gap: 6px; padding: 0; }
+  html[data-skin][data-game][data-game][data-game] body:not(:has(#crossword)) .top-right .kp-skin button { padding: 4px; }
+  html[data-skin][data-game][data-game][data-game] body:not(:has(#crossword)) .games-nav { padding-right: 16px; border-top: 0; margin-top: 4px; }
+}
+@media (min-width: 641px) {
+  html[data-skin][data-game][data-game][data-game] body:not(:has(#crossword)) .games-nav { max-width: 968px; padding-left: 0; padding-right: 0; }
+  html[data-skin][data-game][data-game][data-game] body:not(:has(#crossword)) .top-right .kp-skin { gap: 10px; }
+  html[data-skin][data-game][data-game][data-game] body:not(:has(#crossword)) .top-right .kp-skin .dot { width: 20px; height: 20px; }
+  .kp-cell-r .kp-pen .kp-art { width: 54px; height: 54px; }
+}
+
+/* masthead refinements: 2px rules like the rest of the site, centred menu row, no line under the date, pencil and Est. on one bottom line */
+.kp-mast-grid { border-top-width: 2px; border-bottom-width: 2px; }
+.kp-mast-grid .kp-name { border-left-width: 2px; border-right-width: 2px; }
+.kp-cell-r .kp-date { border-bottom: 0; padding-bottom: 0; }
+.kp-cell-r .kp-row { align-items: flex-end; }
+.kp-cell-r .kp-est { line-height: 1; margin-bottom: 3px; }
+.kp-cell-r .kp-pen { display: block; line-height: 0; margin-bottom: -7px; }
+@media (min-width: 641px) {
+  html[data-skin][data-game][data-game][data-game] body:not(:has(#crossword)) .games-nav { margin-top: 0; padding-top: 12px; padding-bottom: 12px; align-items: center; border-bottom-width: 2px; }
+  html[data-skin][data-game][data-game][data-game] body:not(:has(#crossword)) .games-nav a { margin: 0; padding-top: 11px; padding-bottom: 11px; }
+}
+
+/* equal side cells so the title and its cell are always centred */
+.kp-mast-grid { grid-template-columns: 230px minmax(0, 1fr) 230px; }
+.kp-cell-r .kp-pen { margin-left: -8px; }
+.kp-mast-grid { grid-template-columns: 210px minmax(0, 1fr) 210px; }
+.kp-mast-grid .kp-title { font-size: 70px; }
+.kp-cell-r { padding-left: 16px; padding-right: 12px; }
+.kp-cell-r .kp-pen { margin-left: -15px; }
+
+/* All page: the page title stays in the HTML for search engines and screen readers, but is not shown */
+h1.hub-title { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+html[data-skin] .hub .hub-games { margin-top: 24px; }
+html[data-skin] .hub .hub-games { margin-top: -18px; }
+
+/* Home page: no big title; the drawing and the description are centred on each other; less space under the stats bar */
+html[data-skin] main.home > h1 { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+@media (min-width: 761px) {
+  html[data-skin] main.home { position: relative; }
+  html[data-skin] main.home .kp-hero { top: 0; }
+  html[data-skin] main.home .intro { min-height: 198px; display: flex; align-items: center; margin-top: 0; margin-bottom: 30px; }
+  html[data-skin] main.home .stats-bar { margin-bottom: 18px; }
+}
+@media (max-width: 760px) { html[data-skin] main.home .stats-bar { margin-bottom: 18px; } }
+@media (min-width: 761px) {
+  html[data-skin] main.home .intro { position: relative; max-width: none !important; padding-right: 290px; }
+  html[data-skin] main.home .intro .kp-hero { top: 50%; right: 0; transform: translateY(-50%); }
+}
+@media (max-width: 760px) { html[data-skin] main.home .intro { position: relative; } html[data-skin] main.home .intro .kp-hero { top: -6px; right: 0; } }
+@media (min-width: 761px) { html[data-skin] main.home .intro { margin-top: -26px; margin-bottom: 0; } }
+@media (max-width: 760px) {
+  html[data-skin] main.home .intro { display: flex; align-items: center; min-height: 112px; padding-right: 130px; }
+  html[data-skin] main.home .intro .kp-hero { top: 50%; right: 0; transform: translateY(-50%); }
+}
+/* text in the ball box, same look as the date */
+.kp-cell-l { align-items: stretch; justify-content: space-between; padding: 12px 12px 8px 16px; text-align: left; }
+.kp-cell-l .kp-date { font-size: 12px; letter-spacing: .1em; line-height: 1.4; color: var(--muted); opacity: .9; text-transform: uppercase; border: 0; padding: 0; }
+html:lang(ka) .kp-cell-l .kp-date { text-transform: none; letter-spacing: .06em; font-size: 13px; }
+.kp-cell-l .kp-ballwrap { display: flex; justify-content: center; align-items: center; flex: 1; min-height: 0; }
+.kp-cell-l .kp-art { width: 54px; height: 54px; }
+
+/* ===== Daily card uses the big drawing; intro text is one line that scrolls sideways ===== */
+html[data-skin] .daily-card[href*="krosvordi"]::before, html[data-skin] .daily-card[href="daily/"]::before { display: none; }
+html[data-skin] .daily-card .kp-hero { position: absolute; pointer-events: none; }
+@media (min-width: 641px) {
+  html[data-skin] .daily-card[href*="krosvordi"], html[data-skin] .daily-card[href="daily/"] { min-height: 230px; padding-left: 300px; }
+  html[data-skin] .daily-card .kp-hero { left: 32px; right: auto; top: 50%; transform: translateY(-50%); width: 236px; }
+}
+@media (max-width: 640px) {
+  html[data-skin] .daily-card .kp-hero { position: static; width: 118px; margin-bottom: 2px; }
+}
+html[data-skin] main.home .intro { display: block !important; padding: 0 !important; min-height: 0 !important; overflow: hidden; white-space: nowrap; max-width: none !important; margin: 14px 0 22px !important; }
+html[data-skin] main.home .intro .marquee { display: inline-flex; animation: kp-marquee 28s linear infinite; will-change: transform; }
+html[data-skin] main.home .intro .marquee > span { padding-right: 3em; }
+@media (min-width: 641px) and (hover: hover){html[data-skin] main.home .intro:hover .marquee{ animation-play-state: paused; }}
+@keyframes kp-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { html[data-skin] main.home .intro { overflow-x: auto; } html[data-skin] main.home .intro .marquee { animation: none; } }
+html[data-skin] main.home .daily-card[href*="krosvordi"], html[data-skin] main.home .daily-card[href="daily/"] { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; }
+html[data-skin] main.home .daily-card .kicker { margin-bottom: 0; }
+@media (min-width: 641px) {
+  html[data-skin] main.home .daily-card .kp-hero { position: absolute; left: 32px; right: auto; top: 50%; transform: translateY(-50%); width: 236px; }
+  html[data-skin] main.home .daily-card .name { max-width: calc(100% - 140px); }
+}
+@media (max-width: 640px) {
+  html[data-skin] main.home .daily-card .kp-hero { position: static; transform: none; width: 118px; margin: 4px 0 10px; }
+  html[data-skin] main.home .daily-card .kicker { order: 0; margin-bottom: 8px; }
+  html[data-skin] main.home .daily-card .name { order: 1; max-width: 60%; }
+  html[data-skin] main.home .daily-card .kp-hero { order: 2; }
+}
+html[data-skin] main.home .daily-card .kicker, html[data-skin] main.home .daily-card .name { align-self: flex-start; text-align: left; justify-self: start; }
+@media (min-width: 641px) {
+  html[data-skin] main.home .daily-card[href*="krosvordi"], html[data-skin] main.home .daily-card[href="daily/"] { padding: 28px 28px 28px 300px; }
+  html[data-skin] main.home .daily-card .kicker { padding-left: 0 !important; margin: 3px 0 0 !important; }
+}
+@media (max-width: 640px) {
+  html[data-skin] main.home .daily-card .kicker { position: static !important; margin: 0 0 8px !important; max-width: calc(100% - 120px); }
+  html[data-skin] main.home .daily-card .name { max-width: 100%; }
+}
+@media (min-width: 761px) { html[data-skin] main.home .intro { margin: -18px 0 22px !important; } }
+/* ball box: ball dead centre, caption on the same baseline as "Est. 2026" */
+.kp-cell-l { position: relative; padding: 0 !important; }
+.kp-cell-l .kp-ballwrap { position: absolute; inset: 0; flex: none; }
+.kp-cell-l .kp-date { position: absolute; left: 16px; bottom: 12px; margin-bottom: 3px; font-size: 13px; letter-spacing: .12em; line-height: 1; text-transform: none; white-space: nowrap; color: var(--muted); }
+html:lang(ka) .kp-cell-l .kp-date { font-size: 13px; letter-spacing: .12em; }
+/* the ball gently bobs so people see it can be clicked */
+.kp-cell-l .kp-ballwrap .kp-art { animation: kp-hint 2.8s ease-in-out infinite; transform-origin: 50% 100%; }
+@media (min-width: 641px) and (hover: hover){.kp-cell-l:hover .kp-ballwrap .kp-art{ animation-play-state: paused; }}
+@keyframes kp-hint {
+  0%, 38%, 100% { transform: translateY(0) scale(1, 1); animation-timing-function: cubic-bezier(.3, .6, .5, 1); }
+  14% { transform: translateY(-9px) scale(1, 1); animation-timing-function: cubic-bezier(.5, 0, .9, .5); }
+  24% { transform: translateY(0) scale(1.05, .95); }
+  31% { transform: translateY(-3px) scale(1, 1); }
+}
+@media (prefers-reduced-motion: reduce) { .kp-cell-l .kp-ballwrap .kp-art { animation: none; } }
+html[data-skin] main.home .daily-card .name { max-width: 100%; white-space: nowrap; }
+
+/* ===== Shape system: tags fully round, buttons and cards clean 6px corners ===== */
+/* cards */
+html[data-skin][data-game][data-game][data-game] .list a,
+html[data-skin][data-game][data-game][data-game] .daily-card,
+html[data-skin][data-game][data-game][data-game] .next-card,
+html[data-skin][data-game][data-game][data-game] .stats-bar,
+html[data-skin][data-game][data-game][data-game] .clues section,
+html[data-skin][data-game][data-game][data-game] .empty,
+html[data-skin][data-game][data-game][data-game] .t5-card,
+html[data-skin][data-game][data-game][data-game] .t5-row,
+html[data-skin][data-game][data-game][data-game] .sc-game,
+html[data-skin][data-game][data-game][data-game] .sc-end,
+html[data-skin][data-game][data-game][data-game] .ws-grid,
+html[data-skin][data-game][data-game][data-game] .win-card,
+html[data-skin][data-game][data-game][data-game] .t5-modal-card,
+html[data-skin][data-game][data-game][data-game] .ws-modal-card,
+html[data-skin][data-game][data-game][data-game] .filters .dd .chips { border-radius: 6px; }
+/* buttons (including dropdown triggers, text inputs that act as fields, share and call-to-action links) */
+html[data-skin][data-game][data-game][data-game] button:not(.dot):not(.chip-x),
+html[data-skin][data-game][data-game][data-game] .chip,
+html[data-skin][data-game][data-game][data-game] .sc-chip,
+html[data-skin][data-game][data-game][data-game] .filters .dd-trigger,
+html[data-skin][data-game][data-game][data-game] main.info .cta a,
+html[data-skin][data-game][data-game][data-game] .kp-share.kp-share a,
+html[data-skin][data-game][data-game][data-game] .kp-share.kp-share button,
+html[data-skin][data-game][data-game][data-game] .sc-game .actions button,
+html[data-skin][data-game][data-game][data-game] .ws-game .actions button,
+html[data-skin][data-game][data-game][data-game] .t5-game .actions button,
+html[data-skin][data-game][data-game][data-game] .t5-input,
+html[data-skin][data-game][data-game][data-game] body.phone-play #kb button,
+html[data-skin][data-game][data-game][data-game] body.phone-play #kb .kba,
+html[data-skin][data-game][data-game][data-game] body.phone-play #kb .kbl { border-radius: 6px; }
+html[data-skin][data-game][data-game][data-game] .kp-skin button { border-radius: 0; }
+html[data-skin][data-game][data-game][data-game] .filters .dd .chip { border-radius: 6px; }
+/* tags: fully rounded */
+html[data-skin][data-game][data-game][data-game] .level,
+html[data-skin][data-game][data-game][data-game] .pill,
+html[data-skin][data-game][data-game][data-game] .daily-card .level,
+html[data-skin][data-game][data-game][data-game] .list .level { border-radius: 999px; }
+html[data-skin][data-game][data-game][data-game] .sc-tile,
+html[data-skin][data-game][data-game][data-game] .sc-slot,
+html[data-skin][data-game][data-game][data-game] .ws-w,
+html[data-skin][data-game][data-game][data-game] .clue-bar,
+html[data-skin][data-game][data-game][data-game] .result { border-radius: 6px; }
+html[data-skin][data-game][data-game][data-game] .games-nav a, html[data-skin][data-game][data-game][data-game] .games-nav a[aria-current="page"], html[data-skin][data-game][data-game][data-game] .games-nav a[aria-current="page"] .ico{ border-radius: 6px; }@media (min-width: 641px) and (hover: hover){html[data-skin][data-game][data-game][data-game] .games-nav a:hover{ border-radius: 6px; }}
+/* all cards: transparent, same as the page background */
+html[data-skin][data-game][data-game][data-game] .list a, html[data-skin][data-game][data-game][data-game] .list a.is-solved, html[data-skin][data-game][data-game][data-game] .topic-group .list li.feature a, html[data-skin][data-game][data-game][data-game] .topic-group .list li.feature a.is-solved, html[data-skin][data-game][data-game][data-game] .daily-card, html[data-skin][data-game][data-game][data-game] .daily-card.is-solved, html[data-skin][data-game][data-game][data-game] .next-card, html[data-skin][data-game][data-game][data-game] .stats-bar, html[data-skin][data-game][data-game][data-game] .empty, html[data-skin][data-game][data-game][data-game] .t5-card, html[data-skin][data-game][data-game][data-game] .t5-row, html[data-skin][data-game][data-game][data-game] .sc-game, html[data-skin][data-game][data-game][data-game] .sc-end, html[data-skin][data-game][data-game][data-game] .clues section{ background: transparent; }@media (min-width: 641px) and (hover: hover){html[data-skin][data-game][data-game][data-game] .list a:hover{ background: transparent; }}
+html[data-skin] .hub .topic-group h2 .hub-name { font-style: normal; color: inherit; cursor: default; }
+
+/* ===== Phone header: big logo, bouncing ball, burger menu (not on crossword play pages) ===== */
+.kp-phone-actions, .kp-menu { display: none; }
+@media (max-width: 640px) {
+  html[data-skin] .games-nav { display: none; }
+  html[data-skin] .topbar { display: flex; align-items: center; justify-content: space-between; height: auto; min-height: 60px; padding: 12px 16px 8px; position: relative; z-index: 10001; }
+  html[data-skin][data-game][data-game][data-game] .topbar .brand { display: block; font-size: 34px; line-height: 1; white-space: nowrap; letter-spacing: 0; }
+  html[data-skin][data-game][data-game][data-game] .topbar:has(.pill-slot .pill) .brand { display: none; }
+  html[data-skin] .kp-phone-actions { display: inline-flex; align-items: center; gap: 12px; }
+  html[data-skin] .kp-pball .kp-cell-l { position: static; display: block; padding: 0 !important; width: 40px; height: 40px; }
+  html[data-skin] .kp-pball .kp-ballwrap { position: static; display: flex; width: 40px; height: 40px; align-items: center; justify-content: center; flex: none; }
+  html[data-skin] .kp-pball .kp-art { width: 38px; height: 38px; filter: url(#kp-rough-s); animation: kp-hint-s 2.8s ease-in-out infinite; }
+  html[data-skin] .kp-burger { width: 44px; height: 44px; padding: 0 !important; border: 0 !important; background: none !important; color: var(--ink); display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; cursor: pointer; }
+  html[data-skin] .kp-burger svg { width: 40px; height: 40px; filter: url(#kp-rough-s); }
+  html[data-skin] .kp-burger .kp-bg-close { display: none; }
+  html.kp-menu-open .kp-burger .kp-bg-open { display: none; }
+  html.kp-menu-open .kp-burger .kp-bg-close { display: block; }
+  html.kp-menu-open, html.kp-menu-open body { overflow: hidden; }
+  html[data-skin] .kp-menu { position: fixed; inset: 0; z-index: 10000; background: var(--bg); padding: 96px 20px 28px; flex-direction: column; gap: 20px; overflow-y: auto; }
+  html.kp-menu-open .kp-menu { display: flex; }
+  html[data-skin] .kp-menu-nav { display: flex; flex-direction: column; gap: 12px; }
+  html[data-skin] .kp-menu-nav a { display: flex; align-items: center; gap: 16px; padding: 18px 20px; border: 2px solid var(--ink); border-radius: 6px; color: var(--ink); text-decoration: none; font-family: var(--display); font-size: 26px; line-height: 1.1; background: transparent; }
+  html[data-skin] .kp-menu-nav a .ico { display: inline-flex; width: 34px; height: 34px; background: none; padding: 0; border-radius: 0; }
+  html[data-skin] .kp-menu-nav a .ico svg { width: 34px; height: 34px; }
+  html[data-skin] .kp-menu-nav a[aria-current="page"] { background: var(--ink); color: var(--paper); }
+  html[data-skin]:lang(ka) .kp-menu-nav a { font-weight: 400; letter-spacing: 0; }
+  html[data-skin] .kp-menu-tools { margin-top: auto; display: flex; align-items: center; justify-content: space-between; padding-top: 20px; border-top: 2px solid var(--rule); }
+  html[data-skin] .kp-menu .kp-skin { border: 0; background: none; border-radius: 0; gap: 12px; padding: 0; }
+  html[data-skin] .kp-menu .kp-skin button { padding: 4px; }
+  html[data-skin] .kp-menu .kp-skin .dot { width: 24px; height: 24px; }
+  html[data-skin] .kp-menu .lang-switch { font-size: 16px; display: flex; gap: 8px; align-items: center; }
+}
+@keyframes kp-hint-s { 0%, 38%, 100% { transform: translateY(0); } 14% { transform: translateY(-5px); } 24% { transform: translateY(0) scale(1.05, .95); } 31% { transform: translateY(-2px); } }
+@media (prefers-reduced-motion: reduce) { html[data-skin] .kp-pball .kp-art { animation: none; } }
+@media (max-width: 640px) {
+  html[data-skin][data-game][data-game][data-game] .kp-burger, html[data-skin][data-game][data-game][data-game] .kp-burger:focus, html[data-skin][data-game][data-game][data-game] .kp-burger:active{ color: var(--ink) !important; background: none !important; box-shadow: none; transform: none; }@media (min-width: 641px) and (hover: hover){html[data-skin][data-game][data-game][data-game] .kp-burger:hover{ color: var(--ink) !important; background: none !important; box-shadow: none; transform: none; }}
+  html[data-skin] .topbar { position: sticky; top: 0; background: var(--bg); }
+  html[data-skin] main { padding-top: 6px; }
+}
+@media (max-width: 640px) {
+  html.kp-menu-open[data-skin] .topbar { position: fixed; top: 0; left: 0; right: 0; }
+}
+
+@media (max-width: 640px) {
+  html[data-skin] body { padding-bottom: 0; }
+  html[data-skin] body.phone-play .topbar { display: flex; flex: none; position: relative; }
+  html[data-skin] body.phone-play { --cell: min(46px, calc((100vw - 32px) / var(--cols) - 2px), max(28px, calc((100dvh - 150px - var(--kbh)) / var(--rows) - 2px))); }
+  html[data-skin] main { padding-top: 18px; }
+  html[data-skin] body.phone-play #crossword > main { padding-top: 6px; }
+}
+@media (max-width: 640px) { html[data-skin] body:has(main.home) .topbar { padding-bottom: 22px; } }
+@media (max-width: 640px) {
+  html[data-skin] body.phone-play .topbar { width: 100%; max-width: none; margin: 0; box-sizing: border-box; background: transparent; }
+}
+/* phone: the daily card drawing fills the free space and sits on the same line as "Play" */
+@media (max-width: 640px) {
+  html[data-skin] main.home .daily-card[href*="krosvordi"], html[data-skin] main.home .daily-card[href="daily/"] { min-height: 300px; }
+  html[data-skin] main.home .daily-card .kp-hero { position: static; transform: none; flex: 1 1 auto; width: 100%; min-height: 120px; margin: 4px 0 -44px; display: flex; align-items: flex-end; justify-content: flex-start; }
+  html[data-skin] main.home .daily-card .kp-hero .kp-art { height: 100%; width: auto; max-width: 70%; }
+}
+/* phone swipe on the crossword home page: big box first, then pairs of small boxes stacked */
+@media (max-width: 560px) {
+  html[data-skin] main.home:not(.hub) .topic-group .list { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, auto); grid-auto-columns: 84%; gap: 14px; }
+  html[data-skin] main.home:not(.hub) .topic-group .list li, html[data-skin] main.home:not(.hub) .topic-group .list li.feature { flex: none; width: auto; min-width: 0; }
+  html[data-skin] main.home:not(.hub) .topic-group .list li.feature { grid-row: 1 / span 2; }
+  html[data-skin] main.home:not(.hub) .topic-group .list li.tall { grid-row: span 2; }
+  html[data-skin] main.home:not(.hub) .topic-group .list li:not(.feature) a { min-height: 0; height: 100%; }
+  html[data-skin] main.home:not(.hub) .one-topic .topic-group .list, html[data-skin] .one-topic main.home .topic-group .list { display: flex; flex-direction: column; grid-auto-flow: row; }
+}
+@media (max-width: 640px) {
+  html[data-skin] .kp-pball .kp-cell-l, html[data-skin] .kp-pball .kp-ballwrap { width: 52px; height: 52px; }
+  html[data-skin] .kp-pball .kp-art { width: 49px; height: 49px; }
+  html[data-skin] .kp-phone-actions { gap: 8px; }
+}
+@media (max-width: 360px) { html[data-skin][data-game][data-game][data-game] .topbar .brand { font-size: 27px; } html[data-skin] .kp-phone-actions { gap: 2px; } }
+/* swipe boxes: tag stays on top, title and description sit at the bottom */
+@media (max-width: 560px) {
+  html[data-skin] main.home:not(.hub) .topic-group .list li:not(.feature) a { justify-content: flex-start; }
+  html[data-skin] main.home:not(.hub) .topic-group .list li:not(.feature) a .name { margin-top: auto; }
 }

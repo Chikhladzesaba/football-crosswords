@@ -18,7 +18,7 @@
 .sc-slot.filled { border-style: solid; }
 .sc-slot.locked { background: var(--grey); }
 .sc-tile { background: var(--card); border: 1.5px solid var(--accent); cursor: pointer; }
-.sc-tile:hover { background: var(--accent-soft); color: var(--ink); }
+@media (min-width: 641px) and (hover: hover){.sc-tile:hover{ background: var(--accent-soft); color: var(--ink); }}
 .sc-tile.used { opacity: .25; border-color: var(--border); cursor: default; }
 .sc-slots.right .sc-slot { background: var(--green); border-color: var(--green); color: var(--green-ink); }
 .sc-slots.wrong { animation: sc-shake .4s; }
@@ -63,7 +63,7 @@
 .sc-slot { border: 2px solid var(--border); border-style: solid; background: var(--card); color: var(--head); }
 .sc-slot.filled { background: var(--accent-soft); border-color: var(--line2); }
 .sc-tile { border: 1px solid var(--line2); color: var(--head); background: var(--card); }
-.sc-tile:hover { background: var(--accent-soft); color: var(--head); }
+@media (min-width: 641px) and (hover: hover){.sc-tile:hover{ background: var(--accent-soft); color: var(--head); }}
 .sc-game .actions { justify-content: center; gap: 10px; }
 .sc-game .actions button { padding: 12px 30px; border-radius: 12px; font-size: 15px; font-weight: 400; border: 1px solid var(--line2); color: var(--head); background: var(--card); }
 .sc-game .actions #scHint { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 500; }
