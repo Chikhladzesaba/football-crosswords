@@ -931,3 +931,7 @@ html[data-skin] .hub .topic-group h2 .hub-name { font-style: normal; color: inhe
   html[data-skin] main.home:not(.hub) .topic-group .list li:not(.feature) a { justify-content: flex-start; }
   html[data-skin] main.home:not(.hub) .topic-group .list li:not(.feature) a .name { margin-top: auto; }
 }
+/* Safari draws the filtered hero picture in the wrong place on phones: no wobble there */
+@media (max-width: 640px) {
+  html[data-skin] .daily-card .kp-hero .kp-art { filter: none; }
+}
