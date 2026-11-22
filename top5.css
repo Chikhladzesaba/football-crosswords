@@ -63,7 +63,7 @@
 .t5-modal-card button:not(.primary):not(.t5-link) { border-color: var(--line2); color: var(--head); }
 .t5-modal-card .share-note { order: 3; margin: 8px 0 0; font-size: 13px; }
 .t5-modal-card .t5-link { order: 4; border: 0; background: none; color: var(--accent); text-decoration: none; font-size: 14px; }
-.t5-modal-card .t5-link:hover { text-decoration: underline; }
+@media (min-width: 641px) and (hover: hover){.t5-modal-card .t5-link:hover{ text-decoration: underline; }}
 @keyframes t5-fade { from { opacity: 0; } to { opacity: 1; } }
 
 /* Georgian has no capitals: text-transform would turn the letters into Mtavruli, so switch it off */
@@ -105,7 +105,7 @@ html:lang(ka) .t5-kicker { text-transform: none; letter-spacing: 0; }
 @media (min-width: 900px) { #top5 main.narrow { max-width: 1000px; } }
 
 .t5-row.can-hint { cursor: pointer; }
-.t5-row.can-hint:hover, .t5-row.can-hint:focus-visible { border-color: var(--accent); outline: none; }
+.t5-row.can-hint:focus-visible{ border-color: var(--accent); outline: none; }@media (min-width: 641px) and (hover: hover){.t5-row.can-hint:hover{ border-color: var(--accent); outline: none; }}
 .t5-tip { font-size: 13px; color: var(--muted); margin: 0 0 8px; }
 .t5-hint-ic { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; margin-left: auto; border-radius: 10px; color: var(--accent); background: var(--accent-soft); flex: none; }
-.t5-row.can-hint:hover .t5-hint-ic { background: var(--accent); color: #fff; }
+@media (min-width: 641px) and (hover: hover){.t5-row.can-hint:hover .t5-hint-ic{ background: var(--accent); color: #fff; }}

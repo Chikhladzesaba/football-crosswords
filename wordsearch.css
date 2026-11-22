@@ -52,7 +52,7 @@
 .ws-modal-card button:not(.primary):not(.ws-link) { border-color: var(--line2); color: var(--head); }
 .ws-modal-card .share-note { order: 3; margin: 8px 0 0; font-size: 13px; }
 .ws-modal-card .ws-link { order: 4; border: 0; background: none; color: var(--accent); text-decoration: none; font-size: 14px; }
-.ws-modal-card .ws-link:hover { text-decoration: underline; }
+@media (min-width: 641px) and (hover: hover){.ws-modal-card .ws-link:hover{ text-decoration: underline; }}
 @keyframes ws-fade { from { opacity: 0; } to { opacity: 1; } }
 
 /* Georgian has no capitals: text-transform would turn the letters into Mtavruli, so switch it off */
