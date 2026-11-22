@@ -92,5 +92,5 @@ html:lang(ka) .ws-group h3 { text-transform: none; letter-spacing: 0; }
   .ws-game .actions { gap: 10px; }
   .ws-game .actions button { flex: 1 1 0; padding: 12px 8px; }
 }
-/* Phones: a finger that starts on the letters can still scroll the page up and down. Words are marked by tapping the first and last letter (dragging sideways works too). */
-@media (pointer: coarse) { .ws-grid { touch-action: pan-y; } }
+/* Phones: dragging on the letters marks words in every direction (up, down, sideways, diagonal), so the grid itself does not scroll the page. Scroll by touching anywhere outside the grid. Tapping the first and last letter still works. */
+@media (pointer: coarse) { .ws-grid { touch-action: none; } }
