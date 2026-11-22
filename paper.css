@@ -12,15 +12,15 @@
 
 /* ============ Skins (variables). Triple attribute selectors beat the per-game colours in nav.css ============ */
 html[data-skin="bw"][data-game][data-game][data-game] {
-  --bg: #f9f2e2; --card: #f9f2e2; --ink: #1c1a17; --muted: #5b5446; --border: #b9ab8c;
-  --accent: #1c1a17; --accent-soft: #dcdad4; --head: #1c1a17; --main: #1c1a17; --line2: #1c1a17; --ph: #6b6354;
-  --green: #dcdad4; --green-ink: #1c1a17; --red: #f0d3c9; --red-ink: #a3321f; --grey: #dcdad4;
-  --rule: #1c1a17; --paper: #f9f2e2; --on-accent: #f9f2e2; --shadow: #1c1a17;
+  --bg: #F0EFEC; --card: #F0EFEC; --ink: #1c1a17; --muted: #5b5446; --border: #b9ab8c;
+  --accent: #1c1a17; --accent-soft: #E8E7E4; --head: #1c1a17; --main: #1c1a17; --line2: #1c1a17; --ph: #6b6354;
+  --green: #DAD8D3; --green-ink: #1c1a17; --red: #f0d3c9; --red-ink: #a3321f; --grey: #E8E7E4;
+  --rule: #1c1a17; --paper: #F0EFEC; --on-accent: #F0EFEC; --shadow: #1c1a17;
   --display: "Ranchers", "FiraGO", system-ui, sans-serif; --serif: "Poppins", "FiraGO", system-ui, sans-serif; --body: "Poppins", "FiraGO", system-ui, sans-serif;
-  --sk-a: #dcdad4; --sk-b: #c4c1ba;
+  --sk-a: #DAD8D3; --sk-b: #DAD8D3;
   --lv-easy: transparent; --lv-medium: transparent; --lv-hard: transparent; --lv-very: #1c1a17;
-  --hl0: #dcdad4; --hl1: #dcdad4; --hl2: #dcdad4; --hl3: #dcdad4; --hl4: #dcdad4; --hl5: #dcdad4;
-  --hi: #dcdad4; --solved: #dcdad4; --soft-ink: #1c1a17;
+  --hl0: #DAD8D3; --hl1: #DAD8D3; --hl2: #DAD8D3; --hl3: #DAD8D3; --hl4: #DAD8D3; --hl5: #DAD8D3;
+  --hi: #DAD8D3; --solved: #DAD8D3; --soft-ink: #1c1a17;
 }
 html[data-skin="bw"][data-ink="red"][data-game][data-game][data-game] { --ink: #c0301c; --accent: #c0301c; --head: #c0301c; --main: #c0301c; --line2: #c0301c; --rule: #c0301c; --shadow: #c0301c; --green-ink: #c0301c; --soft-ink: #c0301c; --lv-very: #c0301c; --muted: #a8402f; --ph: #a8402f; --border: #a8402f; --sk-a: #e8a89c; --sk-b: #c0301c; }
 html[data-skin="bw"][data-ink="blue"][data-game][data-game][data-game] { --ink: #1f4fa8; --accent: #1f4fa8; --head: #1f4fa8; --main: #1f4fa8; --line2: #1f4fa8; --rule: #1f4fa8; --shadow: #1f4fa8; --green-ink: #1f4fa8; --soft-ink: #1f4fa8; --lv-very: #1f4fa8; --muted: #3a5fa0; --ph: #3a5fa0; --border: #3a5fa0; --sk-a: #a3b8e0; --sk-b: #1f4fa8; }
@@ -28,7 +28,7 @@ html[data-skin="bw"][data-ink="blue"][data-game][data-game][data-game] { --ink: 
 /* ============ Page, paper grain, retro checker frame ============ */
 html[data-skin] body, html[data-skin] button, html[data-skin] input { font-family: var(--body); }
 html[data-skin] body { background: var(--bg); color: var(--ink); font-weight: 400; }
-html[data-skin] body::before { content: ""; position: fixed; inset: 0; z-index: 100; pointer-events: none; mix-blend-mode: multiply; opacity: .5; background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27240%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.75%27%20numOctaves%3D%273%27%20stitchTiles%3D%27stitch%27/%3E%3CfeColorMatrix%20values%3D%270%200%200%200%20.38%20%200%200%200%200%20.30%20%200%200%200%200%20.2%20%200%200%200%20.5%20-.12%27/%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23n%29%27/%3E%3C/svg%3E"); }
+html[data-skin] body::before { content: ""; position: fixed; inset: 0; z-index: 100; pointer-events: none; mix-blend-mode: multiply; opacity: .16; background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27240%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.75%27%20numOctaves%3D%273%27%20stitchTiles%3D%27stitch%27/%3E%3CfeColorMatrix%20values%3D%270%200%200%200%20.3%20%200%200%200%200%20.3%20%200%200%200%200%20.3%20%200%200%200%20.5%20-.12%27/%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23n%29%27/%3E%3C/svg%3E"); }
 .only-bw, .only-color { display: contents; }
 
 /* ============ Type ============ */
@@ -288,7 +288,7 @@ html[data-skin] .kp-share.kp-share a, html[data-skin] .kp-share.kp-share button 
 html[data-skin] .ws-cell.f0 { background: var(--hl0); } html[data-skin] .ws-cell.f1 { background: var(--hl1); } html[data-skin] .ws-cell.f2 { background: var(--hl2); } html[data-skin] .ws-cell.f3 { background: var(--hl3); } html[data-skin] .ws-cell.f4 { background: var(--hl4); } html[data-skin] .ws-cell.f5 { background: var(--hl5); }
 html[data-skin] .ws-w.f0.found { background: var(--hl0); } html[data-skin] .ws-w.f1.found { background: var(--hl1); } html[data-skin] .ws-w.f2.found { background: var(--hl2); } html[data-skin] .ws-w.f3.found { background: var(--hl3); } html[data-skin] .ws-w.f4.found { background: var(--hl4); } html[data-skin] .ws-w.f5.found { background: var(--hl5); }
 html[data-skin] .daily-card { background: var(--daily); }
-html[data-skin="bw"][data-game][data-game][data-game] { --daily: #f9f2e2; --solved: #dcdad4; --hl0: #dcdad4; --hl1: #c9c6bf; --hl2: #dcdad4; --hl3: #c9c6bf; --hl4: #dcdad4; --hl5: #c9c6bf; }
+html[data-skin="bw"][data-game][data-game][data-game] { --daily: #F0EFEC; --solved: #DAD8D3; --hl0: #DAD8D3; --hl1: #DAD8D3; --hl2: #DAD8D3; --hl3: #DAD8D3; --hl4: #DAD8D3; --hl5: #DAD8D3; }
 html[data-skin="color"][data-game][data-game][data-game] { --daily: #fbeeb8; }
 
 /* Ranchers = titles and bold highlights (one weight only, never faux-bold) */
@@ -351,8 +351,8 @@ html[data-skin] main:has(> details:last-child), html[data-skin] .below:has(> det
 html[data-skin] body:has(main > details:last-child, .below > details:last-child) .site-footer { margin-top: 0; }
 
 /* ===== Crossword: selection and hover are inverted (ink fill, paper letters) ===== */
-html[data-skin][data-game][data-game][data-game] .cell.open.inword { background: color-mix(in srgb, var(--ink) 24%, var(--card)); }
-html[data-skin][data-game][data-game][data-game] .cell.open.solved.inword { background: color-mix(in srgb, var(--ink) 24%, var(--card)); }
+html[data-skin][data-game][data-game][data-game] .cell.open.inword { background: var(--hi); }
+html[data-skin][data-game][data-game][data-game] .cell.open.solved.inword { background: var(--hi); }
 html[data-skin][data-game][data-game][data-game] .cell.open:hover, html[data-skin][data-game][data-game][data-game] .cell.open.active, html[data-skin][data-game][data-game][data-game] .cell.open.solved.active { background: var(--ink); border-color: var(--ink); }
 html[data-skin][data-game][data-game][data-game] .cell.open:hover input, html[data-skin][data-game][data-game][data-game] .cell.open:hover .num, html[data-skin][data-game][data-game][data-game] .cell.active input, html[data-skin][data-game][data-game][data-game] .cell.active .num { color: var(--paper); }
 html[data-skin][data-game][data-game][data-game] .clues li:hover, html[data-skin][data-game][data-game][data-game] .clues li.current { background: var(--ink); color: var(--paper); }
@@ -362,3 +362,67 @@ html[data-skin][data-game][data-game][data-game] .cell.open, html[data-skin][dat
 
 /* Georgian capitals: letter spacing -2 (= -0.02em) */
 html[data-skin][data-game][data-game][data-game]:lang(ka) h1, html[data-skin][data-game][data-game][data-game]:lang(ka) h2, html[data-skin][data-game][data-game][data-game]:lang(ka) h3, html[data-skin][data-game][data-game][data-game]:lang(ka) b, html[data-skin][data-game][data-game][data-game]:lang(ka) strong, html[data-skin][data-game][data-game][data-game]:lang(ka) .level, html[data-skin][data-game][data-game][data-game]:lang(ka) .clue-bar b, html[data-skin][data-game][data-game][data-game]:lang(ka) .stat b, html[data-skin][data-game][data-game][data-game]:lang(ka) .t5-rank, html[data-skin][data-game][data-game][data-game]:lang(ka) .t5-title, html[data-skin][data-game][data-game][data-game]:lang(ka) .clues li .n, html[data-skin][data-game][data-game][data-game]:lang(ka) .num, html[data-skin][data-game][data-game][data-game]:lang(ka) .howto summary, html[data-skin][data-game][data-game][data-game]:lang(ka) .t5-rules summary, html[data-skin][data-game][data-game][data-game]:lang(ka) .sc-rules summary, html[data-skin][data-game][data-game][data-game]:lang(ka) .ws-rules summary, html[data-skin][data-game][data-game][data-game]:lang(ka) .ws-cell, html[data-skin][data-game][data-game][data-game]:lang(ka) .sc-tile, html[data-skin][data-game][data-game][data-game]:lang(ka) .sc-slot { letter-spacing: -0.02em; }
+
+/* ===== Phone keyboard in the newspaper style ===== */
+html[data-skin] body.phone-play #kb { background: var(--hi); border-radius: 0; border-top: 2px solid var(--ink); }
+html[data-skin] body.phone-play #kb button { background: var(--card); color: var(--ink); border: 2px solid var(--ink); border-radius: 4px 8px 5px 9px / 8px 4px 9px 5px; box-shadow: none; font-family: var(--body); }
+html[data-skin] body.phone-play #kb button:active, html[data-skin] body.phone-play #kb button:hover { background: var(--ink); color: var(--paper); }
+html[data-skin] body.phone-play #kb .fk[aria-pressed="true"], html[data-skin] body.phone-play #kb .kba[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+html[data-skin] body.phone-play #kb .ctl button { color: var(--ink); }
+html[data-skin] body.phone-play #kb .ctl .on { background: var(--hi); color: var(--ink); }
+html[data-skin] body.phone-play #kb .ctl .on:active { background: var(--ink); color: var(--paper); }
+html[data-skin] body.phone-play #kb .kba { background: var(--card); border: 2px solid var(--ink); border-radius: 15px; color: var(--ink); }
+html[data-skin] body.phone-play #kb .kba.main { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+html[data-skin] body.phone-play #kb .kba.main:active { background: var(--card); color: var(--ink); }
+html[data-skin] body.phone-play #kb .kbx { border: 0; background: none; color: var(--ink); }
+html[data-skin] body.phone-play #kb .kbx:active { background: none; color: var(--muted); }
+html[data-skin] body.phone-play #kb .kbl { background: var(--card); border: 2px solid var(--ink); border-radius: 4px 8px 5px 9px / 8px 4px 9px 5px; }
+html[data-skin] body.phone-play #kb .kbl h4 { color: var(--muted); }
+html[data-skin] body.phone-play #kb .kbl .ci { border: 0; border-radius: 4px; background: none; color: var(--ink); }
+html[data-skin] body.phone-play #kb .kbl .ci b { color: var(--ink); }
+html[data-skin] body.phone-play #kb .kbl .ci.cur { background: var(--ink); color: var(--paper); }
+html[data-skin] body.phone-play #kb .kbl .ci.cur b { color: var(--paper); }
+html[data-skin] body.phone-play #kb .kbl .ci.done { color: var(--muted); }
+
+/* ===== Crossword: neighbouring squares share ONE 2px line (no doubled lines) ===== */
+html[data-skin][data-game][data-game][data-game] .grid { gap: 0; padding: 0 2px 2px 0; }
+html[data-skin][data-game][data-game][data-game] .cell input, html[data-skin][data-game][data-game][data-game] .cell input:focus { border-radius: 0; }
+
+/* ===== Crossword: whole-pixel square size so every line renders exactly 2px ===== */
+html[data-skin] { --cell: round(down, min(46px, calc((100vw - 36px) / var(--cols))), 2px); }
+@media (min-width: 761px) { html[data-skin] { --cell: round(down, max(22px, min(56px, calc((100dvh - var(--nav-h) - 52px) / var(--rows)), calc(640px / var(--cols)))), 2px); } }
+@media (max-width: 760px) { html[data-skin] body.phone-play { --cell: round(down, min(46px, calc((100vw - 36px) / var(--cols)), max(28px, calc((100dvh - 156px - var(--kbh)) / var(--rows)))), 2px); } }
+
+/* ===== Crossword header: back link and counter/timer share one text baseline (desktop) ===== */
+@media (min-width: 761px) {
+  html[data-skin][data-game][data-game][data-game] #crossword > main > .back,
+  html[data-skin][data-game][data-game][data-game] #crossword > main > .meta { align-self: baseline; }
+}
+
+/* ===== Clue list: one ink outline only, black scrollbar ===== */
+html[data-skin][data-game][data-game][data-game] .clues { border: 0; border-radius: 0; background: transparent; padding: 0; }
+html[data-skin][data-game][data-game][data-game] .clues,
+html[data-skin][data-game][data-game][data-game] .clues section { scrollbar-width: thin; scrollbar-color: var(--ink) transparent; }
+html[data-skin][data-game][data-game][data-game] .clues::-webkit-scrollbar,
+html[data-skin][data-game][data-game][data-game] .clues section::-webkit-scrollbar { width: 8px; height: 8px; }
+html[data-skin][data-game][data-game][data-game] .clues::-webkit-scrollbar-track,
+html[data-skin][data-game][data-game][data-game] .clues section::-webkit-scrollbar-track { background: transparent; }
+html[data-skin][data-game][data-game][data-game] .clues::-webkit-scrollbar-thumb,
+html[data-skin][data-game][data-game][data-game] .clues section::-webkit-scrollbar-thumb { background: var(--ink); border-radius: 4px; }
+
+/* ===== Top menu: tabs, colour switch and language switch share one centre line (desktop) ===== */
+@media (min-width: 641px) {
+  html[data-skin] .top-right { top: 6px; height: 35px; display: flex; align-items: center; }
+  html[data-skin] .top-right .lang-switch { align-items: center; }
+}
+/* ===== Clue boxes: every side of every box is the same 2px ink line ===== */
+html[data-skin][data-game][data-game][data-game] .clues section { border-width: 2px; border-style: solid; border-color: var(--ink); }
+@media (min-width: 641px) {
+  html[data-skin][data-game][data-game][data-game] .top-right { top: 6px; height: 35px; }
+}
+@media (min-width: 641px) {
+  html[data-skin] body:has(#crossword) .top-right { top: 6px; }
+}
+@media (min-width: 641px) {
+  html[data-skin] body:not(:has(#crossword)) .top-right { top: 20px; }
+}
