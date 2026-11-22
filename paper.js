@@ -60,7 +60,9 @@
   // ---------- Masthead (newspaper nameplate), hidden by CSS on crossword puzzle pages and on phones ----------
   const home = new URL(".", document.currentScript.src).href + (KA ? "ka/" : "");
   const now = new Date();
-  const date = now.toLocaleDateString(KA ? "ka-GE" : "en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+  const KA_MONTHS = ["იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი", "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"];
+  const date = KA ? now.getFullYear() + " წლის " + now.getDate() + " " + KA_MONTHS[now.getMonth()]
+    : now.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
   const mast = document.createElement("header");
   mast.className = "kp-mast";
   mast.innerHTML = '<div class="kp-mast-top"><span>Est. 2026</span><span class="kp-date">' + date + '</span></div>' +
