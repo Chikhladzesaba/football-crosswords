@@ -226,7 +226,7 @@
     }
   }
 
-  // Pointer events work for mouse, pen and touch. on phones the CSS uses touch-action: pan-y, so the page can still scroll; a scroll cancels the drag (pointercancel) and is not counted as a wrong answer.
+  // Pointer events work for mouse, pen and touch. on phones the CSS uses touch-action: none, so dragging in any direction marks a word instead of scrolling the page.
   function cellAt(e) {
     const rect = $("wsGrid").getBoundingClientRect();
     const c = Math.min(SIZE - 1, Math.max(0, Math.floor(((e.clientX - rect.left) / rect.width) * SIZE)));
