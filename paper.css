@@ -7,7 +7,8 @@
 @font-face { font-family: "Poppins"; font-weight: 500; font-display: swap; src: url("/fonts/paper/poppins-500.woff2") format("woff2"); }
 @font-face { font-family: "Poppins"; font-weight: 600; font-display: swap; src: url("/fonts/paper/poppins-600.woff2") format("woff2"); }
 
-@font-face { font-family: "Eurostile GEO"; font-weight: 400; font-display: swap; src: url("/fonts/paper/eurostile-geo-bold.woff2") format("woff2"); }
+@font-face { font-family: "FiraGO Title"; font-weight: 400; font-display: swap; src: url("/fonts/paper/firago-bold.woff2") format("woff2"); }
+@font-face { font-family: "Georgian Caps"; font-weight: 400; font-display: swap; unicode-range: U+10A0-10FF, U+1C90-1CBF, U+2D00-2D2F; src: url("/fonts/paper/noto-sans-georgian-bold.woff2") format("woff2"); }
 
 /* ============ Skins (variables). Triple attribute selectors beat the per-game colours in nav.css ============ */
 html[data-skin="bw"][data-game][data-game][data-game] {
@@ -299,7 +300,7 @@ html[data-skin] .chip[aria-pressed="true"], html[data-skin] button.primary, html
 html[data-skin] .games-nav a, html[data-skin] .kp-skin button, html[data-skin] .lang-switch { font-family: var(--body); }
 /* Georgian uses FiraGO (neither chosen font has Georgian letters) */
 /* Georgian version: titles in Gugeshashvili Rachveli, everything else in FiraGO */
-html[data-skin][data-game][data-game][data-game]:lang(ka) { --display: "Eurostile GEO", "FiraGO", system-ui, sans-serif; --serif: "FiraGO", system-ui, sans-serif; --body: "FiraGO", system-ui, sans-serif; }
+html[data-skin][data-game][data-game][data-game]:lang(ka) { --display: "Georgian Caps", "FiraGO Title", "FiraGO", system-ui, sans-serif; --serif: "FiraGO", system-ui, sans-serif; --body: "FiraGO", system-ui, sans-serif; }
 html[data-skin]:lang(ka) h1, html[data-skin]:lang(ka) h2, html[data-skin]:lang(ka) h3, html[data-skin]:lang(ka) .list .name, html[data-skin]:lang(ka) .daily-card .name, html[data-skin]:lang(ka) b, html[data-skin]:lang(ka) .level, html[data-skin]:lang(ka) .kp-title { font-weight: 400; letter-spacing: 0; }
 html[data-skin]:lang(ka) .kp-title { letter-spacing: .01em; }
 
@@ -357,3 +358,7 @@ html[data-skin][data-game][data-game][data-game] .cell.open:hover input, html[da
 html[data-skin][data-game][data-game][data-game] .clues li:hover, html[data-skin][data-game][data-game][data-game] .clues li.current { background: var(--ink); color: var(--paper); }
 html[data-skin][data-game][data-game][data-game] .clues li:hover *, html[data-skin][data-game][data-game][data-game] .clues li.current * { color: var(--paper); }
 html[data-skin][data-game][data-game][data-game] .cell.open, html[data-skin][data-game][data-game][data-game] .cell.open.active { border-radius: 0; }
+/* Georgian titles in capitals: the title font draws Mkhedruli letters as Mtavruli capitals (browsers do not all convert them with text-transform) */
+
+/* Georgian capitals: letter spacing -2 (= -0.02em) */
+html[data-skin][data-game][data-game][data-game]:lang(ka) h1, html[data-skin][data-game][data-game][data-game]:lang(ka) h2, html[data-skin][data-game][data-game][data-game]:lang(ka) h3, html[data-skin][data-game][data-game][data-game]:lang(ka) b, html[data-skin][data-game][data-game][data-game]:lang(ka) strong, html[data-skin][data-game][data-game][data-game]:lang(ka) .level, html[data-skin][data-game][data-game][data-game]:lang(ka) .clue-bar b, html[data-skin][data-game][data-game][data-game]:lang(ka) .stat b, html[data-skin][data-game][data-game][data-game]:lang(ka) .t5-rank, html[data-skin][data-game][data-game][data-game]:lang(ka) .t5-title, html[data-skin][data-game][data-game][data-game]:lang(ka) .clues li .n, html[data-skin][data-game][data-game][data-game]:lang(ka) .num, html[data-skin][data-game][data-game][data-game]:lang(ka) .howto summary, html[data-skin][data-game][data-game][data-game]:lang(ka) .t5-rules summary, html[data-skin][data-game][data-game][data-game]:lang(ka) .sc-rules summary, html[data-skin][data-game][data-game][data-game]:lang(ka) .ws-rules summary, html[data-skin][data-game][data-game][data-game]:lang(ka) .ws-cell, html[data-skin][data-game][data-game][data-game]:lang(ka) .sc-tile, html[data-skin][data-game][data-game][data-game]:lang(ka) .sc-slot { letter-spacing: -0.02em; }
