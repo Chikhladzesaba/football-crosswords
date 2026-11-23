@@ -95,13 +95,13 @@
   // On a phone the answer box must be visible without scrolling: put it (with the lives and messages) right under the list title.
   // On a computer it stays in the right-hand column.
   (function () {
-    const card = root.querySelector(".t5-card"), side = root.querySelector(".t5-side"), board = $("t5Board");
+    const card = root.querySelector(".t5-card"), side = root.querySelector(".t5-side"), board = $("t5Board"), head = root.querySelector(".page-head");
     const onPhone = ["t5Form", "t5Msg", "t5Lives", "t5Note"].map($);
-    const onComputer = ["t5Lives", "t5Note", "t5Form", "t5Msg"].map($);
+    const onComputer = ["t5Note", "t5Form", "t5Msg"].map($); // the hearts sit at the right end of the intro line instead
     const mq = matchMedia("(max-width: 640px)");
     function place() {
       if (mq.matches) onPhone.forEach((el) => card.insertBefore(el, board));
-      else onComputer.forEach((el) => side.insertBefore(el, side.querySelector(".actions")));
+      else { head.appendChild($("t5Lives")); onComputer.forEach((el) => side.insertBefore(el, side.querySelector(".actions"))); }
     }
     place();
     mq.addEventListener("change", place);
@@ -188,10 +188,12 @@
     });
     $("t5Count").textContent = TEXT.found(found.filter(Boolean).length, list.items.length);
   }
+  // Lives are hearts (a filled heart = a life left, an outline = a life lost). No word next to them.
+  const HEART = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
   function drawLives() {
-    const box = $("t5Lives"); box.innerHTML = `<span>${TEXT.lives}</span><span class="t5-dots"></span>`;
-    const dots = box.querySelector(".t5-dots");
-    for (let i = 0; i < LIVES; i++) { const d = document.createElement("span"); d.className = "t5-dot" + (i >= lives ? " lost" : ""); dots.appendChild(d); }
+    const box = $("t5Lives"); box.innerHTML = "";
+    box.setAttribute("role", "img"); box.setAttribute("aria-label", `${TEXT.ariaLives}: ${lives}/${LIVES}`);
+    for (let i = 0; i < LIVES; i++) { const h = document.createElement("span"); h.className = "t5-heart" + (i >= lives ? " lost" : ""); h.innerHTML = HEART; box.appendChild(h); }
   }
   function say(text, kind) { const m = $("t5Msg"); m.textContent = text; m.className = "t5-msg" + (kind ? " " + kind : ""); }
 
