@@ -386,7 +386,7 @@
     if (listWaiters) return listWaiters.push(cb);
     listWaiters = [cb];
     const s = document.createElement("script");
-    s.src = "../crosswords.js";
+    s.src = "../crosswords.js?v=1"; // keep the number the same as in the home pages
     s.onload = s.onerror = () => listWaiters.forEach((f) => f(window.CROSSWORDS || []));
     document.head.appendChild(s);
   }

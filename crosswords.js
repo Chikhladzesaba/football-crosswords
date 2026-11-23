@@ -1,4 +1,5 @@
 // The list of crosswords shown on the home page.
+// After you change this file, raise the number in "crosswords.js?v=N" (index.html, ka/index.html, crosswords/index.html, ka/crosswords/index.html and crossword.js), so visitors get the new list at once.
 // To add a crossword: copy one { ... } block, change it, and keep the comma between blocks.
 //   folder     = the puzzle's folder name
 //   difficulty = "Easy", "Medium", "Hard" or "Very hard"
