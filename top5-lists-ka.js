@@ -1,4 +1,4 @@
-// Georgian version of the Top 5 game (test). Same lists and numbers as top5-lists.js, so update both files together.
+// Georgian version of the Top 5 game. Same lists and numbers as top5-lists.js, so update both files together.
 // The list ids here are Georgian words in Latin letters (?list=seria-as-bombardirebi opens one list for testing). The English file keeps English ids.
 // TOP5_TEXT = every word the player sees (top5.js has the English default). TOP5_LISTS = the lists.
 // name = what we show. alt = other ways to type it (Georgian spellings, surnames, English names). Case and spaces do not matter.
