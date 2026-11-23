@@ -662,7 +662,7 @@
     if (vv) { vv.addEventListener("resize", fit); vv.addEventListener("scroll", fit); fit(); }
     addEventListener("scroll", () => { if (scrollY) scrollTo(0, 0); }, { passive: true });
   }
-  // ---- OWN KEYBOARD (phones, test version) --------------------------------
+  // ---- OWN KEYBOARD (phones, live) --------------------------------
   // On by default on phones. ?kb=native switches back to the phone's own keyboard (and remembers it), ?kb=own turns ours on again. The squares keep their <input>,
   // but inputmode="none" tells the phone not to show its own keyboard, so our buttons (below) type the letters instead.
   let ownKb = true;
