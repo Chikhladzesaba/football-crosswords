@@ -1159,3 +1159,15 @@ html[data-skin][data-game][data-game][data-game] body .word-tools .ibtn { flex: 
   html[data-skin] .top-right { pointer-events: none; }
   html[data-skin] .top-right > * { pointer-events: auto; }
 }
+
+/* ===== 23 Nov: phone header for Top 5, Scramble and Word Search =====
+   Same idea as the crossword page: one slim row (title on the left, round / progress on the right) and a small intro line under it,
+   so the game starts higher on the screen. If a title and its pill do not fit side by side (Top 5 in Georgian), the pill drops to its own line.
+   Only phones; computers are not touched. */
+@media (max-width: 640px) {
+  html[data-skin][data-game][data-game][data-game] main:has(.t5-game, .sc-game, .ws-game) .page-head { display: flex; flex-flow: row wrap; justify-content: space-between; align-items: center; gap: 6px 12px; margin-bottom: 14px; }
+  html[data-skin][data-game][data-game][data-game] main:has(.t5-game, .sc-game, .ws-game) .page-head .ph-text { display: contents; }
+  html[data-skin][data-game][data-game][data-game] main:has(.t5-game, .sc-game, .ws-game) .page-head h1 { order: 1; flex: 0 1 auto; margin: 0; font-size: 24px; line-height: 1.15; white-space: nowrap; }
+  html[data-skin][data-game][data-game][data-game] main:has(.t5-game, .sc-game, .ws-game) .page-head .pill { order: 2; flex: none; margin: 0; padding: 3px 10px; font-size: 13px; white-space: nowrap; }
+  html[data-skin][data-game][data-game][data-game] main:has(.t5-game, .sc-game, .ws-game) .page-head .intro { order: 3; flex: 0 0 100%; font-size: 13px; line-height: 1.35; }
+}
