@@ -1,7 +1,7 @@
 // Game switcher: a bar at the bottom on a phone, tabs at the top on a computer.
 // Every page loads it with <script src="…/nav.js"></script> right after <body>. It works out three things by itself:
 // the language (<html lang>), which game this page belongs to (first folder in the address), and where the site root is.
-// VISUAL TEST (local only): newspaper skin. Remove these two lines to go back to the normal look.
+// The newspaper look ("paper" style) is LIVE on every page. This line loads paper.css and the line further down loads paper.js. Remove both and the site goes back to the old look.
 document.write('<link rel="stylesheet" href="/paper.css?v=44">');
 (function () {
   const KA = document.documentElement.lang === "ka";
@@ -47,7 +47,7 @@ document.write('<link rel="stylesheet" href="/paper.css?v=44">');
   top.innerHTML = '<a class="brand" href="' + root + (KA ? "ka/" : "") + '">Kickoff Puzzles</a><span class="top-right"><span class="pill-slot"></span><nav class="lang-switch" aria-label="' + (KA ? "ენა" : "Language") + '">' + LANG + "</nav></span>";
   document.body.insertBefore(top, document.body.firstChild);
   document.documentElement.classList.add("with-top");
-  document.write('<script src="/paper.js?v=8"><\/script>'); // VISUAL TEST
+  document.write('<script src="/paper.js?v=8"><\/script>'); // loads the live newspaper look (see line 4)
 
   // Footer with the About / Contact / Privacy links, added to every page. Hidden while playing a crossword on a phone (the page is a fixed-size app there).
   const FT = KA ? { about: "ჩვენ შესახებ", contact: "კონტაქტი", privacy: "კონფიდენციალურობა" }
