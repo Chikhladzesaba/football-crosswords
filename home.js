@@ -147,7 +147,6 @@
       if (!inTopic.length) return;
       const sec = document.createElement("section"); sec.className = "topic-group"; sec.dataset.topic = t;
       const h = document.createElement("h2"); h.textContent = say(t); if (window.KPArt) h.prepend(window.KPArt.spotFor(t));
-      const n = document.createElement("span"); n.textContent = inTopic.length; h.appendChild(n);
       const ul = document.createElement("ul"); ul.className = "list";
       // The newest crossword of the topic (the last one added to crosswords.js) is the big highlighted card
       const newest = list.filter((c) => c.topic === t).pop();
@@ -171,13 +170,12 @@
       if (vis.length < inTopic.length) { // some boxes are hidden: the link opens this topic on its own page (all of its crosswords)
         const more = document.createElement("a");
         more.className = "show-more"; more.href = location.pathname + "?topic=" + encodeURIComponent(t);
-        more.textContent = (KA ? "მეტის ნახვა" : "Show more") + " (" + (inTopic.length - vis.length) + ")";
+        more.textContent = (KA ? "მეტის ნახვა" : "Show more");
         sec.appendChild(more);
       }
       groups.appendChild(sec);
     });
     document.getElementById("empty").hidden = shown.length > 0;
-    document.getElementById("shown").textContent = T.count(shown.length, list.length);
   }
 
   buttons("difficulty", used("difficulty", LEVELS));
@@ -243,11 +241,20 @@
     filters.parentNode.insertBefore(a, filters);
   }
 
-  dailyCard(); // English: daily/, Georgian: dgis-krosvordi/
-  // (no Scramble card: the game tabs in the nav link to every game, as in the design)
-  stats();
-  draw();
-  // ?topic=Legends (used by the All page) opens the home page with that topic already chosen
+  // ?topic=Legends ("Show more") opens a page of its own: just a back link and every crossword of that topic
   const wanted = new URLSearchParams(location.search).get("topic");
-  if (wanted) { const chip = [...document.querySelectorAll("#filter-topic .chip")].find((b) => b.textContent === say(wanted)); if (chip) chip.click(); }
+  if (wanted && TOPICS.includes(wanted)) {
+    chosen.topic = wanted;
+    document.body.classList.add("topic-page");
+    const back = document.createElement("a");
+    back.className = "topic-back"; back.href = location.pathname;
+    back.textContent = KA ? "← ყველა კროსვორდი" : "← All crosswords";
+    mainEl.insertBefore(back, mainEl.firstChild);
+    draw();
+  } else {
+    dailyCard(); // English: daily/, Georgian: dgis-krosvordi/
+    // (no Scramble card: the game tabs in the nav link to every game, as in the design)
+    stats();
+    draw();
+  }
 })();
