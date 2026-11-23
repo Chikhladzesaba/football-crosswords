@@ -1,4 +1,4 @@
-// Georgian version of the Word Search game (test). Same game code as English (wordsearch.js).
+// Georgian version of the Word Search game. Same game code as English (wordsearch.js).
 // WORDSEARCH_TEXT = every word the player sees (wordsearch.js has the English default).
 // WORDSEARCH_WORDS = the word pool. One word per line, Georgian letters, no spaces.
 // cat = players | coaches | stadiums | teams.  lvl = easy | medium | hard.
