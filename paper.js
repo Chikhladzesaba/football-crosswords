@@ -1,3 +1,4 @@
+(function(){var r=document.documentElement,d=function(){var q=window.devicePixelRatio||1,c=2;[2,4].some(function(s){if(Math.abs(s*q-Math.round(s*q))<1e-6){c=s;return true}});r.style.setProperty("--cs",c+"px")};d();window.addEventListener("resize",d);})(); /* crossword squares: whole device pixels where the screen scale allows, so lines stay even */
 // Visual test: "newspaper" art direction with two skins (ink = black & white, color = retro).
 // Loaded from nav.js on every page. Local test only, not pushed. To remove: delete the two lines at the top of nav.js.
 (function () {
