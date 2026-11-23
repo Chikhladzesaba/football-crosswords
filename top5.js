@@ -12,7 +12,7 @@
     backHref: "/", back: "← All games",
     h1: "Guess the <em>Top 5</em>",
     intro: "Name the players or clubs in the Top 5. Complete 3 lists in a row to win.",
-    kicker: (r, total, n) => `Round ${r} of ${total} · Top ${n}`,
+    kicker: (r, total) => `Round ${r} of ${total}`,
     asOf: (d) => `Numbers as of ${d}`,
     found: (f, t) => `${f} of ${t} found`,
     lives: "Lives", ariaRound: "Round", ariaLives: "Lives", ariaGuess: "Your guess",
