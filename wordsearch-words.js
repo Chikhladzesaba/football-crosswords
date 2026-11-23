@@ -1,4 +1,4 @@
-// Word pool for the Word Search game (test version, English).
+// Word pool for the Word Search game (English).
 // One word per line. w = the word in capitals, no spaces and no accents (Bernabéu -> BERNABEU, Maracanã -> MARACANA).
 // cat = players | coaches | stadiums | teams.  lvl = easy | medium | hard.
 // Easy = known by almost everyone. Medium = known by a regular fan. Hard = longer, harder to spell or less famous.
