@@ -1008,3 +1008,16 @@ html[data-skin][data-game][data-game][data-game]:not(:lang(ka)) .daily-card .nam
 /* "Show more" under a crossword section */
 html[data-skin][data-game][data-game][data-game] .topic-group .show-more { display: block; width: fit-content; text-decoration: none; margin: 18px auto 0; padding: 10px 26px; font: inherit; font-size: 15px; color: var(--ink); background: transparent; border: 2px solid var(--ink); border-radius: 4px 7px 5px 8px / 7px 4px 8px 5px; cursor: pointer; }
 html[data-skin][data-game][data-game][data-game] .topic-group .show-more:hover { background: var(--ink); color: var(--paper); }
+
+/* Topic page ("Show more"): only a back link and the crosswords of that topic */
+html[data-skin] .shown { display: none; }
+html[data-skin] body.topic-page main h1, html[data-skin] body.topic-page .intro, html[data-skin] body.topic-page main .intro, html[data-skin] body.topic-page main .filters, html[data-skin] body.topic-page main .stats-bar { display: none !important; }
+html[data-skin] .topic-back { display: inline-block; margin: 8px 0 18px; font-family: var(--body); font-weight: 600; font-size: 15px; color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--ink); }
+html[data-skin] .topic-back:hover { background: var(--ink); color: var(--paper, #fff); }
+
+/* Crossword: a word that is filled in correctly turns green (also while it is the selected word). The square you are standing on is a darker green so you can see where you are. */
+html[data-skin][data-game][data-game][data-game][data-game] .cell.open.solved, html[data-skin][data-game][data-game][data-game][data-game] .cell.open.solved.inword { background: #cdebd6; }
+html[data-skin][data-game][data-game][data-game][data-game] .cell.open.solved input { color: #14643a; }
+html[data-skin][data-game][data-game][data-game][data-game] .cell.open.solved.active { background: #2e9b5a; }
+html[data-skin][data-game][data-game][data-game][data-game] .cell.open.solved.active input { color: #fff; }
+html[data-skin][data-game][data-game][data-game][data-game] .clues li.done .num, html[data-skin][data-game][data-game][data-game][data-game] #kb .kbl .ci.done b { color: #14643a; }
