@@ -1171,3 +1171,12 @@ html[data-skin][data-game][data-game][data-game] body .word-tools .ibtn { flex: 
   html[data-skin][data-game][data-game][data-game] main:has(.t5-game, .sc-game, .ws-game) .page-head .pill { order: 2; flex: none; margin: 0; padding: 3px 10px; font-size: 13px; white-space: nowrap; }
   html[data-skin][data-game][data-game][data-game] main:has(.t5-game, .sc-game, .ws-game) .page-head .intro { order: 3; flex: 0 0 100%; font-size: 13px; line-height: 1.35; }
 }
+
+/* ===== 23 Nov: crossword "your progress" box on computers =====
+   The four stats share one row (equal blocks with dividers). The reset link gets its own thin row under them, so a long
+   Georgian label can no longer push the last stat onto a second line and leave a stray border. Phones keep their own stacked layout. */
+@media (min-width: 761px) {
+  html[data-skin][data-game][data-game][data-game] .stats-bar { flex-wrap: wrap; }
+  html[data-skin][data-game][data-game][data-game] .stats-bar .stat { flex: 1 1 0; min-width: 0; padding: 20px 24px; }
+  html[data-skin][data-game][data-game][data-game] .stats-bar .reset { flex: 0 0 100%; display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin: 0 !important; padding: 10px 24px !important; border-top: 2px solid var(--ink) !important; }
+}
