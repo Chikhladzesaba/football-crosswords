@@ -77,7 +77,7 @@ window.WORDSEARCH_WORDS = [
   { w: "იუვენტუსი", cat: "teams", lvl: "medium" },
   { w: "ბენფიკა", cat: "teams", lvl: "medium" },
   { w: "აიაქსი", cat: "teams", lvl: "medium" },
-  { w: "გალატასარაი", cat: "teams", lvl: "hard" },
+  { w: "გალათასარაი", cat: "teams", lvl: "hard" },
   { w: "დორტმუნდი", cat: "teams", lvl: "hard" },
   { w: "სელტიკი", cat: "teams", lvl: "hard" },
 ];
