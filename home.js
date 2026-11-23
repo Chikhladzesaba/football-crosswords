@@ -257,4 +257,10 @@
     stats();
     draw();
   }
+
+  // Back button: the phone keeps the previous page frozen and shows it again without running this file.
+  // If the saved progress changed in the meantime (you solved a crossword), reload so the ticks and stats are right.
+  const progress = () => { try { return Object.keys(localStorage).filter((k) => k.startsWith("crossword:")).sort().map((k) => k + "=" + localStorage.getItem(k)).join("|"); } catch (e) { return ""; } };
+  const seen = progress();
+  window.addEventListener("pageshow", (e) => { if (e.persisted && progress() !== seen) location.reload(); });
 })();
