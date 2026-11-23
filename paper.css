@@ -169,7 +169,7 @@ html[data-skin] .stats-bar { color: var(--muted); }
 /* ============ Crossword puzzle ============ */
 html[data-skin] .grid { gap: 0; }
 html[data-skin] .cell { border-radius: 0; }
-html[data-skin] .cell.open { background: var(--card); border: 2px solid var(--ink); border-radius: 0; margin: 0 -2px -2px 0; }
+html[data-skin] .cell.open { background: var(--card); border: var(--bw, 2px) solid var(--ink); border-radius: 0; margin: 0 calc(var(--bw, 2px) * -1) calc(var(--bw, 2px) * -1) 0; }
 html[data-skin] .cell.open.inword { background: var(--hi); }
 html[data-skin] .cell.open.active { background: var(--ink); border-color: var(--ink); }
 html[data-skin="color"] .cell.open.active { background: var(--accent); }
@@ -382,13 +382,13 @@ html[data-skin] body.phone-play #kb .kbl .ci.cur b { color: var(--paper); }
 html[data-skin] body.phone-play #kb .kbl .ci.done { color: var(--muted); }
 
 /* ===== Crossword: neighbouring squares share ONE 2px line (no doubled lines) ===== */
-html[data-skin][data-game][data-game][data-game] .grid { gap: 0; padding: 0 2px 2px 0; }
+html[data-skin][data-game][data-game][data-game] .grid { gap: 0; padding: 0 var(--bw, 2px) var(--bw, 2px) 0; }
 html[data-skin][data-game][data-game][data-game] .cell input, html[data-skin][data-game][data-game][data-game] .cell input:focus { border-radius: 0; }
 
 /* ===== Crossword: whole-pixel square size so every line renders exactly 2px ===== */
-html[data-skin] { --cell: round(down, min(46px, calc((100vw - 36px) / var(--cols))), 2px); }
-@media (min-width: 761px) { html[data-skin] { --cell: round(down, max(22px, min(56px, calc((100dvh - var(--nav-h) - 52px) / var(--rows)), calc(640px / var(--cols)))), 2px); } }
-@media (max-width: 760px) { html[data-skin] body.phone-play { --cell: round(down, min(46px, calc((100vw - 36px) / var(--cols)), max(28px, calc((100dvh - 156px - var(--kbh)) / var(--rows)))), 2px); } }
+html[data-skin] { --cell: round(down, min(46px, calc((100vw - 36px) / var(--cols))), var(--cs, 2px)); } /* square size is a whole number of device pixels where the screen scale allows (--cs is set by paper.js) */
+@media (min-width: 761px) { html[data-skin] { --cell: round(down, max(22px, min(56px, calc((100dvh - var(--nav-h) - 52px) / var(--rows)), calc(640px / var(--cols)))), var(--cs, 2px)); } }
+@media (max-width: 760px) { html[data-skin] body.phone-play { --cell: round(down, min(64px, calc((100vw - 34px) / var(--cols)), max(28px, calc((100dvh - 156px - var(--kbh)) / var(--rows)))), 1px); } }
 
 /* ===== Crossword header: back link and counter/timer share one text baseline (desktop) ===== */
 @media (min-width: 761px) {
@@ -897,7 +897,7 @@ html[data-skin] .hub .topic-group h2 .hub-name { font-style: normal; color: inhe
 @media (max-width: 640px) {
   html[data-skin] body { padding-bottom: 0; }
   html[data-skin] body.phone-play .topbar { display: flex; flex: none; position: relative; }
-  html[data-skin] body.phone-play { --cell: min(46px, calc((100vw - 32px) / var(--cols) - 2px), max(28px, calc((100dvh - 150px - var(--kbh)) / var(--rows) - 2px))); }
+  html[data-skin] body.phone-play { --cell: round(down, min(64px, calc((100vw - 34px) / var(--cols)), max(28px, calc((100dvh - 156px - var(--kbh)) / var(--rows)))), 1px); }
   html[data-skin] main { padding-top: 18px; }
   html[data-skin] body.phone-play #crossword > main { padding-top: 6px; }
 }
@@ -1007,13 +1007,13 @@ html[data-skin][data-game][data-game][data-game]:not(:lang(ka)) .daily-card .nam
 
 /* "Show more" under a crossword section */
 html[data-skin][data-game][data-game][data-game] .topic-group .show-more { display: block; width: fit-content; text-decoration: none; margin: 18px auto 0; padding: 10px 26px; font: inherit; font-size: 15px; color: var(--ink); background: transparent; border: 2px solid var(--ink); border-radius: 4px 7px 5px 8px / 7px 4px 8px 5px; cursor: pointer; }
-html[data-skin][data-game][data-game][data-game] .topic-group .show-more:hover { background: var(--ink); color: var(--paper); }
+@media (hover: hover) { html[data-skin][data-game][data-game][data-game] .topic-group .show-more:hover { border-bottom-color: transparent; } }
 
 /* Topic page ("Show more"): only a back link and the crosswords of that topic */
 html[data-skin] .shown { display: none; }
 html[data-skin] body.topic-page main h1, html[data-skin] body.topic-page .intro, html[data-skin] body.topic-page main .intro, html[data-skin] body.topic-page main .filters, html[data-skin] body.topic-page main .stats-bar { display: none !important; }
 html[data-skin] .topic-back { display: inline-block; margin: 8px 0 18px; font-family: var(--body); font-weight: 600; font-size: 15px; color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--ink); }
-html[data-skin] .topic-back:hover { background: var(--ink); color: var(--paper, #fff); }
+@media (hover: hover) { html[data-skin] .topic-back:hover { background: var(--ink); color: var(--paper, #fff); } }
 
 /* Crossword: a word that is filled in correctly turns green (also while it is the selected word). The square you are standing on is a darker green so you can see where you are. */
 html[data-skin][data-game][data-game][data-game][data-game] .cell.open.solved, html[data-skin][data-game][data-game][data-game][data-game] .cell.open.solved.inword { background: #cdebd6; }
@@ -1021,3 +1021,131 @@ html[data-skin][data-game][data-game][data-game][data-game] .cell.open.solved in
 html[data-skin][data-game][data-game][data-game][data-game] .cell.open.solved.active { background: #2e9b5a; }
 html[data-skin][data-game][data-game][data-game][data-game] .cell.open.solved.active input { color: #fff; }
 html[data-skin][data-game][data-game][data-game][data-game] .clues li.done .num, html[data-skin][data-game][data-game][data-game][data-game] #kb .kbl .ci.done b { color: #14643a; }
+
+/* ===== Open game pages (computer): no big masthead. Row 1: game tabs, colour dots and language. Row 2: Back link and progress / time / score. ===== */
+.kp-subbar { display: none; }
+@media (min-width: 641px) {
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .kp-mast { display: none; }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .games-nav { max-width: 968px; margin: 14px auto 0; padding: 12px 0; border-top: 2px solid var(--rule); border-bottom: 2px solid var(--rule); align-items: center; }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .games-nav a { margin: 0; padding-top: 11px; padding-bottom: 11px; }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .top-right { top: 14px !important; height: 43px !important; left: 16px !important; right: 16px !important; justify-content: flex-end; align-items: center; gap: 22px; }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .top-right .kp-skin { border: 0; background: none; border-radius: 0; gap: 10px; padding: 0; }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .top-right .kp-skin button { padding: 4px; }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .top-right .kp-skin .dot { width: 20px; height: 20px; }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .kp-subbar { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 16px; max-width: 968px; min-height: 50px; margin: 0 auto 8px; border-bottom: 2px solid var(--rule); }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .kp-sub-r { display: flex; align-items: center; justify-content: flex-end; gap: 22px; grid-column: 3; }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .kp-subbar .back { grid-column: 1; justify-self: start; }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .kp-subbar h1 { grid-column: 2; margin: 0; font-size: 26px; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; text-align: center; }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .kp-subbar .back { margin: 0; padding: 0; font-size: 14px; line-height: 1; }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .kp-subbar .meta { margin: 0; gap: 16px; align-items: center; }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .kp-subbar .pill { margin: 0; padding: 0; border: 0; background: none; box-shadow: none; font-size: 14px; color: var(--muted); }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .kp-subbar .timer, html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .kp-subbar .ws-time { font-size: 20px; }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .kp-subbar .count { font-size: 14px; color: var(--muted); }
+}
+
+/* ===== Crossword (computer): one clue box with Across / Down tabs, word buttons only while a word is selected, Start over + Share as fixed icon buttons ===== */
+.clue-tabs { display: none; }
+ /* the phone keeps its own button rows */
+@media (min-width: 641px) {
+  html[data-skin][data-game][data-game][data-game] body:not(.phone-play) #btnCheck, html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .actions-break { display: none; }
+  html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .word-tools { display: flex; flex: 1 1 100%; gap: 8px; flex-wrap: wrap; }
+  html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .word-tools .quiet { order: 0; border: 2px solid var(--ink) !important; background: transparent; color: var(--ink); padding: 8px 14px; font-size: 14px; margin: 0; border-radius: 5px 9px 6px 10px / 9px 5px 10px 6px; }
+  @media (hover: hover) { html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .word-tools .quiet:hover { background: var(--accent-soft); color: var(--ink); } }
+  html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .actions .quiet#btnAuto { margin-left: 0; }
+  html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .clue-tabs { display: flex; gap: 8px; }
+  html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .clue-tabs button { flex: 1 1 0; padding: 9px 14px; font-size: 13px; font-family: var(--body); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; border: 2px solid var(--ink); background: transparent; color: var(--ink); border-radius: 5px 9px 6px 10px / 9px 5px 10px 6px; cursor: pointer; }
+  html:lang(ka) html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .clue-tabs button { text-transform: none; letter-spacing: .02em; font-size: 14px; }
+  html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .clue-tabs button[aria-selected="true"] { background: var(--ink); color: var(--paper); }
+  html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .clues { grid-template-columns: minmax(0, 1fr); }
+  html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .clues h3 { display: none; }
+  html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .clues[data-tab="A"] > section:nth-child(2), html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .clues[data-tab="D"] > section:nth-child(1) { display: none; }
+}
+
+/* Auto-check is a switch */
+@media (min-width: 641px) {
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .actions #btnAuto { display: inline-flex; align-items: center; gap: 10px; padding: 3px 0; background: none !important; font-size: 14px; color: var(--ink); }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .actions #btnAuto::before { content: ""; flex: none; width: 36px; height: 20px; box-sizing: border-box; border: 2px solid var(--ink); border-radius: 20px; background: radial-gradient(circle at 10px 50%, var(--ink) 5px, transparent 5.5px); transition: background .15s; }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .actions #btnAuto[aria-pressed="true"]::before { background: radial-gradient(circle at calc(100% - 10px) 50%, var(--paper) 5px, transparent 5.5px), var(--ink); }
+  html[data-skin][data-game][data-game][data-game] body:has(#crossword, #top5, #scramble, #wordsearch):not(.phone-play) .actions #btnAuto[aria-pressed="true"] { background: none !important; color: var(--ink); }
+}
+
+/* ===== Crossword on a phone: icon tabs + colour + language in a top strip (no big logo), start over / share as icons in the title row,
+   word buttons only once a word is selected, Auto-check as a switch, Across / Down tabs in the clue list ===== */
+@media (max-width: 760px) {
+  html[data-skin] body.phone-play #btnCheck { display: none; }
+  html[data-skin] body.phone-play .actions .word-tools { display: flex; flex: 1 1 100%; justify-content: center; gap: 6px; flex-wrap: wrap; }
+  html[data-skin] body.phone-play .actions .word-tools .quiet { order: 0; border: 2px solid var(--ink) !important; background: transparent; color: var(--ink); padding: 7px 10px; font-size: 13px; margin: 0; border-radius: 5px 9px 6px 10px / 9px 5px 10px 6px; }
+  html[data-skin] body.phone-play .actions #btnAuto { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink); background: none !important; padding: 3px 4px; }
+  html[data-skin] body.phone-play .actions #btnAuto::before, #kb .kba#btnAuto::before, #kb .kba[data-id="btnAuto"]::before { content: ""; flex: none; width: 34px; height: 20px; box-sizing: border-box; border: 2px solid var(--ink); border-radius: 20px; background: radial-gradient(circle at 10px 50%, var(--ink) 5px, transparent 5.5px); }
+  html[data-skin] body.phone-play .actions #btnAuto[aria-pressed="true"]::before, #kb .kba[data-id="btnAuto"][aria-pressed="true"]::before { background: radial-gradient(circle at calc(100% - 10px) 50%, var(--paper) 5px, transparent 5.5px), var(--ink); }
+  html[data-skin] body.phone-play .actions #btnAuto[aria-pressed="true"] { background: none !important; color: var(--ink); }
+  #kb .kba[data-id="btnAuto"] { display: inline-flex; align-items: center; gap: 8px; }
+  #kb .kba[data-id="btnAuto"][aria-pressed="true"] { background: #fff; border-color: var(--ink); color: var(--ink); }
+  #kb .ltabs { display: flex; gap: 6px; margin: 0 -2px; }
+  #kb .ltabs button { flex: 1 1 0; max-width: none; height: 34px; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink); background: #fff; border: 2px solid var(--ink); border-radius: 6px; box-shadow: none; padding: 0; }
+  #kb .ltabs button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  html:lang(ka) #kb .ltabs button { text-transform: none; letter-spacing: 0; font-size: 14px; }
+}
+@media (max-width: 640px) {
+  html[data-skin] body.phone-play.own-kb.typing .actions { display: contents; }
+}
+
+/* ===== Crossword buttons in one row, always visible: Reveal letter, Reveal word, then icon buttons (delete word, start over, share), Auto-check below ===== */
+.ibtn .ic { display: none; }
+html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .ibtn, html[data-skin][data-game][data-game][data-game] body.phone-play:has(#crossword) .ibtn { width: 42px; height: 42px; min-width: 0; padding: 0 !important; margin: 0 !important; display: inline-flex; align-items: center; justify-content: center; border: 2px solid var(--ink) !important; background: transparent; color: var(--ink); border-radius: 5px 9px 6px 10px / 9px 5px 10px 6px; box-shadow: none; }
+html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .ibtn .ic, html[data-skin][data-game][data-game][data-game] body.phone-play:has(#crossword) .ibtn .ic { display: block; width: 22px; height: 22px; }
+html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .ibtn .lbl, html[data-skin][data-game][data-game][data-game] body.phone-play:has(#crossword) .ibtn .lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (hover: hover) { html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .ibtn:hover { background: var(--ink); color: var(--paper); } }
+html[data-skin] body.phone-play.own-kb.typing .actions { display: none !important; }
+#kb .kba svg { width: 20px; height: 20px; display: block; }
+#kb .kba[aria-label]:not([data-id="btnAuto"]) { flex: 0 0 44px; padding: 0; display: inline-flex; align-items: center; justify-content: center; }
+@media (max-width: 760px) {
+  html[data-skin] body.phone-play .actions .word-tools { flex-wrap: nowrap; gap: 5px; }
+  html[data-skin] body.phone-play .actions .word-tools .quiet:not(.ibtn) { padding: 7px 8px; font-size: 12.5px; white-space: nowrap; }
+  html[data-skin][data-game][data-game][data-game] body.phone-play:has(#crossword) .ibtn { width: 38px; height: 38px; flex: none; }
+}
+.ibtn[hidden] { display: none !important; }
+/* ===== Crossword: every block (title row, clue box, grid, buttons) shares the same left and right edge ===== */
+.ibtn { flex: 1 1 42px; }
+html[data-skin] body.phone-play .actions .word-tools { flex-wrap: nowrap; }
+@media (max-width: 760px) { html[data-skin][data-game][data-game][data-game] body.phone-play:has(#crossword) .ibtn { flex: 1 1 38px; max-width: none; } html[data-skin] body.phone-play .actions .word-tools { justify-content: stretch; } }
+/* Phone crossword: selecting a word does not change the title row (arrow and title stay as they were) */
+@media (max-width: 760px) {
+  html[data-skin][data-game][data-game][data-game] body.phone-play.own-kb.typing:has(#crossword) .back { display: inline-flex; }
+  html[data-skin][data-game][data-game][data-game] body.phone-play.own-kb.typing:has(#crossword) #crossword > main > h1 { display: block; font-size: 18px; font-weight: 400; color: var(--ink); }
+  html[data-skin][data-game][data-game][data-game] body.phone-play.typing:has(#crossword) .bar-back { display: none; }
+}
+
+/* ===== Spacing pass: one rhythm for every page =====
+   - same gap under the header strip on every game page (30px desktop, 18px phone)
+   - content, footer and header share the same left and right edge
+   - "Give up" is a real button like the others, Word Search grid fills the page width on phones */
+@media (min-width: 761px) {
+  html[data-skin][data-game][data-game] main:has(.t5-game, .sc-game, .ws-game) { padding-top: 22px; }
+  html[data-skin][data-game][data-game] main:has(.t5-game, .sc-game, .ws-game) .page-head { padding-top: 0; }
+  html[data-skin][data-game][data-game] main.home .intro { margin-top: -10px !important; }
+  html[data-skin][data-game] .site-footer { padding-left: 0; padding-right: 0; }
+  html[data-skin][data-game] main.info { max-width: 968px; margin-left: auto; margin-right: auto; }
+}
+@media (max-width: 640px) {
+  html[data-skin][data-game][data-game] main.home, html[data-skin][data-game][data-game] main.narrow:has(.hub-title) { margin-top: 0; padding-top: 18px; }
+  html[data-skin][data-game][data-game] main.home .intro { margin-top: 0 !important; }
+  html[data-skin][data-game][data-game] .ws-game { --ws: calc((100vw - 32px - 22px) / var(--n, 14)); }
+  html[data-skin][data-game][data-game] .ws-grid { margin: 12px 0 8px; max-width: 100%; box-sizing: border-box; }
+}
+html[data-skin][data-game][data-game] #t5Give { padding: 8px 16px; text-decoration: none; font-size: 14px; }
+@media (min-width: 641px) { html[data-skin] body .site-footer { padding-left: 0 !important; padding-right: 0 !important; } }
+@media (max-width: 640px) {
+  html[data-skin][data-game][data-game] .ws-grid { width: 100%; grid-template-columns: repeat(var(--n, 14), minmax(0, 1fr)); }
+  html[data-skin][data-game][data-game] .ws-grid .ws-cell { width: auto; height: auto; aspect-ratio: 1 / 1; }
+}
+@media (min-width: 761px) { html[data-skin] main.info { padding-left: 0 !important; padding-right: 0 !important; } }
+/* Phone: a full-width black line closes the header */
+@media (max-width: 640px) {
+  html[data-skin] .topbar { border-bottom: 2px solid var(--ink); padding-bottom: 10px !important; }
+  html[data-skin] body.phone-play { --cell: round(down, min(64px, calc((100vw - 34px) / var(--cols)), max(28px, calc((100dvh - 168px - var(--kbh)) / var(--rows)))), 1px); }
+}
+@media (max-width: 640px) { html[data-skin][data-game] main.home.hub { padding-top: 0 !important; } html[data-skin][data-game] main.home.hub .hub-games { margin-top: 0 !important; padding-top: 18px !important; } }
+html[data-skin] .topic-group h2 .kp-spot { display: none !important; }
+/* "Show more": a plain text button on the right */
+html[data-skin][data-game][data-game][data-game] .topic-group .show-more { margin: 14px 0 0 auto; padding: 4px 0; background: none; border: 0; border-bottom: 2px solid var(--ink); border-radius: 0; font-size: 15px; }

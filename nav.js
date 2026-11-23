@@ -2,7 +2,7 @@
 // Every page loads it with <script src="…/nav.js"></script> right after <body>. It works out three things by itself:
 // the language (<html lang>), which game this page belongs to (first folder in the address), and where the site root is.
 // VISUAL TEST (local only): newspaper skin. Remove these two lines to go back to the normal look.
-document.write('<link rel="stylesheet" href="/paper.css?v=17">');
+document.write('<link rel="stylesheet" href="/paper.css?v=41">');
 (function () {
   const KA = document.documentElement.lang === "ka";
   const root = new URL(".", document.currentScript.src).href; // folder that holds nav.js = the site root
@@ -47,7 +47,7 @@ document.write('<link rel="stylesheet" href="/paper.css?v=17">');
   top.innerHTML = '<a class="brand" href="' + root + (KA ? "ka/" : "") + '">Kickoff Puzzles</a><span class="top-right"><span class="pill-slot"></span><nav class="lang-switch" aria-label="' + (KA ? "ენა" : "Language") + '">' + LANG + "</nav></span>";
   document.body.insertBefore(top, document.body.firstChild);
   document.documentElement.classList.add("with-top");
-  document.write('<script src="/paper.js?v=4"><\/script>'); // VISUAL TEST
+  document.write('<script src="/paper.js?v=8"><\/script>'); // VISUAL TEST
 
   // Footer with the About / Contact / Privacy links, added to every page. Hidden while playing a crossword on a phone (the page is a fixed-size app there).
   const FT = KA ? { about: "ჩვენ შესახებ", contact: "კონტაქტი", privacy: "კონფიდენციალურობა" }
@@ -88,6 +88,35 @@ document.write('<link rel="stylesheet" href="/paper.css?v=17">');
   };
   document.addEventListener("focusin", sync); document.addEventListener("focusout", () => setTimeout(sync, 50));
   if (vv) vv.addEventListener("resize", sync); window.addEventListener("resize", sync);
+
+  // Open game pages on a computer: under the game tabs there is a second strip with the Back link and the progress / time / score.
+  // The games build these bits themselves, so this only moves them up (the games keep finding them by id).
+  const sub = document.createElement("div");
+  sub.className = "kp-subbar";
+  const subRight = document.createElement("span"); subRight.className = "kp-sub-r";
+  sub.appendChild(subRight);
+  nav.insertAdjacentElement("afterend", sub);
+  const DESK = window.matchMedia("(min-width: 641px)");
+  const gameRoot = () => document.querySelector("#crossword, #top5, #scramble, #wordsearch");
+  const idsOf = (el) => [el.id, ...[...el.querySelectorAll("[id]")].map((x) => x.id)].filter(Boolean);
+  let moved = false;
+  function adopt() {
+    const r = gameRoot();
+    if (!r || !DESK.matches || document.body.classList.contains("phone-play")) return;
+    const title = r.id === "crossword" ? r.querySelector("main > h1") : null; // crosswords: the puzzle name goes in the middle of the strip
+    if (title) { sub.querySelectorAll("h1").forEach((o) => { if (o !== title) o.remove(); }); sub.insertBefore(title, subRight); moved = true; }
+    [[".back", sub], ["[data-pill]", subRight], [".meta", subRight]].forEach(([q, to]) => {
+      r.querySelectorAll(q).forEach((el) => {
+        idsOf(el).forEach((id) => sub.querySelectorAll("#" + CSS.escape(id)).forEach((old) => { if (old !== el) (old.closest(".back, [data-pill], .meta") || old).remove(); })); // the game drew a new copy: drop the old one
+        if (to === sub) { sub.querySelectorAll(".back").forEach((o) => { if (o !== el) o.remove(); }); sub.insertBefore(el, sub.firstChild); } else subRight.appendChild(el);
+        moved = true;
+      });
+    });
+  }
+  const start = () => { adopt(); const r = gameRoot(); if (r) new MutationObserver(adopt).observe(r, { childList: true, subtree: true }); };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
+  // a window dragged from wide to phone width: the moved bits have no place on the phone layout, so load the page again (crossword progress is saved)
+  DESK.addEventListener("change", () => { if (moved && !DESK.matches) location.reload(); });
 })();
 
 // Share panel for computers (phones open their own share menu instead). Each game calls KPShare.open({ anchor, text, url, note })

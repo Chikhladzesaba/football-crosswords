@@ -91,28 +91,31 @@
         <div class="side">
           <div class="actions">
             <button class="primary" id="btnCheck" type="button">${T.check}</button>
-            <button id="btnLetter" type="button">${T.letter}</button>
-            <button id="btnReveal" type="button">${T.reveal}</button>
+            <span class="word-tools" id="wordTools">
+              <button id="btnLetter" type="button">${T.letter}</button>
+              <button id="btnReveal" type="button">${T.reveal}</button>
+              <button class="quiet ibtn" id="btnClearWord" type="button" hidden title="${T.clearWord}" aria-label="${T.clearWord}"><svg class="ic" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12.5h10L18 7M9 7V4.5h6V7"/></svg><span class="lbl">${T.clearWord}</span></button>
+              <button class="quiet ibtn" id="btnClear" type="button" title="${T.clear}" aria-label="${T.clear}"><svg class="ic" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 1 0 2.7-6.2"/><path d="M3.5 4v5h5"/></svg><span class="lbl">${T.clear}</span></button>
+            </span>
             <span class="actions-break" aria-hidden="true"></span>
             <button class="quiet" id="btnAuto" type="button" aria-pressed="false">${T.auto}</button>
-            <button class="quiet" id="btnClearWord" type="button">${T.clearWord}</button>
-            <button class="quiet" id="btnClear" type="button">${T.clear}</button>
-            <button class="quiet" id="btnSharePuzzle" type="button">${T.share}</button>
           </div>
-          <p class="share-note" id="sharePuzzleNote" hidden></p>
           <div class="result" id="result" hidden>
             <p id="resultText"></p>
             <button class="primary" id="btnShareResult" type="button">${T.shareResult}</button>
             <button class="result-next" id="btnNextResult" type="button">${T.playNext} →</button>
             <p class="share-note" id="shareResultNote" hidden></p>
           </div>
-          <div class="clues">
+          <div class="clue-tabs" role="tablist">
+            <button type="button" role="tab" data-d="A" aria-selected="true">${T.across}</button>
+            <button type="button" role="tab" data-d="D" aria-selected="false">${T.down}</button>
+          </div>
+          <div class="clues" data-tab="A">
             <section><h3>${T.across}</h3><ol id="across"></ol></section>
             <section><h3>${T.down}</h3><ol id="down"></ol></section>
           </div>
         </div>
       </div>
-      ${P.note ? `<p class="legend">${P.note}</p>` : ""}
     </main>
     <div class="below">
       <section class="more" id="next" hidden><h2>${T.more}</h2><div class="next-list" id="nextList"></div></section>
@@ -200,12 +203,22 @@
   const other = (d) => (d === "A" ? "D" : "A");
   const wordAt = (cell, dir) => cell.words[dir] || cell.words[other(dir)];
 
+  // One clue box with an Across / Down tab
+  function showTab(d) {
+    const box = root.querySelector(".side .clues"); if (!box) return;
+    box.dataset.tab = d;
+    root.querySelectorAll(".clue-tabs button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.d === d)));
+  }
+  root.querySelectorAll(".clue-tabs button").forEach((b) => b.addEventListener("click", () => showTab(b.dataset.d)));
+
+  let started = false; // the first word is selected automatically when the page opens; the word buttons wait for a real selection
   let onDirChange = () => {};
   function select(cell, dir) {
     if (!cell.words[dir]) dir = other(dir);
     state.cell = cell; state.dir = dir;
     onDirChange();
     const w = cell.words[dir];
+    showTab(w.dir); // the list shows the direction of the selected word
     Object.values(cells).forEach((c) => c.el.classList.remove("inword", "active"));
     w.cells.forEach((c) => c.el.classList.add("inword"));
     cell.el.classList.add("active");
@@ -216,6 +229,7 @@
       const t = w.li.getBoundingClientRect().top - box.getBoundingClientRect().top + box.scrollTop, b = t + w.li.offsetHeight;
       if (t < box.scrollTop) box.scrollTop = t - 8; else if (b > box.scrollTop + box.clientHeight) box.scrollTop = b - box.clientHeight + 8;
     }
+    updateDel();
     $("clueNum").textContent = w.num + w.dir;
     $("clueText").textContent = w.clue;
     if (document.activeElement !== cell.input) cell.input.focus({ preventScroll: true });
@@ -305,7 +319,20 @@
 
   function isWordDone(w) { return w.cells.every((c) => c.input.value === c.answer); }
 
+  // The delete-word button only shows when the selected word has letters that it could clear.
+  let onDelChange = () => {};
+  function updateDel() {
+    const b = $("btnClearWord"); if (!b) return;
+    let any = false;
+    if (state.cell && !state.done) {
+      const w = wordAt(state.cell, state.dir);
+      any = w.cells.some((c) => c.input.value && !(c.el.classList.contains("revealed") || (c.words[other(w.dir)] && isWordDone(c.words[other(w.dir)]))));
+    }
+    if (b.hidden === !any) return;
+    b.hidden = !any; onDelChange();
+  }
   function afterChange() {
+    setTimeout(updateDel, 0);
     let solved = 0;
     Object.values(cells).forEach((c) => c.el.classList.remove("solved", "wordwrong"));
     words.forEach((w) => {
@@ -466,8 +493,6 @@
   $("btnNextResult").addEventListener("click", goNext);
   $("win").addEventListener("click", (e) => { if (e.target.id === "win") closeWin(); }); // tap outside the card
   addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("win").hidden) closeWin(); });
-  $("btnSharePuzzle").addEventListener("click", (e) =>
-    share(T.invite(words.length), shareLink("puzzle"), "sharePuzzleNote", e.currentTarget));
 
   // ---- BUTTONS ------------------------------------------------------------
   $("btnCheck").addEventListener("click", () => {
@@ -687,7 +712,7 @@
     const TXT = KA
       ? { prev: "წინა", next: "შემდეგი", back: "წაშლა", shift: "Shift", dir: "მიმართულების შეცვლა", lang: { ka: "ABC", en: "ქარ" }, list: "ყველა კითხვა", keys: "კლავიატურა", close: "კლავიატურის დამალვა", group: "კლავიატურა" }
       : { prev: "Prev", next: "Next", back: "Delete", shift: "Shift", dir: "Switch direction", lang: { ka: "ABC", en: "ქარ" }, list: "All clues", keys: "Keyboard", close: "Hide keyboard", group: "Keyboard" };
-    let lang = KA ? "ka" : "en", shift = false, showList = false;
+    let lang = KA ? "ka" : "en", shift = false, showList = false, listDir = "A";
     const kb = document.createElement("div");
     kb.id = "kb"; kb.setAttribute("role", "group"); kb.setAttribute("aria-label", TXT.group);
     document.body.appendChild(kb);
@@ -696,8 +721,8 @@
       const rows = LAY[lang === "ka" && shift ? "kaShift" : lang];
       const keys = (r) => [...rows[r]].map((ch) => btn("key", ch, ch, ch)).join("");
       const sh = lang === "ka" ? btn("shift", IC.shift(shift), TXT.shift).replace("<button", '<button class="fk" aria-pressed="' + shift + '"') : "";
-      const act = (id) => '<button type="button" class="kba' + (id === "btnCheck" ? " main" : "") + '" data-a="act" data-id="' + id + '"' + (id === "btnAuto" ? ' aria-pressed="' + $(id).getAttribute("aria-pressed") + '"' : "") + ">" + $(id).textContent.trim() + "</button>";
-      const top = '<div class="kbtop"><div class="kbscroll">' + ["btnCheck", "btnLetter", "btnReveal", "btnAuto", "btnClearWord", "btnClear", "btnSharePuzzle"].map(act).join("") + "</div>" + btn("close", IC.down, TXT.close).replace("<button", '<button class="kbx"') + "</div>";
+      const act = (id) => $(id).hidden ? "" : '<button type="button" class="kba' + (id === "btnCheck" ? " main" : "") + '" data-a="act" data-id="' + id + '"' + (id === "btnAuto" ? ' aria-pressed="' + $(id).getAttribute("aria-pressed") + '"' : "") + (id === "btnAuto" || !$(id).querySelector("svg") ? ">" + $(id).textContent.trim() : ' aria-label="' + $(id).getAttribute("aria-label") + '">' + $(id).querySelector("svg").outerHTML.replace(/ (width|height)="22"/g, "")) + "</button>";
+      const top = '<div class="kbtop"><div class="kbscroll">' + ["btnLetter", "btnReveal", "btnClearWord", "btnClear", "btnAuto"].map(act).join("") + "</div>" + btn("close", IC.down, TXT.close).replace("<button", '<button class="kbx"') + "</div>";
       const ctl = '<div class="kbr ctl">' +
           btn("lang", IC.lang + "<span>" + TXT.lang[lang] + "</span>", TXT.lang[lang]).replace("<button", '<button class="w1"') +
           btn("dir", state.dir === "D" ? IC.dirD : IC.dir, TXT.dir).replace("<button", '<button class="w2"') +
@@ -707,8 +732,8 @@
         "</div>";
       if (showList) {
         const item = (w) => '<button type="button" data-a="clue" data-i="' + words.indexOf(w) + '" class="ci' + (state.cell && wordAt(state.cell, state.dir) === w ? " cur" : "") + (w.li.classList.contains("done") ? " done" : "") + '"><b>' + w.num + "</b><span>" + w.clue + "</span></button>";
-        const grp = (d, h) => "<h4>" + h + "</h4>" + words.filter((w) => w.dir === d).map(item).join("");
-        kb.innerHTML = top + '<div class="kbl">' + grp("A", T.across) + grp("D", T.down) + "</div>" + ctl;
+        const tab = (d, h) => '<button type="button" data-a="ltab" data-d="' + d + '" aria-pressed="' + (listDir === d) + '">' + h + "</button>";
+        kb.innerHTML = top + '<div class="ltabs">' + tab("A", T.across) + tab("D", T.down) + '</div><div class="kbl">' + words.filter((w) => w.dir === listDir).map(item).join("") + "</div>" + ctl;
         const cur = kb.querySelector(".ci.cur"); if (cur) kb.querySelector(".kbl").scrollTop = Math.max(0, cur.offsetTop - 44);
         return;
       }
@@ -718,6 +743,7 @@
         '<div class="kbr">' + sh + keys(2) + btn("back", IC.back, TXT.back).replace("<button", '<button class="fk"') + "</div>" + ctl;
     }
     onDirChange = () => { const b = $("kb") && $("kb").querySelector('[data-a="dir"]'); if (b) b.innerHTML = state.dir === "D" ? IC.dirD : IC.dir; };
+    onDelChange = () => { if (!showList) renderKb(); };
     renderKb();
     setTimeout(() => (root.dataset.ready = "1"), 600); // ignore the automatic focus on load
     const press = (b) => {
@@ -730,7 +756,8 @@
       else if (a === "dir") { if (c.words.A && c.words.D) select(c, other(state.dir)); }
       else if (a === "close") { showList = false; shift = false; renderKb(); document.body.classList.remove("typing"); if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); }
       else if (a === "act") { $(b.dataset.id).click(); if (b.dataset.id === "btnAuto") b.setAttribute("aria-pressed", $("btnAuto").getAttribute("aria-pressed")); if (showList) { showList = false; renderKb(); } }
-      else if (a === "list") { showList = !showList; renderKb(); }
+      else if (a === "list") { showList = !showList; if (showList) listDir = state.dir; renderKb(); }
+      else if (a === "ltab") { listDir = b.dataset.d; renderKb(); }
       else if (a === "clue") { const w = words[+b.dataset.i]; showList = false; select(w.cells[0], w.dir); renderKb(); }
       else if (a === "prev") { nextWord(-1); if (showList) renderKb(); }
       else if (a === "next") { nextWord(1); if (showList) renderKb(); }
@@ -790,5 +817,26 @@
   try { if (localStorage.getItem("crossword:autocheck") === "1" && !state.done) { state.auto = true; state.autoUsed = true; $("btnAuto").setAttribute("aria-pressed", "true"); } } catch (e) {}
   afterChange();
   select(words[0].cells[0], words[0].dir);
+  started = true;
   withList(showNext); // "Play more crosswords" under the puzzle
+  // Phone: stretch the grid to the same left and right edge as the header (logo and burger menu). Squares stay whole pixels:
+  // the few leftover pixels are shared out one by one, so some columns are 1px wider.
+  const gridEl = $("grid");
+  function fitGrid() {
+    gridEl.style.gridTemplateColumns = "";
+    if (!document.body.classList.contains("phone-play")) return;
+    const par = gridEl.parentElement, cs = getComputedStyle(par);
+    const avail = Math.floor(par.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight));
+    const cell = parseFloat(getComputedStyle(gridEl).gridTemplateColumns.split(" ")[0]);
+    const n = getComputedStyle(gridEl).gridTemplateColumns.split(" ").length;
+    const line = parseFloat(getComputedStyle(gridEl).paddingRight) || 2;
+    const extra = avail - line - n * cell;
+    if (!(cell > 0) || extra <= 0 || extra > n * 3) return; // small puzzles that are limited by height stay centred instead of stretching the squares
+    const cols = [];
+    for (let i = 0; i < n; i++) cols.push(cell + Math.floor(((i + 1) * extra) / n) - Math.floor((i * extra) / n) + "px");
+    gridEl.style.gridTemplateColumns = cols.join(" ");
+  }
+  fitGrid();
+  window.addEventListener("resize", fitGrid);
+  new MutationObserver(fitGrid).observe(document.body, { attributes: true, attributeFilter: ["class"] });
 })();
