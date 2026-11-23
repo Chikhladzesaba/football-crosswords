@@ -1149,3 +1149,13 @@ html[data-skin][data-game][data-game] #t5Give { padding: 8px 16px; text-decorati
 html[data-skin] .topic-group h2 .kp-spot { display: none !important; }
 /* "Show more": a plain text button on the right */
 html[data-skin][data-game][data-game][data-game] .topic-group .show-more { margin: 14px 0 0 auto; padding: 4px 0; background: none; border: 0; border-bottom: 2px solid var(--ink); border-radius: 0; font-size: 15px; }
+/* Crossword buttons: the two text buttons share the free space, icon buttons keep their size (no giant icon button when delete is hidden) */
+html[data-skin][data-game][data-game][data-game] body .word-tools { flex-wrap: nowrap; }
+html[data-skin][data-game][data-game][data-game] body .word-tools button:not(.ibtn) { flex: 1 1 auto; text-align: center; }
+html[data-skin][data-game][data-game][data-game] body .word-tools .ibtn { flex: 0 0 42px; max-width: 42px; }
+@media (max-width: 760px) { html[data-skin][data-game][data-game][data-game] body.phone-play:has(#crossword) .word-tools .ibtn { flex: 0 0 38px; max-width: 38px; } }
+/* The right-hand box with the colour dots and language switch stretches across the whole strip: let clicks pass through it to the game tabs */
+@media (min-width: 641px) {
+  html[data-skin] .top-right { pointer-events: none; }
+  html[data-skin] .top-right > * { pointer-events: auto; }
+}
