@@ -6,7 +6,7 @@
   if (!root || !ALL.length) return;
   const KA = document.documentElement.lang === "ka";
   const ROUND = 10; // names per round
-  const LENGTHS = [0, 4, 5, 6, 7]; // minimum name length (0 = all)
+  const LENGTHS = [0, 5, 6, 7]; // minimum name length (0 = all). No 4+: it holds almost every name, so it was the same as "All"
   const HOME = KA ? "../ka/crosswords/" : "../crosswords/"; // gamoicani-pekhburtelebis-gvarebi/ → ka/ (Georgian home) ; scramble/ → home
 
   const T = KA ? {
@@ -26,7 +26,7 @@
   } : {
     back: "← All games", title: "Name <em>Scramble</em>",
     intro: "The letters of a famous player's name are mixed up. Tap them in the right order.",
-    lenAll: "All", lenN: (n) => `${n}+ letters`, lenLabel: "Minimum name length",
+    lenAll: "All", lenN: (n) => `${n}+`, lenLabel: "Minimum name length",
     progress: (i, n) => `${i} of ${n}`, score: (s) => `Correct: ${s}`,
     hint: "Show letter", clear: "Delete", skip: "Skip",
     endTitle: "You did it! 🏆", endTitleMid: "Nice result!", endTitleLow: "Not this time",
