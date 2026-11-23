@@ -1180,3 +1180,33 @@ html[data-skin][data-game][data-game][data-game] body .word-tools .ibtn { flex: 
   html[data-skin][data-game][data-game][data-game] .stats-bar .stat { flex: 1 1 0; min-width: 0; padding: 20px 24px; }
   html[data-skin][data-game][data-game][data-game] .stats-bar .reset { flex: 0 0 100%; display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin: 0 !important; padding: 10px 24px !important; border-top: 2px solid var(--ink) !important; }
 }
+
+/* ===== 23 Nov: Top 5 page (computer) + space under "How to play" =====
+   Top 5: the game name sits at the left of the top strip (there is no Back link: the game is opened from the menu, not from a list).
+   The intro line and the hearts (lives) share one row; the game box and the answer / Guess boxes start at the same height.
+   Rule for all pages: a Back link only exists on an open crossword (All and Crosswords are lists, so a crossword needs a way back);
+   Top 5, Scramble and Word Search are opened straight from the menu and need none. */
+@media (min-width: 641px) {
+  html[data-skin][data-game][data-game][data-game] body:has(#top5, #scramble, #wordsearch):not(.phone-play) .kp-subbar.kp-sub-left { grid-template-columns: minmax(0, 1fr) auto; }
+  html[data-skin][data-game][data-game][data-game] body:has(#top5, #scramble, #wordsearch):not(.phone-play) .kp-subbar.kp-sub-left h1 { grid-column: 1; justify-self: start; text-align: left; }
+  html[data-skin][data-game][data-game][data-game] body:has(#top5, #scramble, #wordsearch):not(.phone-play) .kp-subbar.kp-sub-left .kp-sub-r { grid-column: 2; }
+  html[data-skin][data-game][data-game][data-game] #top5 .page-head { align-items: center; margin-bottom: 18px; }
+  html[data-skin][data-game][data-game][data-game] #top5 .page-head .intro { font-size: 15px; }
+  html[data-skin][data-game][data-game][data-game] #top5 .page-head .t5-lives { flex: none; }
+  /* Scramble and Word Search: same intro line as Top 5 now that the title lives in the strip */
+  html[data-skin][data-game][data-game][data-game] #scramble .page-head, html[data-skin][data-game][data-game][data-game] #wordsearch .page-head { margin-bottom: 18px; }
+  html[data-skin][data-game][data-game][data-game] #scramble .page-head .intro, html[data-skin][data-game][data-game][data-game] #wordsearch .page-head .intro { font-size: 15px; }
+}
+/* Word Search on a wide screen: the progress / time moved up into the strip, which left two empty grid rows above the word list; remove them so the list starts level with the top of the grid */
+@media (min-width: 900px) {
+  html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .ws-game { row-gap: 0; }
+  html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .ws-game .ws-msg:not(:empty) { margin-bottom: 12px; }
+  html[data-skin][data-game][data-game][data-game] body:not(.phone-play) .ws-game .ws-words { margin-bottom: 16px; }
+}
+/* hearts: a filled heart is a life left, an outline is a life lost */
+html[data-skin][data-game][data-game][data-game] .t5-lives { justify-content: flex-end; gap: 4px; }
+html[data-skin][data-game][data-game][data-game] .t5-heart svg { display: block; fill: var(--ink); stroke: var(--ink); stroke-width: 2px; stroke-linejoin: round; }
+html[data-skin="color"][data-game][data-game][data-game] .t5-heart svg { fill: var(--accent); stroke: var(--accent); }
+html[data-skin][data-game][data-game][data-game] .t5-heart.lost svg { fill: none; opacity: .4; }
+/* "How to play" (Top 5, Scramble, Word Search, crossword): the space under it was twice the space above, because the footer adds its own gap on top of the row's padding */
+html[data-skin][data-game][data-game][data-game] body:has(.t5-rules, .sc-rules, .ws-rules, .howto) .site-footer { margin-top: 0; }

@@ -2,7 +2,7 @@
 // Every page loads it with <script src="…/nav.js"></script> right after <body>. It works out three things by itself:
 // the language (<html lang>), which game this page belongs to (first folder in the address), and where the site root is.
 // The newspaper look ("paper" style) is LIVE on every page. This line loads paper.css and the line further down loads paper.js. Remove both and the site goes back to the old look.
-document.write('<link rel="stylesheet" href="/paper.css?v=46">');
+document.write('<link rel="stylesheet" href="/paper.css?v=47">');
 (function () {
   const KA = document.documentElement.lang === "ka";
   const root = new URL(".", document.currentScript.src).href; // folder that holds nav.js = the site root
@@ -103,7 +103,11 @@ document.write('<link rel="stylesheet" href="/paper.css?v=46">');
   function adopt() {
     const r = gameRoot();
     if (!r || !DESK.matches || document.body.classList.contains("phone-play")) return;
-    const title = r.id === "crossword" ? r.querySelector("main > h1") : null; // crosswords: the puzzle name goes in the middle of the strip
+    // crosswords: the puzzle name goes in the middle of the strip (next to the Back link).
+    // Top 5, Scramble, Word Search: the game name goes at the left of the strip (no Back link: they are opened from the menu, not from a list).
+    const leftTitle = r.id !== "crossword";
+    const title = r.id === "crossword" ? r.querySelector("main > h1") : r.querySelector(".page-head h1");
+    sub.classList.toggle("kp-sub-left", leftTitle);
     if (title) { sub.querySelectorAll("h1").forEach((o) => { if (o !== title) o.remove(); }); sub.insertBefore(title, subRight); moved = true; }
     [[".back", sub], ["[data-pill]", subRight], [".meta", subRight]].forEach(([q, to]) => {
       r.querySelectorAll(q).forEach((el) => {
