@@ -1,4 +1,4 @@
-// Lists for the Top 5 game (test version, English).
+// Lists for the Top 5 game (English).
 // Rules for a list: the numbers must all be different (no ties), and the last place must be clearly ahead of the one just outside the list.
 // name = what we show. alt = other ways a player can type it (surnames, nicknames), lowercase, no accents needed.
 // ambiguous = words that are too vague to count as a guess (no life lost).
