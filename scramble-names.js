@@ -2,6 +2,8 @@
 // To add a player, add a line. Use one word only (the name fans say), no spaces.
 // a: 1 = still playing, a: 0 = career finished. Check this list now and then: players retire.
 window.SCRAMBLE_NAMES = [
+  { en: "YAMAL", ka: "იამალი", a: 1 },
+  { en: "DEMBELE", ka: "დემბელე", a: 1 },
   { en: "MESSI", ka: "მესი", a: 1 },
   { en: "RONALDO", ka: "რონალდუ", a: 1 },
   { en: "MARADONA", ka: "მარადონა", a: 0 },
