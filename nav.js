@@ -2,7 +2,18 @@
 // Every page loads it with <script src="…/nav.js"></script> right after <body>. It works out three things by itself:
 // the language (<html lang>), which game this page belongs to (first folder in the address), and where the site root is.
 // The newspaper look ("paper" style) is LIVE on every page. This line loads paper.css and the line further down loads paper.js. Remove both and the site goes back to the old look.
-document.write('<link rel="stylesheet" href="/paper.css?v=48">');
+// Page-to-page flicker fix: (1) hide the page until paper.css has arrived, so the old look never shows for a moment before the newspaper look (a safety timer shows the page after 2.5 s in any case);
+// (2) ask for the newspaper fonts at once (preload) instead of waiting until paper.css has been read. Keep this list in step with the @font-face lines at the top of paper.css.
+(function () {
+  const de = document.documentElement, ka = de.lang === "ka";
+  const show = () => { de.style.visibility = ""; };
+  de.style.visibility = "hidden";
+  setTimeout(show, 2500);
+  window.__kpShow = show;
+  const FONTS = ka ? ["ranchers", "firago-bold", "noto-sans-georgian-bold"] : ["ranchers", "poppins-400", "poppins-600"];
+  document.write(FONTS.map((f) => '<link rel="preload" href="/fonts/paper/' + f + '.woff2" as="font" type="font/woff2" crossorigin>').join("") +
+    '<link rel="stylesheet" href="/paper.css?v=48" onload="__kpShow()" onerror="__kpShow()">');
+})();
 (function () {
   const KA = document.documentElement.lang === "ka";
   const root = new URL(".", document.currentScript.src).href; // folder that holds nav.js = the site root
