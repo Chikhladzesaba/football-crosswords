@@ -1210,3 +1210,12 @@ html[data-skin="color"][data-game][data-game][data-game] .t5-heart svg { fill: v
 html[data-skin][data-game][data-game][data-game] .t5-heart.lost svg { fill: none; opacity: .4; }
 /* "How to play" (Top 5, Scramble, Word Search, crossword): the space under it was twice the space above, because the footer adds its own gap on top of the row's padding */
 html[data-skin][data-game][data-game][data-game] body:has(.t5-rules, .sc-rules, .ws-rules, .howto) .site-footer { margin-top: 0; }
+/* Top 5 on a phone: the "found" count is only "✓ 0/5" and sits on the left of the hearts (same row, hearts on the right); the list title gets the whole line above and wraps to two lines when it is long. The full words stay for screen readers. */
+#t5Count .c-short { display: none; }
+@media (max-width: 640px) {
+  html[data-skin][data-game][data-game][data-game] #top5 .t5-status { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  html[data-skin][data-game][data-game][data-game] #top5 .t5-status .count { font-size: 15px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+  html[data-skin][data-game][data-game][data-game] #top5 .t5-status .t5-lives { margin-left: auto; }
+  #t5Count .c-short { display: inline; }
+  #t5Count .c-full { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+}
