@@ -96,12 +96,22 @@
   // On a computer it stays in the right-hand column.
   (function () {
     const card = root.querySelector(".t5-card"), side = root.querySelector(".t5-side"), board = $("t5Board"), head = root.querySelector(".page-head");
-    const onPhone = ["t5Form", "t5Msg", "t5Lives", "t5Note"].map($);
+    const onPhone = ["t5Form", "t5Msg"].map($);
     const onComputer = ["t5Note", "t5Form", "t5Msg"].map($); // the hearts sit at the right end of the intro line instead
     const mq = matchMedia("(max-width: 640px)");
+    // On a phone the "found" count and the hearts share one row (count on the left, hearts on the right), so the list title gets the whole line above.
+    const count = $("t5Count"), lives = $("t5Lives"), headBox = root.querySelector(".t5-cardhead"), status = document.createElement("div");
+    status.className = "t5-status";
     function place() {
-      if (mq.matches) onPhone.forEach((el) => card.insertBefore(el, board));
-      else { head.appendChild($("t5Lives")); onComputer.forEach((el) => side.insertBefore(el, side.querySelector(".actions"))); }
+      if (mq.matches) {
+        status.append(count, lives);
+        [...onPhone, status, $("t5Note")].forEach((el) => card.insertBefore(el, board));
+      } else {
+        headBox.appendChild(count);
+        head.appendChild(lives);
+        status.remove();
+        onComputer.forEach((el) => side.insertBefore(el, side.querySelector(".actions")));
+      }
     }
     place();
     mq.addEventListener("change", place);
@@ -186,7 +196,9 @@
       }
       b.appendChild(li);
     });
-    $("t5Count").textContent = TEXT.found(found.filter(Boolean).length, list.items.length);
+    const nFound = found.filter(Boolean).length, nTotal = list.items.length;
+    // Full words for a computer and for screen readers; on a phone only "✓ 0/5" is shown (see the Top 5 block at the end of paper.css)
+    $("t5Count").innerHTML = `<span class="c-full">${TEXT.found(nFound, nTotal)}</span><span class="c-short" aria-hidden="true">✓ ${nFound}/${nTotal}</span>`;
   }
   // Lives are hearts (a filled heart = a life left, an outline = a life lost). No word next to them.
   const HEART = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
