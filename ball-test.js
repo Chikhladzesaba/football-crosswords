@@ -3,7 +3,7 @@
   // ---- Texts. Change the game name here (one line per language). ----
   const NAME = { en: "Ball Control Test", ka: "ბურთის ფლობის ტესტი" };
   const T = {
-    en: { start: "Tap the ball to start", hint: "Tap the ball to keep it in the air. Tap its left side to send it right.", over: "Ball dropped :(", score: "touches", best: "Best", again: "Play again", pops: ["Nice!", "Great!", "Wow!", "Legend!"] },
+    en: { start: "", hint: "Tap the ball to start. Don't let it drop! The further you go, the harder it gets. Good luck!", over: "You dropped the ball :(", score: "touches", best: "Best", again: "Play again", pops: ["Nice!", "Great!", "Wow!", "Legend!"] },
     ka: { start: "", hint: "დაკლიკე ბურთს და დაიწყე. მთავარია, ბურთი არ დაგივარდეს! რაც უფრო შორს წახვალ, თამაში უფრო გართულდება. აბა, შენ იცი!", over: "ბურთი დაგივარდა :(", score: "შეხება", best: "რეკორდი", again: "ითამაშე თავიდან", pops: ["კარგია!", "შესანიშნავია!", "ყოჩაღ!", "უჰ!"] }
   };
   const MILESTONES = [10, 25, 50, 100];
