@@ -2,14 +2,19 @@
 // Every page loads it with <script src="…/nav.js"></script> right after <body>. It works out three things by itself:
 // the language (<html lang>), which game this page belongs to (first folder in the address), and where the site root is.
 // The newspaper look ("paper" style) is LIVE on every page. This line loads paper.css and the line further down loads paper.js. Remove both and the site goes back to the old look.
-// Page-to-page flicker fix: (1) hide the page until paper.css has arrived, so the old look never shows for a moment before the newspaper look (a safety timer shows the page after 2.5 s in any case);
+// Page-to-page flicker fix: (1) hide the page until paper.css has arrived AND the page has finished building, so the old look never shows for a moment before the newspaper look (a safety timer shows the page after 2.5 s in any case);
 // (2) ask for the newspaper fonts at once (preload) instead of waiting until paper.css has been read. Keep this list in step with the @font-face lines at the top of paper.css.
 (function () {
   const de = document.documentElement, ka = de.lang === "ka";
   const show = () => { de.style.visibility = ""; };
+  // Show the page only when BOTH are true: paper.css has arrived AND the page has finished building itself (DOMContentLoaded: menu, cards, footer are all in place).
+  // Showing it on paper.css alone let the page appear half built on a slow phone and then jump as the rest was added.
+  let cssOk = false, domOk = document.readyState !== "loading";
+  const tryShow = () => { if (cssOk && domOk) requestAnimationFrame(() => requestAnimationFrame(show)); };
+  if (!domOk) document.addEventListener("DOMContentLoaded", () => { domOk = true; setTimeout(tryShow, 0); }); // setTimeout: lets the footer (added at DOMContentLoaded) go in first
   de.style.visibility = "hidden";
   setTimeout(show, 2500);
-  window.__kpShow = show;
+  window.__kpShow = () => { cssOk = true; tryShow(); };
   const FONTS = ka ? ["ranchers", "firago-bold", "noto-sans-georgian-bold"] : ["ranchers", "poppins-400", "poppins-600"];
   document.write(FONTS.map((f) => '<link rel="preload" href="/fonts/paper/' + f + '.woff2" as="font" type="font/woff2" crossorigin>').join("") +
     '<link rel="stylesheet" href="/paper.css?v=48" onload="__kpShow()" onerror="__kpShow()">');
