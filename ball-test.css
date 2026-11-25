@@ -1,0 +1,19 @@
+/* Ball Control Test page. Colours match the newspaper look. */
+.bt-wrap{--paper:#F0EFEC;--soft:#DAD8D3;--ink:#1c1a17;--muted:#5b5446;position:relative;width:min(100%,480px);height:min(78vh,680px);height:min(78dvh,680px);margin:0 auto 14px;background:var(--paper);color:var(--ink);border:2px solid var(--ink);border-radius:6px;overflow:hidden;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
+.bt-wrap canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.bt-hud{position:absolute;left:0;right:0;top:0;height:72px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;pointer-events:none}
+.bt-best{font-size:14px;font-weight:600;color:var(--muted);min-width:90px}
+.bt-score{font-size:46px;font-weight:900;line-height:1;text-align:center}
+.bt-score small{display:block;font-size:11px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.bt-spacer{min-width:90px}
+.bt-intro{position:absolute;left:0;right:0;top:78px;text-align:center;pointer-events:none;padding:8px 24px}
+.bt-intro h1{margin:0 0 6px;font-size:28px;line-height:1.1;text-transform:uppercase}
+.bt-intro p{margin:0;font-size:14px;line-height:1.4;color:var(--muted)}
+.bt-card{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);width:min(78%,300px);text-align:center;background:var(--paper);border:2px solid var(--ink);border-radius:6px;padding:18px 20px;box-shadow:5px 5px 0 var(--ink)}
+.bt-card h2{margin:0 0 6px;font-size:20px;font-weight:900}
+.bt-card .big{font-size:46px;font-weight:900;line-height:1.1}
+.bt-card .sub{font-size:13px;color:var(--muted);margin:2px 0 14px}
+.bt-card button{font:inherit;font-size:15px;font-weight:800;color:var(--paper);background:var(--ink);border:0;border-radius:4px;padding:12px 18px;width:100%;cursor:pointer}
+.bt-wrap [hidden]{display:none!important}
+.bt-leave:hover{text-decoration:underline}
+.bt-leave{display:block;margin-top:12px;font-size:14px;font-weight:600;color:var(--muted);text-decoration:none}
