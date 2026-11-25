@@ -3,7 +3,7 @@
 // What it does:
 //  1. Sets the DEFAULT consent for Google Analytics by country: Georgia (GE) = counting is on, every other country = off until the visitor says OK.
 //     (Google's Consent Mode decides the country itself; see https://developers.google.com/tag-platform/security/guides/consent)
-//  2. Shows a small banner once, with two buttons: OK / No thanks. The choice is kept in the browser (localStorage "kp-consent").
+//  2. Shows a thin one-line banner at the bottom of the two home pages (/ and /en/) until the visitor picks Yes / No. The choice is kept in the browser (localStorage "kp-consent").
 //  3. Adds a "Cookie settings" link to the footer so the visitor can change the choice later.
 //  4. Loads Google's tag (gtag.js) once GA_ID below has a value.
 //
@@ -19,10 +19,12 @@
   const KEY = "kp-consent"; // "granted" or "denied"
   const root = new URL(".", document.currentScript ? document.currentScript.src : location.href).href; // folder that holds consent.js = the site root
   const TEXT = KA
-    ? { msg: "Kickoff Puzzles იყენებს Google Analytics-ს (ქუქი-ფაილებს), რომ დაითვალოს, რომელ თამაშებს თამაშობენ, და საიტი გააუმჯობესოს. ეთანხმები?",
-        yes: "კარგი", no: "არა, გმადლობ", more: "დეტალები", label: "ქუქი-ფაილები", settings: "ქუქი-პარამეტრები", privacy: root + "ka/privacy/" }
-    : { msg: "Kickoff Puzzles uses Google Analytics (cookies) to count which games are played and to improve the site. Is that OK?",
-        yes: "OK", no: "No thanks", more: "Details", label: "Cookies", settings: "Cookie settings", privacy: root + "privacy/" };
+    ? { msg: "ჩვენ ვიყენებთ cookie ფაილებს საიტის გასაუმჯობესებლად. ეთანხმები?",
+        yes: "კი", no: "არა", more: "დეტალები", label: "ქუქი-ფაილები", settings: "ქუქი-პარამეტრები", privacy: root + "ka/privacy/" }
+    : { msg: "We use cookies to improve the site. Is that OK?",
+        yes: "Yes", no: "No", more: "Details", label: "Cookies", settings: "Cookie settings", privacy: root + "privacy/" };
+  const seg = location.pathname.split("/").filter(Boolean);
+  const IS_HOME = seg.length === 0 || (seg.length === 1 && (seg[0] === "en" || seg[0] === "ka")); // the front pages: / (Georgian), /en/ (English), /ka/ (forwards to /)
 
   const read = () => { try { const v = localStorage.getItem(KEY); return v === "granted" || v === "denied" ? v : null; } catch (e) { return null; } };
   const save = (v) => { try { localStorage.setItem(KEY, v); } catch (e) {} };
@@ -81,14 +83,10 @@
     row.append(yes, no);
     box.append(p, row);
     document.body.appendChild(box);
-    if (document.body.classList.contains("phone-play")) { // keep it clear of the header (its position is measured, the header height differs by phone)
-      const tb = document.querySelector(".topbar");
-      box.style.top = (tb ? Math.round(tb.getBoundingClientRect().bottom) + 8 : 10) + "px";
-    }
   };
 
   const start = () => {
-    if (PREVIEW || !read()) show();
+    if ((PREVIEW || !read()) && IS_HOME) show(); // asked only on the home pages; the footer link below opens it anywhere
     // "Cookie settings" link under the footer (nav.js builds the footer when the page has loaded; this runs right after it).
     // It is its own line, not a link inside the footer: the footer row on the game pages has no room for a fourth link on a phone.
     const foot = document.querySelector(".site-footer");
@@ -105,24 +103,20 @@
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => setTimeout(start, 0)); else setTimeout(start, 0);
 
-  // The banner sits at the bottom; on a crossword played on a phone (own keyboard at the bottom) it sits at the top, just under the header, so it cannot cover the keyboard.
+  // A thin strip at the bottom of the screen, small text, one line (wraps only on very narrow phones).
   const CSS = `
-.kp-consent { position: fixed; left: 10px; right: 10px; bottom: 10px; z-index: 9000; max-width: 640px; margin: 0 auto; padding: 14px 16px; box-sizing: border-box;
-  background: var(--paper, #F0EFEC); color: var(--ink, #1c1a17); border: 2px solid var(--ink, #1c1a17); border-radius: 5px 9px 6px 10px / 9px 5px 10px 6px; box-shadow: 4px 4px 0 var(--ink, #1c1a17);
-  font: 400 14px/1.45 inherit; font-family: inherit; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
-.kp-consent p { margin: 0; flex: 1 1 280px; }
+.kp-consent { position: fixed; left: 0; right: 0; bottom: 0; z-index: 9000; box-sizing: border-box; padding: 6px 12px calc(6px + env(safe-area-inset-bottom));
+  background: var(--paper, #F0EFEC); color: var(--ink, #1c1a17); border-top: 1px solid var(--ink, #1c1a17);
+  font-family: inherit; font-size: 12px; line-height: 1.3; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 12px; }
+.kp-consent p { margin: 0; }
 .kp-consent a { color: inherit; text-decoration: underline; }
-.kp-consent-btns { display: flex; gap: 10px; flex: 0 0 auto; }
-.kp-consent button { font: inherit; font-weight: 500; padding: 8px 16px; min-height: 40px; cursor: pointer; color: var(--ink, #1c1a17); background: var(--paper, #F0EFEC);
-  border: 2px solid var(--ink, #1c1a17); border-radius: 5px 9px 6px 10px / 9px 5px 10px 6px; }
+.kp-consent-btns { display: flex; gap: 8px; }
+.kp-consent button { font: inherit; font-weight: 600; padding: 3px 14px; min-height: 28px; cursor: pointer; color: var(--ink, #1c1a17); background: transparent;
+  border: 1px solid var(--ink, #1c1a17); border-radius: 4px; }
 .kp-consent button.kp-consent-yes { background: var(--ink, #1c1a17); color: var(--paper, #F0EFEC); }
-.kp-consent button:focus-visible, .kp-consent a:focus-visible { outline: 3px solid var(--ink, #1c1a17); outline-offset: 2px; }
-@media (max-width: 760px) { .kp-consent { bottom: calc(10px + env(safe-area-inset-bottom)); } }
-body.phone-play .kp-consent { bottom: auto; top: 10px; }
+.kp-consent button:focus-visible, .kp-consent a:focus-visible { outline: 2px solid var(--ink, #1c1a17); outline-offset: 2px; }
 .kp-cookie-line { max-width: 968px; margin: 0 auto; padding: 0 16px 18px; text-align: center; font-size: 12px; color: var(--muted, #5b5446); }
 .kp-cookie-line a { color: inherit; text-decoration: underline; }
 body.phone-play .kp-cookie-line { display: none; }
-@media (prefers-reduced-motion: no-preference) { .kp-consent { animation: kp-consent-in .25s ease-out; } }
-@keyframes kp-consent-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 `;
 })();
