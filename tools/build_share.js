@@ -14,7 +14,7 @@ const path = require("path");
 const { chromium } = require("playwright");
 
 const SITE = "https://kickoffpuzzles.com/";
-const BRAND = "Football Crosswords";
+const BRAND = "Kickoff Puzzles";
 const KA_PUBLIC = true; // true = Georgian pages may appear on Google (live since Nov 2026)
 const ONLY = (process.argv.indexOf("--lang") > -1) ? process.argv[process.argv.indexOf("--lang") + 1] : null;
 const IMAGES_ONLY = process.argv.includes("--images-only"); // only redraw share.png files, leave pages/sitemap alone
@@ -22,7 +22,7 @@ const write = (...a) => { if (!IMAGES_ONLY) fs.writeFileSync(...a); };
 const langOf = (c) => c.lang || "en";
 // Georgian texts (approved by Saba)
 const KA = {
-  brand: "საფეხბურთო კროსვორდები",
+  brand: "Kickoff Puzzles",
   title: (c) => `${c.name} | საფეხბურთო კროსვორდი`,
   description: (c, level) => `${c.about} საფეხბურთო კროსვორდი, სირთულე: ${level}. შეგიძლია ითამაშო ტელეფონზეც და კომპიუტერზეც.`,
   level: { "Easy": "მარტივი", "Medium": "საშუალო", "Hard": "რთული", "Very hard": "ძალიან რთული" },
@@ -231,7 +231,7 @@ const gapNote = (what, gap) => { if (gap < 24) console.log("  !! title is close 
   {
   let home = fs.readFileSync(path.join(ROOT, "crosswords", "index.html"), "utf8");
   home = home.replace(/  <title>[\s\S]*?(?=  <link rel="icon")/, headTags({
-    title: `${BRAND}: free football crosswords to play online`,
+    title: `Free Football Crosswords to Play Online | ${BRAND}`,
     description: `Football crosswords on the World Cup, the Champions League, the Premier League and other football topics.`,
     url: SITE + "crosswords/", image: SITE + "crosswords/share.png", alternates: KA_PUBLIC ? HOME_ALTERNATES : [],
   }) + "\n");
