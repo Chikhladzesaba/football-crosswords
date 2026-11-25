@@ -12,6 +12,9 @@
   // ---- LANGUAGE -----------------------------------------------------------
   // English by default. A puzzle with lang: ka in words.txt gets Georgian labels and a Georgian font.
   const KA = P.lang === "ka";
+  // ---- ANALYTICS (Google Analytics events; see consent.js) ----
+  // The three details sent with every event: which game, which puzzle, which language.
+  const track = (name, extra) => { if (window.kpTrack) kpTrack(name, Object.assign({ game: "crossword", puzzle_id: P.id, language: KA ? "ka" : "en" }, extra)); };
   const T = KA ? {
     back: "← ყველა კროსვორდი", check: "შემოწმება", clearWord: "სიტყვის წაშლა", reveal: "სიტყვის ჩვენება", letter: "ასოს ჩვენება",
     playNext: "ითამაშე სხვა კროსვორდი", more: "ითამაშე სხვა კროსვორდები", allDone: "ყველა კროსვორდი ამოხსნილი გაქვს! 🏆", home: "ყველა კროსვორდი",
@@ -353,6 +356,7 @@
     $("result").hidden = false;
     $("resultText").textContent = T.done(words.length, fmt(state.elapsed), helpText());
     const fresh = !state.wasDone; // reopening an already finished puzzle shows no popup
+    if (fresh) track("game_complete", { duration_sec: state.elapsed, no_help: state.hinted.size === 0 && state.revealed.size === 0 && !state.autoUsed });
     recordSolve();
     withList(showNext);
     if (fresh) showWin();
@@ -459,6 +463,7 @@
   }
   function resultText() { return T.result(words.length, fmt(state.elapsed), helpText()); }
   async function share(text, url, noteId, anchor) {
+    track("share", { method: "result" });
     const note = $(noteId);
     const full = text + "\n" + url;
     if (navigator.share && matchMedia("(pointer: coarse)").matches) {
@@ -561,6 +566,7 @@
   function fmt(s) { return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); }
   function startTimer() {
     if (state.timerId || state.done) return;
+    if (state.elapsed === 0 && !state.startSent) { state.startSent = true; track("game_start"); } // a brand new game, once per page load (resuming a saved game is not a new start)
     state.started = Date.now() - state.elapsed * 1000;
     state.timerId = setInterval(() => {
       state.elapsed = Math.floor((Date.now() - state.started) / 1000);
