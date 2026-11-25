@@ -142,9 +142,15 @@
 
   // ---- State ----
   let grid, placed, found, hints, over, startTs, tick, anchor, drag;
+  // ---- ANALYTICS (Google Analytics events; see consent.js) ----
+  // Every event carries: which game, which puzzle, which language. "began" makes game_start fire once per game, on the player's first real action.
+  const track = (name, extra) => { if (window.kpTrack) kpTrack(name, Object.assign({ game: "wordsearch", puzzle_id: "random", language: document.documentElement.lang === "ka" ? "ka" : "en" }, extra)); };
+  let began = false;
+  const begin = () => { if (!began) { began = true; track("game_start"); } };
 
   function newGame() {
     clearInterval(tick);
+    began = false;
     let b = null;
     while (!b) b = build(pickWords());
     grid = b.g; placed = b.placed; found = placed.map(() => false); hints = 0; over = false; anchor = null; drag = null;
@@ -242,6 +248,7 @@
   const grd = $("wsGrid");
   grd.addEventListener("pointerdown", (e) => {
     if (over) return;
+    begin();
     e.preventDefault();
     const [lr, lc] = cellAt(e);
     if (isLocked(lr, lc)) return; // an already found letter cannot be picked
@@ -273,6 +280,7 @@
   // ---- Hint, give up, finish ----
   function hint() {
     if (over) return;
+    begin();
     const left = placed.map((p, i) => i).filter((i) => !found[i]);
     if (!left.length) return;
     const p = placed[left[rand(left.length)]], [r, c] = p.cells[0], e = cellEl(r, c);
@@ -290,6 +298,7 @@
 
   function modal(won) {
     const n = found.filter(Boolean).length;
+    track("game_complete", { result: won ? "win" : "lose", found: n, total: placed.length, hints_used: hints });
     $("wsModalTitle").textContent = won ? TEXT.wonTitle : TEXT.lostTitle;
     $("wsModalText").textContent = won ? TEXT.wonText(timeText, hints, placed.length) : TEXT.lostText(n, placed.length);
     // Won: Share is the main button. Gave up: "Try again" is the main button and Share comes second.
@@ -304,6 +313,7 @@
   }
 
   async function share() {
+    track("share", { method: "result" });
     const n = found.filter(Boolean).length;
     const url = location.origin + location.pathname + "?utm_source=share&utm_medium=social&utm_campaign=wordsearch";
     const text = `${TEXT.shareTitle}\n${TEXT.shareLine(n, placed.length, timeText, TEXT.shareHelp(hints))}`;

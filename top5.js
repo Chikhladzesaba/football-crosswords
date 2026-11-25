@@ -136,6 +136,11 @@
   // ---- State ----
   let run = [], round = 0, list, found, lives, hints = 0, over, done = 0, timer;
   const wanted = window.TOP5_LIST || new URLSearchParams(location.search).get("list"); // the list's own page sets TOP5_LIST; ?list=laliga-scorers also opens one list first (for testing)
+  // ---- ANALYTICS (Google Analytics events; see consent.js) ----
+  // Every event carries: which game, which puzzle, which language. "began" makes game_start fire once per game, on the player's first real action.
+  const track = (name, extra) => { if (window.kpTrack) kpTrack(name, Object.assign({ game: "top5", puzzle_id: (wanted || "random"), language: document.documentElement.lang === "ka" ? "ka" : "en" }, extra)); };
+  let began = false;
+  const begin = () => { if (!began) { began = true; track("game_start"); } };
 
   // A new game: pick 3 different lists at random (?list=id puts that list first)
   function newRun() {
@@ -143,7 +148,7 @@
     let idx = shuffle(LISTS.map((_, i) => i));
     const w = LISTS.findIndex((l) => l.id === wanted);
     if (w >= 0) idx = [w, ...idx.filter((i) => i !== w)];
-    run = idx.slice(0, ROUNDS); round = 0; hints = 0; done = 0;
+    run = idx.slice(0, ROUNDS); round = 0; hints = 0; done = 0; began = false;
     $("t5Modal").hidden = true;
     start(LISTS[run[0]]);
   }
@@ -230,6 +235,7 @@
     const raw = $("t5Input").value;
     const i = match(raw);
     if (i === -3) return;
+    begin();
     $("t5Input").value = "";
     if (i === -2) return say(TEXT.vague);
     if (i >= 0) {
@@ -259,6 +265,7 @@
   function hint(i) {
     const n = list.items[i];
     if (over || found[i] || n.shown >= maxHint(n)) return;
+    begin();
     n.shown++; hints++; drawBoard();
     say(TEXT.hintMsg(hintStart(n)));
   }
@@ -288,6 +295,7 @@
   }
 
   function modal(won) {
+    track("game_complete", { result: won ? "win" : "lose", lists_done: done, hints_used: hints });
     $("t5ModalTitle").textContent = won ? TEXT.wonTitle(ROUNDS) : TEXT.lostTitle;
     $("t5ModalText").textContent = won
       ? TEXT.wonText(ROUNDS) + (hints ? " " + TEXT.hintsUsed(hints) : "")
@@ -305,6 +313,7 @@
   }
 
   async function share() {
+    track("share", { method: "result" });
     const won = done === ROUNDS;
     const url = location.origin + location.pathname + "?utm_source=share&utm_medium=social&utm_campaign=top5";
     const text = `${TEXT.shareTitle}\n${TEXT.shareScore(won, done, ROUNDS, TEXT.shareHelp(hints))}`;
