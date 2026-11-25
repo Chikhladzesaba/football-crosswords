@@ -15,6 +15,7 @@ body:has(.bt-wrap) :is(.topbar,.games-nav,.kp-subbar,.kp-menu,.kp-mast,.site-foo
 .bt-card{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);width:min(78%,300px);text-align:center;background:var(--paper);border:2px solid var(--ink);border-radius:6px;padding:18px 20px;box-shadow:5px 5px 0 var(--ink)}
 .bt-card h2{margin:0 0 6px;font-size:20px;font-weight:900}
 .bt-card .big{font-size:46px;font-weight:900;line-height:1.1}
+.bt-card .big span{font-size:18px;font-weight:600;color:var(--muted)}
 .bt-card .sub{font-size:13px;color:var(--muted);margin:2px 0 14px}
 .bt-card button{font:inherit;font-size:15px;font-weight:800;color:var(--paper);background:var(--ink);border:0;border-radius:4px;padding:12px 18px;width:100%;cursor:pointer}
 .bt-wrap [hidden]{display:none!important}

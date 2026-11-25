@@ -28,7 +28,7 @@
     $("bt-score").innerHTML = state === "ready" ? "" : score + "<small>" + t.score + "</small>";
     $("bt-intro").hidden = state !== "ready";
     $("bt-card").hidden = state !== "over";
-    if (state === "over") { $("bt-overTitle").textContent = t.over; $("bt-overScore").textContent = score; $("bt-overBest").textContent = t.score + " · " + t.best + ": " + best; $("bt-again").textContent = t.again; }
+    if (state === "over") { $("bt-overTitle").textContent = t.over; $("bt-overScore").innerHTML = score + " <span>" + t.score + "</span>"; $("bt-overBest").textContent = t.best + ": " + best; $("bt-again").textContent = t.again; }
   }
 
   // ---- Ground: striped pitch strip in the site's ink style ----
