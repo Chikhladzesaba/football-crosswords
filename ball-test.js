@@ -84,6 +84,10 @@
     const reach = r * (3.8 - Math.min(score, 40) * .05); // big tap area at the start, shrinks as you score
     if (Math.hypot(px - ball.x, py - ball.y) <= reach) { if (state === "ready") state = "play"; kick(px, py); ui(); }
   });
+  // iPhone: stop double-tap zoom and two-finger pinch zoom while playing
+  let lastTouch = 0;
+  document.addEventListener("touchend", (e) => { const t = Date.now(); if (t - lastTouch < 350) e.preventDefault(); lastTouch = t; }, { passive: false });
+  document.addEventListener("gesturestart", (e) => e.preventDefault());
   $("bt-again").addEventListener("click", reset);
   window.addEventListener("resize", size);
 
