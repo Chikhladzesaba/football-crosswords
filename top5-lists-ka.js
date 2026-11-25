@@ -1,4 +1,5 @@
 // Georgian version of the Top 5 game. Same lists and numbers as top5-lists.js, so update both files together.
+// twin = the id of the same list in top5-lists.js (used by tools/build_top5_pages.js for hreflang and the language switch).
 // The list ids here are Georgian words in Latin letters (?list=seria-as-bombardirebi opens one list for testing). The English file keeps English ids.
 // TOP5_TEXT = every word the player sees (top5.js has the English default). TOP5_LISTS = the lists.
 // name = what we show. alt = other ways to type it (Georgian spellings, surnames, English names). Case and spaces do not matter.
@@ -53,6 +54,7 @@ const KANE = { name: "ჰარი კეინი", alt: ["კეინი", "�
 window.TOP5_LISTS = [
   {
     id: "chempionta-ligis-bombardirebi",
+    twin: "ucl-scorers",
     title: "ჩემპიონთა ლიგის ყველა დროის საუკეთესო ბომბარდირები",
     desc: "ჩემპიონთა ლიგის ყველა დროის საუკეთესო ბომბარდირების ტოპ 5.",
     unit: "გოლი",
@@ -69,6 +71,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "premierligis-titulebi",
+    twin: "pl-titles",
     title: "პრემიერლიგის ტიტულები კლუბების მიხედვით",
     desc: "პრემიერლიგის ტიტულების ტოპ 5 კლუბების მიხედვით.",
     unit: "ტიტული",
@@ -86,6 +89,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "la-ligis-bombardirebi",
+    twin: "laliga-scorers",
     title: "ლა ლიგის ყველა დროის საუკეთესო ბომბარდირები",
     desc: "ლა ლიგის ყველა დროის საუკეთესო ბომბარდირების ტოპ 5.",
     unit: "გოლი",
@@ -102,6 +106,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "premierligis-bombardirebi",
+    twin: "pl-scorers",
     title: "პრემიერლიგის ყველა დროის საუკეთესო ბომბარდირები",
     desc: "პრემიერლიგის ყველა დროის საუკეთესო ბომბარდირების ტოპ 5.",
     unit: "გოლი",
@@ -118,6 +123,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "bundesligis-bombardirebi",
+    twin: "bundesliga-scorers",
     title: "ბუნდესლიგის ყველა დროის საუკეთესო ბომბარდირები",
     desc: "ბუნდესლიგის ყველა დროის საუკეთესო ბომბარდირების ტოპ 5.",
     unit: "გოლი",
@@ -134,6 +140,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "msoflio-chempionatis-bombardirebi",
+    twin: "wc-scorers",
     title: "მსოფლიო ჩემპიონატის ყველა დროის საუკეთესო ბომბარდირები",
     desc: "მსოფლიო ჩემპიონატის ყველა დროის საუკეთესო ბომბარდირების ტოპ 5.",
     unit: "გოლი",
@@ -151,6 +158,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "seria-as-bombardirebi",
+    twin: "seriea-scorers",
     title: "სერია A-ს ყველა დროის საუკეთესო ბომბარდირები",
     desc: "სერია A-ს ყველა დროის საუკეთესო ბომბარდირების ტოპ 5.",
     unit: "გოლი",
@@ -168,6 +176,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "yvelaze-meti-matchi-chempionta-ligaze",
+    twin: "ucl-appearances",
     title: "ყველაზე მეტი მატჩი ჩემპიონთა ლიგაზე",
     desc: "ჩემპიონთა ლიგაზე ყველაზე მეტი მატჩის ტოპ 5.",
     unit: "მატჩი",
@@ -185,6 +194,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "vis-aqvs-la-liga-yvelaze-metjer-mogebuli",
+    twin: "laliga-titles",
     title: "ვის აქვს ლა ლიგა ყველაზე მეტჯერ მოგებული?",
     desc: "ვის აქვს ლა ლიგა ყველაზე მეტჯერ მოგებული?",
     unit: "ტიტული",
@@ -202,6 +212,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "vis-aqvs-chempionta-ligaze-yvelaze-meti-penalti-gatanili",
+    twin: "ucl-penalties",
     title: "ვის აქვს ჩემპიონთა ლიგაზე ყველაზე მეტი პენალტი გატანილი?",
     desc: "ვის აქვს ჩემპიონთა ლიგაზე ყველაზე მეტი პენალტი გატანილი?",
     unit: "პენალტი",
@@ -220,6 +231,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "vin-gaatara-chempionta-ligaze-yvelaze-meti-tsuti-moedanze",
+    twin: "ucl-minutes",
     title: "ვინ გაატარა ჩემპიონთა ლიგაზე ყველაზე მეტი წუთი მოედანზე?",
     desc: "ვინ გაატარა ჩემპიონთა ლიგაზე ყველაზე მეტი წუთი მოედანზე?",
     unit: "წუთი",
@@ -237,6 +249,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "vis-aqvs-chempionta-ligaze-yvelaze-meti-asisti",
+    twin: "ucl-assists",
     title: "ვის აქვს ჩემპიონთა ლიგაზე ყველაზე მეტი ასისტი?",
     desc: "ვის აქვს ჩემპიონთა ლიგაზე ყველაზე მეტი ასისტი?",
     unit: "ასისტი",
@@ -255,6 +268,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "romel-mekares-aqvs-chempionta-ligaze-yvelaze-metjer-kari-mshralad",
+    twin: "ucl-clean-sheets",
     title: "რომელ მეკარეს აქვს ჩემპიონთა ლიგაზე ყველაზე მეტჯერ კარი მშრალად შენახული?",
     desc: "რომელ მეკარეს აქვს ჩემპიონთა ლიგაზე ყველაზე მეტჯერ კარი მშრალად შენახული?",
     unit: "მშრალი მატჩი",
@@ -272,6 +286,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "vis-aqvs-chempionta-liga-yvelaze-metjer-mogebuli",
+    twin: "ucl-titles",
     title: "ვის აქვს ჩემპიონთა ლიგა ყველაზე მეტჯერ მოგებული?",
     desc: "ვის აქვს ჩემპიონთა ლიგა ყველაზე მეტჯერ მოგებული?",
     unit: "ტიტული",
@@ -290,6 +305,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "vin-ari-chempionta-ligis-yvelaze-swrafi-golebis-avtori",
+    twin: "ucl-fastest-goals",
     title: "ვინ არიან ჩემპიონთა ლიგის ყველაზე სწრაფი გოლების ავტორები?",
     desc: "ვინ არიან ჩემპიონთა ლიგის ყველაზე სწრაფი გოლების ავტორები?",
     unit: "წამი",
@@ -308,6 +324,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "vis-aqvs-premier-ligashi-yvelaze-meti-matchi",
+    twin: "pl-appearances",
     title: "ვის აქვს პრემიერლიგის ისტორიაში ყველაზე მეტი მატჩი ჩატარებული?",
     desc: "ვის აქვს პრემიერლიგის ისტორიაში ყველაზე მეტი მატჩი ჩატარებული?",
     unit: "მატჩი",
@@ -325,6 +342,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "vis-aqvs-seria-ashi-yvelaze-meti-matchi",
+    twin: "seriea-appearances",
     title: "ვის აქვს სერია A-ს ისტორიაში ყველაზე მეტი მატჩი ჩატარებული?",
     desc: "ვის აქვს სერია A-ს ისტორიაში ყველაზე მეტი მატჩი ჩატარებული?",
     unit: "მატჩი",
@@ -341,6 +359,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "vis-aqvs-premier-ligashi-yvelaze-meti-asisti",
+    twin: "pl-assists",
     title: "ვინ არის პრემიერლიგის ისტორიაში ყველაზე მეტი ასისტის ავტორი?",
     desc: "ვინ არის პრემიერლიგის ისტორიაში ყველაზე მეტი ასისტის ავტორი?",
     unit: "ასისტი",
@@ -357,6 +376,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "vis-aqvs-chempionta-ligaze-ert-klubistvis-yvelaze-meti-goli-gatanili",
+    twin: "ucl-club-goals",
     title: "ვის აქვს ჩემპიონთა ლიგაზე ერთი კლუბისთვის ყველაზე მეტი გოლი გატანილი?",
     desc: "ვის აქვს ჩემპიონთა ლიგაზე ერთი კლუბისთვის ყველაზე მეტი გოლი გატანილი?",
     unit: "გოლი",
@@ -373,6 +393,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "vis-aqvs-chempionta-ligaze-yvelaze-meti-het-triki-shesrulebuli",
+    twin: "ucl-hat-tricks",
     title: "ვის აქვს ჩემპიონთა ლიგაზე ყველაზე მეტი ჰეტ-ტრიკი შესრულებული?",
     desc: "ვის აქვს ჩემპიონთა ლიგაზე ყველაზე მეტი ჰეტ-ტრიკი შესრულებული?",
     unit: "ჰეტ-ტრიკი",
@@ -389,6 +410,7 @@ window.TOP5_LISTS = [
   },
   {
     id: "romelma-mwvrtnelma-moigo-chempionta-ligaze-yvelaze-meti-matchi",
+    twin: "ucl-coach-wins",
     title: "რომელმა მწვრთნელმა მოიგო ჩემპიონთა ლიგაზე ყველაზე მეტი მატჩი?",
     desc: "რომელმა მწვრთნელმა მოიგო ჩემპიონთა ლიგაზე ყველაზე მეტი მატჩი?",
     unit: "გამარჯვება",

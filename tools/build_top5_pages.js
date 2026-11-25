@@ -21,6 +21,12 @@ function swap(html, from, to) {
   return html.replace(from, () => to);
 }
 
+// Twin lists: a Georgian list says twin: "english-id" in top5-lists-ka.js. The pairing works both ways.
+const readLists = (file) => { global.window = {}; const f = path.resolve(file); delete require.cache[f]; require(f); return window.TOP5_LISTS; };
+const EN_LISTS = readLists("top5-lists.js"), KA_LISTS = readLists("top5-lists-ka.js");
+const twinOf = (g, list) => g.ka ? (list.twin && EN_LISTS.find((x) => x.id === list.twin) ? { folder: "top5", id: list.twin } : null)
+                                  : (KA_LISTS.find((x) => x.twin === list.id) ? { folder: "gamoicani-top5", id: KA_LISTS.find((x) => x.twin === list.id).id } : null);
+
 for (const g of GAMES) {
   global.window = {};
   const file = path.resolve(g.lists);
@@ -43,7 +49,16 @@ for (const g of GAMES) {
       h = h.replace(/(<meta name="description" content=")[^"]*(">)/, (_, a, b) => a + desc + b);
       h = h.replace(/(<meta property="og:description" content=")[^"]*(">)/, (_, a, b) => a + desc + b);
     }
-    h = h.replace(/ *<link rel="alternate" hreflang="[^"]*" href="[^"]*">\n/g, ""); // the language links point to the game start pages, not to this list
+    // hreflang: the template's links point to the game start pages. A list with a twin gets links to both lists (both pages say the same); a list without a twin gets none.
+    const tw = twinOf(g, list);
+    let links = "";
+    if (tw) {
+      const en = g.ka ? `${SITE}/top5/${tw.id}/` : url, ka = g.ka ? url : `${SITE}/gamoicani-top5/${tw.id}/`;
+      links = `  <link rel="alternate" hreflang="en" href="${en}">\n  <link rel="alternate" hreflang="ka" href="${ka}">\n  <link rel="alternate" hreflang="x-default" href="${en}">\n`;
+      h = swap(h, `<html lang="${g.ka ? "ka" : "en"}">`, `<html lang="${g.ka ? "ka" : "en"}" data-alt="${tw.folder}/${tw.id}/">`); // makes the language switch jump to the twin list
+    }
+    let first = true;
+    h = h.replace(/ *<link rel="alternate" hreflang="[^"]*" href="[^"]*">\n/g, () => { const r = first ? links : ""; first = false; return r; });
     h = h.replace(/(href|src)="\.\.\//g, '$1="../../'); // the page sits one folder deeper
     h = swap(h, `<script src="../../${g.lists}`, `<script>window.TOP5_LIST = ${JSON.stringify(list.id)};</script>\n  <script src="../../${g.lists}`);
     const dir = path.join(g.folder, list.id);
