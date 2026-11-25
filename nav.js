@@ -78,6 +78,12 @@
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", addFooter); else addFooter();
 
+  // Cookie banner + Google Analytics (consent.js does nothing until it has a GA4 ID; see the top of that file).
+  const cs = document.createElement("script");
+  cs.async = true;
+  cs.src = root + "consent.js?v=1";
+  document.head.appendChild(cs);
+
   // On a phone the round / progress pill sits in the top bar (as in the design); on a computer it stays beside the heading.
   const mq = window.matchMedia("(max-width: 640px)");
   let pillHome = null;
