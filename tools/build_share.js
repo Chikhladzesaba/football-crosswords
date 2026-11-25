@@ -20,6 +20,15 @@ const ONLY = (process.argv.indexOf("--lang") > -1) ? process.argv[process.argv.i
 const IMAGES_ONLY = process.argv.includes("--images-only"); // only redraw share.png files, leave pages/sitemap alone
 const write = (...a) => { if (!IMAGES_ONLY) fs.writeFileSync(...a); };
 const langOf = (c) => c.lang || "en";
+// Twin crosswords: a Georgian entry says twin: "english-folder" in crosswords.js. The pairing works both ways.
+const twinOf = (c) => c.twin ? LIST.find((x) => x.folder === c.twin) : LIST.find((x) => x.twin === c.folder);
+// hreflang links (both pages list both languages, as Google requires) + data-alt, which makes the language switch jump to the twin
+function twinTags(c) {
+  const t = twinOf(c);
+  if (!t || !KA_PUBLIC) return { alternates: [], dataAlt: "" };
+  const en = langOf(c) === "en" ? c : t, ka = langOf(c) === "ka" ? c : t;
+  return { alternates: [["en", SITE + en.folder + "/"], ["ka", SITE + ka.folder + "/"], ["x-default", SITE + en.folder + "/"]], dataAlt: ` data-alt="${t.folder}/"` };
+}
 // Georgian texts (approved by Saba)
 const KA = {
   brand: "Kickoff Puzzles",
@@ -82,12 +91,13 @@ function puzzlePage(c, p) {
   const title = `${c.name} Crossword | ${BRAND}`;
   const description = `${c.about} A free ${c.difficulty.toLowerCase()} football crossword with ${c.answers} answers. Play on your phone or computer.`;
   const clues = p.words.map((w) => `        <li>${w.clue} (${w.answer.length})</li>`).join("\n");
+  const tw = twinTags(c);
   return `<!doctype html>
-<html lang="en">
+<html lang="en"${tw.dataAlt}>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-${headTags({ title, description, url, image: url + "share.png" })}
+${headTags({ title, description, url, image: url + "share.png", alternates: tw.alternates })}
 ${FONT_LINKS}
   <link rel="preload" href="/fonts/FiraGO-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/FiraGO-Medium.woff2" as="font" type="font/woff2" crossorigin>
@@ -124,12 +134,13 @@ function puzzlePageKa(c, p) {
   const url = SITE + c.folder + "/";
   const level = KA.level[c.difficulty];
   const list = (dir) => p.words.filter((w) => w.dir === dir).map((w) => `        <li>${w.clue} (${w.answer.length})</li>`).join("\n");
+  const tw = twinTags(c);
   return `<!doctype html>
-<html lang="ka">
+<html lang="ka"${tw.dataAlt}>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-${headTags({ title: KA.title(c), description: KA.description(c, level), url, image: url + "share.png", brand: KA.brand, locale: "ka_GE", noindex: !KA_PUBLIC })}
+${headTags({ title: KA.title(c), description: KA.description(c, level), url, image: url + "share.png", brand: KA.brand, locale: "ka_GE", noindex: !KA_PUBLIC, alternates: tw.alternates })}
 ${FONT_LINKS}
   <link rel="preload" href="/fonts/FiraGO-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/FiraGO-Medium.woff2" as="font" type="font/woff2" crossorigin>
