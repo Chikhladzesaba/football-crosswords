@@ -103,7 +103,7 @@
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => setTimeout(start, 0)); else setTimeout(start, 0);
 
-  // A thin strip at the bottom of the screen, small text, one line (wraps only on very narrow phones).
+  // A thin strip at the bottom of the screen on phones/tablets, small text (see the wide-screen rule below).
   const CSS = `
 .kp-consent { position: fixed; left: 0; right: 0; bottom: 0; z-index: 9000; box-sizing: border-box; padding: 6px 12px calc(6px + env(safe-area-inset-bottom));
   background: var(--paper, #F0EFEC); color: var(--ink, #1c1a17); border-top: 1px solid var(--ink, #1c1a17);
@@ -115,6 +115,8 @@
   border: 1px solid var(--ink, #1c1a17); border-radius: 4px; }
 .kp-consent button.kp-consent-yes { background: var(--ink, #1c1a17); color: var(--paper, #F0EFEC); }
 .kp-consent button:focus-visible, .kp-consent a:focus-visible { outline: 2px solid var(--ink, #1c1a17); outline-offset: 2px; }
+/* Wide screens: the strip sits in the empty gap of the top row (between the three color dots and the language switch), scrolls away with the page, and covers no content. */
+@media (min-width: 1000px) { .kp-consent { position: absolute; left: 50%; right: auto; bottom: auto; top: 10px; transform: translateX(-50%); width: max-content; max-width: 700px; padding: 0; background: transparent; border-top: 0; } }
 .kp-cookie-line { max-width: 968px; margin: 0 auto; padding: 0 16px 18px; text-align: center; font-size: 12px; color: var(--muted, #5b5446); }
 .kp-cookie-line a { color: inherit; text-decoration: underline; }
 body.phone-play .kp-cookie-line { display: none; }
