@@ -13,9 +13,9 @@
   const $ = (id) => document.getElementById(id);
   const bgc = $("bt-bg"), bctx = bgc.getContext("2d"), cv = $("bt-c"), ctx = cv.getContext("2d");
   const COL = { ink: "", soft: "", paper: "" }; // colours are read once, not on every frame
-  const readColors = () => { const cs = getComputedStyle(document.documentElement); for (const k in COL) COL[k] = cs.getPropertyValue("--" + k).trim(); };
+  const readColors = () => { const cs = getComputedStyle($("bt-c").parentNode); for (const k in COL) COL[k] = cs.getPropertyValue("--" + k).trim(); };
   readColors();
-  let W = 0, H = 0, r = 24;
+  let W = 0, H = 0, U = 0, r = 24;
   const ball = { x: 0, y: 0, vx: 0, vy: 0, rot: 0 };
   let state = "ready", score = 0, last = 0, sparks = [], pops = [];
 
@@ -45,7 +45,7 @@
     const line = (x1, y1, x2, y2) => { const n = Math.max(2, Math.round(Math.hypot(x2 - x1, y2 - y1) / 16)); wob(Array.from({ length: n + 1 }, (_, i) => [x1 + (x2 - x1) * i / n, y1 + (y2 - y1) * i / n])); };
     line(-4, groundY, W + 4, groundY);
     // the goal: if you drop the ball, you concede
-    const gw = Math.min(W * .56, 260), gh = Math.min(H * .13, 96), gx = (W - gw) / 2, gy = groundY - gh;
+    const gw = Math.min(W * .56, U * .6), gh = Math.min(H * .13, 120), gx = (W - gw) / 2, gy = groundY - gh;
     c.save(); c.globalAlpha = .35; c.lineWidth = 1;
     for (let i = 1; i < 12; i++) line(gx + gw * i / 12, gy, gx + gw * i / 12, groundY);
     for (let i = 1; i < 5; i++) line(gx, gy + gh * i / 5, gx + gw, gy + gh * i / 5);
@@ -56,14 +56,14 @@
     line(pxL, groundY, pxL - sl, groundY + sh); line(pxR, groundY, pxR + sl, groundY + sh); line(pxL - sl, groundY + sh, pxR + sl, groundY + sh);
     const sd = sh * .38; line(gx, groundY, gx, groundY + sd); line(gx + gw, groundY, gx + gw, groundY + sd); line(gx, groundY + sd, gx + gw, groundY + sd);
     c.fillStyle = ink; c.beginPath(); c.arc(W / 2, groundY + sh * .66, 2.5, 0, 7); c.fill();
-    star(c, W * .16, groundY - 150, 1.3, soft); star(c, W * .84, groundY - 260, 1, soft); star(c, W * .7, 130, 1.1, soft); star(c, W * .12, 150, .9, soft);
+    const sy = Math.max(280, H * .36); star(c, W * .16, groundY - 150, 1.3, soft); star(c, W * .84, groundY - 260, 1, soft); star(c, W * .8, sy, 1.1, soft); star(c, W * .1, sy + 30, .9, soft);
   }
   function size() {
     for (const k of [bgc, cv]) {
       const b = k.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 3);
       W = b.width; H = b.height; k.width = Math.round(W * dpr); k.height = Math.round(H * dpr); k.getContext("2d").setTransform(dpr, 0, 0, dpr, 0, 0);
     }
-    groundY = H - Math.max(70, H * .12); r = Math.max(20, Math.min(W * .075, 34));
+    U = Math.min(W, H * .8); groundY = H - Math.max(70, H * .12); r = Math.max(20, Math.min(U * .075, 44));
     drawField();
     if (state === "ready") reset(); else { ball.x = Math.min(Math.max(ball.x, r), W - r); ball.y = Math.min(ball.y, groundY - r); }
   }
@@ -72,7 +72,7 @@
 
   function kick(px, py) {
     ball.vy = -Math.sqrt(2 * gravity() * H * .4); // fly about 42% of the screen height up
-    ball.vx = Math.max(-W * .9, Math.min(W * .9, (ball.x - px) / r * W * .28)); // tap the left side: it flies right
+    ball.vx = Math.max(-U * .9, Math.min(U * .9, (ball.x - px) / r * U * .28)); // tap the left side: it flies right
     sparks.push({ x: px, y: py, t: 0 }); score++;
     const m = MILESTONES.indexOf(score); if (m > -1) pops.push({ text: T[lang].pops[m], t: 0 });
   }

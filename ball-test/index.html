@@ -31,20 +31,19 @@
   <link rel="preload" href="/fonts/FiraGO-Medium.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/nav.css?v=7">
   <link rel="stylesheet" href="/crossword.css?v=26">
-  <link rel="stylesheet" href="/ball-test.css?v=3">
+  <link rel="stylesheet" href="/ball-test.css?v=5">
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3b650f1df19b43698cc1d110b8a5c6dc"}'></script><!-- End Cloudflare Web Analytics -->
 </head>
 <body>
   <script src="/nav.js?v=11"></script>
   <main>
-    <a class="back" href="/">← Go back</a>
     <div class="bt-wrap">
       <canvas id="bt-bg"></canvas><canvas id="bt-c"></canvas>
-      <div class="bt-hud"><div class="bt-best" id="bt-best"></div><div class="bt-score" id="bt-score"></div><div class="bt-spacer"></div></div>
+      <div class="bt-hud"><a class="bt-back" href="/">← Go back</a><div class="bt-score" id="bt-score"></div><div class="bt-best" id="bt-best"></div></div>
       <div class="bt-intro" id="bt-intro"><h1 id="bt-name"></h1><p id="bt-hint"></p></div>
       <div class="bt-card" id="bt-card" hidden><h2 id="bt-overTitle"></h2><div class="big" id="bt-overScore"></div><div class="sub" id="bt-overBest"></div><button id="bt-again" type="button"></button><a class="bt-leave" href="/">Other puzzles</a></div>
     </div>
   </main>
-  <script src="/ball-test.js?v=1"></script>
+  <script src="/ball-test.js?v=2"></script>
 </body>
 </html>
