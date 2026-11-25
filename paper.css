@@ -1219,3 +1219,13 @@ html[data-skin][data-game][data-game][data-game] body:has(.t5-rules, .sc-rules, 
   #t5Count .c-short { display: inline; }
   #t5Count .c-full { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 }
+
+/* BALL-ASK: the question after the masthead ball's first fall ("Play Ball Control?"). Added at the end on purpose; own class names, so no heavy specificity needed. */
+.kp-ballask { position: fixed; left: 50%; top: 38%; transform: translate(-50%, -50%); z-index: 100000; width: min(78vw, 340px); box-sizing: border-box; text-align: center;
+  background: var(--bg, #F0EFEC); color: var(--ink, #1c1a17); border: 2px solid var(--ink, #1c1a17); border-radius: 6px; padding: 18px; box-shadow: 5px 5px 0 var(--ink, #1c1a17); animation: kp-ballask-in .18s ease-out; }
+.kp-ballask p { margin: 0 0 14px; font: 400 20px/1.25 var(--display, system-ui, sans-serif); }
+.kp-ballask div { display: flex; gap: 10px; }
+.kp-ballask a, .kp-ballask button { flex: 1; display: block; box-sizing: border-box; font: 800 16px/1.2 var(--body, system-ui, sans-serif); text-align: center; text-decoration: none; cursor: pointer;
+  border: 2px solid var(--ink, #1c1a17); border-radius: 4px; padding: 11px; background: var(--bg, #F0EFEC); color: var(--ink, #1c1a17); }
+.kp-ballask a.yes { background: var(--ink, #1c1a17); color: var(--bg, #F0EFEC); }
+@keyframes kp-ballask-in { from { opacity: 0; } to { opacity: 1; } }

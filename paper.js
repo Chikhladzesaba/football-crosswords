@@ -132,12 +132,29 @@
     '<div class="kp-cell kp-cell-r"><span class="kp-date">' + date + '</span><span class="kp-row"><span class="kp-pen">' + ART.pencil + '</span><span class="kp-est">Est. 2026</span></span></div></div>';
   // BALL-START
   // The ball in the masthead: click it and it drops, bounces slowly around the window; click (catch) it and it flies back to its place.
+  const SITE = new URL(".", document.currentScript.src).href; // site root, for the link to the ball game
+  const BALL_TEXT = KA_LANG() ? { q: "გინდა „ბურთის კონტროლი“ ითამაშო?", yes: "კი", no: "არა", url: SITE + "burtis-kontroli/" }
+                              : { q: "Want to try the Ball Control Test?", yes: "Yes", no: "No", url: SITE + "ball-test/" };
+  function KA_LANG() { return document.documentElement.lang === "ka"; }
+  // After the ball's first fall, ask once whether the person wants to play the ball game. "No" is remembered until the tab is closed.
+  function kpBallAsk() {
+    let said = false; try { said = sessionStorage.getItem("kp-ball-no") === "1"; } catch (e) {}
+    if (said || document.querySelector(".kp-ballask")) return;
+    const box = document.createElement("div"); box.className = "kp-ballask"; box.setAttribute("role", "dialog"); box.setAttribute("aria-label", BALL_TEXT.q);
+    box.innerHTML = "<p></p><div><a class=\"yes\" href=\"" + BALL_TEXT.url + "\">" + BALL_TEXT.yes + "</a><button type=\"button\" class=\"no\">" + BALL_TEXT.no + "</button></div>";
+    box.querySelector("p").textContent = BALL_TEXT.q;
+    const close = () => { box.remove(); document.removeEventListener("keydown", esc); };
+    const esc = (e) => { if (e.key === "Escape") close(); };
+    box.querySelector(".no").addEventListener("click", () => { try { sessionStorage.setItem("kp-ball-no", "1"); } catch (e) {} close(); });
+    document.addEventListener("keydown", esc);
+    document.body.appendChild(box);
+  }
   function kpBall(mast, KA) {
     const cell = mast.querySelector(".kp-cell-l"), svg = cell && cell.querySelector("svg");
     if (!svg || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
     cell.setAttribute("role", "button"); cell.tabIndex = 0; cell.style.cursor = "pointer";
     cell.setAttribute("aria-label", KA ? "ბურთის ჩამოგდება" : "Drop the ball");
-    let ball = null, raf = 0;
+    let ball = null, raf = 0, asked = false;
     const G = 900, BOUNCE = 0.8; // gravity (px/s2) and how much speed is kept after each bounce: low numbers = slow, soft bounces
     function drop() {
       if (ball) return;
@@ -153,7 +170,7 @@
         const dt = Math.min(0.034, (t - last) / 1000); last = t;
         const floor = window.innerHeight - size - 4, right = window.innerWidth - size;
         vy += G * dt; y += vy * dt; x += vx * dt; rot += vx * dt * 1.4;
-        if (y >= floor) { y = floor; vy = -vy * BOUNCE; vx *= 0.92; if (Math.abs(vy) < 90) vy = 0; }
+        if (y >= floor) { if (!asked) { asked = true; kpBallAsk(); } y = floor; vy = -vy * BOUNCE; vx *= 0.92; if (Math.abs(vy) < 90) vy = 0; }
         if (x <= 0) { x = 0; vx = Math.abs(vx) * 0.8; } else if (x >= right) { x = right; vx = -Math.abs(vx) * 0.8; }
         draw();
         if (y >= floor && vy === 0 && Math.abs(vx) < 8) return; // resting on the bottom of the window until it is caught

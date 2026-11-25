@@ -17,7 +17,7 @@
   window.__kpShow = () => { cssOk = true; tryShow(); };
   const FONTS = ka ? ["ranchers", "firago-bold", "noto-sans-georgian-bold"] : ["ranchers", "poppins-400", "poppins-600"];
   document.write(FONTS.map((f) => '<link rel="preload" href="/fonts/paper/' + f + '.woff2" as="font" type="font/woff2" crossorigin>').join("") +
-    '<link rel="stylesheet" href="/paper.css?v=48" onload="__kpShow()" onerror="__kpShow()">');
+    '<link rel="stylesheet" href="/paper.css?v=49" onload="__kpShow()" onerror="__kpShow()">');
 })();
 (function () {
   const KA = document.documentElement.lang === "ka";
@@ -63,7 +63,7 @@
   top.innerHTML = '<a class="brand" href="' + root + (KA ? "" : "en/") + '">Kickoff Puzzles</a><span class="top-right"><span class="pill-slot"></span><nav class="lang-switch" aria-label="' + (KA ? "ენა" : "Language") + '">' + LANG + "</nav></span>";
   document.body.insertBefore(top, document.body.firstChild);
   document.documentElement.classList.add("with-top");
-  document.write('<script src="/paper.js?v=9"><\/script>'); // loads the live newspaper look (see line 4)
+  document.write('<script src="/paper.js?v=10"><\/script>'); // loads the live newspaper look (see line 4)
 
   // Footer with the About / Contact / Privacy links, added to every page. Hidden while playing a crossword on a phone (the page is a fixed-size app there).
   const FT = KA ? { about: "ჩვენ შესახებ", contact: "კონტაქტი", privacy: "კონფიდენციალურობა" }
