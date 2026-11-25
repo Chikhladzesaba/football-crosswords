@@ -84,6 +84,11 @@
 
   // ---- State ----
   let names, index, score, hints, word, slots, tiles, busy;
+  // ---- ANALYTICS (Google Analytics events; see consent.js) ----
+  // Every event carries: which game, which puzzle, which language. "began" makes game_start fire once per game, on the player's first real action.
+  const track = (name, extra) => { if (window.kpTrack) kpTrack(name, Object.assign({ game: "scramble", puzzle_id: "random", language: document.documentElement.lang === "ka" ? "ka" : "en" }, extra)); };
+  let began = false;
+  const begin = () => { if (!began) { began = true; track("game_start"); } };
 
   // ---- Filter: minimum name length (chips above the game). Choosing one starts a new round. ----
   let minLen = 0;
@@ -102,7 +107,7 @@
   function newRound() {
     const pool = ALL.filter((n) => [...word_of(n)].length >= minLen);
     names = shuffle(pool).slice(0, ROUND).map(word_of);
-    index = 0; score = 0; hints = 0;
+    index = 0; score = 0; hints = 0; began = false;
     $("scEnd").hidden = true; $("scGame").hidden = false;
     drawFilter();
     nextWord();
@@ -146,6 +151,7 @@
     if (busy || tile.slot >= 0) return;
     const i = slots.indexOf(null);
     if (i < 0) return;
+    begin();
     slots[i] = tile; tile.slot = i;
     draw(); check();
   }
@@ -180,6 +186,7 @@
     const i = slots.findIndex((t, k) => !t || (!t.locked && t.letter !== word[k]));
     const k = i >= 0 ? i : slots.findIndex((t) => !t.locked);
     if (k < 0) return;
+    begin();
     if (slots[k]) { slots[k].slot = -1; slots[k] = null; }
     const letter = [...word][k];
     let tile = tiles.find((t) => t.letter === letter && t.slot < 0);
@@ -195,6 +202,7 @@
 
   function skip() {
     if (busy) return;
+    begin();
     busy = true;
     const s = $("scSlots");
     s.innerHTML = "";
@@ -206,6 +214,7 @@
   function finish() {
     $("scGame").hidden = true; $("scEnd").hidden = false;
     const all = score === names.length;
+    track("game_complete", { score, total: names.length, hints_used: hints, no_help: hints === 0 });
     $("scEndTitle").textContent = all ? T.endTitle : score * 2 >= names.length ? T.endTitleMid : T.endTitleLow;
     // All correct: Share is the main button. Otherwise "Try again" is the main button and Share comes second.
     const share = $("scShare"), again = $("scAgain");
@@ -220,6 +229,7 @@
 
   // Phones: opens the share menu. Computers: copies the text.
   async function share() {
+    track("share", { method: "result" });
     const url = location.origin + location.pathname + "?utm_source=share&utm_medium=social&utm_campaign=scramble";
     const text = T.shareText(score, names.length, hints);
     const full = text + "\n" + url;
