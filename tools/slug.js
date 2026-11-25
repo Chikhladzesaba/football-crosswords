@@ -10,6 +10,7 @@
 //   node tools/slug.js --check             looks at every page folder and lists names that break the rules
 //
 // The rules it uses: lowercase letters and digits only, words separated by one hyphen, no hyphen at the start or end.
+// Reserved names (solved, days, kb, autocheck) are refused too. See RESERVED below.
 // Old folder names are never renamed, so --check only reports; it does not touch anything.
 
 const fs = require("fs");
@@ -45,6 +46,11 @@ function makeSlug(text) {
   return { slug: out.replace(/-+/g, "-").replace(/^-|-$/g, ""), unknown: [...unknown] };
 }
 
+// Names a crossword folder must never have. A puzzle saves its progress under "crossword:<folder>", and the site
+// keeps its own settings under "crossword:solved", "crossword:days", "crossword:kb" and "crossword:autocheck".
+// A folder with one of these names would overwrite those settings in the visitor's browser.
+const RESERVED = new Set(["solved", "days", "kb", "autocheck"]);
+
 // Folders that are not pages (and so not slugs).
 const NOT_PAGES = new Set(["fonts", "tools", "node_modules"]);
 function pageFolders() {
@@ -63,7 +69,7 @@ if (args.length === 0 || args[0] === "--help" || args[0] === "-h") {
 
 if (args[0] === "--check") {
   const folders = pageFolders();
-  const bad = folders.filter((f) => !SLUG_OK.test(f));
+  const bad = folders.filter((f) => !SLUG_OK.test(f) || RESERVED.has(f));
   console.log(folders.length + " page folders checked.");
   if (bad.length === 0) console.log("All names follow the rules (lowercase letters and digits, single hyphens).");
   else { console.log("These break the rules:"); bad.forEach((f) => console.log("  " + f)); process.exitCode = 1; }
@@ -73,7 +79,8 @@ if (args[0] === "--check") {
   if (!slug) { console.log("Nothing left after converting. Is the text empty?"); process.exit(1); }
   console.log(slug);
   const taken = fs.existsSync(path.join(ROOT, slug));
-  console.log(taken ? "TAKEN: a folder named " + slug + " already exists. Choose another name." : "Free: no folder with this name yet.");
+  if (RESERVED.has(slug)) console.log("RESERVED: " + slug + " is used for saved settings in the browser. Choose another name.");
+  if (!RESERVED.has(slug)) console.log(taken ? "TAKEN: a folder named " + slug + " already exists. Choose another name." : "Free: no folder with this name yet.");
   if (!SLUG_OK.test(slug)) console.log("Warning: this does not match the slug rules.");
   const words = slug.split("-").length;
   if (words > 5) console.log("Note: " + words + " words. The rule is 2 to 5 words, so consider a shorter name.");
