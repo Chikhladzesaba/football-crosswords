@@ -6,7 +6,7 @@
 // Keep every word 11 letters or fewer. The grid is 11 x 11 on a computer and 10 x 10 on a phone, and longer words are left out of the game.
 // All words are spellings that already appear on the site (crosswords or Scramble).
 window.WORDSEARCH_TEXT = {
-  backHref: "../ka/", back: "← სხვა თამაშები",
+  backHref: "/", back: "← სხვა თამაშები",
   h1: "სკაუტი",
   intro: "იპოვე დამალული სიტყვები: ფეხბურთელების გვარები, სტადიონის სახელები, ცნობილი მწვრთნელები.",
   cats: { players: "ფეხბურთელები", coaches: "მწვრთნელები", stadiums: "სტადიონები", teams: "გუნდები" },

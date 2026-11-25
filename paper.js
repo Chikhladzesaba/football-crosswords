@@ -119,7 +119,7 @@
   document.body.insertBefore(defs, document.body.firstChild);
 
   // ---------- Masthead (newspaper nameplate), hidden by CSS on crossword puzzle pages and on phones ----------
-  const home = new URL(".", document.currentScript.src).href + (KA ? "ka/" : "");
+  const home = new URL(".", document.currentScript.src).href + (KA ? "" : "en/");
   const now = new Date();
   const KA_MONTHS = ["იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი", "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"];
   const date = KA ? now.getFullYear() + " წლის " + now.getDate() + " " + KA_MONTHS[now.getMonth()]

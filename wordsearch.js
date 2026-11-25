@@ -22,7 +22,7 @@
   const COLORS = 6;                                 // number of colours for found words (see wordsearch.css)
 
   const TEXT = Object.assign({
-    backHref: "../", back: "← All games",
+    backHref: "/en/", back: "← All games",
     h1: "Word <em>Search</em>",
     intro: "Find the hidden football words: players, coaches, stadiums and teams.",
     cats: { players: "Players", coaches: "Coaches", stadiums: "Stadiums", teams: "Teams" },
