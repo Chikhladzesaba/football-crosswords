@@ -4,14 +4,14 @@
 //  1. Sets the DEFAULT consent for Google Analytics by country: Georgia (GE) = counting is on, every other country = off until the visitor says OK.
 //     (Google's Consent Mode decides the country itself; see https://developers.google.com/tag-platform/security/guides/consent)
 //  2. Shows a thin one-line banner at the bottom of the two home pages (/ and /en/) until the visitor picks Yes / No. The choice is kept in the browser (localStorage "kp-consent").
-//  3. Adds a "Cookie settings" link to the footer so the visitor can change the choice later.
+//  3. The Privacy pages have a "Cookie settings" link (data-cookie-settings) so the visitor can change the choice later.
 //  4. Loads Google's tag (gtag.js) once GA_ID below has a value.
 //
-// Until GA_ID is filled in this file does nothing visible: no banner, no footer link, no Google script.
-// To look at the banner before that, open any page with ?consent=show at the end of the address (it only previews; nothing is sent to Google).
+// If GA_ID is ever emptied, this file does nothing visible again: no banner, no Google script.
+// To look at the banner, open a home page with ?consent=show at the end of the address.
 // Texts are in TEXT below (English and Georgian). Look is in the CSS string at the bottom.
 (function () {
-  const GA_ID = ""; // <- the GA4 Measurement ID, like "G-XXXXXXXXXX". It is public by design (every visitor can see it in the page).
+  const GA_ID = "G-53QQD3NGCL"; // <- the GA4 Measurement ID, like "G-XXXXXXXXXX". It is public by design (every visitor can see it in the page).
   const PREVIEW = /[?&]consent=show\b/.test(location.search);
   if (!GA_ID && !PREVIEW) return;
 
@@ -86,20 +86,11 @@
   };
 
   const start = () => {
-    if ((PREVIEW || !read()) && IS_HOME) show(); // asked only on the home pages; the footer link below opens it anywhere
-    // "Cookie settings" link under the footer (nav.js builds the footer when the page has loaded; this runs right after it).
-    // It is its own line, not a link inside the footer: the footer row on the game pages has no room for a fourth link on a phone.
-    const foot = document.querySelector(".site-footer");
-    if (foot && !document.querySelector(".kp-cookie-line")) {
-      ensureCss();
-      const line = document.createElement("div");
-      line.className = "kp-cookie-line";
-      const a = document.createElement("a");
-      a.href = "#cookies"; a.textContent = TEXT.settings;
+    if ((PREVIEW || !read()) && IS_HOME) show(); // asked only on the home pages; the Cookie settings link on the Privacy pages opens it
+    // "Cookie settings": any link marked data-cookie-settings (it is on the Privacy pages) clears the saved answer and asks again.
+    document.querySelectorAll("[data-cookie-settings]").forEach((a) => {
       a.addEventListener("click", (e) => { e.preventDefault(); clear(); show(); });
-      line.appendChild(a);
-      foot.insertAdjacentElement("afterend", line);
-    }
+    });
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => setTimeout(start, 0)); else setTimeout(start, 0);
 
@@ -117,8 +108,5 @@
 .kp-consent button:focus-visible, .kp-consent a:focus-visible { outline: 2px solid var(--ink, #1c1a17); outline-offset: 2px; }
 /* Wide screens: the strip sits in the empty gap of the top row (between the three color dots and the language switch), scrolls away with the page, and covers no content. */
 @media (min-width: 1000px) { .kp-consent { position: absolute; left: 50%; right: auto; bottom: auto; top: 10px; transform: translateX(-50%); width: max-content; max-width: 700px; padding: 0; background: transparent; border-top: 0; } }
-.kp-cookie-line { max-width: 968px; margin: 0 auto; padding: 0 16px 18px; text-align: center; font-size: 12px; color: var(--muted, #5b5446); }
-.kp-cookie-line a { color: inherit; text-decoration: underline; }
-body.phone-play .kp-cookie-line { display: none; }
 `;
 })();
