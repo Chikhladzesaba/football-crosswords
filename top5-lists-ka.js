@@ -5,7 +5,7 @@
 // A Georgian name ending in -ი also works without it (კეინ = კეინი), top5.js does that by itself.
 const ORD = ["პირველ", "მეორე", "მესამე", "მეოთხე", "მეხუთე"];
 window.TOP5_TEXT = {
-  backHref: "/ka/", back: "← სხვა თამაშები",
+  backHref: "/", back: "← სხვა თამაშები",
   h1: "გამოიცანი ტოპ 5",
   intro: "შეგიძლია გაიხსენო რეკორდსმენები, ბომბარდირები და ჩემპიონები? სამი ტოპ 5-ის გამოცნობა გამარჯვებაა.",
   kicker: (r, total) => `რაუნდი ${r}/${total}`,

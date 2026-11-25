@@ -9,7 +9,7 @@
 
   const plural = (n) => (n === 1 ? "" : "s");
   const TEXT = Object.assign({
-    backHref: "/", back: "← All games",
+    backHref: "/en/", back: "← All games",
     h1: "Guess the <em>Top 5</em>",
     intro: "Name the players or clubs in the Top 5. Complete 3 lists in a row to win.",
     kicker: (r, total) => `Round ${r} of ${total}`,

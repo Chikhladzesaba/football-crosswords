@@ -129,7 +129,7 @@ async function siteArt(browser) {
   const base = "http://127.0.0.1:" + srv.address().port;
   const page = await browser.newPage({ viewport: { width: 1200, height: 800 } });
   const out = { all: {} };
-  for (const [lang, url] of [["en", "/"], ["ka", "/ka/"]]) {
+  for (const [lang, url] of [["en", "/en/"], ["ka", "/"]]) {
     await page.goto(base + url, { waitUntil: "networkidle" });
     await page.waitForFunction(() => window.KPArt);
     out.all[lang] = await page.evaluate(() => ["hub:crosswords", "hub:top5", "hub:scramble", "hub:wordsearch"].map((t) => window.KPArt.feature(t).innerHTML));
