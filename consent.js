@@ -19,9 +19,9 @@
   const KEY = "kp-consent"; // "granted" or "denied"
   const root = new URL(".", document.currentScript ? document.currentScript.src : location.href).href; // folder that holds consent.js = the site root
   const TEXT = KA
-    ? { msg: "ჩვენ ვიყენებთ cookie ფაილებს საიტის გასაუმჯობესებლად.",
+    ? { msg: "თამაშების დასახვეწად და თქვენი გამოცდილების გასაუმჯობესებლად, ჩვენ ვაგროვებთ cookie მონაცემებს.",
         yes: "ვეთანხმები", no: "არ ვეთანხმები", label: "ქუქი-ფაილები", settings: "ქუქი-პარამეტრები", privacy: root + "ka/privacy/" }
-    : { msg: "We use cookies to improve the site.",
+    : { msg: "To improve our games and your experience, we collect cookie data.",
         yes: "I agree", no: "I don't agree", label: "Cookies", settings: "Cookie settings", privacy: root + "privacy/" };
   const seg = location.pathname.split("/").filter(Boolean);
   const IS_HOME = seg.length === 0 || (seg.length === 1 && (seg[0] === "en" || seg[0] === "ka")); // the front pages: / (Georgian), /en/ (English), /ka/ (forwards to /)
