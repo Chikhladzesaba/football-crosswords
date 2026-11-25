@@ -42,6 +42,9 @@
     if (saved) setConsent(saved);
     gtag("js", new Date());
     gtag("config", GA_ID, { allow_google_signals: false, allow_ad_personalization_signals: false });
+    // The games call kpTrack("event_name", { ...details }) to tell Google Analytics that something happened (a game was started, finished, shared).
+    // It is sent the same way as page views, so it follows the same cookie choice. Nothing is sent when GA_ID is empty.
+    window.kpTrack = (name, params) => { try { gtag("event", name, params || {}); } catch (e) {} };
     const s = document.createElement("script");
     s.async = true;
     s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(GA_ID);

@@ -32,7 +32,7 @@
 </head>
 <body>
   <script>try{if(matchMedia("(pointer:coarse)").matches&&matchMedia("(max-width:760px)").matches){var b=document.body.classList;b.add("phone-play");if(localStorage.getItem("crossword:kb")!=="native")b.add("own-kb")}}catch(e){}</script>
-  <script src="../nav.js?v=16"></script>
+  <script src="../nav.js?v=17"></script>
   <!-- Hand-made page (tools/build_share.js does not touch it). The script below picks today's
        crossword from dgis-krosvordi/YYYY-MM.js (made by: python3 tools/build_daily.py ka) and starts the game. -->
   <div id="crossword">
@@ -69,7 +69,7 @@
         invite: "⚽ შეძლებ დღევანდელი საფეხბურთო კროსვორდის ამოხსნას? " + p.words.length + " პასუხი, სირთულე: " + level + ".",
       };
       var g = document.createElement("script");
-      g.src = "../crossword.js?v=22";
+      g.src = "../crossword.js?v=23";
       document.body.appendChild(g);
     };
     document.body.appendChild(s);
