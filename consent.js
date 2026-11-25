@@ -3,7 +3,7 @@
 // What it does:
 //  1. Sets the DEFAULT consent for Google Analytics by country: Georgia (GE) = counting is on, every other country = off until the visitor says OK.
 //     (Google's Consent Mode decides the country itself; see https://developers.google.com/tag-platform/security/guides/consent)
-//  2. Shows a thin one-line banner at the bottom of the two home pages (/ and /en/) until the visitor picks Yes / No. The choice is kept in the browser (localStorage "kp-consent").
+//  2. Shows a floating card at the bottom of the two home pages (/ and /en/) until the visitor picks agree / don't agree. The choice is kept in the browser (localStorage "kp-consent").
 //  3. The Privacy pages have a "Cookie settings" link (data-cookie-settings) so the visitor can change the choice later.
 //  4. Loads Google's tag (gtag.js) once GA_ID below has a value.
 //
@@ -19,10 +19,10 @@
   const KEY = "kp-consent"; // "granted" or "denied"
   const root = new URL(".", document.currentScript ? document.currentScript.src : location.href).href; // folder that holds consent.js = the site root
   const TEXT = KA
-    ? { msg: "ჩვენ ვიყენებთ cookie ფაილებს საიტის გასაუმჯობესებლად. ეთანხმები?",
-        yes: "კი", no: "არა", more: "დეტალები", label: "ქუქი-ფაილები", settings: "ქუქი-პარამეტრები", privacy: root + "ka/privacy/" }
-    : { msg: "We use cookies to improve the site. Is that OK?",
-        yes: "Yes", no: "No", more: "Details", label: "Cookies", settings: "Cookie settings", privacy: root + "privacy/" };
+    ? { msg: "ჩვენ ვიყენებთ cookie ფაილებს საიტის გასაუმჯობესებლად.",
+        yes: "ვეთანხმები", no: "არ ვეთანხმები", label: "ქუქი-ფაილები", settings: "ქუქი-პარამეტრები", privacy: root + "ka/privacy/" }
+    : { msg: "We use cookies to improve the site.",
+        yes: "I agree", no: "I don't agree", label: "Cookies", settings: "Cookie settings", privacy: root + "privacy/" };
   const seg = location.pathname.split("/").filter(Boolean);
   const IS_HOME = seg.length === 0 || (seg.length === 1 && (seg[0] === "en" || seg[0] === "ka")); // the front pages: / (Georgian), /en/ (English), /ka/ (forwards to /)
 
@@ -70,21 +70,21 @@
     box.setAttribute("role", "region");
     box.setAttribute("aria-label", TEXT.label);
     const p = document.createElement("p");
-    p.textContent = TEXT.msg + " ";
-    const more = document.createElement("a");
-    more.href = TEXT.privacy;
-    more.textContent = TEXT.more;
-    p.appendChild(more);
+    p.textContent = TEXT.msg;
+    const icon = document.createElement("span");
+    icon.className = "kp-consent-icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.innerHTML = COOKIE_SVG;
     const row = document.createElement("div");
     row.className = "kp-consent-btns";
     const yes = document.createElement("button");
-    yes.type = "button"; yes.textContent = TEXT.yes; yes.className = "kp-consent-yes";
+    yes.type = "button"; yes.textContent = TEXT.yes;
     yes.addEventListener("click", () => choose("granted"));
     const no = document.createElement("button");
     no.type = "button"; no.textContent = TEXT.no;
     no.addEventListener("click", () => choose("denied"));
-    row.append(yes, no);
-    box.append(p, row);
+    row.append(no, yes); // both buttons look the same: no answer is pushed harder than the other
+    box.append(icon, p, row);
     document.body.appendChild(box);
   };
 
@@ -97,19 +97,18 @@
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => setTimeout(start, 0)); else setTimeout(start, 0);
 
-  // A thin strip at the bottom of the screen on phones/tablets, small text (see the wide-screen rule below).
+  // A floating card at the bottom of the screen (paper style: 2px ink border, small radius, offset shadow). Same look on every screen size; on phones the buttons go under the text.
+  const COOKIE_SVG = '<svg width="38" height="38" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 3a15 15 0 1 0 15 15 6 6 0 0 1-6-6 6 6 0 0 1-6-6 6 6 0 0 1-3-3z"/><circle cx="12" cy="15" r="1.6" fill="currentColor"/><circle cx="19" cy="24" r="1.6" fill="currentColor"/><circle cx="11" cy="25" r="1.3" fill="currentColor"/><circle cx="24" cy="18" r="1.3" fill="currentColor"/></svg>';
   const CSS = `
-.kp-consent { position: fixed; left: 0; right: 0; bottom: 0; z-index: 9000; box-sizing: border-box; padding: 6px 12px calc(6px + env(safe-area-inset-bottom));
-  background: var(--paper, #F0EFEC); color: var(--ink, #1c1a17); border-top: 1px solid var(--ink, #1c1a17);
-  font-family: inherit; font-size: 12px; line-height: 1.3; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 12px; }
-.kp-consent p { margin: 0; }
-.kp-consent a { color: inherit; text-decoration: underline; }
-.kp-consent-btns { display: flex; gap: 8px; }
-.kp-consent button { font: inherit; font-weight: 600; padding: 3px 14px; min-height: 28px; cursor: pointer; color: var(--ink, #1c1a17); background: transparent;
-  border: 1px solid var(--ink, #1c1a17); border-radius: 4px; }
-.kp-consent button.kp-consent-yes { background: var(--ink, #1c1a17); color: var(--paper, #F0EFEC); }
-.kp-consent button:focus-visible, .kp-consent a:focus-visible { outline: 2px solid var(--ink, #1c1a17); outline-offset: 2px; }
-/* Wide screens: the strip sits in the empty gap of the top row (between the three color dots and the language switch), scrolls away with the page, and covers no content. */
-@media (min-width: 1000px) { .kp-consent { position: absolute; left: 50%; right: auto; bottom: auto; top: 10px; transform: translateX(-50%); width: max-content; max-width: 700px; padding: 0; background: transparent; border-top: 0; } }
+.kp-consent { position: fixed; left: 12px; right: 12px; bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 9000; box-sizing: border-box; max-width: 720px; margin: 0 auto; padding: 14px;
+  background: var(--paper, #F0EFEC); color: var(--ink, #1c1a17); border: 2px solid var(--ink, #1c1a17); border-radius: 6px; box-shadow: 5px 5px 0 var(--ink, #1c1a17);
+  font-family: inherit; font-size: 15px; line-height: 1.45; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.kp-consent-icon { flex: none; display: flex; }
+.kp-consent p { margin: 0; flex: 1 1 0; min-width: 0; }
+.kp-consent-btns { display: flex; gap: 10px; flex: 1 1 100%; }
+.kp-consent button { flex: 1; font: inherit; font-weight: 700; padding: 0 14px; min-height: 44px; cursor: pointer; color: var(--ink, #1c1a17); background: var(--paper, #F0EFEC);
+  border: 2px solid var(--ink, #1c1a17); border-radius: 6px; }
+.kp-consent button:focus-visible { outline: 3px solid var(--ink, #1c1a17); outline-offset: 2px; }
+@media (min-width: 700px) { .kp-consent { left: 24px; right: 24px; bottom: 20px; flex-wrap: nowrap; padding: 14px 16px; } .kp-consent-btns { flex: none; } .kp-consent button { flex: none; } }
 `;
 })();

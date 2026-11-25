@@ -81,7 +81,7 @@
   // Cookie banner + Google Analytics (consent.js does nothing until it has a GA4 ID; see the top of that file).
   const cs = document.createElement("script");
   cs.async = true;
-  cs.src = root + "consent.js?v=4";
+  cs.src = root + "consent.js?v=5";
   document.head.appendChild(cs);
 
   // On a phone the round / progress pill sits in the top bar (as in the design); on a computer it stays beside the heading.
