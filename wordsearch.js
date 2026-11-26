@@ -291,14 +291,14 @@
     over = true; clearAnchor(); showSel(null);
     $("wsHint").disabled = true; $("wsGive").disabled = true;
     if (!won) placed.forEach((p, i) => { if (!found[i]) p.cells.forEach(([r, c]) => cellEl(r, c).classList.add("missed")); });
-    timeText = clock(Math.floor((Date.now() - startTs) / 1000));
+    timeSec = Math.floor((Date.now() - startTs) / 1000); timeText = clock(timeSec);
     setTimeout(() => modal(won), won ? 700 : 500);
   }
-  let timeText = "0:00";
+  let timeText = "0:00", timeSec = 0;
 
   function modal(won) {
     const n = found.filter(Boolean).length;
-    track("game_complete", { result: won ? "win" : "lose", found: n, total: placed.length, hints_used: hints });
+    track("game_complete", { result: won ? "win" : "lose", found: n, total: placed.length, hints_used: hints, duration_sec: timeSec });
     $("wsModalTitle").textContent = won ? TEXT.wonTitle : TEXT.lostTitle;
     $("wsModalText").textContent = won ? TEXT.wonText(timeText, hints, placed.length) : TEXT.lostText(n, placed.length);
     // Won: Share is the main button. Gave up: "Try again" is the main button and Share comes second.
