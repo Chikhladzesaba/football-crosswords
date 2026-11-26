@@ -76,13 +76,14 @@
     sparks.push({ x: px, y: py, t: 0 }); score++;
     const m = MILESTONES.indexOf(score); if (m > -1) pops.push({ text: T[lang].pops[m], t: 0 });
   }
-  function end() { state = "over"; if (score > best) { best = score; try { localStorage.setItem("kp-ball-best", best); } catch (e) {} } ui(); }
+  const track = (name, extra) => { if (window.kpTrack) kpTrack(name, Object.assign({ game: "ball", puzzle_id: "ball", site_lang: lang }, extra)); };
+  function end() { state = "over"; track("game_complete", { score: score, result: score > best ? "record" : "normal" }); if (score > best) { best = score; try { localStorage.setItem("kp-ball-best", best); } catch (e) {} } ui(); }
 
   cv.addEventListener("pointerdown", (e) => {
     e.preventDefault(); if (state === "over") return;
     const b = cv.getBoundingClientRect(), px = e.clientX - b.left, py = e.clientY - b.top;
     const reach = r * (3.8 - Math.min(score, 40) * .05); // big tap area at the start, shrinks as you score
-    if (Math.hypot(px - ball.x, py - ball.y) <= reach) { if (state === "ready") state = "play"; kick(px, py); ui(); }
+    if (Math.hypot(px - ball.x, py - ball.y) <= reach) { if (state === "ready") { state = "play"; track("game_start"); } kick(px, py); ui(); }
   });
   // iPhone: stop double-tap zoom and two-finger pinch zoom while playing
   let lastTouch = 0;
