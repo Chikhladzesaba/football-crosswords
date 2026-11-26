@@ -138,7 +138,7 @@
   const wanted = window.TOP5_LIST || new URLSearchParams(location.search).get("list"); // the list's own page sets TOP5_LIST; ?list=laliga-scorers also opens one list first (for testing)
   // ---- ANALYTICS (Google Analytics events; see consent.js) ----
   // Every event carries: which game, which puzzle, which language. "began" makes game_start fire once per game, on the player's first real action.
-  const track = (name, extra) => { if (window.kpTrack) kpTrack(name, Object.assign({ game: "top5", puzzle_id: (wanted || "random"), language: document.documentElement.lang === "ka" ? "ka" : "en" }, extra)); };
+  const track = (name, extra) => { if (window.kpTrack) kpTrack(name, Object.assign({ game: "top5", puzzle_id: (wanted || "random"), site_lang: document.documentElement.lang === "ka" ? "ka" : "en" }, extra)); };
   let began = false;
   const begin = () => { if (!began) { began = true; track("game_start"); } };
 
