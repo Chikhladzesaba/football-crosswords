@@ -145,7 +145,7 @@
     box.querySelector("p").textContent = BALL_TEXT.q;
     const close = () => { box.remove(); document.removeEventListener("keydown", esc); };
     const esc = (e) => { if (e.key === "Escape") close(); };
-    const track = (answer) => { if (window.kpTrack) kpTrack("ball_prompt", { answer: answer, language: KA_LANG() ? "ka" : "en", transport_type: "beacon" }); }; // "beacon" so the event still gets sent when the page changes
+    const track = (answer) => { if (window.kpTrack) kpTrack("ball_prompt", { answer: answer, site_lang: KA_LANG() ? "ka" : "en", transport_type: "beacon" }); }; // "beacon" so the event still gets sent when the page changes
     box.querySelector(".yes").addEventListener("click", () => track("yes"));
     box.querySelector(".no").addEventListener("click", () => { track("no"); try { sessionStorage.setItem("kp-ball-no", "1"); } catch (e) {} close(); });
     document.addEventListener("keydown", esc);

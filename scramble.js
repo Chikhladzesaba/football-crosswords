@@ -86,7 +86,7 @@
   let names, index, score, hints, word, slots, tiles, busy;
   // ---- ANALYTICS (Google Analytics events; see consent.js) ----
   // Every event carries: which game, which puzzle, which language. "began" makes game_start fire once per game, on the player's first real action.
-  const track = (name, extra) => { if (window.kpTrack) kpTrack(name, Object.assign({ game: "scramble", puzzle_id: "random", language: document.documentElement.lang === "ka" ? "ka" : "en" }, extra)); };
+  const track = (name, extra) => { if (window.kpTrack) kpTrack(name, Object.assign({ game: "scramble", puzzle_id: "random", site_lang: document.documentElement.lang === "ka" ? "ka" : "en" }, extra)); };
   let began = false;
   const begin = () => { if (!began) { began = true; track("game_start"); } };
 

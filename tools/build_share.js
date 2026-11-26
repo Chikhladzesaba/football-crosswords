@@ -123,7 +123,7 @@ ${clues}
     </main>
   </div>
   <script src="puzzle.js"></script>
-  <script src="../crossword.js?v=23"></script>
+  <script src="../crossword.js?v=24"></script>
 </body>
 </html>
 `;
@@ -170,7 +170,7 @@ ${list("D")}
     </main>
   </div>
   <script src="puzzle.js"></script>
-  <script src="../crossword.js?v=23"></script>
+  <script src="../crossword.js?v=24"></script>
 </body>
 </html>
 `;

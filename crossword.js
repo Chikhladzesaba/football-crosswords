@@ -14,7 +14,7 @@
   const KA = P.lang === "ka";
   // ---- ANALYTICS (Google Analytics events; see consent.js) ----
   // The three details sent with every event: which game, which puzzle, which language.
-  const track = (name, extra) => { if (window.kpTrack) kpTrack(name, Object.assign({ game: "crossword", puzzle_id: P.id, language: KA ? "ka" : "en" }, extra)); };
+  const track = (name, extra) => { if (window.kpTrack) kpTrack(name, Object.assign({ game: "crossword", puzzle_id: P.id, site_lang: KA ? "ka" : "en" }, extra)); };
   const T = KA ? {
     back: "← ყველა კროსვორდი", check: "შემოწმება", clearWord: "სიტყვის წაშლა", reveal: "სიტყვის ჩვენება", letter: "ასოს ჩვენება",
     playNext: "ითამაშე სხვა კროსვორდი", more: "ითამაშე სხვა კროსვორდები", allDone: "ყველა კროსვორდი ამოხსნილი გაქვს! 🏆", home: "ყველა კროსვორდი",
