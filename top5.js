@@ -142,10 +142,24 @@
   let began = false;
   const begin = () => { if (!began) { began = true; track("game_start"); } };
 
-  // A new game: pick 3 different lists at random (?list=id puts that list first)
+  // The "memory": the last lists you saw are saved in this browser, so new games pick other lists.
+  const MEMORY_KEY = "kp-top5-recent-" + (document.documentElement.lang === "ka" ? "ka" : "en");
+  const MEMORY_LISTS = 15; // keep this well below the number of lists
+  function readRecent() {
+    try { const a = JSON.parse(localStorage.getItem(MEMORY_KEY)); return Array.isArray(a) ? a : []; }
+    catch (e) { return []; }
+  }
+  function saveSeen(id) { // newest first
+    try { localStorage.setItem(MEMORY_KEY, JSON.stringify([id].concat(readRecent().filter((x) => x !== id)).slice(0, MEMORY_LISTS))); }
+    catch (e) { /* storage is blocked: the game still works, just without the memory */ }
+  }
+
+  // A new game: pick 3 different lists at random, not recently seen ones first (?list=id puts that list first)
   function newRun() {
     clearTimeout(timer);
-    let idx = shuffle(LISTS.map((_, i) => i));
+    const recent = readRecent();
+    const age = (i) => { const n = recent.indexOf(LISTS[i].id); return n < 0 ? Infinity : n; }; // bigger = seen longer ago
+    let idx = shuffle(LISTS.map((_, i) => i)).sort((a, b) => (age(a) === age(b) ? 0 : age(b) > age(a) ? 1 : -1));
     const w = LISTS.findIndex((l) => l.id === wanted);
     if (w >= 0) idx = [w, ...idx.filter((i) => i !== w)];
     run = idx.slice(0, ROUNDS); round = 0; hints = 0; done = 0; began = false;
@@ -154,6 +168,7 @@
   }
 
   function start(l) {
+    saveSeen(l.id);
     list = l; list.items.forEach((it) => (it.shown = 0)); found = list.items.map(() => false); lives = LIVES; over = false;
     $("t5Game").hidden = false;
     $("t5Kicker").textContent = TEXT.kicker(round + 1, ROUNDS, topN());
