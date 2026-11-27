@@ -90,7 +90,7 @@
 
   // The "memory": the words of the last few rounds are saved in this browser, so they do not come back right away.
   const MEMORY_KEY = "kp-wordsearch-recent-" + (document.documentElement.lang === "ka" ? "ka" : "en");
-  const MEMORY_ROUNDS = 3;
+  const MEMORY_ROUNDS = 7;
   function readRecent() {
     try { const a = JSON.parse(localStorage.getItem(MEMORY_KEY)); return Array.isArray(a) ? a.filter(Array.isArray) : []; }
     catch (e) { return []; }
