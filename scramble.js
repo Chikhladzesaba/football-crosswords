@@ -22,7 +22,7 @@
     shareText: (s, n, h) => `⚽ დალაგობანა\n✅ ${s}/${n} · ${h ? h + " ასო ნაჩვენები" : "დახმარების გარეშე"}`,
     copied: "დაკოპირდა! ჩასვი სადაც გინდა.",
     rulesTitle: "თამაშის წესები",
-    rules: ["დაწყებამდე შეგიძლია აირჩიო გვარის მინიმალური სიგრძე, მოქმედი ან კარიერადასრულებული ფეხბურთელები და რაუნდის სიგრძე. გვარები ყოველ ჯერზე შემთხვევით ირჩევა. ასოები არეულია: დაალაგე ისინი სწორი თანმიმდევრობით და გამოიცანი ფეხბურთელი.", "შეცდი? „წაშლა“ ბოლო ასოს წაშლის. ჩასმულ ასოზე დაკლიკებითაც შეგიძლია მისი დაბრუნება.", "ვერ იხსენებ? „ასოს ჩვენება“ ერთ ასოს გაჩვენებს, „გამოტოვება“ კი შემდეგ გვარზე გადაგიყვანს.", "რაუნდის ბოლოს შენს შედეგს ნახავ. თუ მოგწონა თამაში, შეგიძლია შენი სტატისტიკა მეგობრებსაც გაუზიარო."],
+    rules: ["დაწყებამდე შეგიძლია აირჩიო გვარის მინიმალური სიგრძე. გვარები ყოველ ჯერზე შემთხვევით ირჩევა. ასოები არეულია: დაალაგე ისინი სწორი თანმიმდევრობით და გამოიცანი ფეხბურთელი.", "შეცდი? „წაშლა“ ბოლო ასოს წაშლის. ჩასმულ ასოზე დაკლიკებითაც შეგიძლია მისი დაბრუნება.", "ვერ იხსენებ? „ასოს ჩვენება“ ერთ ასოს გაჩვენებს, „გამოტოვება“ კი შემდეგ გვარზე გადაგიყვანს.", "რაუნდის ბოლოს შენს შედეგს ნახავ. თუ მოგწონა თამაში, შეგიძლია შენი სტატისტიკა მეგობრებსაც გაუზიარო."],
   } : {
     back: "← All games", title: "Name <em>Scramble</em>",
     intro: "The letters of a famous player's name are mixed up. Tap them in the right order.",
@@ -36,7 +36,7 @@
     shareText: (s, n, h) => `⚽ Name Scramble\n✅ ${s}/${n} · ${h ? h + " letter hint" + (h === 1 ? "" : "s") : "no help"}`,
     copied: "Copied! Paste it anywhere to share.",
     rulesTitle: "How to play",
-    rules: ["Before you start, choose the minimum name length, active or retired players, and the round length. Names are picked at random every time. The letters are mixed up: put them in the right order to guess the player.", "Made a mistake? “Delete” removes the last letter. You can also tap a placed letter to take it back.", "Stuck? “Show letter” reveals one letter, and “Skip” moves on to the next name.", "At the end of the round you see your result and can share it with friends."],
+    rules: ["Before you start, you can choose the minimum name length. Names are picked at random every time. The letters are mixed up: put them in the right order to guess the player.", "Made a mistake? “Delete” removes the last letter. You can also tap a placed letter to take it back.", "Stuck? “Show letter” reveals one letter, and “Skip” moves on to the next name.", "At the end of the round you see your result and can share it with friends."],
   };
 
   root.innerHTML = `
@@ -104,9 +104,32 @@
     });
   }
 
+  // The "memory": the names of the last few rounds are saved in this browser, so they do not come back right away.
+  const MEMORY_KEY = "kp-scramble-recent-" + (KA ? "ka" : "en");
+  const MEMORY_ROUNDS = 5;
+  function readRecent() {
+    try { const a = JSON.parse(localStorage.getItem(MEMORY_KEY)); return Array.isArray(a) ? a.filter(Array.isArray) : []; }
+    catch (e) { return []; }
+  }
+  function saveRound(words) {
+    try { localStorage.setItem(MEMORY_KEY, JSON.stringify([words].concat(readRecent()).slice(0, MEMORY_ROUNDS))); }
+    catch (e) { /* storage is blocked: the game still works, just without the memory */ }
+  }
+  // Names not played recently. If too few are left, the oldest remembered round is allowed again, then the next one.
+  function freshNames(pool) {
+    const recent = readRecent(); // newest round first
+    for (let n = recent.length; n > 0; n--) {
+      const used = new Set([].concat(...recent.slice(0, n)));
+      const fresh = pool.filter((x) => !used.has(word_of(x)));
+      if (fresh.length >= ROUND) return fresh;
+    }
+    return pool;
+  }
+
   function newRound() {
     const pool = ALL.filter((n) => [...word_of(n)].length >= minLen);
-    names = shuffle(pool).slice(0, ROUND).map(word_of);
+    names = shuffle(freshNames(pool)).slice(0, ROUND).map(word_of);
+    saveRound(names);
     index = 0; score = 0; hints = 0; began = false;
     $("scEnd").hidden = true; $("scGame").hidden = false;
     drawFilter();
