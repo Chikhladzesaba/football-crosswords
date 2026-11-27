@@ -88,10 +88,33 @@
   function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = rand(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; }
   const clock = (s) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 
-  // Pick the words for one round: 4 easy, 3 medium, 3 hard, at random
+  // The "memory": the words of the last few rounds are saved in this browser, so they do not come back right away.
+  const MEMORY_KEY = "kp-wordsearch-recent-" + (document.documentElement.lang === "ka" ? "ka" : "en");
+  const MEMORY_ROUNDS = 3;
+  function readRecent() {
+    try { const a = JSON.parse(localStorage.getItem(MEMORY_KEY)); return Array.isArray(a) ? a.filter(Array.isArray) : []; }
+    catch (e) { return []; }
+  }
+  function saveRound(words) {
+    try { localStorage.setItem(MEMORY_KEY, JSON.stringify([words.map((x) => x.w)].concat(readRecent()).slice(0, MEMORY_ROUNDS))); }
+    catch (e) { /* storage is blocked: the game still works, just without the memory */ }
+  }
+
+  // Pick the words for one round: 4 easy, 3 medium, 3 hard, at random, skipping recently played words.
+  // If a level has too few fresh words, the oldest remembered round is allowed again, then the next one.
   function pickWords() {
+    const recent = readRecent(); // newest round first
     let out = [];
-    for (const lvl of Object.keys(MIX)) out = out.concat(shuffle(POOL.filter((x) => x.lvl === lvl)).slice(0, MIX[lvl]));
+    for (const lvl of Object.keys(MIX)) {
+      const level = POOL.filter((x) => x.lvl === lvl);
+      let fresh = level;
+      for (let n = recent.length; n >= 0; n--) {
+        const used = new Set([].concat(...recent.slice(0, n)));
+        fresh = level.filter((x) => !used.has(x.w));
+        if (fresh.length >= MIX[lvl]) break;
+      }
+      out = out.concat(shuffle(fresh).slice(0, MIX[lvl]));
+    }
     return out;
   }
 
@@ -152,7 +175,9 @@
     clearInterval(tick);
     began = false;
     let b = null;
-    while (!b) b = build(pickWords());
+    let words;
+    while (!b) { words = pickWords(); b = build(words); }
+    saveRound(words);
     grid = b.g; placed = b.placed; found = placed.map(() => false); hints = 0; over = false; anchor = null; drag = null;
     $("wsModal").hidden = true;
     $("wsHint").disabled = false; $("wsGive").disabled = false;
